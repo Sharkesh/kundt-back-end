@@ -17,14 +17,41 @@
 </style>
 
 
-<div class="container" style="border:5px solid black">
-  <div class="col-lg-4">
+<div class="container" style="border:5px solid black"> 
+  <div class="col-lg-4">@*Anfang des Linken Such Bereich*@
       <div class="form-group">
           <label for="IDAuto">ID Auto</label>
           <input type="text" class="form-control" id="IDAuto" placeholder="Suche nach Auto ID">
       </div>
+      <select name="Marke" class="col-lg-4">
+          <option value="Marke">Marke</option>
+          <option value="saab">Saab</option>
+          <option value="fiat">Fiat</option>
+          <option value="audi">Audi</option>
+          <option value="Renault">Renault</option>
+          <option value="BMW">BMW</option>
+      </select>
+      <select name="Typ" class="col-lg-4">
+          <option value="Typ">Typ</option>
+          <option value="Coupe">Coupé</option>
+          <option value="Kombi">Kombi</option>
+          <option value="Cabriolet">Cabriolet</option>
+          <option value="Roadster">Roadster</option>
+          <option value="Runabout">Runabout</option>
+      </select>
+      <select name="Kategorie" class="col-lg-4">
+          <option value="Kategorie">Kategorie</option>
+          <option value="BiligKlasse">Bilig Klasse</option>
+          <option value="MittelKlasse">Mittel Klasse</option>
+          <option value="LuxusKlasse">Luxus Klasse</option>
+          <option value="Roadster">Roadster</option>
+          <option value="Runabout">Runabout</option>
+      </select>
      <h6 style="text-align:center">Filter</h6>
-  </div>
+  </div> @*Ende des Linken Such Bereich*@
+    
+    <div class="col-lg-offset-4 col-lg-8"> @*Anfang des Rechten Ergebnis Bereiches*@
+        
 
-    <div class="col-lg-offset-4 col-lg-8"></div>
+    </div> @*Ende des Rechten Ergebnis Bereiches*@
 </div> @*Container Ende*@
