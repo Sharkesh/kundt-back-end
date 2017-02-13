@@ -160,8 +160,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\UebersichtKunden.cshtml" />
-    <Content Include="Views\Home\Index - Kopieren.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\UebersichtAuto.cshtml" />
+    <Content Include="Views\Home\Einstellung.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
