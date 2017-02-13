@@ -16,5 +16,9 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
+        public ActionResult UebersichtAuto()
+        {
+            return View();
+        }
     }
 }

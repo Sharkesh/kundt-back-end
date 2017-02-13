@@ -161,6 +161,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\UebersichtKunden.cshtml" />
     <Content Include="Views\Home\Index - Kopieren.cshtml" />
+    <Content Include="Views\Home\UebersichtAuto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
