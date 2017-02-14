@@ -12,17 +12,26 @@
     .TabellenGitter{
         border:1px solid black;
     }
-
+    .BildKleinSkalierung{
+        width:25px;
+        height:25px;
+    }
+    .BeschreibungsBox{
+        width:100px;
+        height:50px;
+        border:1px solid black;
+    }
 
 </style>
 
 
 <div class="container" style="border:5px solid black"> 
-  <div class="col-lg-4">@*Anfang des Linken Such Bereich*@
+  <div class="col-lg-4 TabellenGitter">@*Anfang des Linken Such Bereich*@
       <div class="form-group">
           <label for="IDAuto">ID Auto</label>
           <input type="text" class="form-control" id="IDAuto" placeholder="Suche nach Auto ID">
       </div>
+      <h6 style="text-align:center">Filter</h6>
       <select name="Marke" class="col-lg-4">
           <option value="Marke">Marke</option>
           <option value="saab">Saab</option>
@@ -47,11 +56,82 @@
           <option value="Roadster">Roadster</option>
           <option value="Runabout">Runabout</option>
       </select>
-     <h6 style="text-align:center">Filter</h6>
+      <select name="Status" class="col-lg-4">
+          <option value="Status">Status</option>
+          <option value="Verfügbar">Verfügbar</option>
+          <option value="Ausgeliehen">Ausgeliehen</option>
+          <option value="Versteckt">Versteckt</option>
+      </select>
+    <br />
+      <div class="form-group">
+          <label for="Baujahr">Baujahr</label>
+          <input type="text" class="form-control" id="Baujahr" placeholder="Suche nach Baujahr">
+      </div>
+      <div class="form-group">
+          <label for="Preis">Preis</label>
+          <input type="text" class="form-control" id="Preis" placeholder="Suche nach Preis">
+      </div>
+      <div class="form-group">
+          <label for="KMS">Kilometer Stand</label>
+          <input type="text" class="form-control" id="Baujahr" placeholder="Suche nach Kilometer">
+      </div>
+      <button type="submit" class="btn btn-default" id="AutoFilterBTN">Suchen</button>
   </div> @*Ende des Linken Such Bereich*@
     
-    <div class="col-lg-offset-4 col-lg-8"> @*Anfang des Rechten Ergebnis Bereiches*@
+    <div class="row"> @*Anfang des Rechten Ergebnis Bereiches*@
         
+        <table>
+            <tr class="TabellenGitter">
+                <th class="col-lg-4 TabellenGitter">Bild</th>
+                <th class="col-lg-4 TabellenGitter">Beschreibung</th>
+                <th class="col-lg-4 TabellenGitter">Bearbeiten</th>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2"><img src="~/Content/img/kundt_logo_with_slogan_right.png" class="img-responsive"/></td>
+                <td class="col-lg-8"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-2"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+            <tr class="TabellenGitter">
+                <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+            </tr>
+        </table>
 
     </div> @*Ende des Rechten Ergebnis Bereiches*@
 </div> @*Container Ende*@
