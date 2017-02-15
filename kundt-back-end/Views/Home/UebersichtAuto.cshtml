@@ -13,14 +13,10 @@
         border:1px solid black;
     }
     .BildKleinSkalierung{
-        width:25px;
-        height:25px;
+        width:auto;
+        height:auto;
     }
-    .BeschreibungsBox{
-        width:100px;
-        height:50px;
-        border:1px solid black;
-    }
+  
 
 </style>
 
@@ -82,18 +78,18 @@
         
         <table>
             <tr class="TabellenGitter">
-                <th class="col-lg-4 TabellenGitter">Bild</th>
+                <th class="col-lg-2 TabellenGitter">Bild</th>
                 <th class="col-lg-4 TabellenGitter">Beschreibung</th>
                 <th class="col-lg-4 TabellenGitter">Bearbeiten</th>
             </tr>
             <tr class="TabellenGitter">
-                <td class="col-lg-2"><img src="~/Content/img/kundt_logo_with_slogan_right.png" class="img-responsive"/></td>
-                <td class="col-lg-8"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-2"><img  class="BildKleinSkalierung"/></td>
+                <td class="col-lg-8"><textarea type="text" style="border:1px solid black" class="form-control" rows="3" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
                 <td class="col-lg-2"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
             </tr>
             <tr class="TabellenGitter">
                 <td class="col-lg-2 BildKleinSkalierung"><img src="~/Content/img/kundt_logo_with_slogan_right.png" /></td>
-                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control BeschreibungsBox" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
+                <td class="col-lg-offset-2 col-lg-4"><input type="text" class="form-control col-lg-8" id="BeschreibungAuto" placeholder="Daten vom Auto" /></td>
                 <td class="col-lg-offset-6 col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
             </tr>
             <tr class="TabellenGitter">
