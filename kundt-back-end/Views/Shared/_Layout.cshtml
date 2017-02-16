@@ -41,7 +41,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="Active()">
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -60,30 +60,30 @@
     <div class="container" style="margin-top:20px;margin-bottom:20px;">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="navbar-collapse collapse" style="max-height:50px;">
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Übersicht", "Index", "Home")</li>
-                        <li class="dropdown">
+                        <li id="uebersicht">@Html.ActionLink("Übersicht", "Index", "Home")</li>
+                        <li id="fahrzeug" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fahrzeug<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("UebersichtAuto","Home")">Liste</a></li>
                                 <li><a href="#">Hinzufügen</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li id="kunden" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kunden<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("UebersichtKunden","Home")">Liste</a></li>
                                 <li><a href="#">Hinzufügen</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li id="buchung" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buchung<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Liste</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li id="mitarbeiter" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mitarbeiter<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Liste</a></li>
@@ -101,6 +101,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/scripts.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
