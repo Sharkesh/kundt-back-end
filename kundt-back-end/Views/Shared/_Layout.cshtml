@@ -17,14 +17,22 @@
         }
 
         .navbar-nav > li > a {
-            padding-top: 35px;
-            padding-bottom: 20px;
             font-size: 2em;
             font-weight: bold;
         }
 
-        .navbar-toggle {
-            margin-top: 30px;
+        .navbar-right {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .navbar .navbar-nav {
+            display: inline-block;
+            float: none;
+        }
+
+        .navbar .navbar-collapse {
+            text-align: center;
         }
 
         .body-content {
@@ -37,11 +45,6 @@
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="@Url.Action("Index","Home")">
                     <img alt="Brand" src="~/Content/img/kundt_logo_with_slogan_right.png" />
                 </a>
@@ -54,6 +57,44 @@
             </div>
         </div>
     </nav>
+    <div class="container" style="margin-top:20px;margin-bottom:20px;">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Übersicht", "Index", "Home")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fahrzeug<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("UebersichtAuto","Home")">Liste</a></li>
+                                <li><a href="#">Hinzufügen</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kunden<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("UebersichtKunden","Home")">Liste</a></li>
+                                <li><a href="#">Hinzufügen</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buchung<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Liste</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mitarbeiter<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Liste</a></li>
+                                <li><a href="#">Hinzufügen</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
     <div class="container body-content">
         @RenderBody()
     </div>
