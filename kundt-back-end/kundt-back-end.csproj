@@ -233,6 +233,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\UebersichtAuto.cshtml" />
     <Content Include="Views\Home\Einstellung.cshtml" />
+    <Content Include="Views\Home\HinzufuegenAuto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

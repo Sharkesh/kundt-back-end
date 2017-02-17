@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "HinzufuegenAuto";
+}
+<style>
+    .table1 {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+    }
+
+    .hinzuAuto {
+        min-width: 200px;
+        max-width: 200px;
+    }
+
+    .step3tr {
+        background-color: orange;
+        width: 300px;
+        padding-bottom: 10px;
+    }
+
+        .step3tr:nth-child(even) {
+            background-color: darkorange;
+        }
+</style>
+<center style="padding-bottom:30px">
+    <h2>Auto hinzufügen</h2>
+</center>
+<div class="container">
+    <div class="col-xs-5">
+        <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" alt="Alternate Text" style="max-height:200px" />
+    </div>
+    <div class="col-xs-7">
+        <table class="table1">
+            <tr class="step3tr">
+                <td>Marke:</td>
+                <td>
+                    <select id="Marke" class="hinzuAuto">
+                        <optgroup label="Marke wählen">
+                            <option value="1">Mazda</option>
+                            <option value="2">Honda</option>
+                            <option value="3">VW</option>
+                        </optgroup>
+                    </select>
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>Typ:</td>
+                <td>
+                    <input type="text" name="name" value="" class="hinzuAuto" />
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>Kategorie:</td>
+                <td>
+                    <select id="Kategorie" class="hinzuAuto">
+                        <optgroup label="Kategorie wählen">
+                            <option value="1">Kleinwagen</option>
+                            <option value="2">Mittelklasse</option>
+                            <option value="3">Luxus</option>
+                        </optgroup>
+                    </select>
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>PS:</td>
+                <td>
+                    <input type="text" name="name" value="" class="hinzuAuto" />
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>Getriebe:</td>
+                <td>
+                    <select id="Getriebe" class="hinzuAuto">
+                        <optgroup label="Getriebe wählen">
+                            <option value="1">Manuell</option>
+                            <option value="2">Automatik</option>
+                        </optgroup>
+                    </select>
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>Baujahr:</td>
+                <td>
+                    <input type="text" name="name" value="" class="hinzuAuto" />
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>Türen:</td>
+                <td>
+                    <input type="text" name="name" value="" class="hinzuAuto" />
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>Sitze:</td>
+                <td>
+                    <input type="text" name="name" value="" class="hinzuAuto" />
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>KM-Stand:</td>
+                <td>
+                    <input type="text" name="name" value="" class="hinzuAuto" />
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>Treibstoff:</td>
+                <td>
+                    <select id="Treibstoff" class="hinzuAuto">
+                        <optgroup label="Treibstoff wählen">
+                            <option value="1">Diesel</option>
+                            <option value="2">Benzin</option>
+                            <option value="3">Elektrisch</option>
+                        </optgroup>
+                    </select>
+                </td>
+            </tr>
+            <tr class="step3tr">
+                <td>Mietpreis:</td>
+                <td>
+                    <input type="text" name="name" value="" class="hinzuAuto" />
+                </td>
+            </tr>
+        </table>
+
+
+
+    </div>
+    <div class="col-xs-12">
+        <fieldset>
+            <header>Ausstattungsoptionen:</header>
+        </fieldset>
+    </div>
+</div>
+
