@@ -24,14 +24,18 @@
         border-color: lightgray;
     }
 
-    /*.autoHinzu_tr:nth-child(even) {
-            background-color: lightgrey;
-        }*/
+    .hinzuAutoCheckbox {
+        height: -12px;
+        width: -10px;
+        text-align: center;
+    }
+
 </style>
-<center style="margin-bottom:30px">
-    <h2>Fahrzeug hinzufügen</h2>
-</center>
+
 <div class="container">
+    <center style="margin-bottom:30px">
+        <h2>Fahrzeug hinzufügen</h2>
+    </center>
     <div class="col-xs-5">
         <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" alt="Alternate Text" style="max-height:175px" class="picBorder" />
         <p><a href="#">Bild hinzufügen/ändern</a></p>
@@ -128,14 +132,48 @@
                 </td>
             </tr>
         </table>
-
-
-
     </div>
     <div class="col-xs-12">
         <fieldset>
             <header>Ausstattungsoptionen:</header>
         </fieldset>
+    </div>
+    <div class="col-xs-12 text-center">
+        <form>
+            <div class="col-xs-3 col-xs-offset-1">
+                <div class="checkbox">
+                    <label style="margin:auto auto 10px auto"><input type="checkbox" value="" class="hinzuAutoCheckbox">Option 1</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 2</label>
+                </div>
+                <div class="checkbox disabled">
+                    <label><input type="checkbox" value="" disabled>Option 3</label>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 1</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 2</label>
+                </div>
+                <div class="checkbox disabled">
+                    <label><input type="checkbox" value="" disabled>Option 3</label>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 1</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Option 2</label>
+                </div>
+                <div class="checkbox disabled">
+                    <label><input type="checkbox" value="" disabled>Option 3</label>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
