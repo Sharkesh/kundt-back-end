@@ -5,6 +5,7 @@
 <style>
     .TabellenGitter {
         border: solid 1px black;
+        height:2em;
     }
 
     .row > .col-lg-4 {
@@ -14,6 +15,9 @@
     #time{
         font-weight:bold;
         font-size:large;
+    }
+    #Kopfzeile {
+        height: 4em;
     }
 </style>
 <div id="Datumsfeld" >
@@ -28,7 +32,7 @@
         <center><h3>Abholung</h3></center>
         <div class="row">
             <table>
-                <tr class="TabellenGitter">
+                <tr class="TabellenGitter" id="Kopfzeile">
                     <th class="col-lg-1 TabellenGitter">B-Nr.</th>
                     <th class="col-lg-5 TabellenGitter">Name</th>
                     <th class="col-lg-5 TabellenGitter">Auto</th>
@@ -83,7 +87,7 @@
         <center><h3>Rückgabe</h3></center>
         <div class="row">
             <table>
-                <tr class="TabellenGitter">
+                <tr class="TabellenGitter" id="Kopfzeile">
                     <th class="col-lg-1 TabellenGitter">B-Nr.</th>
                     <th class="col-lg-5 TabellenGitter">Name</th>
                     <th class="col-lg-5 TabellenGitter">Auto</th>
@@ -138,7 +142,7 @@
         <center><h3>Problem?!</h3></center>
         <div class="row">
             <table>
-                <tr class="TabellenGitter">
+                <tr class="TabellenGitter" id="Kopfzeile">
                     <th class="col-lg-1 TabellenGitter">B-Nr.</th>
                     <th class="col-lg-5 TabellenGitter">Name</th>
                     <th class="col-lg-5 TabellenGitter">Auto</th>
