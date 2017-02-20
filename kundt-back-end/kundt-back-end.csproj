@@ -229,11 +229,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\UebersichtKunden.cshtml" />
+    <Content Include="Views\Home\KundenListe.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\UebersichtAuto.cshtml" />
     <Content Include="Views\Home\Einstellung.cshtml" />
     <Content Include="Views\Home\HinzufuegenAuto.cshtml" />
+    <Content Include="Views\Home\KundenUebersicht.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

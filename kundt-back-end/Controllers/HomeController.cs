@@ -12,7 +12,11 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        public ActionResult UebersichtKunden()
+        public ActionResult KundenUebersicht()
+        {
+            return View();
+        }
+        public ActionResult KundenListe()
         {
             return View();
         }
