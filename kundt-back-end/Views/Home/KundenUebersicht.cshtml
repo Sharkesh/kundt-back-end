@@ -2,30 +2,43 @@
     ViewBag.Title = "KundenListe";
 }
 <style>
-    .CenteredButton{
+    .CenteredButton {
         display: block;
         margin: auto;
     }
-    .TabellenGitter{
-        border:1px solid black;
+
+    .TabellenGitter {
+        border: 1px solid black;
     }
-
-
 </style>
 
 
-<div class="container" style="border:5px solid black">
-    <div class="row">
-        <div class="col-lg-3">
-            <div class="row">
+<div class="container" style="border:3px solid black">
+    <div class="row col-lg-12">
+        <div class="col-lg-3" style="margin:10px;">
+            <div class="row" style="padding:10px;border:1px solid black">
                 <center><h3>Suchen</h3></center>
-                <input type="text" placeholder="Name" class="col-lg-12"/>
+                <input type="text" placeholder="Name" class="col-lg-12" />
                 <input type="text" placeholder="Kunden-Nr." class="col-lg-12" />
                 <input type="text" placeholder="Ort" class="col-lg-12" />
                 <input type="text" placeholder="PLZ" class="col-lg-12" />
-                <input type="checkbox" />
+                <center><label>Offene Buchung</label></center>
+                <center><input type="checkbox" /></center>
+                <input class="col-lg-6 col-lg-offset-3" type="submit" value="Suchen" />
             </div>
         </div>
-        <div class="col-lg-9"></div>
+        <div class="col-lg-9" style="margin:10px;">
+            <div class="row" style="padding:10px;border:1px solid black">
+                <table>
+                    <tr>
+                        <th class="col-lg-2">KundenNr.</th>
+                        <th class="col-lg-2">Vorname</th>
+                        <th class="col-lg-2">Nachname</th>
+                        <th class="col-lg-2">Status</th>
+                        <th class="col-lg-2">Bearbeiten</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
