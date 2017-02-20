@@ -8,6 +8,16 @@
     }
     .TabellenGitter{
         border:1px solid black;
+        height:2em;
+        
+    }
+    #Kopfzeile{
+        height:4em;
+    }
+    #Tabelle{
+        margin-left:auto;
+        margin-right:auto;
+        margin-bottom:1em;
     }
 
 
@@ -41,7 +51,7 @@
                     <input type="text" class="form-control" id="PLZ" placeholder="Suche nach PLZ">
                 </div>
             </div> @*Ende colspan-lg-6*@
-            <div class="col-lg-offset-6">
+            <div class="">
                 <div class="form-group">
                     <label for="Ort">Ort</label>
                     <input type="text" class="form-control" id="Ort" placeholder="Suche nach Ort">
@@ -51,72 +61,70 @@
                     <input type="text" class="form-control" id="PassNR" placeholder="Suche nach Reisepass">
                 </div>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+
         </form>
     </div> @*Ersten 12 Zeilen Row Einteilung Ende*@
-    <div class="row ">
-        <table>
-            <tr class="TabellenGitter">
-                <th class="col-lg-2 TabellenGitter">BuchungsNr.</th>
-                <th class="col-lg-offset-2 col-lg-2 TabellenGitter">Eröffnung</th>
-                <th class="col-lg-offset-4 col-lg-2 TabellenGitter">Rückgabe</th>
-                <th class="col-lg-offset-6 col-lg-2 TabellenGitter">Status</th>
-                <th class="col-lg-offset-8 col-lg-2 TabellenGitter">Bearbeiten</th>
-            </tr>
-            <tr class="TabellenGitter">
-                <td class="col-lg-2 TabellenGitter">BNR. 1</td>
-                <td class="col-lg-offset-2 col-lg-2 TabellenGitter">Er. 1</td>
-                <td class="col-lg-offset-4 col-lg-2 TabellenGitter">Rü. 1</td>
-                <td class="col-lg-offset-6 col-lg-2 TabellenGitter">St. 1</td>
-                <td class="col-lg-offset-8 col-lg-2 TabellenGitter"><input id="edit1" type="submit" name="edit1" value="Edit1" /></td>
-            </tr>
-            <tr class="TabellenGitter">
-                <td class="col-lg-2 TabellenGitter">BNR. 2</td>
-                <td class="col-lg-offset-2 col-lg-2 TabellenGitter">Er. 2</td>
-                <td class="col-lg-offset-4 col-lg-2 TabellenGitter">Rü. 2</td>
-                <td class="col-lg-offset-6 col-lg-2 TabellenGitter">St. 2</td>
-                <td class="col-lg-offset-8 col-lg-2 TabellenGitter"><input id="edit2" type="submit" name="edit2" value="Edit2" /></td>
-            </tr>
-            <tr class="TabellenGitter">
-                <td class="col-lg-2 TabellenGitter">BNR. 3</td>
-                <td class="col-lg-offset-2 col-lg-2 TabellenGitter">Er. 3</td>
-                <td class="col-lg-offset-4 col-lg-2 TabellenGitter">Rü. 3</td>
-                <td class="col-lg-offset-6 col-lg-2 TabellenGitter">St. 3</td>
-                <td class="col-lg-offset-8 col-lg-2 TabellenGitter"><input id="edit3" type="submit" name="edit3" value="Edit3" /></td>
-            </tr>
-            <tr class="TabellenGitter">
-                <td class="col-lg-2 TabellenGitter">BNR. 4</td>
-                <td class="col-lg-offset-2 col-lg-2 TabellenGitter">Er. 4</td>
-                <td class="col-lg-offset-4 col-lg-2 TabellenGitter">Rü. 4</td>
-                <td class="col-lg-offset-6 col-lg-2 TabellenGitter">St. 4</td>
-                <td class="col-lg-offset-8 col-lg-2 TabellenGitter"><input id="edit4" type="submit" name="edit4" value="Edit4" /></td>
-            </tr>
-            <tr class="TabellenGitter">
-                <td class="col-lg-2 TabellenGitter">BNR. 5</td>
-                <td class="col-lg-offset-2 col-lg-2 TabellenGitter">Er. 5</td>
-                <td class="col-lg-offset-4 col-lg-2 TabellenGitter">Rü. 5</td>
-                <td class="col-lg-offset-6 col-lg-2 TabellenGitter">St. 5</td>
-                <td class="col-lg-offset-8 col-lg-2 TabellenGitter"><input id="edit5" type="submit" name="edit5" value="Edit5" /></td>
-            </tr>
-            <tr class="TabellenGitter">
-                <td class="col-lg-2 TabellenGitter">BNR. 6</td>
-                <td class="col-lg-offset-2 col-lg-2 TabellenGitter">Er. 6</td>
-                <td class="col-lg-offset-4 col-lg-2 TabellenGitter">Rü. 6</td>
-                <td class="col-lg-offset-6 col-lg-2 TabellenGitter">St. 6</td>
-                <td class="col-lg-offset-8 col-lg-2 TabellenGitter"><input id="edit6" type="submit" name="edit6" value="Edit6" /></td>
-            </tr>
-            <tr class="TabellenGitter">
-                <td class="col-lg-2 TabellenGitter">BNR. 7</td>
-                <td class="col-lg-offset-2 col-lg-2 TabellenGitter">Er. 7</td>
-                <td class="col-lg-offset-4 col-lg-2 TabellenGitter">Rü. 7</td>
-                <td class="col-lg-offset-6 col-lg-2 TabellenGitter">St. 7</td>
-                <td class="col-lg-offset-8 col-lg-2 TabellenGitter"><input id="edit7" type="submit" name="edit7" value="Edit7" /></td>
-            </tr>
-        </table>
-        <button  type="submit" class="btn btn-default CenteredButton">Submit</button>
+    <center>
+        <div class="row" id="Tabelle">
+            <table>
+                <tr class="TabellenGitter" id="Kopfzeile">
+                    <th class="col-lg-2 TabellenGitter">BuchungsNr.</th>
+                    <th class="col-lg-2 TabellenGitter">Buchungsdatum</th>
+                    <th class="col-lg-2 TabellenGitter">Rückgabe</th>
+                    <th class="col-lg-2 TabellenGitter">Status</th>
+                   
+                </tr>
+                <tr class="TabellenGitter">
+                    <td class="col-lg-2 TabellenGitter">BNR. 1</td>
+                    <td class="col-lg-2 TabellenGitter">Er. 1</td>
+                    <td class="col-lg-2 TabellenGitter">Rü. 1</td>
+                    <td class="col-lg-2 TabellenGitter">St. 1</td>
+                   
+                </tr>
+                <tr class="TabellenGitter">
+                    <td class="col-lg-2 TabellenGitter">BNR. 2</td>
+                    <td class="col-lg-2 TabellenGitter">Er. 2</td>
+                    <td class="col-lg-2 TabellenGitter">Rü. 2</td>
+                    <td class="col-lg-2 TabellenGitter">St. 2</td>
+                </tr>
+                <tr class="TabellenGitter">
+                    <td class="col-lg-2 TabellenGitter">BNR. 3</td>
+                    <td class="col-lg-2 TabellenGitter">Er. 3</td>
+                    <td class="col-lg-2 TabellenGitter">Rü. 3</td>
+                    <td class="col-lg-2 TabellenGitter">St. 3</td>
+                </tr>
+                <tr class="TabellenGitter">
+                    <td class="col-lg-2 TabellenGitter">BNR. 4</td>
+                    <td class="col-lg-2 TabellenGitter">Er. 4</td>
+                    <td class="col-lg-2 TabellenGitter">Rü. 4</td>
+                    <td class="col-lg-2 TabellenGitter">St. 4</td>
+                </tr>
+                <tr class="TabellenGitter">
+                    <td class="col-lg-2 TabellenGitter">BNR. 5</td>
+                    <td class="col-lg-2 TabellenGitter">Er. 5</td>
+                    <td class="col-lg-2 TabellenGitter">Rü. 5</td>
+                    <td class="col-lg-2 TabellenGitter">St. 5</td>
+                </tr>
+                <tr class="TabellenGitter">
+                    <td class="col-lg-2 TabellenGitter">BNR. 6</td>
+                    <td class="col-lg-2 TabellenGitter">Er. 6</td>
+                    <td class="col-lg-2 TabellenGitter">Rü. 6</td>
+                    <td class="col-lg-2 TabellenGitter">St. 6</td>
+                </tr>
+                <tr class="TabellenGitter">
+                    <td class="col-lg-2 TabellenGitter">BNR. 7</td>
+                    <td class="col-lg-2 TabellenGitter">Er. 7</td>
+                    <td class="col-lg-2 TabellenGitter">Rü. 7</td>
+                    <td class="col-lg-2 TabellenGitter">St. 7</td>
+                </tr>
+            </table>
+        </div>
+    </center>
+    <button type="submit" class="btn btn-default CenteredButton">Aktualisieren</button>
+</div>
+        
 
 
 
 
-    </div> @*Zweite 12 Zeilen Row Einteilung Ende*@
-</div> @*Container Ende*@
+ 
