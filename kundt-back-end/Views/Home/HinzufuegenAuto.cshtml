@@ -24,20 +24,31 @@
         border-color: lightgray;
     }
 
-    .hinzuAutoCheckbox {
-        height: -12px;
-        width: -10px;
-        text-align: center;
+    .labelCheckbox {
+        margin-left: 20px;
+        font-style: unset;
     }
-
+    .buttonOrangeNextStep {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
 </style>
 
 <div class="container">
-    <center style="margin-bottom:30px">
+    <center style="margin-bottom:50px">
         <h2>Fahrzeug hinzufügen</h2>
     </center>
     <div class="col-xs-5">
-        <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" alt="Alternate Text" style="max-height:175px" class="picBorder" />
+        <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" alt="Alternate Text" style="max-height:200px" class="picBorder" />
         <p><a href="#">Bild hinzufügen/ändern</a></p>
     </div>
     <div class="col-xs-6 col-xs-offset-1 table-responsive text-right" style="max-width:400px">
@@ -138,40 +149,52 @@
             <header>Ausstattungsoptionen:</header>
         </fieldset>
     </div>
-    <div class="col-xs-12 text-center">
+    <div class="col-xs-12 text-left">
         <form>
-            <div class="col-xs-3 col-xs-offset-1">
+            <div class="col-xs-2">
+                <div class="checkbox">                    
+                        <label class="labelCheckbox"><input type="checkbox" value="">Option 1</label>                    
+                </div>
+
                 <div class="checkbox">
-                    <label style="margin:auto auto 10px auto"><input type="checkbox" value="" class="hinzuAutoCheckbox">Option 1</label>
+                    <label class="labelCheckbox"><input type="checkbox" value="">Option 2</label>
                 </div>
+
                 <div class="checkbox">
-                    <label><input type="checkbox" value="">Option 2</label>
+                    <label class="labelCheckbox"><input type="checkbox" value="">Option 3</label>
                 </div>
-                <div class="checkbox disabled">
-                    <label><input type="checkbox" value="" disabled>Option 3</label>
-                </div>
+
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-2">
                 <div class="checkbox">
-                    <label><input type="checkbox" value="">Option 1</label>
+                    <label class="labelCheckbox"><input type="checkbox" value="">Option 1</label>
                 </div>
+
                 <div class="checkbox">
-                    <label><input type="checkbox" value="">Option 2</label>
+                    <label class="labelCheckbox"><input type="checkbox" value="">Option 2</label>
                 </div>
-                <div class="checkbox disabled">
-                    <label><input type="checkbox" value="" disabled>Option 3</label>
+
+                <div class="checkbox">
+                    <label class="labelCheckbox"><input type="checkbox" value="">Option 3</label>
                 </div>
+
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-2">
                 <div class="checkbox">
-                    <label><input type="checkbox" value="">Option 1</label>
+                    <label class="labelCheckbox"><input type="checkbox" value="">Option 1</label>
                 </div>
+
                 <div class="checkbox">
-                    <label><input type="checkbox" value="">Option 2</label>
+                    <label class="labelCheckbox"><input type="checkbox" value="">Option 2</label>
                 </div>
-                <div class="checkbox disabled">
-                    <label><input type="checkbox" value="" disabled>Option 3</label>
+
+                <div class="checkbox">
+                    <label class="labelCheckbox"><input type="checkbox" value="">Option 3</label>
                 </div>
+
+            </div>
+            <div class="col-xs-4 col-xs-offset-1 text-center">
+                <button class="buttonOrangeNextStep">Aktualisieren</button>
             </div>
         </form>
     </div>
