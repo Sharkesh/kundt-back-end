@@ -39,6 +39,12 @@
             padding-left: 0px;
             padding-right: 0px;
         }
+
+        #time {
+            font-weight: bold;
+            font-size: large;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body onload="Active()">
@@ -70,19 +76,25 @@
                                 <li><a href="#">Hinzufügen</a></li>
                             </ul>
                         </li>
-                        <li id="kunden" class="dropdown">
+                        <li id="kunden">
+                            @Html.ActionLink("Kunden", "KundenUebersicht", "Home")
+                        </li>
+                        @*<li id="kunden" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kunden<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="@Url.Action("KundenUebersicht","Home")">KundenUebersicht</a></li>
-                                <li><a href="@Url.Action("KundenListe","Home")">Liste</a></li>
+                                <li><a href="@Url.Action("KundenUebersicht","Home")">Liste</a></li>
                             </ul>
+                        </li>*@
+                        <li>
+                            <a href="#">Buchungen</a>
+                            @*@Html.ActionLink("Buchungen", "View", "Controller")*@
                         </li>
-                        <li id="buchung" class="dropdown">
+                        @*<li id="buchung" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buchung<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Liste</a></li>
                             </ul>
-                        </li>
+                        </li>*@
                         <li id="mitarbeiter" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mitarbeiter<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -96,6 +108,13 @@
         </nav>
     </div>
     <div class="container body-content">
+        <div id="Datumsfeld">
+            <center>
+                <div id="time">
+
+                </div>
+            </center>
+        </div>
         @RenderBody()
     </div>
 
