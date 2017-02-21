@@ -3,25 +3,58 @@
 }
 
 <style>
-    .TabellenGitter {
-        border: solid 1px black;
-        height:2em;
-    }
-
     .row > .col-lg-4 {
         padding-left: 20px;
         padding-right: 20px;
     }
-    #time{
-        font-weight:bold;
-        font-size:large;
+
+    #time {
+        font-weight: bold;
+        font-size: large;
     }
 
+    table {
+        width: 100%;
+    }
+
+    thead, tbody, tr, td, th {
+        text-align: center;
+    }
+
+    .table > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 0px;
+    }
+
+    /*thead,*/ tbody, tr /*, td, th*/ {
+        display: block;
+    }
+
+        tr:after {
+            content: ' ';
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+
+    thead th {
+        height: 30px;
+    }
+
+    tbody {
+        height: 300px;
+        overflow-y: auto;
+    }
+
+        tbody td, thead th {
+            width: auto;
+            float: left;
+        }
 </style>
-<div id="Datumsfeld" >
+<div id="Datumsfeld">
     <center>
         <div id="time">
-            
+
         </div>
     </center>
 </div>
@@ -30,112 +63,116 @@
         <center><h3>Abholung</h3></center>
         <div class="row table-responsive" style="height:500px;">
             <table class="table">
-                <tr class="TabellenGitter">
-                    <th class="col-lg-1 TabellenGitter">B-Nr.</th>
-                    <th class="col-lg-5 TabellenGitter">Name</th>
-                    <th class="col-lg-5 TabellenGitter">Auto</th>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                <thead>
+                    <tr>
+                        <th class="col-lg-2 ">B-Nr.</th>
+                        <th class="col-lg-5 ">Name</th>
+                        <th class="col-lg-5 ">Auto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -143,54 +180,58 @@
         <center><h3>Rückgabe</h3></center>
         <div class="row table-responsive" style="height:500px;">
             <table class="table">
-                <tr class="TabellenGitter">
-                    <th class="col-lg-1 TabellenGitter">B-Nr.</th>
-                    <th class="col-lg-5 TabellenGitter">Name</th>
-                    <th class="col-lg-5 TabellenGitter">Auto</th>
+                <thead>
+                    <tr>
+                        <th class="col-lg-2 ">B-Nr.</th>
+                        <th class="col-lg-5 ">Name</th>
+                        <th class="col-lg-5 ">Auto</th>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
 
-                </tr>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -198,56 +239,60 @@
         <center><h3>Problem?!</h3></center>
         <div class="row table-responsive" style="height:500px;">
             <table class="table">
-                <tr class="TabellenGitter">
-                    <th class="col-lg-1 TabellenGitter">B-Nr.</th>
-                    <th class="col-lg-5 TabellenGitter">Name</th>
-                    <th class="col-lg-5 TabellenGitter">Auto</th>
-                    <th class="col-lg-1 TabellenGitter">Problem</th>
+                <thead>
+                    <tr>
+                        <th class="col-lg-2 ">B-Nr.</th>
+                        <th class="col-lg-5 ">Name</th>
+                        <th class="col-lg-5 ">Auto</th>
+                        <th class="col-lg-2 ">Problem</th>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
-                    <td class="col-lg-1 TabellenGitter">Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
+                        <td class="col-lg-2 ">Status</td>
 
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
-                    <td class="col-lg-1 TabellenGitter">Status</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
-                    <td class="col-lg-1 TabellenGitter">Status</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
-                    <td class="col-lg-1 TabellenGitter">Status</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
-                    <td class="col-lg-1 TabellenGitter">Status</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
-                    <td class="col-lg-1 TabellenGitter">Status</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-1 TabellenGitter">5000000</td>
-                    <td class="col-lg-5 TabellenGitter">Name</td>
-                    <td class="col-lg-5 TabellenGitter">Auto</td>
-                    <td class="col-lg-1 TabellenGitter">Status</td>
-                </tr>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
+                        <td class="col-lg-2 ">Status</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
+                        <td class="col-lg-2 ">Status</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
+                        <td class="col-lg-2 ">Status</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
+                        <td class="col-lg-2 ">Status</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
+                        <td class="col-lg-2 ">Status</td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-2 ">5000000</td>
+                        <td class="col-lg-5 ">Name</td>
+                        <td class="col-lg-5 ">Auto</td>
+                        <td class="col-lg-2 ">Status</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
