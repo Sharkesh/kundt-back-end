@@ -7,12 +7,12 @@
         margin: auto;
     }
 
-    .SuchFilter_abstand{
-        margin-top:10px;
-        margin-bottom:10px;
+    .SuchFilter_abstand {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
-        table {
+    table {
         width: 100%;
     }
 
@@ -25,12 +25,16 @@
         border-bottom: 0px;
     }
 
-    tr:after {
-        content: ' ';
+    tbody, tr /*, td,th, thead*/ {
         display: block;
-        visibility: hidden;
-        clear: both;
     }
+
+        tr:after {
+            content: ' ';
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
 
     thead th {
         height: 30px;
@@ -40,6 +44,7 @@
         height: 300px;
         overflow-y: auto;
     }
+
         tbody td, thead th {
             width: auto;
             float: left;
@@ -50,127 +55,112 @@
 <div class="container" style="border:3px solid black;">
     <div class="row">
         <div class="col-lg-3">
-            <div class="row" style="margin:10px;padding:10px;border:1px solid black;">                
-                    <center><h3>Suchen</h3></center>
-                    <input type="text" placeholder="Name" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" placeholder="Kunden-Nr." class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
-                    <center><label class="SuchFilter_abstand">Offene Buchung</label></center>
-                    <center><input type="checkbox" class="SuchFilter_abstand" /></center>
-                    <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen" />
+            <div class="row" style="margin:10px;padding:10px;border:1px solid black;">
+                <center><h3>Suchen</h3></center>
+                <input type="text" placeholder="Name" class="col-lg-12 SuchFilter_abstand" />
+                <input type="text" placeholder="Kunden-Nr." class="col-lg-12 SuchFilter_abstand" />
+                <input type="text" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
+                <input type="text" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
+                <center><label class="SuchFilter_abstand">Offene Buchung</label></center>
+                <center><input type="checkbox" class="SuchFilter_abstand" /></center>
+                <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen" />
             </div>
         </div>
         <div class="col-lg-9">
-            <div class="row table-responsive" style="margin:10px;padding:10px;border:1px solid black;">
+            <div class="row table-responsive" style="margin:10px;padding:10px;height:400px;">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class="col-lg-2 TabellenGitter">KundenNr.</th>
-                            <th class="col-lg-3 TabellenGitter">Vorname</th>
-                            <th class="col-lg-3 TabellenGitter">Nachname</th>
-                            <th class="col-lg-2 TabellenGitter">Status</th>
-                            <th class="col-lg-2 TabellenGitter">Bearbeiten</th>
+                            <th class="col-lg-1">KundenNr.</th>
+                            <th class="col-lg-5">Vorname</th>
+                            <th class="col-lg-5">Nachname</th>
+                            <th class="col-lg-1">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-5">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                         <tr>
-                            <td class="col-lg-2 TabellenGitter">123456</td>
-                            <td class="col-lg-3 TabellenGitter">Franzi</td>
-                            <td class="col-lg-3 TabellenGitter">Mustermann</td>
-                            <td class="col-lg-2 TabellenGitter">O_o</td>
-                            <td class="col-lg-2 TabellenGitter"><input type="button" value="Bearbeiten" /></td>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-5">Franzi</td>
+                            <td class="col-lg-5">Mustermann</td>
+                            <td class="col-lg-1">O_o</td>
                         </tr>
                     </tbody>
                 </table>
