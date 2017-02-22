@@ -347,6 +347,7 @@
     <Content Include="Views\Home\Einstellung.cshtml" />
     <Content Include="Views\Home\HinzufuegenAuto.cshtml" />
     <Content Include="Views\Home\KundenUebersicht.cshtml" />
+    <Content Include="Views\Home\MitarbeiterHinzufuegen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
