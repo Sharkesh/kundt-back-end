@@ -25,6 +25,7 @@ namespace kundt_back_end
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-select.min.css",
                       "~/Content/bootstrap-theme.min.css",
                       "~/Content/site.css"));
         }
