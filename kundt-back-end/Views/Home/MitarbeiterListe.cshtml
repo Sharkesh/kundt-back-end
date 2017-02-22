@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "MitarbeiterListe";
+}
+
+<h2>MitarbeiterListe</h2>
+
+<style>
+    .CenteredButton {
+        display: block;
+        margin: auto;
+    }
+
+    .SuchFilter_abstand {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    thead, tbody, tr, td, th {
+        text-align: center;
+    }
+
+    .table > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 0px;
+    }
+
+    tbody, tr /*, td,th, thead*/ {
+        display: block;
+    }
+
+        tr:after {
+            content: ' ';
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+
+    thead th {
+        height: 30px;
+    }
+
+    tbody {
+        height: 300px;
+        overflow-y: auto;
+    }
+
+        tbody td, thead th {
+            width: auto;
+            float: left;
+        }
+</style>
+
+
+<div class="container" style="border:3px solid black;">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="row" style="margin:10px;padding:10px;border:1px solid black;">
+                <center><h3>Suchen</h3></center>
+                <input type="text" placeholder="MA-Nr." class="col-lg-12 SuchFilter_abstand" />
+                <input type="text" placeholder="Anrede" class="col-lg-12 SuchFilter_abstand" />
+                <input type="text" placeholder="Vorname" class="col-lg-12 SuchFilter_abstand" />
+                <input type="text" placeholder="Nachname" class="col-lg-12 SuchFilter_abstand" />
+                <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen" />
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="row table-responsive" style="margin:10px;padding:10px;height:400px;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-1">MA-Nr.</th>
+                            <th class="col-lg-1">Anrede</th>
+                            <th class="col-lg-3">Vorname</th>
+                            <th class="col-lg-3" style="position: relative; left: -10px;">Nachname</th>
+                            <th class="col-lg-2" style="position: relative; left: -10px;">Berarbeiten</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-1">Herr</td>
+                            <td class="col-lg-3">Max</td>
+                            <td class="col-lg-3">Msutermann</td>
+                            <td class="col-lg-2"><button type="button" class="btn btn-primary btn-sm">Bearbeiten</button></td>
+                        </tr>
+                        <tr>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-1">Herr</td>
+                            <td class="col-lg-3">Max</td>
+                            <td class="col-lg-3">Msutermann</td>
+                            <td class="col-lg-2"><button type="button" class="btn btn-primary btn-sm">Bearbeiten</button></td>
+                        </tr>
+                        <tr>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-1">Herr</td>
+                            <td class="col-lg-3">Max</td>
+                            <td class="col-lg-3">Msutermann</td>
+                            <td class="col-lg-2"><button type="button" class="btn btn-primary btn-sm">Bearbeiten</button></td>
+                        </tr>
+                        <tr>
+                            <td class="col-lg-1">123456</td>
+                            <td class="col-lg-1">Herr</td>
+                            <td class="col-lg-3">Max</td>
+                            <td class="col-lg-3">Msutermann</td>
+                            <td class="col-lg-2"><button type="button" class="btn btn-primary btn-sm">Bearbeiten</button></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
