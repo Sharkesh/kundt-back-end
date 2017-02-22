@@ -1,4 +1,9 @@
-﻿function Active() {
+﻿function OnLoad() {
+    Active();
+    StartTime();
+}
+
+function Active() {
     if (document.title == "Übersicht") {
         $("#uebersicht").addClass("active");
     } else {
@@ -24,25 +29,26 @@
     } else {
         $("#mitarbeiter").removeClass("active");
     }
-
-    startTime();
 }
+
 // (SH) Uhr + Datums anzeige auf der Übersichts seite.
-function startTime() {
+function StartTime() {
     var today = new Date();
     var h = today.getHours();
     var m = today.getMinutes();
     var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    var d = new Date();
-    var n = d.toDateString();
-    document.getElementById('time').innerHTML =
-    n+", "+h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
+    m = CheckTime(m);
+    s = CheckTime(s);
+    h = CheckTime(h);
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var n = today.toLocaleDateString('de-AT', options);
+    document.getElementById('time').innerHTML = n + ", " + h + ":" + m + ":" + s;
+    var t = setTimeout(StartTime, 1000);
 
 }
-function checkTime(i) {
-    if (i < 10) { i = "0" + i };  
+function CheckTime(i) {
+    if (i < 10) {
+        i = "0" + i
+    };
     return i;
 }
