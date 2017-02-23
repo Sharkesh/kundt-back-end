@@ -2,110 +2,201 @@
     ViewBag.Title = "Übersicht Autos";
 }
 <style>
+    .SuchFilter_abstand {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
     .CenteredButton {
         display: block;
         margin: auto;
     }
 
     .TabellenGitter {
-        border: 1px solid black;
+        border-right: 1px solid black;
+        margin: 10px;
+        padding:10px;
     }
 
     .BildKleinSkalierung {
         width: 100px;
         height: 75px;
     }
+
+    table {
+        width: 100%;
+    }
+
+    thead, tbody, tr, td, th {
+        text-align: center;
+    }
+
+    .table > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 0px;
+    }
+
+    /*thead,*/ tbody, tr /*, td, th*/ {
+        display: block;
+    }
+
+        tr:after {
+            content: ' ';
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+
+    thead th {
+        height: 30px;
+    }
+
+    tbody {
+        height: 400px;
+        overflow-y: auto;
+    }
+
+        tbody td, thead th {
+            width: auto;
+            float: left;
+        }
 </style>
 
 
-<div class="container">
-    <div class="row" style="border:5px solid black">
-        <div class="col-lg-4 TabellenGitter ">
+<div class="container" style="border:3px solid black">
+    <div class="row">
+        <div class="col-lg-4">
             @*Anfang des Linken Such Bereich*@
-
-            <div class="form-group">
-                <label for="IDAuto">ID Auto</label>
-                <input type="text" class="form-control" id="IDAuto" placeholder="Suche nach Auto ID">
+            <div class="row TabellenGitter">
+                <center><h3>Suchen</h3></center>
+                <div class="form-group col-lg-12">
+                    <center><input class="form-control" type="text" id="IDAuto" placeholder="Suche nach Auto ID"></center>
+                </div>
+                <div class="row">
+                    <center><h3 style="text-align:center">Filter</h3></center>
+                    <div class="col-lg-12 SuchFilter_abstand">
+                        <center>
+                            <select name="Marke" class="col-lg-6">
+                                <option value="Marke">Marke</option>
+                                <option value="saab">Saab</option>
+                                <option value="fiat">Fiat</option>
+                                <option value="audi">Audi</option>
+                                <option value="Renault">Renault</option>
+                                <option value="BMW">BMW</option>
+                            </select>
+                            <select name="Typ" class="col-lg-6">
+                                <option value="Typ">Typ</option>
+                                <option value="Coupe">Coupé</option>
+                                <option value="Kombi">Kombi</option>
+                                <option value="Cabriolet">Cabriolet</option>
+                                <option value="Roadster">Roadster</option>
+                                <option value="Runabout">Runabout</option>
+                            </select>
+                        </center>
+                    </div>
+                    <center class="col-lg-12 SuchFilter_abstand">
+                        <center>
+                            <select name="Kategorie" class="col-lg-6">
+                                <option value="Kategorie">Kategorie</option>
+                                <option value="BiligKlasse">Bilig Klasse</option>
+                                <option value="MittelKlasse">Mittel Klasse</option>
+                                <option value="LuxusKlasse">Luxus Klasse</option>
+                                <option value="Roadster">Roadster</option>
+                                <option value="Runabout">Runabout</option>
+                            </select>
+                            <select name="Status" class="col-lg-6">
+                                <option value="Status">Status</option>
+                                <option value="Verfügbar">Verfügbar</option>
+                                <option value="Ausgeliehen">Ausgeliehen</option>
+                                <option value="Versteckt">Versteckt</option>
+                            </select>
+                        </center>
+                    </center>
+                </div>
+                <div class="form-group col-lg-12 SuchFilter_abstand">
+                    <center><input type="text" class="form-control" id="Baujahr" placeholder="Suche nach Baujahr"></center>
+                </div>
+                <div class="form-group col-lg-12 SuchFilter_abstand">
+                    <center><input type="text" class="form-control" id="Preis" placeholder="Suche nach Preis"></center>
+                </div>
+                <div class="form-group col-lg-12 SuchFilter_abstand">
+                    <center><input type="text" class="form-control" id="Baujahr" placeholder="Suche nach Kilometer"></center>
+                </div>
+                <button type="submit" class="btn btn-default col-lg-offset-4 col-lg-4 SuchFilter_abstand" id="AutoFilterBTN">Suchen</button>
             </div>
-            <div class="row">
-                <h6 style="text-align:center">Filter</h6>
-                <select name="Marke" class="col-lg-4">
-                    <option value="Marke">Marke</option>
-                    <option value="saab">Saab</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="audi">Audi</option>
-                    <option value="Renault">Renault</option>
-                    <option value="BMW">BMW</option>
-                </select>
-                <select name="Typ" class="col-lg-4">
-                    <option value="Typ">Typ</option>
-                    <option value="Coupe">Coupé</option>
-                    <option value="Kombi">Kombi</option>
-                    <option value="Cabriolet">Cabriolet</option>
-                    <option value="Roadster">Roadster</option>
-                    <option value="Runabout">Runabout</option>
-                </select>
-                <select name="Kategorie" class="col-lg-4">
-                    <option value="Kategorie">Kategorie</option>
-                    <option value="BiligKlasse">Bilig Klasse</option>
-                    <option value="MittelKlasse">Mittel Klasse</option>
-                    <option value="LuxusKlasse">Luxus Klasse</option>
-                    <option value="Roadster">Roadster</option>
-                    <option value="Runabout">Runabout</option>
-                </select>
-                <select name="Status" class="col-lg-4">
-                    <option value="Status">Status</option>
-                    <option value="Verfügbar">Verfügbar</option>
-                    <option value="Ausgeliehen">Ausgeliehen</option>
-                    <option value="Versteckt">Versteckt</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Baujahr">Baujahr</label>
-                <input type="text" class="form-control" id="Baujahr" placeholder="Suche nach Baujahr">
-            </div>
-            <div class="form-group">
-                <label for="Preis">Preis</label>
-                <input type="text" class="form-control" id="Preis" placeholder="Suche nach Preis">
-            </div>
-            <div class="form-group">
-                <label for="KMS">Kilometer Stand</label>
-                <input type="text" class="form-control" id="Baujahr" placeholder="Suche nach Kilometer">
-            </div>
-            <button type="submit" class="btn btn-default" id="AutoFilterBTN">Suchen</button>
-        </div> @*Ende des Linken Such Bereich*@
-
-        <div class="col-lg-8"">
+        </div>@*Ende des Linken Such Bereich*@
+        <div class="col-lg-8">
             @*Anfang des Rechten Ergebnis Bereiches*@
-            <div class="row">
+            <div class="row" style="height:400px;">
                 <div class="col-lg-12">
-                    <table>
-                        <tr class="TabellenGitter">
-                            <th class="col-lg-2 TabellenGitter">Bild</th>
-                            <th class="col-lg-4 TabellenGitter">Beschreibung</th>
-                            <th class="col-lg-1 TabellenGitter">Bearbeiten</th>
-                        </tr>
-                        <tr class="TabellenGitter">
-                            <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
-                            <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
-                            <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
-                        </tr>
-                        <tr class="TabellenGitter">
-                            <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
-                            <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
-                            <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
-                        </tr>
-                        <tr class="TabellenGitter">
-                            <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
-                            <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
-                            <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
-                        </tr>
-                        <tr class="TabellenGitter">
-                            <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
-                            <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
-                            <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
-                        </tr>
-                    </table>
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="col-lg-2 ">Bild</th>
+                                    <th class="col-lg-4 ">Beschreibung</th>
+                                    <th class="col-lg-1 ">Bearbeiten</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-lg-2"><img src="/Content/img/vw-touran-van-weiss-2016.png" class="BildKleinSkalierung img-responsive" /></td>
+                                    <td class="col-lg-8"><textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto"></textarea></td>
+                                    <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div> @*Ende des Rechten Ergebnis Bereiches*@
