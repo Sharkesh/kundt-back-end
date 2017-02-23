@@ -347,12 +347,10 @@
     <Content Include="Views\Home\Einstellung.cshtml" />
     <Content Include="Views\Home\HinzufuegenAuto.cshtml" />
     <Content Include="Views\Home\KundenUebersicht.cshtml" />
-
     <Content Include="Views\Home\BearbeitenAuto.cshtml" />
     <Content Include="Views\Home\Buchungsdetails.cshtml" />
-
     <Content Include="Views\Home\MitarbeiterHinzufuegen.cshtml" />
-
+    <Content Include="Views\Home\MitarbeiterBearbeiten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
