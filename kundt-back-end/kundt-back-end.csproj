@@ -351,6 +351,7 @@
     <Content Include="Views\Home\Buchungsdetails.cshtml" />
     <Content Include="Views\Home\MitarbeiterHinzufuegen.cshtml" />
     <Content Include="Views\Home\MitarbeiterBearbeiten.cshtml" />
+    <Content Include="Views\Home\MitarbeiterListe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
