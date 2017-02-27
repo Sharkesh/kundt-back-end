@@ -16,11 +16,11 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        public ActionResult KundenListe()
+        public ActionResult KundenDetail()
         {
             return View();
         }
-        public ActionResult UebersichtAuto()
+        public ActionResult AutoUebersicht()
         {
             return View();
         }
@@ -28,11 +28,11 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        public ActionResult HinzufuegenAuto()
+        public ActionResult AutoHinzufuegen()
         {
             return View();
         }
-        public ActionResult BearbeitenAuto()
+        public ActionResult AutoDetail()
         {
             return View();
         }
@@ -44,12 +44,12 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        public ActionResult MitarbeiterBearbeiten()
+        public ActionResult MitarbeiterDetail()
 
         {
             return View();
         }
-        public ActionResult MitarbeiterListe()
+        public ActionResult MitarbeiterUebersicht()
 
         {
             return View();

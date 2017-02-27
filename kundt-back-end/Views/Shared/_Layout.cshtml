@@ -72,34 +72,34 @@
                         <li id="fahrzeug" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fahrzeug<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="@Url.Action("UebersichtAuto","Home")">Liste</a></li>
-                                <li><a href="#">Hinzufügen</a></li>
+                                <li><a href="@Url.Action("AutoUebersicht","Home")">Liste</a></li>
+                                <li><a href="@Url.Action("AutoHinzufuegen","Home")">Hinzufügen</a></li>
                             </ul>
                         </li>
                         <li id="kunden">
                             @Html.ActionLink("Kunden", "KundenUebersicht", "Home")
                         </li>
                         @*<li id="kunden" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kunden<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="@Url.Action("KundenUebersicht","Home")">Liste</a></li>
-                            </ul>
-                        </li>*@
-                        <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kunden<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("KundenUebersicht","Home")">Liste</a></li>
+                                </ul>
+                            </li>*@
+                        <li id="buchung">
                             @Html.ActionLink("Buchungen", "BuchungenUebersicht", "Home")
                             @*@Html.ActionLink("Buchungen", "View", "Controller")*@
                         </li>
                         @*<li id="buchung" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buchung<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Liste</a></li>
-                            </ul>
-                        </li>*@
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buchung<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Liste</a></li>
+                                </ul>
+                            </li>*@
                         <li id="mitarbeiter" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mitarbeiter<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Liste</a></li>
-                                <li><a href="#">Hinzufügen</a></li>
+                                <li><a href="@Url.Action("MitarbeiterUebersicht","Home")">Liste</a></li>
+                                <li><a href="@Url.Action("MitarbeiterHinzufuegen","Home")">Hinzufügen</a></li>
                             </ul>
                         </li>
                     </ul>
