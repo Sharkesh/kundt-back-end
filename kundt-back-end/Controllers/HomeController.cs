@@ -32,7 +32,28 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
+
+        public ActionResult BearbeitenAuto()
+        {
+            return View();
+        }
+        public ActionResult Buchungsdetails()
+	{
+            return View();
+        }
+
         public ActionResult MitarbeiterHinzufuegen()
+
+        {
+            return View();
+        }
+        public ActionResult MitarbeiterBearbeiten()
+
+        {
+            return View();
+        }
+        public ActionResult MitarbeiterListe()
+
         {
             return View();
         }
