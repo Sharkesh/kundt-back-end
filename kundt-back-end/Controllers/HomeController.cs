@@ -36,7 +36,7 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        public ActionResult BuchungsDetail()
+        public ActionResult BuchungDetail()
         {
             return View();
         }
@@ -54,7 +54,7 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        public ActionResult BuchungenUebersicht()
+        public ActionResult BuchungUebersicht()
         {
             return View();
         }

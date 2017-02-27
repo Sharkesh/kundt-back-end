@@ -422,16 +422,16 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\KundenDetail.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\UebersichtAuto.cshtml" />
+    <Content Include="Views\Home\AutoUebersicht.cshtml" />
     <Content Include="Views\Home\Einstellung.cshtml" />
-    <Content Include="Views\Home\HinzufuegenAuto.cshtml" />
+    <Content Include="Views\Home\AutoHinzufuegen.cshtml" />
     <Content Include="Views\Home\KundenUebersicht.cshtml" />
-    <Content Include="Views\Home\BearbeitenAuto.cshtml" />
-    <Content Include="Views\Home\Buchungsdetails.cshtml" />
+    <Content Include="Views\Home\AutoDetail.cshtml" />
+    <Content Include="Views\Home\BuchungDetail.cshtml" />
     <Content Include="Views\Home\MitarbeiterHinzufuegen.cshtml" />
-    <Content Include="Views\Home\BuchungenUebersicht.cshtml" />
-    <Content Include="Views\Home\MitarbeiterBearbeiten.cshtml" />
-    <Content Include="Views\Home\MitarbeiterListe.cshtml" />
+    <Content Include="Views\Home\BuchungUebersicht.cshtml" />
+    <Content Include="Views\Home\MitarbeiterDetail.cshtml" />
+    <Content Include="Views\Home\MitarbeiterUebersicht.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
