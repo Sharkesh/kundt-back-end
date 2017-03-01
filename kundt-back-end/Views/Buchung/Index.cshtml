@@ -1,0 +1,81 @@
+﻿@model IEnumerable<kundt_back_end.Models.tblBuchung>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BuchungAm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuchungVon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuchungBis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Versicherung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuchungStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Storno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblAuto.PS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblKunde.Vorname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuchungAm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuchungVon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuchungBis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Versicherung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuchungStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Storno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblAuto.PS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblKunde.Vorname)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDBuchung }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDBuchung }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDBuchung })
+        </td>
+    </tr>
+}
+
+</table>

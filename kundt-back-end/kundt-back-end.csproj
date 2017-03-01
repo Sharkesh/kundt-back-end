@@ -130,10 +130,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BuchungController.cs" />
+    <Compile Include="Controllers\BuchungUebersichtController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\tblAutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuchungsUebersicht.cs" />
     <Compile Include="Models\It22AutoverleihModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -432,6 +436,21 @@
     <Content Include="Views\Home\BuchungUebersicht.cshtml" />
     <Content Include="Views\Home\MitarbeiterDetail.cshtml" />
     <Content Include="Views\Home\MitarbeiterUebersicht.cshtml" />
+    <Content Include="Views\tblAuto\Create.cshtml" />
+    <Content Include="Views\tblAuto\Delete.cshtml" />
+    <Content Include="Views\tblAuto\Details.cshtml" />
+    <Content Include="Views\tblAuto\Edit.cshtml" />
+    <Content Include="Views\tblAuto\Index.cshtml" />
+    <Content Include="Views\BuchungUebersicht\Create.cshtml" />
+    <Content Include="Views\BuchungUebersicht\Delete.cshtml" />
+    <Content Include="Views\BuchungUebersicht\Details.cshtml" />
+    <Content Include="Views\BuchungUebersicht\Edit.cshtml" />
+    <Content Include="Views\BuchungUebersicht\Index.cshtml" />
+    <Content Include="Views\Buchung\Create.cshtml" />
+    <Content Include="Views\Buchung\Delete.cshtml" />
+    <Content Include="Views\Buchung\Details.cshtml" />
+    <Content Include="Views\Buchung\Edit.cshtml" />
+    <Content Include="Views\Buchung\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
