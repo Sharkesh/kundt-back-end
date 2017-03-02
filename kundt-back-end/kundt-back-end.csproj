@@ -446,8 +446,6 @@
     <Content Include="Views\BuchungUebersicht\Details.cshtml" />
     <Content Include="Views\BuchungUebersicht\Edit.cshtml" />
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
-    <Content Include="Views\Buchung\Create.cshtml" />
-    <Content Include="Views\Buchung\Delete.cshtml" />
     <Content Include="Views\Buchung\Details.cshtml" />
     <Content Include="Views\Buchung\Edit.cshtml" />
     <Content Include="Views\Buchung\Index.cshtml" />

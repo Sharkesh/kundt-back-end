@@ -45,33 +45,6 @@ namespace kundt_back_end.Controllers
             return View(tblBuchung);
         }
 
-        // GET: BuchungUebersicht/Create
-        public ActionResult Create()
-        {
-            ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS");
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname");
-            return View();
-        }
-
-        // POST: BuchungUebersicht/Create
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDBuchung,BuchungAm,BuchungVon,BuchungBis,Versicherung,FKKunde,FKAuto,Tage,BuchungStatus,Storno")] tblBuchung tblBuchung)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tblBuchung.Add(tblBuchung);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", tblBuchung.FKAuto);
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", tblBuchung.FKKunde);
-            return View(tblBuchung);
-        }
-
         // GET: BuchungUebersicht/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -105,32 +78,6 @@ namespace kundt_back_end.Controllers
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", tblBuchung.FKAuto);
             ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", tblBuchung.FKKunde);
             return View(tblBuchung);
-        }
-
-        // GET: BuchungUebersicht/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblBuchung tblBuchung = db.tblBuchung.Find(id);
-            if (tblBuchung == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblBuchung);
-        }
-
-        // POST: BuchungUebersicht/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tblBuchung tblBuchung = db.tblBuchung.Find(id);
-            db.tblBuchung.Remove(tblBuchung);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

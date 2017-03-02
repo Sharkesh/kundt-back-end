@@ -4,86 +4,56 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="row" style="margin:10px;padding:10px;height:400px;">
+                <span class="col-lg-3">@Html.DisplayNameFor(model => model.IDBuchung)</span><span class="col-lg-9">@Html.DisplayFor(Model => Model.IDBuchung)</span>
+                <span class="col-lg-3">@Html.DisplayNameFor(model => model.tblKunde.Vorname)</span><span class="col-lg-9">@Html.DisplayFor(Model => Model.tblKunde.Vorname)</span>
+                <span class="col-lg-3">@Html.DisplayNameFor(model => model.tblKunde.Nachname)</span><span class="col-lg-9">@Html.DisplayFor(Model => Model.tblKunde.Nachname)</span>
+                <span class="col-lg-3">@Html.DisplayNameFor(model => model.BuchungAm)</span><span class="col-lg-9">@Html.DisplayFor(Model => Model.BuchungAm)</span>
+                <span class="col-lg-3">@Html.DisplayNameFor(model => model.BuchungVon)</span><span class="col-lg-9">@Html.DisplayFor(Model => Model.BuchungVon)</span>
+                <span class="col-lg-3">@Html.DisplayNameFor(model => model.BuchungBis)</span><span class="col-lg-9">@Html.DisplayFor(Model => Model.BuchungBis)</span>
+                <span class="col-lg-3">Gesamtpreis</span><span class="col-lg-9">@ViewBag.gesamtPreis</span>
+                <span class="col-lg-3">@Html.DisplayNameFor(model => model.Versicherung)</span><span class="col-lg-9">@Html.DisplayFor(Model => Model.Versicherung)</span>
+                
+            </div>
+        </div>
+        @*<div class="col-lg-3">
+                <div class="row table-responsive" style="margin:10px;padding:10px;height:400px;">
+                    <table class="table">
+                        <thead>
+                            <tr style="margin-right:16px;">
+                                <th style="width:15%;">@Html.DisplayNameFor(model => model.IDBuchung)</th>
+                                <th style="width:15%;">KundenNr.</th>
+                                <th style="width:15%;">Vorname</th>
+                                <th style="width:15%;">Nachname</th>
+                                <th style="width:20%;">Ort</th>
+                                <th style="width:10%;">PLZ</th>
+                                <th style="width:10%;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:15%;"><a href="@Url.Action("Details","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Details","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.tblKunde.IDKunde)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Details","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.tblKunde.Vorname)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Details","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.tblKunde.Nachname)</a></td>
+                                    <td style="width:20%;"><a href="@Url.Action("Details","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.tblKunde.tblPLZOrt.Ort)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Details","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.tblKunde.tblPLZOrt.PLZ)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Details","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungStatus)</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
-<div>
-    <h4>tblBuchung</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.BuchungAm)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BuchungAm)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BuchungVon)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BuchungVon)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BuchungBis)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BuchungBis)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Versicherung)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Versicherung)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BuchungStatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BuchungStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Storno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Storno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tblAuto.PS)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tblAuto.PS)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tblKunde.Vorname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tblKunde.Vorname)
-        </dd>
-
-    </dl>
+                </div>
+            </div>*@
+    </div>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.IDBuchung }) |
     @Html.ActionLink("Back to List", "Index")
