@@ -21,7 +21,7 @@ namespace kundt_back_end.Controllers
 
             var buchungRueckgabe = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde).Where(b => b.BuchungBis == DateTime.Now);
 
-            var buchungProblem = db.tblBuchung.Include(b => b.tblHistorie).Where(b => b.BuchungVon < DateTime.Now && b.BuchungBis < DateTime.Now);
+            var buchungProblem = db.tblBuchung.Include(b => b.tblHistorie).Where(b => (b.BuchungVon < DateTime.Now && b.BuchungStatus == "erstellt") || (b.BuchungBis < DateTime.Now && b.BuchungStatus == "abgeholt"));
 
             BuchungsUebersicht bu = new BuchungsUebersicht();
             bu.buchungAbholung = buchungAbholung.ToList();
