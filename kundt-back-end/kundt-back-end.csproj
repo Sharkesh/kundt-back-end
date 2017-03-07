@@ -441,9 +441,6 @@
     <Content Include="Views\tblAuto\Details.cshtml" />
     <Content Include="Views\tblAuto\Edit.cshtml" />
     <Content Include="Views\tblAuto\Index.cshtml" />
-    <Content Include="Views\BuchungUebersicht\Create.cshtml" />
-    <Content Include="Views\BuchungUebersicht\Delete.cshtml" />
-    <Content Include="Views\BuchungUebersicht\Details.cshtml" />
     <Content Include="Views\BuchungUebersicht\Edit.cshtml" />
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
     <Content Include="Views\Buchung\Details.cshtml" />
