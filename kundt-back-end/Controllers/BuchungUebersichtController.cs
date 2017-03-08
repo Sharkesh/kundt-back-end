@@ -30,41 +30,6 @@ namespace kundt_back_end.Controllers
             return View(bu);
         }
 
-        // GET: BuchungUebersicht/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblBuchung tblBuchung = db.tblBuchung.Find(id);
-            if (tblBuchung == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", tblBuchung.FKAuto);
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", tblBuchung.FKKunde);
-            return View(tblBuchung);
-        }
-
-        // POST: BuchungUebersicht/Edit/5
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDBuchung,BuchungAm,BuchungVon,BuchungBis,Versicherung,FKKunde,FKAuto,Tage,BuchungStatus,Storno")] tblBuchung tblBuchung)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tblBuchung).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", tblBuchung.FKAuto);
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", tblBuchung.FKKunde);
-            return View(tblBuchung);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

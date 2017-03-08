@@ -11,7 +11,8 @@ namespace kundt_back_end.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblBuchung
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +20,11 @@ namespace kundt_back_end.Models
         {
             this.tblHistorie = new HashSet<tblHistorie>();
         }
-    
+
         public int IDBuchung { get; set; }
         public System.DateTime BuchungAm { get; set; }
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}",ApplyFormatInEditMode =true)]
         public System.DateTime BuchungVon { get; set; }
         public System.DateTime BuchungBis { get; set; }
         public bool Versicherung { get; set; }

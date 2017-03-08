@@ -59,7 +59,7 @@ namespace kundt_back_end.Controllers
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IDBuchung,BuchungAm,BuchungVon,BuchungBis,Versicherung,FKKunde,FKAuto,Tage,BuchungStatus,Storno")] tblBuchung tblBuchung)
         {
             if (ModelState.IsValid)
