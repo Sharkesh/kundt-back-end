@@ -22,10 +22,12 @@ namespace kundt_back_end.Models
         }
 
         public int IDBuchung { get; set; }
-        public System.DateTime BuchungAm { get; set; }
-        //[DataType(DataType.Date)]
-        //[DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}",ApplyFormatInEditMode =true)]
+        public System.DateTime BuchungAm { get; set; }        
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public System.DateTime BuchungVon { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public System.DateTime BuchungBis { get; set; }
         public bool Versicherung { get; set; }
         public int FKKunde { get; set; }
