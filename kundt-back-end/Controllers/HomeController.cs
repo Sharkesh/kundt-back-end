@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data;
 using System.Data.Entity;
 using kundt_back_end.Models;
+using System.Web;
 
 namespace kundt_back_end.Controllers
 {
@@ -34,7 +35,10 @@ namespace kundt_back_end.Controllers
         }
         public ActionResult AutoUebersicht()
         {
-            return View();
+            // die variable "tblKunde" enthält die daten aus der Tabelle Kunde/ort/Login
+            var tblAuto = db.tblAuto;
+            // Schmeis dem View die Liste mit allen Daten aus der Variable "tblKunde" ins Gsicht!
+            return View(tblAuto.ToList());
         }
         public ActionResult Einstellung()
         {
