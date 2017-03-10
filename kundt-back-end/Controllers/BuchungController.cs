@@ -23,23 +23,6 @@ namespace kundt_back_end.Controllers
             return View(tblBuchung.ToList());
         }
 
-        // GET: Buchung/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblBuchung tblBuchung = db.tblBuchung.Find(id);
-            if (tblBuchung == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.gesamtPreis = tblBuchung.Tage * tblBuchung.tblAuto.MietPreis;
-
-            return View(tblBuchung);
-        }
-
         // GET: Buchung/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -67,7 +50,7 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblBuchung).State = EntityState.Modified;
+                db.Entry(tblBuchung).State = EntityState.Modified;                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

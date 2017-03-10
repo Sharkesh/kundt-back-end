@@ -68,7 +68,7 @@
             <div class="container-fluid">
                 <div id="navbar" class="navbar-collapse collapse" style="max-height:50px;">
                     <ul class="nav navbar-nav">
-                        <li id="uebersicht">@Html.ActionLink("Übersicht", "Index", "Home")</li>
+                        <li id="uebersicht">@Html.ActionLink("Übersicht", "Index", "BuchungUebersicht")</li>
                         <li id="fahrzeug" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fahrzeug<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -86,7 +86,7 @@
                                 </ul>
                             </li>*@
                         <li id="buchung">
-                            @Html.ActionLink("Buchungen", "BuchungUebersicht", "Home")
+                            @Html.ActionLink("Buchungen", "Index", "Buchung")
                             @*@Html.ActionLink("Buchungen", "View", "Controller")*@
                         </li>
                         @*<li id="buchung" class="dropdown">

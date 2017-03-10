@@ -442,7 +442,6 @@
     <Content Include="Views\tblAuto\Edit.cshtml" />
     <Content Include="Views\tblAuto\Index.cshtml" />
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
-    <Content Include="Views\Buchung\Details.cshtml" />
     <Content Include="Views\Buchung\Edit.cshtml" />
     <Content Include="Views\Buchung\Index.cshtml" />
   </ItemGroup>
