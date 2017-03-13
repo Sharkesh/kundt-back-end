@@ -23,9 +23,9 @@ namespace kundt_back_end.Controllers
         public ActionResult KundenUebersicht()
         {
             // die variable "tblKunde" enthält die daten aus der Tabelle Kunde/ort/Login
-            var tblKunde = db.tblKunde.Include(t => t.tblPLZOrt);
+            var tblBu = db.tblBuchung.Include(t => t.tblKunde).Include(t => t.tblKunde.tblPLZOrt);
             // Schmeis dem View die Liste mit allen Daten aus der Variable "tblKunde" ins Gsicht!
-            return View(tblKunde.ToList());
+            return View(tblBu.ToList());
         }
 
 

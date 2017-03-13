@@ -1,5 +1,6 @@
-﻿@model IEnumerable<kundt_back_end.Models.tblKunde>
-@model IEnumerable<kundt_back_end.Models.tblBuchung>
+﻿@model IEnumerable<kundt_back_end.Models.tblBuchung>
+
+
 @{
     ViewBag.Title = "Übersicht Kunden";
 }
@@ -76,19 +77,19 @@
                             <th style="width:10%;">KundenNr.</th>
                             <th style="width:20%;">Vorname</th>
                             <th style="width:20%;">Nachname</th>
-                            <th style="width:30%;">Status</th>
-                            <th style="width:20%;">Details/Bearbeiten</th>
+                            <th style="width:20%;">Status</th>
+                            <th style="width:30%;">Details/Bearbeiten</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td style="width:10%">@Html.DisplayFor(modelItem => item.IDKunde)</td>
-                                <td style="width:20%;">@Html.DisplayFor(modelItem => item.Vorname)</td>
-                                <td style="width:20%;">@Html.DisplayFor(modelItem => item.Nachname)</td>
-                                <td style="width:30%;">@Html.DisplayFor()</td>
-                                <td style="width:20%;">@Html.DisplayFor(modelItem => item.Nachname)</td>
+                                <td style="width:10%">@Html.DisplayFor(x => item.tblKunde.IDKunde)</td>
+                                <td style="width:20%;">@Html.DisplayFor(x => item.tblKunde.Vorname)</td>
+                                <td style="width:20%;">@Html.DisplayFor(x => item.tblKunde.Nachname)</td>
+                                <td style="width:20%;">@Html.DisplayFor(x => item.BuchungStatus)</td>
+                                <td style="width:30%;"><input type="button" class="btn-default" value="Details"/><input type="button" class="btn-default" value="Bearbeiten" /></td>
 
                             </tr>
                         }
