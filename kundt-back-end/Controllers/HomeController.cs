@@ -5,8 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
+using System.Net;
+using System.Threading;
 using kundt_back_end.Models;
-using System.Web;
+
 
 namespace kundt_back_end.Controllers
 {
@@ -23,9 +26,10 @@ namespace kundt_back_end.Controllers
         public ActionResult KundenUebersicht()
         {
             // die variable "tblKunde" enthält die daten aus der Tabelle Kunde/ort/Login
-            var tblBu = db.tblBuchung.Include(t => t.tblKunde).Include(t => t.tblKunde.tblPLZOrt);
+            //var tblBu = db.tblBuchung.Include(t => t.tblKunde).Include(t => t.tblKunde.tblPLZOrt);
+            var varKundenListe = db.tblKunde;
             // Schmeis dem View die Liste mit allen Daten aus der Variable "tblKunde" ins Gsicht!
-            return View(tblBu.ToList());
+            return View(varKundenListe.ToList());
         }
 
 
@@ -33,6 +37,26 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
+
+        public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
+        {
+
+        
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tblKunde tblKundenKunde = db.tblKunde.Find(id);
+            if (tblKundenKunde == null)
+            {
+                return HttpNotFound();
+            }
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
+            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "MietPreis", tblKunde.FKPLZOrt);
+            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
+            return View(tblKundenKunde);
+        }
+
         public ActionResult AutoUebersicht()
         {
             // die variable "tblKunde" enthält die daten aus der Tabelle Kunde/ort/Login

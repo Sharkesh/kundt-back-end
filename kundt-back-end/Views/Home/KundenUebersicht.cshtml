@@ -1,4 +1,5 @@
-﻿@model IEnumerable<kundt_back_end.Models.tblBuchung>
+﻿@using kundt_back_end.Models
+@model IEnumerable<kundt_back_end.Models.tblKunde>
 
 
 @{
@@ -70,7 +71,32 @@
             </div>
         </div>
         <div class="col-lg-9">
-            <div class="row table-responsive" style="margin:10px;padding:10px;height:400px;">
+            <div class="row table-responsive" style="height: 500px;">
+                <table class="table">
+                    <thead>
+                        <tr style="margin-right: 16px;">
+                            <th style="width: 20%;">@Html.DisplayNameFor(model => model.IDKunde)</th>
+                            <th style="width: 40%;">Vorname</th>
+                            <th style="width: 40%;">Nachname</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="width: 20%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.IDKunde)</a></td>
+                                <td style="width: 40%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.Vorname) @Html.DisplayFor(x => item.Vorname)</a></td>
+                                <td style="width: 40%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.Nachname) @Html.DisplayFor(x => item.Nachname)</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+
+            @*Diese variante vorerst nicht verwendet, da ich(endl) zwecks einheitlichkeit variante von (schieder) übernehme*@
+            @*<div class="row table-responsive" style="margin:10px;padding:10px;height:400px;">
                 <table class="table">
                     <thead>
                         <tr style="margin-right:16px;">
@@ -89,13 +115,14 @@
                                 <td style="width:20%;">@Html.DisplayFor(x => item.tblKunde.Vorname)</td>
                                 <td style="width:20%;">@Html.DisplayFor(x => item.tblKunde.Nachname)</td>
                                 <td style="width:20%;">@Html.DisplayFor(x => item.BuchungStatus)</td>
-                                <td style="width:30%;"><input type="button" class="btn-default" value="Details"/><input type="button" class="btn-default" value="Bearbeiten" /></td>
+                                <td style="width:30%;"><input type="button" value="Details" onclick="location.href='@Url.Action("KundenDetail", "Home")'" /><input type="button" value="Bearbeits" onclick="location.href='@Url.Action("KundenBearbeiten", "Home")'" /></td>
 
                             </tr>
                         }
+
                     </tbody>
-                </table>
-            </div>
+                </table>*@
         </div>
     </div>
+</div>
 </div>
