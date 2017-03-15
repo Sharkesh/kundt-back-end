@@ -19,16 +19,14 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        // it22Autoverlei mit namen DB ist eine neue blaaaa eh scho wissen. Wichtige zeile damit die weiterleitung
-        // funtzt.
+        // it22Autoverlei in eine Objeckt mit namen db für weiterverwendung und weiterleitung
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
         public ActionResult KundenUebersicht()
         {
-            // die variable "tblKunde" enthält die daten aus der Tabelle Kunde/ort/Login
-            //var tblBu = db.tblBuchung.Include(t => t.tblKunde).Include(t => t.tblKunde.tblPLZOrt);
+            // Variable deklarieren und mit der tblKunde befüllen
             var varKundenListe = db.tblKunde;
-            // Schmeis dem View die Liste mit allen Daten aus der Variable "tblKunde" ins Gsicht!
+            // Gieb dem View die Liste von Kunden
             return View(varKundenListe.ToList());
         }
 

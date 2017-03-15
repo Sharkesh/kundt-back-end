@@ -82,7 +82,7 @@
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
-                        {
+                        { // Hier noch eine Begrenzung einbauen von ca. 20 Datensätzen
                             <tr>
                                 <td style="width: 20%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.IDKunde)</a></td>
                                 <td style="width: 40%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.Vorname) @Html.DisplayFor(x => item.Vorname)</a></td>
