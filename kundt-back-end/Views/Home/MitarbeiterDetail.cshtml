@@ -1,6 +1,6 @@
-﻿
+﻿@model IEnumerable<kundt_back_end.Models.tblMitarbeiter>
 @{
-    ViewBag.Title = "MitarbeiterDetail";
+    ViewBag.Title = "Mitarbeiter Hinzufügen";
 }
 
 
@@ -19,11 +19,11 @@
                 </select>
             </div>
             @*Dropdown Anrede ende*@
-
+            <p>@Html.DisplayNameFor(model => model.MAAnrede)</p>
             <div class="form-group">
-                <label for="inputMail" class="col-md-2 control-label">Vorname</label>
+                <label for="inputMail" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" id="sirname" placeholder="Nachname">
+                    <input type="text" class="form-control" id="sirname" placeholder="Vorname">
                 </div>
             </div>
             <div class="form-group">
@@ -34,7 +34,7 @@
             </div>
 
             <button type="button" class="col-lg-offset-2 btn btn-primary btn-sm" style="position: relative; left: 6px; width: 280px;">Bearbeiten</button>
-
+            
         </form>
     </div>
 
