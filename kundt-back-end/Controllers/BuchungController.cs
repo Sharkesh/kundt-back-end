@@ -34,8 +34,7 @@ namespace kundt_back_end.Controllers
             if (tblBuchung == null)
             {
                 return HttpNotFound();
-            }
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
+            }            
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
             ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
             return View(tblBuchung);
@@ -46,12 +45,25 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDBuchung,BuchungAm,BuchungVon,BuchungBis,Versicherung,FKKunde,FKAuto,Tage,BuchungStatus,Storno")] tblBuchung tblBuchung)
+        public ActionResult Edit(BuchungEditModel tblBuchung)
+        //public ActionResult Edit(tblBuchung tblBuchung)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblBuchung).State = EntityState.Modified;                
+                /// Hol dir die IDBuchung aus dem veränderten BuchungEditModel und suchen den gleichen
+                /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
+                /// und update die bearbeiteten Felder
+
+                var Buchung = (from b in db.tblBuchung where b.IDBuchung == tblBuchung.IDBuchung select b).FirstOrDefault<tblBuchung>();
+
+                Buchung.BuchungVon = tblBuchung.BuchungVon;
+                Buchung.BuchungBis = tblBuchung.BuchungBis;
+                Buchung.BuchungStatus = tblBuchung.BuchungStatus;
+                Buchung.Versicherung = tblBuchung.Versicherung;
+                Buchung.Storno = tblBuchung.Storno;
+                
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", tblBuchung.FKAuto);
