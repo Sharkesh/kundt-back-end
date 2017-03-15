@@ -53,6 +53,14 @@
             width: auto;
             float: left;
         }
+        .costomListOnKlick {
+            border: none;
+            margin: -10px;
+            margin-bottom: 0px;
+            padding-top: 0px;
+            padding: 0px;
+            border-bottom: 1px solid gray;
+        }
 </style>
 
 
@@ -74,54 +82,28 @@
             <div class="row table-responsive" style="height: 500px;">
                 <table class="table">
                     <thead>
-                        <tr style="margin-right: 16px;">
-                            <th style="width: 20%;">@Html.DisplayNameFor(model => model.IDKunde)</th>
-                            <th style="width: 40%;">Vorname</th>
-                            <th style="width: 40%;">Nachname</th>
-                        </tr>
+                    <tr style="margin-right: 16px; margin-bottom: 10px; border-bottom: 1px solid black"> 
+                        <th style="width: 15%;">Kunden-Nr.</th>
+                        <th style="width: 20%;">Vorname</th>
+                        <th style="width: 20%;">Nachname</th>
+                        <th style="width: 20%;">PLZ</th>
+                        <th style="width: 22%;">Ort</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td style="width: 20%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.IDKunde)</a></td>
-                                <td style="width: 40%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.Vorname) @Html.DisplayFor(x => item.Vorname)</a></td>
-                                <td style="width: 40%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.Nachname) @Html.DisplayFor(x => item.Nachname)</a></td>
-                            </tr>
-                        }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width: 15%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.IDKunde)</a></td>
+                            <td style="width: 20%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Vorname)</a></td>
+                            <td style="width: 20%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Nachname)</a></td>
+                            <td style="width: 20%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.tblPLZOrt.PLZ)</a></td>
+                            <td style="width: 22%;"><a href="@Url.Action("KundenDetail", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.tblPLZOrt.Ort)</a></td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
-
-
             </div>
-
-            @*Diese variante vorerst nicht verwendet, da ich(endl) zwecks einheitlichkeit variante von (schieder) übernehme*@
-            @*<div class="row table-responsive" style="margin:10px;padding:10px;height:400px;">
-                <table class="table">
-                    <thead>
-                        <tr style="margin-right:16px;">
-                            <th style="width:10%;">KundenNr.</th>
-                            <th style="width:20%;">Vorname</th>
-                            <th style="width:20%;">Nachname</th>
-                            <th style="width:20%;">Status</th>
-                            <th style="width:30%;">Details/Bearbeiten</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td style="width:10%">@Html.DisplayFor(x => item.tblKunde.IDKunde)</td>
-                                <td style="width:20%;">@Html.DisplayFor(x => item.tblKunde.Vorname)</td>
-                                <td style="width:20%;">@Html.DisplayFor(x => item.tblKunde.Nachname)</td>
-                                <td style="width:20%;">@Html.DisplayFor(x => item.BuchungStatus)</td>
-                                <td style="width:30%;"><input type="button" value="Details" onclick="location.href='@Url.Action("KundenDetail", "Home")'" /><input type="button" value="Bearbeits" onclick="location.href='@Url.Action("KundenBearbeiten", "Home")'" /></td>
-
-                            </tr>
-                        }
-
-                    </tbody>
-                </table>*@
         </div>
     </div>
 </div>

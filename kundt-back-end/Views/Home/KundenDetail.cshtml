@@ -1,4 +1,11 @@
-﻿@{
+﻿@using kundt_back_end.Models
+
+
+@model kundt_back_end.Models.tblKunde
+
+    
+
+@{
     ViewBag.Title = "KundenDetail";
 }
 <style>
@@ -23,105 +30,111 @@
 
 </style>
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<div class="container" style="border:5px solid black">
-    <div class="row">
-        @*Ersten 12 Zeilen Row Einteilung Anfang*@
-        <div style="margin:5px;"></div>
-        <form>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label for="Vorname">Vorname</label>
-                    <input type="text" class="form-control" id="Vorname" placeholder="Vorname">
-                </div>
-                <div class="form-group">
-                    <label for="Nachname">Nachname</label>
-                    <input type="text" class="form-control" id="Nachname" placeholder="Nachname">
-                </div>
-                <div class="form-group">
-                    <label for="Email">E-Mail</label>
-                    <input type="email" class="form-control" id="Email" placeholder="E-mail">
-                </div>
-                <div class="form-group">
-                    <label for="Adresse">Adresse</label>
-                    <input type="text" class="form-control" id="Adresse" placeholder="Adresse">
-                </div>
-                <div class="form-group">
-                    <label for="PLZ">PLZ</label>
-                    <input type="text" class="form-control" id="PLZ" placeholder="PLZ">
-                </div>
-            </div> @*Ende colspan-lg-6*@
-            <div class="">
-                <div class="form-group">
-                    <label for="Ort">Ort</label>
-                    <input type="text" class="form-control" id="Ort" placeholder="Ort">
-                </div>
-                <div class="form-group">
-                    <label for="PassNR">Reisepass</label>
-                    <input type="text" class="form-control" id="PassNR" placeholder="Reisepass">
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.IDKunde)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDKunde, "Kunden-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IDKunde, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.IDKunde, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vorname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Vorname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nachname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nachname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nachname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Strasse, "Straße", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Strasse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Strasse, "", new { @class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tblPLZOrt.PLZ, "PLZ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tblPLZOrt.PLZ, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.tblPLZOrt.PLZ, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tblPLZOrt.Ort, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tblPLZOrt.Ort, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.tblPLZOrt.Ort, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.tblLogin.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tblLogin.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tblLogin.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Telefon, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-        </form>
-    </div> @*Ersten 12 Zeilen Row Einteilung Ende*@
-    <center>
-        <div class="row" id="Tabelle">
-            <table>
-                <tr class="TabellenGitter" id="Kopfzeile">
-                    <th class="col-lg-2 TabellenGitter">BuchungsNr.</th>
-                    <th class="col-lg-2 TabellenGitter">Buchungsdatum</th>
-                    <th class="col-lg-2 TabellenGitter">Rückgabe</th>
-                    <th class="col-lg-2 TabellenGitter">Status</th>
-                   
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-2 TabellenGitter">BNR. 1</td>
-                    <td class="col-lg-2 TabellenGitter">Er. 1</td>
-                    <td class="col-lg-2 TabellenGitter">Rü. 1</td>
-                    <td class="col-lg-2 TabellenGitter">St. 1</td>
-                   
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-2 TabellenGitter">BNR. 2</td>
-                    <td class="col-lg-2 TabellenGitter">Er. 2</td>
-                    <td class="col-lg-2 TabellenGitter">Rü. 2</td>
-                    <td class="col-lg-2 TabellenGitter">St. 2</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-2 TabellenGitter">BNR. 3</td>
-                    <td class="col-lg-2 TabellenGitter">Er. 3</td>
-                    <td class="col-lg-2 TabellenGitter">Rü. 3</td>
-                    <td class="col-lg-2 TabellenGitter">St. 3</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-2 TabellenGitter">BNR. 4</td>
-                    <td class="col-lg-2 TabellenGitter">Er. 4</td>
-                    <td class="col-lg-2 TabellenGitter">Rü. 4</td>
-                    <td class="col-lg-2 TabellenGitter">St. 4</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-2 TabellenGitter">BNR. 5</td>
-                    <td class="col-lg-2 TabellenGitter">Er. 5</td>
-                    <td class="col-lg-2 TabellenGitter">Rü. 5</td>
-                    <td class="col-lg-2 TabellenGitter">St. 5</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-2 TabellenGitter">BNR. 6</td>
-                    <td class="col-lg-2 TabellenGitter">Er. 6</td>
-                    <td class="col-lg-2 TabellenGitter">Rü. 6</td>
-                    <td class="col-lg-2 TabellenGitter">St. 6</td>
-                </tr>
-                <tr class="TabellenGitter">
-                    <td class="col-lg-2 TabellenGitter">BNR. 7</td>
-                    <td class="col-lg-2 TabellenGitter">Er. 7</td>
-                    <td class="col-lg-2 TabellenGitter">Rü. 7</td>
-                    <td class="col-lg-2 TabellenGitter">St. 7</td>
-                </tr>
-            </table>
         </div>
-    </center>
-    <button type="submit" class="btn btn-default CenteredButton">Aktualisieren</button>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReisepassNr, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReisepassNr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReisepassNr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.GebDatum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GebDatum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GebDatum, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "KundenUebersicht")
 </div>
+
         
 
 

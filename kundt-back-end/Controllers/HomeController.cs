@@ -27,35 +27,39 @@ namespace kundt_back_end.Controllers
         {
             // die variable "tblKunde" enthält die daten aus der Tabelle Kunde/ort/Login
             //var tblBu = db.tblBuchung.Include(t => t.tblKunde).Include(t => t.tblKunde.tblPLZOrt);
-            var varKundenListe = db.tblKunde;
+            var varKundenListe = db.tblKunde.Include(t => t.tblPLZOrt);
             // Schmeis dem View die Liste mit allen Daten aus der Variable "tblKunde" ins Gsicht!
             return View(varKundenListe.ToList());
         }
 
-
-        public ActionResult KundenDetail()
+        //GET: 
+        public ActionResult KundenDetail(int? id)
         {
-            return View();
+            var kunde = db.tblKunde.Find(id);
+            //var varKundenDeatails = db.tblKunde.Include(t => t.tblPLZOrt);
+            
+            return View(kunde);
         }
 
-        public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
+        //POST --> hier funktioniert das posten noch nicht, weil Anrede und PLZOrt noch mit NULL übergeben werden. Mögliche lösung -> verwenden von ViewBag um den wert mitzugeben.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult KundenDetail([Bind(Include = "IDKunde,Vorname,Nachname,Strasse,Telefon,Anrede,GebDatum,ReisepassNr,FKPLZOrt")]  tblKunde kunde)
         {
-
-        
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.Entry(kunde).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("KundenUebersicht");
             }
-            tblKunde tblKundenKunde = db.tblKunde.Find(id);
-            if (tblKundenKunde == null)
+            else
             {
-                return HttpNotFound();
+                return View(kunde);
             }
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
-            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "MietPreis", tblKunde.FKPLZOrt);
-            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
-            return View(tblKundenKunde);
+            
+            
         }
+
 
         public ActionResult AutoUebersicht()
         {
