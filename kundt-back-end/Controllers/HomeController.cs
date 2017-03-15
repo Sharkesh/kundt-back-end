@@ -77,16 +77,55 @@ namespace kundt_back_end.Controllers
         public ActionResult BuchungDetail()
         {
             return View();
-        }
+        }      
+        // Get: tblMitarbeiter 
         public ActionResult MitarbeiterHinzufuegen()
+        {// Mario Anfang
+            var tblMA = db.tblMitarbeiter.Include(tblMitarbeiter => tblMitarbeiter.tblLogin);
+            return View(tblMA.ToList());
+        }
+        // Überprüfung ob die ID die mitgegeben wurde null ist und eventuelle Fehlerbehebung
+        public ActionResult MitarbeiterHinzufugen(int? id) // Frage: richtige ID aus der Datenbank?
+        { 
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tblMitarbeiter tblMA = db.tblMitarbeiter.Find(id);
+            if(tblMA == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tblMA);
+        }
+        // Generiere ein neues Datenbank Objekt
+        public ActionResult Create()
         {
+            ViewBag.FKKategorie = new SelectList(db.tblMitarbeiter, "IDMitarbeiter", "MAVorname", "MANachname");
             return View();
         }
+        //// POST: tblAuto/Create
+        //// Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
+        //// finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "IDMitarbeiter, MAVorname, MANachname")] tblMitarbeiter tblMA)
+        {
+            if (ModelState.IsValid)
+            { //Wenn die Datein Valide sind speichere sie in die Datenbank
+                db.tblMitarbeiter.Add(tblMA);
+                db.SaveChanges();
+                return RedirectToAction("MitarbeiterUebersicht");
+            }
+            // Gib dem ViewBag die Objekte von MitarbeiterHinzufuegen und Login in die Hand
+            ViewBag.FKMitarbeiterHinzufuegen = new SelectList(db.tblMitarbeiter, "IDMitarbeiter", "MAVorname", "MANachname");
+            ViewBag.FKLogin = new SelectList(db.tblLogin, "IDLogin", "Email");
+            return View(tblMA);
+        } // Mario Ende
         public ActionResult MitarbeiterDetail()
-
-        {
+        { // Mario Anfang
             return View();
-        }
+        }// Mario Ende
         public ActionResult MitarbeiterUebersicht()
 
         {
