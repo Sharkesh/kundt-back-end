@@ -19,27 +19,27 @@ namespace kundt_back_end.Controllers
         // GET: Buchung
         [HttpGet]
         public ActionResult Index()
-        {         
-            List<OffeneBuchungenTodayPlus13> BuchungUebersicht = db.OffeneBuchungenTodayPlus13.ToList<OffeneBuchungenTodayPlus13>();
-
-            return View(BuchungUebersicht);            
-        }
-
-        [HttpPost]
-        public ActionResult Index(BuchungSearchModel filter)
         {
-            List<OffeneBuchungenTodayPlus13> buchungslist = new List<OffeneBuchungenTodayPlus13>();
+            var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);            
 
-            if (filter != null)
-            {              
-                if (filter.name.Length > 0)
-                {
-                    buchungslist = (from b in db.OffeneBuchungenTodayPlus13 where b.Nachname == filter.name select b).ToList<OffeneBuchungenTodayPlus13>();                    
-                }
-
-            }
-            return View(buchungslist);
+            return View(buchungUebersicht.ToList());            
         }
+
+        //[HttpPost]
+        //public ActionResult Index(BuchungSearchModel filter)
+        //{
+        //    List<OffeneBuchungenTodayPlus13> buchungslist = new List<OffeneBuchungenTodayPlus13>();
+
+        //    if (filter != null)
+        //    {              
+        //        if (filter.name.Length > 0)
+        //        {
+        //            buchungslist = (from b in db.OffeneBuchungenTodayPlus13 where b.Nachname == filter.name select b).ToList<OffeneBuchungenTodayPlus13>();                    
+        //        }
+
+        //    }
+        //    return View(buchungslist);
+        //}
 
 
 
