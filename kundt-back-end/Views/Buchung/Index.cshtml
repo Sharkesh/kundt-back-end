@@ -61,6 +61,37 @@
             width: auto;
             float: left;
         }
+        /*.drehMich{
+            animation-name:itsOver;
+            animation-iteration-count:infinite;
+            animation-duration:1s;
+        }
+        .drehMich2{
+            animation-name:itsOver;
+            animation-iteration-count:infinite;
+            animation-duration:15s;
+            animation-direction:reverse;
+        }
+        @@keyframes itsOver{
+            0%{
+                background-color:lawngreen;
+                transform:rotate(0deg);
+                min-height:0px;
+                max-height:0px;
+                
+            }
+            50%{
+                min-height:700px;
+                max-height:700px;
+                border-radius:700px;
+            }
+            100%{
+                transform:rotate(3600deg);
+                background-color:red;
+                 min-height:0px;
+                max-height:0px;
+            }
+        }*/
 </style>
 
 <hr />
@@ -84,9 +115,7 @@
             </div>
         </div>
         <div class="col-lg-9">
-
-            @Html.Partial("_BuchungTable",@Model)
-
+            @Html.Partial("_BuchungTable",@Model)           
         </div>
     </div>
 </div>

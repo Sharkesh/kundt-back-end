@@ -20,7 +20,9 @@ namespace kundt_back_end.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);            
+
+            /// Hier gehört noch die Abfrage der Buchungsauflistung der nächsten 14 Tage her
+            var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);
 
             return View(buchungUebersicht.ToList());            
         }
