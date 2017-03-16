@@ -17,11 +17,31 @@ namespace kundt_back_end.Controllers
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
         // GET: Buchung
+        [HttpGet]
         public ActionResult Index()
-        {
-            var tblBuchung = db.tblBuchung.Include(t => t.tblAuto).Include(t => t.tblKunde);
-            return View(tblBuchung.ToList());
+        {         
+            List<OffeneBuchungenTodayPlus13> BuchungUebersicht = db.OffeneBuchungenTodayPlus13.ToList<OffeneBuchungenTodayPlus13>();
+
+            return View(BuchungUebersicht);            
         }
+
+        [HttpPost]
+        public ActionResult Index(BuchungSearchModel filter)
+        {
+            List<OffeneBuchungenTodayPlus13> buchungslist = new List<OffeneBuchungenTodayPlus13>();
+
+            if (filter != null)
+            {              
+                if (filter.name.Length > 0)
+                {
+                    buchungslist = (from b in db.OffeneBuchungenTodayPlus13 where b.Nachname == filter.name select b).ToList<OffeneBuchungenTodayPlus13>();                    
+                }
+
+            }
+            return View(buchungslist);
+        }
+
+
 
         // GET: Buchung/Edit/5
         public ActionResult Edit(int? id)
@@ -34,7 +54,7 @@ namespace kundt_back_end.Controllers
             if (tblBuchung == null)
             {
                 return HttpNotFound();
-            }            
+            }
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
             ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
             return View(tblBuchung);
@@ -61,7 +81,7 @@ namespace kundt_back_end.Controllers
                 Buchung.BuchungStatus = tblBuchung.BuchungStatus;
                 Buchung.Versicherung = tblBuchung.Versicherung;
                 Buchung.Storno = tblBuchung.Storno;
-                
+
                 db.SaveChanges();
 
                 return RedirectToAction("Index");

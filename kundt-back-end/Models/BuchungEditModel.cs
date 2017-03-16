@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace kundt_back_end.Models
 {
     public class BuchungEditModel
     {
+        public BuchungEditModel()
+        {
+            options = new SelectList(new[] { "erstellt", "abgeholt", "zurueck" });           
+        }
+
         public int IDBuchung { get; set; }        
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
@@ -20,5 +26,6 @@ namespace kundt_back_end.Models
         public int FKAuto { get; set; }
         public string BuchungStatus { get; set; }
         public bool Storno { get; set; }
+        public SelectList options { get; set; }
     }
 }
