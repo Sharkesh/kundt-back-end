@@ -80,8 +80,8 @@
                     </thead>
                     <tbody>
                         @foreach (var item in Model.buchungAbholung)
-                        {
-                            <tr>
+                        {                            
+                            <tr>                                
                                 <td style="width:20%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
                                 <td style="width:40%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.tblKunde.Vorname) @Html.DisplayFor(x => item.tblKunde.Nachname)</a></td>
                                 <td style="width:40%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.tblAuto.tblTyp.tblMarke.Marke) @Html.DisplayFor(x => item.tblAuto.tblTyp.Typ)</a></td>

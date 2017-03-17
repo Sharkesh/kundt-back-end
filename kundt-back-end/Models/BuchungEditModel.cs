@@ -11,7 +11,7 @@ namespace kundt_back_end.Models
     {
         public BuchungEditModel()
         {
-            options = new SelectList(new[] { "erstellt", "abgeholt", "zurueck" });                      
+                                  
         }
 
         public int IDBuchung { get; set; }        

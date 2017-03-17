@@ -58,6 +58,11 @@
                 </p>
             </div>
         </div>
+
+        <!-- Datumspicker im Editbereich muss noch konfiguriert werden dass 
+            das DatumBis nicht < als DatumVon sein kann sonst gibt es eine Exception
+            beim speichern in die Datenbank -->
+
         <div class="form-group">
             @Html.LabelFor(model => model.BuchungVon, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
