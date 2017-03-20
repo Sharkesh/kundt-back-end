@@ -22,14 +22,16 @@ namespace kundt_back_end.Controllers
         // it22Autoverlei in eine Objeckt mit namen db für weiterverwendung und weiterleitung
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
+        //SET:
         public ActionResult KundenUebersicht()
         {
             // Variable deklarieren und mit der tblKunde befüllen
-            var varKundenListe = db.tblKunde;
+            var varKundenListe = db.tblKunde.Include(x => x.tblPLZOrt).Include(x => x.tblLogin);
             // Gieb dem View die Liste von Kunden
             return View(varKundenListe.ToList());
         }
 
+        //GET: /Home/KundenBearbeiten/id
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
