@@ -22,22 +22,43 @@ namespace kundt_back_end.Controllers
         // it22Autoverlei in eine Objeckt mit namen db für weiterverwendung und weiterleitung
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
-        //SET:
+        //GET:
         public ActionResult KundenUebersicht()
         {
             // Variable deklarieren und mit der tblKunde befüllen
-            var varKundenListe = db.tblKunde.Include(x => x.tblPLZOrt).Include(x => x.tblLogin);
-            // Gieb dem View die Liste von Kunden
+            var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde).Include(x => x.tblPLZOrt).Include(x => x.tblLogin);
+
+            //var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
+            // Gib dem View die Liste von Kunden
             return View(varKundenListe.ToList());
         }
 
         //GET: /Home/KundenBearbeiten/id
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
         {
 
         
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tblKunde tblKundenKunde = db.tblKunde.Find(id);
+            if (tblKundenKunde == null)
+            {
+                return HttpNotFound();
+            }
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
+            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "MietPreis", tblKunde.FKPLZOrt);
+            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
+            return View(tblKundenKunde);
+        }
+
+        //SET: /Home/KundenBearbeiten/id
+        [HttpPost]
+        public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
+        {
+
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

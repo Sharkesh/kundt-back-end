@@ -154,6 +154,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>It22AutoverleihModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\KundeEditModel.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
