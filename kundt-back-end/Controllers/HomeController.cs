@@ -30,12 +30,8 @@ namespace kundt_back_end.Controllers
             return View(varKundenListe.ToList());
         }
 
-
-        public ActionResult KundenDetail()
-        {
-            return View();
-        }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
         {
 
