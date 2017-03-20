@@ -53,7 +53,7 @@
     }
 
     tbody {
-        height: 300px;
+        height: 330px;
         overflow-y: auto;
     }
 
@@ -61,6 +61,11 @@
             width: auto;
             float: left;
         }
+
+    .SuchFilter_abstand{
+        margin-top: 5px;
+        margin-bottom:5px;
+    }
         /*.drehMich{
             animation-name:itsOver;
             animation-iteration-count:infinite;
@@ -100,13 +105,13 @@
         <div class="col-lg-3">
             <div class="row" style="margin:10px;padding:10px;height:400px;">
                 <form method="post" action="/Buchung/Index">
-                    <center><h3>Suchen</h3></center>
+                    <center><h3>Suchen nach</h3></center>
                     <input type="text" id="buchungnummer" name="buchungnummer" placeholder="Buchung-Nr." class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="name" name="name" placeholder="Name" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="kundennr" name="kundennr" placeholder="Kunden-Nr." class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="ort" name="ort" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="plz" name="plz" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
-                    <center><h3>Status</h3></center>
+                    <center><h3>Buchungs Status</h3></center>
                     <label class="col-lg-11">Offen</label><input type="checkbox" id="offen" name="offen" class="col-lg-1 SuchFilter_abstand" />
                     <label class="col-lg-11">Abgeschlossen</label><input type="checkbox" id="abgeschlossen" name="abgeschlossen" class="col-lg-1 SuchFilter_abstand" />
                     <label class="col-lg-11">Problem</label><input type="checkbox" id="problem" name="problem" class="col-lg-1 SuchFilter_abstand" />
