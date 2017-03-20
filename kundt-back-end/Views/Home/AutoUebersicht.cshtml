@@ -118,14 +118,14 @@
                         </center>
                     </center>
                 </div>
-                
+
                 @*Folgende felder auskommentiert(endl), da eine expliziete Suche nach Preis/Baujahr nicht sinnvoll ist(besprochen mit hill) *@
                 @*<div class="form-group col-lg-12 SuchFilter_abstand">
-                    <center><input type="text" class="form-control" id="Preis" placeholder="Suche nach Preis"></center>
-                </div>
-                <div class="form-group col-lg-12 SuchFilter_abstand">
-                    <center><input type="text" class="form-control" id="Baujahr" placeholder="Suche nach Kilometer"></center>
-                </div>*@
+                        <center><input type="text" class="form-control" id="Preis" placeholder="Suche nach Preis"></center>
+                    </div>
+                    <div class="form-group col-lg-12 SuchFilter_abstand">
+                        <center><input type="text" class="form-control" id="Baujahr" placeholder="Suche nach Kilometer"></center>
+                    </div>*@
                 <button type="submit" class="btn btn-default col-lg-offset-4 col-lg-4 SuchFilter_abstand" id="AutoFilterBTN">Suchen</button>
             </div>
         </div>@*Ende des Linken Such Bereich*@
@@ -147,39 +147,40 @@
                                 {
                                     <tr>
                                         <td class="col-lg-2">
-                                            @{
-                                                if (item.AutoBild != null)
-                                                {@*Ist das Autobild nicht Null! dann hol dir das bild aus der Datenbank*@
-                                            var image = Convert.ToBase64String(item.AutoBild);
 
-                                            <a href="Details/@item.IDAuto">
-                                                @Html.Raw("<img src=\"data:image/jpeg;base64," + image + "\" class=\"img-responsive portrait\"/>")
-                                            </a>
-                                                }
-                                                else
-                                                {@* Ansonsten nimm das Dummy Bild und hau das rein!*@
-                                                    <a href="Details/@item.IDAuto">
-                                                        <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" />
-                                                    </a>
-                                                }
+                                            @if (item.AutoBild != null)
+                                            {
+                                                    <!-- Ist das Autobild nicht Null! dann hol dir das bild aus der Datenbank -->
+                                                var image = Convert.ToBase64String(item.AutoBild);
+
+                                                <a href="Details/@item.IDAuto">
+                                                    @Html.Raw("<img src=\"data:image/jpeg;base64," + image + "\" class=\"img-responsive portrait\"/>")
+                                                </a>
                                             }
-
+                                            else
+                                            {<!-- Ansonsten nimm das Dummy Bild und hau das rein! -->
+                                                <a href="Details/@item.IDAuto">
+                                                    <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" />
+                                                </a>
+                                            }
                                         </td>
                                         <td class="col-lg-8">
-                                            @* Hole dir verschiedene Daten aus der Datenbank und wirf sie in das Textfeld rein*@
-                                            <textarea type="text" style="border:1px solid black; min-width:100%;" class="form-control" rows="2" id="BeschreibungAuto" placeholder="Daten vom Auto">
-PS: @Html.DisplayFor(modelItem => item.PS), Sitze: @Html.DisplayFor(modelItem => item.Sitze), Baujahr: @Html.DisplayFor(modelItem => item.Baujahr), Baujahr: @Html.DisplayFor(modelItem => item.FKTyp), Treibstoff: @Html.DisplayFor(modelItem => item.FKTreibstoff), Getriebe: @Html.DisplayFor(modelItem => item.Getriebe), Kilometerstand: @Html.DisplayFor(modelItem => item.Kilometerstand)
-                                            </textarea>
+                                            <!-- Hole dir verschiedene Daten aus der Datenbank und wirf sie in das Textfeld rein s-->
+                                            <p style="min-width:100%;" id="BeschreibungAuto">
+                                                PS: @Html.DisplayFor(modelItem => item.PS), Sitze: @Html.DisplayFor(modelItem => item.Sitze), Baujahr: @Html.DisplayFor(modelItem => item.Baujahr), Typ: @Html.DisplayFor(modelItem => item.FKTyp), Treibstoff: @Html.DisplayFor(modelItem => item.FKTreibstoff),<br /> Getriebe: @Html.DisplayFor(modelItem => item.Getriebe), Kilometerstand: @Html.DisplayFor(modelItem => item.Kilometerstand)
+                                            </p>
                                         </td>
                                         <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
                                         <td class="col-lg-1">
                                             <div class="checkbox">
                                                 <label class="labelCheckbox" for="checkbox">In Use</label>
-                                                <input id="checkbox" type="checkbox" value="@Html.DisplayFor(modelItem => item.Anzeigen)" />
+                                                
+                                                @Html.DisplayFor(modelItem => item.Anzeigen)
+                                                
                                             </div>
                                         </td>
                                     </tr>
-                                                }
+                                }
                             </tbody>
                         </table>
                     </div>
