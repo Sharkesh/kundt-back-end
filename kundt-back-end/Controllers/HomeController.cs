@@ -34,7 +34,7 @@ namespace kundt_back_end.Controllers
         }
 
         //GET: /Home/KundenBearbeiten/id
-        public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
+        public ActionResult KundenBearbeiten(int? id) //(endl)
         {
 
         
@@ -54,25 +54,25 @@ namespace kundt_back_end.Controllers
         }
 
         //SET: /Home/KundenBearbeiten/id
-        [HttpPost]
-        public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
-        {
+        //[HttpPost]
+        //public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
+        //{
 
 
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblKunde tblKundenKunde = db.tblKunde.Find(id);
-            if (tblKundenKunde == null)
-            {
-                return HttpNotFound();
-            }
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
-            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "MietPreis", tblKunde.FKPLZOrt);
-            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
-            return View(tblKundenKunde);
-        }
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tblKunde tblKundenKunde = db.tblKunde.Find(id);
+        //    if (tblKundenKunde == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
+        //    //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "MietPreis", tblKunde.FKPLZOrt);
+        //    //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
+        //    return View(tblKundenKunde);
+        //}
 
         public ActionResult AutoUebersicht()
         {
