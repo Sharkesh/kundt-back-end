@@ -5,9 +5,10 @@
 }
 
 <style>
-    .EditDisplayWidth{
-        max-width:280px;
+    .EditDisplayWidth {
+        max-width: 280px;
     }
+
     .buttonOrangeNextStep {
         background-color: #f99b1c;
         border: none;
@@ -30,10 +31,11 @@
         padding: 0px;
         border-radius: 4px;
         box-shadow: lightgray 1px 1px 0px;
-        text-align:center;
+        text-align: center;
     }
-    .disabledField{
-        background-color:lightgray;
+
+    .disabledField {
+        background-color: lightgray;
     }
 </style>
 
@@ -45,8 +47,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">        
+
+    <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IDBuchung)
@@ -59,23 +61,32 @@
             </div>
         </div>
 
-        <!-- Datumspicker im Editbereich muss noch konfiguriert werden dass 
+        <!-- Datumspicker im Editbereich muss noch konfiguriert werden dass
             das DatumBis nicht < als DatumVon sein kann sonst gibt es eine Exception
             beim speichern in die Datenbank -->
 
         <div class="form-group">
             @Html.LabelFor(model => model.BuchungVon, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BuchungVon, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.BuchungVon, new { htmlAttributes = new { @class = "form-control"} })*@
+                
+
+                <input type="date" id="BuchungVon" name="BuchungVon" value="@Model.BuchungVon.ToString("yyyy-MM-dd")" class="form-control input EditDisplayWidth" />
                 @Html.ValidationMessageFor(model => model.BuchungVon, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.BuchungBis, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BuchungBis, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">               
+                @*@Html.EditorFor(model => model.BuchungBis, new { htmlAttributes = new { @class = "form-control" } })*@
+                @* class form-control muss beim style der wert von Display: auf inline-block geschalten werden *@
+                <input type="date" id="BuchungBis" name="BuchungBis" value="@Model.BuchungBis.ToString("yyyy-MM-dd")" class="form-control input EditDisplayWidth" />
                 @Html.ValidationMessageFor(model => model.BuchungBis, "", new { @class = "text-danger" })
+                @if (TempData["fail"] != null)
+                {
+                    <span class="text-danger">@TempData["fail"].ToString()</span>
+                }
             </div>
         </div>
         <div class="form-group">
@@ -105,8 +116,8 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.BuchungStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">                
-                @Html.DropDownList("BuchungStatus",Model.options, htmlAttributes: new { @class = "form-control" })
+            <div class="col-md-10">
+                @Html.DropDownList("BuchungStatus", Model.options, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.BuchungStatus, "", new { @class = "text-danger" })
             </div>
         </div>

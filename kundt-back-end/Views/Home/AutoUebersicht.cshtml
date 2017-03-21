@@ -154,29 +154,27 @@
                                                 var image = Convert.ToBase64String(item.AutoBild);
 
                                                 <a href="Details/@item.IDAuto">
-                                                    @Html.Raw("<img src=\"data:image/jpeg;base64," + image + "\" class=\"img-responsive portrait\"/>")
+                                                    @Html.Raw("<img src=\"data:image/jpeg;base64," + image + "\" class=\"img-responsive\"/>")
                                                 </a>
                                             }
                                             else
                                             {<!-- Ansonsten nimm das Dummy Bild und hau das rein! -->
                                                 <a href="Details/@item.IDAuto">
-                                                    <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" />
+                                                    <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" class="img-responsive" />
                                                 </a>
                                             }
                                         </td>
                                         <td class="col-lg-8">
                                             <!-- Hole dir verschiedene Daten aus der Datenbank und wirf sie in das Textfeld rein s-->
                                             <p style="min-width:100%;" id="BeschreibungAuto">
-                                                PS: @Html.DisplayFor(modelItem => item.PS), Sitze: @Html.DisplayFor(modelItem => item.Sitze), Baujahr: @Html.DisplayFor(modelItem => item.Baujahr), Typ: @Html.DisplayFor(modelItem => item.FKTyp), Treibstoff: @Html.DisplayFor(modelItem => item.FKTreibstoff),<br /> Getriebe: @Html.DisplayFor(modelItem => item.Getriebe), Kilometerstand: @Html.DisplayFor(modelItem => item.Kilometerstand)
+                                                PS: @Html.DisplayFor(modelItem => item.PS), Sitze: @Html.DisplayFor(modelItem => item.Sitze), Baujahr: @Html.DisplayFor(modelItem => item.Baujahr), Typ: @Html.DisplayFor(modelItem => item.tblTyp.Typ), Treibstoff: @Html.DisplayFor(modelItem => item.tblTreibstoff.Treibstoff),<br /> Getriebe: @Html.DisplayFor(modelItem => item.Getriebe), Kilometerstand: @Html.DisplayFor(modelItem => item.Kilometerstand)
                                             </p>
                                         </td>
                                         <td class="col-lg-1"><input id="edit1" type="submit" name="edit1" value="Edit" /></td>
                                         <td class="col-lg-1">
                                             <div class="checkbox">
-                                                <label class="labelCheckbox" for="checkbox">In Use</label>
-                                                
-                                                @Html.DisplayFor(modelItem => item.Anzeigen)
-                                                
+                                                <label class="labelCheckbox" for="checkbox">In Use</label>                                                
+                                                @Html.DisplayFor(modelItem => item.Anzeigen)                                                
                                             </div>
                                         </td>
                                     </tr>

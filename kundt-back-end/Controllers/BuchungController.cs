@@ -58,7 +58,7 @@ namespace kundt_back_end.Controllers
                 return HttpNotFound();
             }
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
+            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);            
             return View(tblBuchung);
         }
 
@@ -77,12 +77,21 @@ namespace kundt_back_end.Controllers
                 /// und update die bearbeiteten Felder
 
                 var Buchung = (from b in db.tblBuchung where b.IDBuchung == tblBuchung.IDBuchung select b).FirstOrDefault<tblBuchung>();
+                if (tblBuchung.BuchungBis < tblBuchung.BuchungVon)
+                {
+                    TempData["fail"] = "DatumBis muss > sein als DatumVon du spasti!";
+                    return RedirectToAction("Edit", tblBuchung.IDBuchung);                    
+                }
+                else
+                {
+                    Buchung.BuchungVon = tblBuchung.BuchungVon;
+                    Buchung.BuchungBis = tblBuchung.BuchungBis;
+                    Buchung.BuchungStatus = tblBuchung.BuchungStatus;
+                    Buchung.Versicherung = tblBuchung.Versicherung;
+                    Buchung.Storno = tblBuchung.Storno;
+                }
 
-                Buchung.BuchungVon = tblBuchung.BuchungVon;
-                Buchung.BuchungBis = tblBuchung.BuchungBis;
-                Buchung.BuchungStatus = tblBuchung.BuchungStatus;
-                Buchung.Versicherung = tblBuchung.Versicherung;
-                Buchung.Storno = tblBuchung.Storno;
+                
 
                 db.SaveChanges();
 
