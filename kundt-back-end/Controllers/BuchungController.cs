@@ -20,28 +20,16 @@ namespace kundt_back_end.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-
-            /// Hier gehört noch die Abfrage der Buchungsauflistung der nächsten 14 Tage her
+            /// Hier die Prozedur der Buchungsauflistung der nächsten 14 Tage einfügen
+            /// Evtl. neues Model dafür erstellen und die Buchungsauflistung als Liste übergeben
             var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);
 
             return View(buchungUebersicht.ToList());            
         }
 
-        //[HttpPost]
-        //public ActionResult Index(BuchungSearchModel filter)
-        //{
-        //    List<OffeneBuchungenTodayPlus13> buchungslist = new List<OffeneBuchungenTodayPlus13>();
-
-        //    if (filter != null)
-        //    {              
-        //        if (filter.name.Length > 0)
-        //        {
-        //            buchungslist = (from b in db.OffeneBuchungenTodayPlus13 where b.Nachname == filter.name select b).ToList<OffeneBuchungenTodayPlus13>();                    
-        //        }
-
-        //    }
-        //    return View(buchungslist);
-        //}
+        /// Hier einen Teil einbauen für die Suchmaske, HttpPost
+        /// allerdings Post der Partial View oder Index?
+        /// Prozedur für Suchfilter einbauen, evtl dazupassendes Model anlegen wenn unbedingt nötig?
 
 
 
@@ -52,13 +40,21 @@ namespace kundt_back_end.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            /// Hier abklären ob evtl ein eigenes Model sinn macht oder ob das original Model ausreichend ist
+            /// auch in Bezug auf Sicherheit
+
             tblBuchung tblBuchung = db.tblBuchung.Find(id);
             if (tblBuchung == null)
             {
                 return HttpNotFound();
             }
+
+
+            /// auto generierter Teil sinnvoll????
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);            
+            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
+                        
             return View(tblBuchung);
         }
 
@@ -72,11 +68,14 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-                /// Hol dir die IDBuchung aus dem veränderten BuchungEditModel und suchen den gleichen
+                /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
                 /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
-                /// und update die bearbeiteten Felder
-
+                /// und update die bearbeiteten Felder.
                 var Buchung = (from b in db.tblBuchung where b.IDBuchung == tblBuchung.IDBuchung select b).FirstOrDefault<tblBuchung>();
+
+                /// Das Abfrage Statement austauschen durch die BuchungUpdate Prozedur und den Speichervorgang
+                /// im unteren Teil dementsprechend bearbeiten.
+
                 if (tblBuchung.BuchungBis < tblBuchung.BuchungVon)
                 {
                     TempData["fail"] = "DatumBis muss > sein als DatumVon du spasti!";
@@ -92,13 +91,19 @@ namespace kundt_back_end.Controllers
                 }
 
                 
-
+                /// wenn das Update oben durch Prozedur ausgetauscht wird SaveChanges() auskommentieren oder löschen?
                 db.SaveChanges();
 
+
+                /// Standartmäßige Weiterleitung auf BuchungUebersicht nach dem speichern, oder evtl per ViewBag
+                /// den Ausgangspunkt speichern über den man zur Edit Seite gekommen ist? Wenn ja wie?
                 return RedirectToAction("Index");
             }
+
+            /// auto generierter Teil sinnvoll???
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", tblBuchung.FKAuto);
             ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", tblBuchung.FKKunde);
+
             return View(tblBuchung);
         }
 

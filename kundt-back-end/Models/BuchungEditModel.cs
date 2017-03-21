@@ -13,7 +13,7 @@ namespace kundt_back_end.Models
         {
                                   
         }
-
+        /// Abklären ob die Anotationen nötig sind oder ob man sie weglassen kann??
         public int IDBuchung { get; set; }        
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
