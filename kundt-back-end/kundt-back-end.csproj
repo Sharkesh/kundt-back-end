@@ -133,6 +133,7 @@
     <Compile Include="Controllers\BuchungController.cs" />
     <Compile Include="Controllers\BuchungUebersichtController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MitarbeiterController.cs" />
     <Compile Include="Controllers\tblAutoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -451,6 +452,11 @@
     <Content Include="Views\Buchung\Edit.cshtml" />
     <Content Include="Views\Buchung\Index.cshtml" />
     <Content Include="Views\Buchung\_BuchungTable.cshtml" />
+    <Content Include="Views\Mitarbeiter\Create.cshtml" />
+    <Content Include="Views\Mitarbeiter\Delete.cshtml" />
+    <Content Include="Views\Mitarbeiter\Details.cshtml" />
+    <Content Include="Views\Mitarbeiter\Edit.cshtml" />
+    <Content Include="Views\Mitarbeiter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

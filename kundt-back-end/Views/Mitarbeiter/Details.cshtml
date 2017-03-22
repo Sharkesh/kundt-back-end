@@ -1,0 +1,100 @@
+﻿@model kundt_back_end.Models.tblMitarbeiter
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@{ 
+<div>
+    <h4>tblMitarbeiter</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MAVorname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAVorname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MANachname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MANachname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MAAnrede)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MAAnrede)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblLogin.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblLogin.Email)
+        </dd>
+
+    </dl>
+</div>
+    }
+@*<div class="container">
+    <div class="col-xs-12 text-center" style="margin:auto auto 20px auto; color:white; background-color:#f99b1c; vertical-align:middle; padding:0px; border-radius:4px; box-shadow:lightgray 1px 1px 0px;">
+        <h4>Neuen Mitarbeiter hinzufügen</h4>
+    </div>
+    <div class="row">
+        <form class="form-horizontal" style="padding: 20px;">
+            @*Dropdown Anrede*@
+            @*<div class="form-group">
+                <label class="col-md-2 control-label" style="margin-right: 15px;">Anrede</label>
+                <select class="form-control">
+                    <option>Herr</option>
+                    <option>Frau</option>
+                </select>
+            </div>*@
+            @*Dropdown Anrede ende*@
+            <div class="form-group">
+                <label for="inputMail" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.MAAnrede)</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="sirname" placeholder="Nachname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputMail" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.MAVorname)</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="sirname" placeholder="Nachname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputMail" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.MANachname)</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" id="prename" placeholder="Nachname">
+                </div>
+               
+                <div class="form-group">
+                    <label for="inputMail" class="col-md-2 control-label">@Html.DisplayNameFor(model => model.tblLogin.Email)</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="sirname" placeholder="Nachname">
+                    </div>
+                </div>
+            </div>
+        @*</form>
+    </div>
+
+</div>*@
+
+
+
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDMitarbeiter }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
