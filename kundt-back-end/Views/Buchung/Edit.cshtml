@@ -1,4 +1,4 @@
-﻿@model kundt_back_end.Models.tblBuchung
+﻿@model kundt_back_end.Models.BuchungEditModel
 
 @{
     ViewBag.Title = "Edit";
@@ -97,15 +97,15 @@
             @Html.LabelFor(model => model.FKKunde, "KundenNr.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <p name="KundeId" id="KundeId" class="form-control input EditDisplayWidth disabledField">
-                    @Model.tblKunde.IDKunde
+                    @Model.FKKunde
                 </p>
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.tblAuto.MietPreis, "MietPreis", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MietPreis, "MietPreis", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <p name="MietPreis" id="MietPreis" class="form-control input EditDisplayWidth disabledField">
-                    @Model.tblAuto.MietPreis
+                    @Model.MietPreis
                 </p>
             </div>
         </div>

@@ -12,6 +12,8 @@ namespace kundt_back_end.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class it22AutoverleihEntities : DbContext
     {
@@ -40,5 +42,54 @@ namespace kundt_back_end.Models
         public virtual DbSet<tblPLZOrt> tblPLZOrt { get; set; }
         public virtual DbSet<tblTreibstoff> tblTreibstoff { get; set; }
         public virtual DbSet<tblTyp> tblTyp { get; set; }
+    
+        public virtual ObjectResult<BuchungAbholung_Result> BuchungAbholung()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuchungAbholung_Result>("BuchungAbholung");
+        }
+    
+        public virtual ObjectResult<BuchungProblem_Result> BuchungProblem()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuchungProblem_Result>("BuchungProblem");
+        }
+    
+        public virtual ObjectResult<BuchungRueckgabe_Result> BuchungRueckgabe()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuchungRueckgabe_Result>("BuchungRueckgabe");
+        }
+    
+        public virtual int BuchungUpdate(Nullable<int> id, Nullable<System.DateTime> buchungvon, Nullable<System.DateTime> buchungbis, string buchungstatus, Nullable<bool> storno, Nullable<bool> versicherung)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var buchungvonParameter = buchungvon.HasValue ?
+                new ObjectParameter("buchungvon", buchungvon) :
+                new ObjectParameter("buchungvon", typeof(System.DateTime));
+    
+            var buchungbisParameter = buchungbis.HasValue ?
+                new ObjectParameter("buchungbis", buchungbis) :
+                new ObjectParameter("buchungbis", typeof(System.DateTime));
+    
+            var buchungstatusParameter = buchungstatus != null ?
+                new ObjectParameter("buchungstatus", buchungstatus) :
+                new ObjectParameter("buchungstatus", typeof(string));
+    
+            var stornoParameter = storno.HasValue ?
+                new ObjectParameter("storno", storno) :
+                new ObjectParameter("storno", typeof(bool));
+    
+            var versicherungParameter = versicherung.HasValue ?
+                new ObjectParameter("versicherung", versicherung) :
+                new ObjectParameter("versicherung", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BuchungUpdate", idParameter, buchungvonParameter, buchungbisParameter, buchungstatusParameter, stornoParameter, versicherungParameter);
+        }
+    
+        public virtual ObjectResult<OffeneBuchungenTodayPlus13_Result> OffeneBuchungenTodayPlus13()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<OffeneBuchungenTodayPlus13_Result>("OffeneBuchungenTodayPlus13");
+        }
     }
 }

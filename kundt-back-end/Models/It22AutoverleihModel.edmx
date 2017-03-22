@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="it22AutoverleihModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="it22AutoverleihModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -327,12 +327,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="BuchungAbholung" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="BuchungProblem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="BuchungRueckgabe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="BuchungUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="buchungvon" Type="date" Mode="In" />
+          <Parameter Name="buchungbis" Type="date" Mode="In" />
+          <Parameter Name="buchungstatus" Type="varchar" Mode="In" />
+          <Parameter Name="storno" Type="bit" Mode="In" />
+          <Parameter Name="versicherung" Type="bit" Mode="In" />
+        </Function>
         <Function Name="fBuchungProblem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="idBuchung" Type="int" Mode="In" />
         </Function>
         <Function Name="fBuchungStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="idBuchung" Type="int" Mode="In" />
         </Function>
+        <Function Name="OffeneBuchungenTodayPlus13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="it22AutoverleihModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAusstattung" EntityType="Self.tblAusstattung" Schema="dbo" store:Type="Tables" />
@@ -407,8 +419,7 @@
             <End Role="tblTyp" EntitySet="tblTyp" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="it22AutoverleihModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -800,7 +811,46 @@
             <End Role="tblAusstattung" EntitySet="tblAusstattung" />
             <End Role="tblAuto" EntitySet="tblAuto" />
           </AssociationSet>
+          <FunctionImport Name="BuchungAbholung" ReturnType="Collection(it22AutoverleihModel.BuchungAbholung_Result)" />
+          <FunctionImport Name="BuchungProblem" ReturnType="Collection(it22AutoverleihModel.BuchungProblem_Result)" />
+          <FunctionImport Name="BuchungRueckgabe" ReturnType="Collection(it22AutoverleihModel.BuchungRueckgabe_Result)" />
+          <FunctionImport Name="BuchungUpdate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="buchungvon" Mode="In" Type="DateTime" />
+            <Parameter Name="buchungbis" Mode="In" Type="DateTime" />
+            <Parameter Name="buchungstatus" Mode="In" Type="String" />
+            <Parameter Name="storno" Mode="In" Type="Boolean" />
+            <Parameter Name="versicherung" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="OffeneBuchungenTodayPlus13" ReturnType="Collection(it22AutoverleihModel.OffeneBuchungenTodayPlus13_Result)" />
         </EntityContainer>
+        <ComplexType Name="BuchungAbholung_Result">
+          <Property Type="Int32" Name="IDBuchung" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Auto" Nullable="false" MaxLength="201" />
+        </ComplexType>
+        <ComplexType Name="BuchungProblem_Result">
+          <Property Type="Int32" Name="IDBuchung" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Auto" Nullable="false" MaxLength="201" />
+        </ComplexType>
+        <ComplexType Name="BuchungRueckgabe_Result">
+          <Property Type="Int32" Name="IDBuchung" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Auto" Nullable="false" MaxLength="201" />
+        </ComplexType>
+        <ComplexType Name="OffeneBuchungenTodayPlus13_Result">
+          <Property Type="Int32" Name="IDBuchung" Nullable="false" />
+          <Property Type="Int32" Name="IDKunde" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -976,6 +1026,50 @@
               <ScalarProperty Name="IDAuto" ColumnName="FKAuto" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="BuchungAbholung" FunctionName="it22AutoverleihModel.Store.BuchungAbholung">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.BuchungAbholung_Result">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Auto" ColumnName="Auto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuchungProblem" FunctionName="it22AutoverleihModel.Store.BuchungProblem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.BuchungProblem_Result">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Auto" ColumnName="Auto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuchungRueckgabe" FunctionName="it22AutoverleihModel.Store.BuchungRueckgabe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.BuchungRueckgabe_Result">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Auto" ColumnName="Auto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuchungUpdate" FunctionName="it22AutoverleihModel.Store.BuchungUpdate" />
+          <FunctionImportMapping FunctionImportName="OffeneBuchungenTodayPlus13" FunctionName="it22AutoverleihModel.Store.OffeneBuchungenTodayPlus13">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.OffeneBuchungenTodayPlus13_Result">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="IDKunde" ColumnName="IDKunde" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="PLZ" ColumnName="PLZ" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

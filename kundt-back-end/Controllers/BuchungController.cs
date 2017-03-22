@@ -22,14 +22,24 @@ namespace kundt_back_end.Controllers
         {
             /// Hier die Prozedur der Buchungsauflistung der nächsten 14 Tage einfügen
             /// Evtl. neues Model dafür erstellen und die Buchungsauflistung als Liste übergeben
-            var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);
+            //var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);
 
-            return View(buchungUebersicht.ToList());            
+            var test = db.OffeneBuchungenTodayPlus13();
+
+            //return View(buchungUebersicht.ToList());
+            return View(test.ToList());
         }
 
         /// Hier einen Teil einbauen für die Suchmaske, HttpPost
         /// allerdings Post der Partial View oder Index?
         /// Prozedur für Suchfilter einbauen, evtl dazupassendes Model anlegen wenn unbedingt nötig?
+
+        [HttpPost]
+        public ActionResult Index(int idbuchung,string nachname,int idkunde,string ort,string plz,bool offen,bool abgeschlossen,bool problem)
+        {
+            
+            return View();
+        }
 
 
 
@@ -50,12 +60,24 @@ namespace kundt_back_end.Controllers
                 return HttpNotFound();
             }
 
+            BuchungEditModel BEM = new BuchungEditModel();
+            BEM.BuchungAm = tblBuchung.BuchungAm;
+            BEM.BuchungVon = tblBuchung.BuchungVon;
+            BEM.BuchungBis = tblBuchung.BuchungBis;
+            BEM.BuchungStatus = tblBuchung.BuchungStatus;
+            BEM.FKAuto = tblBuchung.FKAuto;
+            BEM.FKKunde = tblBuchung.FKKunde;
+            BEM.IDBuchung = tblBuchung.IDBuchung;
+            BEM.Versicherung = tblBuchung.Versicherung;
+            BEM.Tage = tblBuchung.Tage;
+            BEM.MietPreis = tblBuchung.tblAuto.MietPreis;
+
 
             /// auto generierter Teil sinnvoll????
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
             ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
                         
-            return View(tblBuchung);
+            return View(BEM);
         }
 
         // POST: Buchung/Edit/5
@@ -63,48 +85,53 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(BuchungEditModel tblBuchung)
+        public ActionResult Edit(BuchungEditModel BEM)
         //public ActionResult Edit(tblBuchung tblBuchung)
         {
             if (ModelState.IsValid)
             {
-                /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
-                /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
-                /// und update die bearbeiteten Felder.
-                var Buchung = (from b in db.tblBuchung where b.IDBuchung == tblBuchung.IDBuchung select b).FirstOrDefault<tblBuchung>();
-
-                /// Das Abfrage Statement austauschen durch die BuchungUpdate Prozedur und den Speichervorgang
-                /// im unteren Teil dementsprechend bearbeiten.
-
-                if (tblBuchung.BuchungBis < tblBuchung.BuchungVon)
+                /// Alte Variante
+                //var Buchung = (from b in db.tblBuchung where b.IDBuchung == BEM.IDBuchung select b).FirstOrDefault<tblBuchung>();            
+                if (BEM.BuchungBis < BEM.BuchungVon)
                 {
                     TempData["fail"] = "DatumBis muss > sein als DatumVon du spasti!";
-                    return RedirectToAction("Edit", tblBuchung.IDBuchung);                    
+                    return RedirectToAction("Edit", BEM.IDBuchung);                    
+                }
+                else if (BEM.BuchungStatus == "abgeholt")
+                {
+
+                    //prozedur
+                }
+                else if (BEM.BuchungStatus == "zurueck")
+                {
+                    //prozedur
                 }
                 else
                 {
-                    Buchung.BuchungVon = tblBuchung.BuchungVon;
-                    Buchung.BuchungBis = tblBuchung.BuchungBis;
-                    Buchung.BuchungStatus = tblBuchung.BuchungStatus;
-                    Buchung.Versicherung = tblBuchung.Versicherung;
-                    Buchung.Storno = tblBuchung.Storno;
+                    /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
+                    /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
+                    /// und update die bearbeiteten Felder.
+                    db.BuchungUpdate(BEM.IDBuchung, BEM.BuchungVon, BEM.BuchungBis, BEM.BuchungStatus, BEM.Storno, BEM.Versicherung);
+
+                    /// Alte Variante
+                    //Buchung.BuchungVon = BEM.BuchungVon;
+                    //Buchung.BuchungBis = BEM.BuchungBis;
+                    //Buchung.BuchungStatus = BEM.BuchungStatus;
+                    //Buchung.Versicherung = BEM.Versicherung;
+                    //Buchung.Storno = BEM.Storno;
                 }
-
-                
-                /// wenn das Update oben durch Prozedur ausgetauscht wird SaveChanges() auskommentieren oder löschen?
-                db.SaveChanges();
-
-
+                /// Alte Variante
+                //db.SaveChanges();
                 /// Standartmäßige Weiterleitung auf BuchungUebersicht nach dem speichern, oder evtl per ViewBag
                 /// den Ausgangspunkt speichern über den man zur Edit Seite gekommen ist? Wenn ja wie?
                 return RedirectToAction("Index");
             }
 
             /// auto generierter Teil sinnvoll???
-            ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", tblBuchung.FKAuto);
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", tblBuchung.FKKunde);
+            ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", BEM.FKAuto);
+            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", BEM.FKKunde);
 
-            return View(tblBuchung);
+            return View(BEM);
         }
 
         protected override void Dispose(bool disposing)

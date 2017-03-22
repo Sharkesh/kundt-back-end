@@ -138,7 +138,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuchungAbholung_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BuchungEditModel.cs" />
+    <Compile Include="Models\BuchungProblem_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BuchungRueckgabe_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BuchungsUebersicht.cs" />
     <Compile Include="Models\It22AutoverleihModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -156,6 +165,9 @@
       <DependentUpon>It22AutoverleihModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\KundeEditModel.cs" />
+    <Compile Include="Models\OffeneBuchungenTodayPlus13_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>

@@ -9,8 +9,8 @@ namespace kundt_back_end.Models
     /// welches 3 Abfrageergebnise in Listen speichert.
     public class BuchungsUebersicht
     {
-        public List<tblBuchung> buchungAbholung { get; set; }
-        public List<tblBuchung> buchungRueckgabe { get; set; }
-        public List<tblBuchung> buchungProblem { get; set; }
+        public List<BuchungAbholung_Result> buchungAbholung { get; set; }
+        public List<BuchungRueckgabe_Result> buchungRueckgabe { get; set; }
+        public List<BuchungProblem_Result> buchungProblem { get; set; }
     }
 }

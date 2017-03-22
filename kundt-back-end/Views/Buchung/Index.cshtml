@@ -1,4 +1,4 @@
-﻿@model IEnumerable<kundt_back_end.Models.tblBuchung>
+﻿@model IEnumerable<kundt_back_end.Models.OffeneBuchungenTodayPlus13_Result>
 
 @{
     ViewBag.Title = "Übersicht Buchungen";
@@ -62,11 +62,26 @@
             float: left;
         }
 
-    .SuchFilter_abstand{
-        margin-top: 5px;
-        margin-bottom:5px;
+    .SuchFilter_abstand {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
-        /*.drehMich{
+
+    .buttonOrangeNextStep {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 221.5px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+        margin-top: 50px;
+    }
+    /*.drehMich{
             animation-name:itsOver;
             animation-iteration-count:infinite;
             animation-duration:1s;
@@ -83,7 +98,7 @@
                 transform:rotate(0deg);
                 min-height:0px;
                 max-height:0px;
-                
+
             }
             50%{
                 min-height:700px;
@@ -100,29 +115,65 @@
 </style>
 
 <hr />
-<div class="container" style="border:2px solid black;">
+<div class="container">
     <div class="row">
         <div class="col-lg-3">
-            <div class="row" style="margin:10px;padding:10px;height:400px;">
+            <div class="row" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
 
                 <!-- Abklären ob man das so lassen kann in Verbindung mit der Prozedur zum Filtern wenn implementiert!!! -->
                 <form method="post" action="/Buchung/Index">
                     <center><h3>Suchen nach</h3></center>
-                    <input type="text" id="buchungnummer" name="buchungnummer" placeholder="Buchung-Nr." class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" id="name" name="name" placeholder="Name" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" id="kundennr" name="kundennr" placeholder="Kunden-Nr." class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" id="idbuchung" name="idbuchung" placeholder="IDBuchung" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" id="nachname" name="nachname" placeholder="Nachname" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" id="idkunde" name="idkunde" placeholder="IDKunde" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="ort" name="ort" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="plz" name="plz" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
                     <center><h3>Buchungs Status</h3></center>
                     <label class="col-lg-11">Offen</label><input type="checkbox" id="offen" name="offen" class="col-lg-1 SuchFilter_abstand" />
                     <label class="col-lg-11">Abgeschlossen</label><input type="checkbox" id="abgeschlossen" name="abgeschlossen" class="col-lg-1 SuchFilter_abstand" />
                     <label class="col-lg-11">Problem</label><input type="checkbox" id="problem" name="problem" class="col-lg-1 SuchFilter_abstand" />
-                    <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" id="suchen" name="suchen" value="Suchen" />
+                    <input class="col-lg-6 SuchFilter_abstand buttonOrangeNextStep" type="submit" id="suchen" name="suchen" value="Suchen" />
                 </form>
             </div>
         </div>
         <div class="col-lg-9">
-            @Html.Partial("_BuchungTable",@Model)           
+            @*@Html.Partial("_BuchungTable",@Model)*@
+            <div class="row table-responsive" style="margin:10px;padding:10px;height:400px;">
+                @if (Model.Count() > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr style="margin-right:16px;">
+                                <th style="width:15%;">IDBuchung</th>
+                                <th style="width:15%;">IDKunden</th>
+                                <th style="width:15%;">Vorname</th>
+                                <th style="width:15%;">Nachname</th>
+                                <th style="width:20%;">Ort</th>
+                                <th style="width:10%;">PLZ</th>
+                                <th style="width:10%;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDKunde)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Vorname)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Nachname)</a></td>
+                                    <td style="width:20%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Ort)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.PLZ)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungStatus)</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <center><h3>Es gibt noch keine Buchungseintraege</h3></center>
+                }
+            </div>
         </div>
     </div>
 </div>
