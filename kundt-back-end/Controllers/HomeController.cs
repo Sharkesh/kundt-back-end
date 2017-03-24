@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Globalization;
 using System.Net;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Threading;
 using kundt_back_end.Models;
 
@@ -26,11 +27,19 @@ namespace kundt_back_end.Controllers
         public ActionResult KundenUebersicht()
         {
             // Variable deklarieren und mit der tblKunde befüllen
-            var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde).Include(x => x.tblPLZOrt).Include(x => x.tblLogin);
+            var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
 
             //var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
             // Gib dem View die Liste von Kunden
-            return View(varKundenListe.ToList());
+
+            string searchName = null;
+
+            int searchKundenNr;
+            searchKundenNr = DBNull; //--> irgendiwe so vielleicht
+            string searchOrt = null;
+            string searchPlz = null;
+            var ku = db.pKundenAnzeigen(searchName, searchKundenNr, searchOrt, searchPlz);
+            return View(ku);
         }
 
         //GET: /Home/KundenBearbeiten/id

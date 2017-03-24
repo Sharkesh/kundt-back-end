@@ -168,6 +168,9 @@
     <Compile Include="Models\OffeneBuchungenTodayPlus13_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pKundenAnzeigen_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>

@@ -1,5 +1,5 @@
 ﻿@using kundt_back_end.Models
-@model IEnumerable<kundt_back_end.Models.tblKunde>
+@model IEnumerable<kundt_back_end.Models.pKundenAnzeigen_Result>
 
 
 @{
@@ -97,8 +97,8 @@
                             <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.IDKunde)</a></td>
                             <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Vorname)</a></td>
                             <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Nachname)</a></td>
-                            <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.tblPLZOrt.PLZ)</a></td>
-                            <td style="width: 22%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.tblPLZOrt.Ort)</a></td>
+                            <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.PLZ)</a></td>
+                            <td style="width: 22%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Ort)</a></td>
                         </tr>
                     }
                     </tbody>
@@ -106,5 +106,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

@@ -345,6 +345,12 @@
           <Parameter Name="idBuchung" Type="int" Mode="In" />
         </Function>
         <Function Name="OffeneBuchungenTodayPlus13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pKundenAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchName" Type="varchar" Mode="In" />
+          <Parameter Name="searchKundenNr" Type="int" Mode="In" />
+          <Parameter Name="searchOrt" Type="varchar" Mode="In" />
+          <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="it22AutoverleihModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAusstattung" EntityType="Self.tblAusstattung" Schema="dbo" store:Type="Tables" />
@@ -823,6 +829,12 @@
             <Parameter Name="versicherung" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="OffeneBuchungenTodayPlus13" ReturnType="Collection(it22AutoverleihModel.OffeneBuchungenTodayPlus13_Result)" />
+          <FunctionImport Name="pKundenAnzeigen" ReturnType="Collection(it22AutoverleihModel.pKundenAnzeigen_Result)">
+            <Parameter Name="searchName" Mode="In" Type="String" />
+            <Parameter Name="searchKundenNr" Mode="In" Type="Int32" />
+            <Parameter Name="searchOrt" Mode="In" Type="String" />
+            <Parameter Name="searchPLZ" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
           <Property Type="Int32" Name="IDBuchung" Nullable="false" />
@@ -850,6 +862,13 @@
           <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="pKundenAnzeigen_Result">
+          <Property Type="Int32" Name="IDKunde" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1067,6 +1086,17 @@
                 <ScalarProperty Name="PLZ" ColumnName="PLZ" />
                 <ScalarProperty Name="Ort" ColumnName="Ort" />
                 <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pKundenAnzeigen" FunctionName="it22AutoverleihModel.Store.pKundenAnzeigen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pKundenAnzeigen_Result">
+                <ScalarProperty Name="IDKunde" ColumnName="IDKunde" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="PLZ" ColumnName="PLZ" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

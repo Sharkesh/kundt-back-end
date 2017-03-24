@@ -91,5 +91,26 @@ namespace kundt_back_end.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<OffeneBuchungenTodayPlus13_Result>("OffeneBuchungenTodayPlus13");
         }
+    
+        public virtual ObjectResult<pKundenAnzeigen_Result> pKundenAnzeigen(string searchName, Nullable<int> searchKundenNr, string searchOrt, string searchPLZ)
+        {
+            var searchNameParameter = searchName != null ?
+                new ObjectParameter("searchName", searchName) :
+                new ObjectParameter("searchName", typeof(string));
+    
+            var searchKundenNrParameter = searchKundenNr.HasValue ?
+                new ObjectParameter("searchKundenNr", searchKundenNr) :
+                new ObjectParameter("searchKundenNr", typeof(int));
+    
+            var searchOrtParameter = searchOrt != null ?
+                new ObjectParameter("searchOrt", searchOrt) :
+                new ObjectParameter("searchOrt", typeof(string));
+    
+            var searchPLZParameter = searchPLZ != null ?
+                new ObjectParameter("searchPLZ", searchPLZ) :
+                new ObjectParameter("searchPLZ", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter);
+        }
     }
 }
