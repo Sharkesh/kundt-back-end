@@ -18,11 +18,20 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IDMitarbeiter, "IDMitarbeiter", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IDMitarbeiter", null, htmlAttributes: new { @class = "form-control" })
+             
+                @*@Html.EditorForModel()*@
+               @*Schnelle Variante da immer alle tbl Daten raus geholt werden aus der Tabelle!*@
+            </div>
+        </div>
+        @*Mitarbeiter ID Nötig???*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDMitarbeiter, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IDMitarbeiter, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.IDMitarbeiter, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @*Mitarbeiter Vorname*@
         <div class="form-group">
             @Html.LabelFor(model => model.MAVorname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -30,7 +39,7 @@
                 @Html.ValidationMessageFor(model => model.MAVorname, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @*Mitarbeiter Nachname*@
         <div class="form-group">
             @Html.LabelFor(model => model.MANachname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -38,15 +47,31 @@
                 @Html.ValidationMessageFor(model => model.MANachname, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
+        @*Mitarbeiter Anrede*@
+        <div class="form-group"> @*Dropdown noch machen*@
             @Html.LabelFor(model => model.MAAnrede, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MAAnrede, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MAAnrede, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @*Login Email *@
+        <div class="form-group">
+            @Html.LabelFor(model => model.tblLogin.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tblLogin.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tblLogin.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*Login Passwort*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.tblLogin.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tblLogin.Passwort, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tblLogin.Passwort, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*Create Button*@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -62,3 +87,8 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+@*TO DO
+    Procedur für die Email noch ein Betten
+    Java Script Abgleichung ob Email auch nach Email ausschaut
+    *@
