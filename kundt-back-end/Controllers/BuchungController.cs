@@ -25,9 +25,23 @@ namespace kundt_back_end.Controllers
             //var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);
 
             var test = db.OffeneBuchungenTodayPlus13();
+            var BuchungListe = new List<BuchungViewModel>();
+            
+            foreach (var b in test)
+            {
+                BuchungViewModel res = new BuchungViewModel();
+                res.IDBuchung = b.IDBuchung;
+                res.IDKunde = b.IDKunde;
+                res.BuchungStatus = b.BuchungStatus;
+                res.Nachname = b.Nachname;
+                res.Vorname = b.Vorname;
+                res.Ort = b.Ort;
+                res.PLZ = b.PLZ;
 
+                BuchungListe.Add(res);
+            }
             //return View(buchungUebersicht.ToList());
-            return View(test.ToList());
+            return View(BuchungListe);
         }
 
         /// Hier einen Teil einbauen für die Suchmaske, HttpPost
@@ -99,31 +113,15 @@ namespace kundt_back_end.Controllers
                     TempData["fail"] = "DatumBis muss > sein als DatumVon!";
                     return RedirectToAction("Edit", BEM.IDBuchung);
                 }
-                if (!BEM.abgeholt)
+                if (BEM.abgeholt)
                 {
                     BEM.BuchungStatus = "abgeholt";
-                }
-                else
-                {
-                    BEM.BuchungStatus = "erstellt";
                 }
                 if (BEM.zurueck)
                 {
                     BEM.BuchungStatus = "zurueck";
                 }
-                else
-                {
-                    BEM.BuchungStatus = "abgeholt";
-                }
-                //if (BEM.BuchungStatus == "abgeholt")
-                //{
 
-                //    //prozedur
-                //}
-                //if (BEM.BuchungStatus == "zurueck")
-                //{
-                //    //prozedur
-                //}
                 /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
                 /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
                 /// und update die bearbeiteten Felder.

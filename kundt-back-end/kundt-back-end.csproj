@@ -149,6 +149,7 @@
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BuchungsUebersicht.cs" />
+    <Compile Include="Models\BuchungViewModel.cs" />
     <Compile Include="Models\It22AutoverleihModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
