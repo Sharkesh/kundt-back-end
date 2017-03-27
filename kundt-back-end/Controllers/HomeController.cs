@@ -26,20 +26,20 @@ namespace kundt_back_end.Controllers
         //GET:
         public ActionResult KundenUebersicht()
         {
-            // Variable deklarieren und mit der tblKunde befüllen
-            var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
-
+            //// Variable deklarieren und mit der tblKunde befüllen
             //var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
-            // Gib dem View die Liste von Kunden
 
-            string searchName = null;
+            ////var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
+            //// Gib dem View die Liste von Kunden
 
-            int searchKundenNr;
-            searchKundenNr = DBNull; //--> irgendiwe so vielleicht
-            string searchOrt = null;
-            string searchPlz = null;
-            var ku = db.pKundenAnzeigen(searchName, searchKundenNr, searchOrt, searchPlz);
-            return View(ku);
+            //string searchName = null;
+
+            //int searchKundenNr;
+            //searchKundenNr = DBNull; //--> irgendiwe so vielleicht
+            //string searchOrt = null;
+            //string searchPlz = null;
+            //var ku = db.pKundenAnzeigen(searchName, searchKundenNr, searchOrt, searchPlz);
+            return View();
         }
 
         //GET: /Home/KundenBearbeiten/id
