@@ -20,26 +20,26 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        // it22Autoverlei in eine Objeckt mit namen db für weiterverwendung und weiterleitung
+        //// it22Autoverlei in eine Objeckt mit namen db für weiterverwendung und weiterleitung
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
         //GET:
         public ActionResult KundenUebersicht()
         {
-            // Variable deklarieren und mit der tblKunde befüllen
-            var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
+            //    // Variable deklarieren und mit der tblKunde befüllen
+            //    var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
 
-            //var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
-            // Gib dem View die Liste von Kunden
+            //    //var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
+            //    // Gib dem View die Liste von Kunden
 
-            string searchName = null;
+            //    string searchName = null;
 
-            int searchKundenNr;
-            searchKundenNr = DBNull; //--> irgendiwe so vielleicht
-            string searchOrt = null;
-            string searchPlz = null;
-            var ku = db.pKundenAnzeigen(searchName, searchKundenNr, searchOrt, searchPlz);
-            return View(ku);
+            //    int searchKundenNr;
+            //    searchKundenNr = DBNull; //--> irgendiwe so vielleicht
+            //    string searchOrt = null;
+            //    string searchPlz = null;
+            //    var ku = db.pKundenAnzeigen(searchName, searchKundenNr, searchOrt, searchPlz);
+            return View(/*ku*/);
         }
 
         //GET: /Home/KundenBearbeiten/id
