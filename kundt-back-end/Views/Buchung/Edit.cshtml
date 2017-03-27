@@ -65,7 +65,7 @@
              Datumspicker im Editbereich muss noch konfiguriert werden dass
             das DatumBis nicht < als DatumVon sein kann sonst gibt es eine Exception
             beim speichern in die Datenbank
-            
+
             Abklären ob dieser Problemfall im Controller ausreichend behandelt wurde!
         -->
 
@@ -73,7 +73,7 @@
             @Html.LabelFor(model => model.BuchungVon, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.BuchungVon, new { htmlAttributes = new { @class = "form-control"} })*@
-                
+
 
                 <input type="date" id="BuchungVon" name="BuchungVon" value="@Model.BuchungVon.ToString("yyyy-MM-dd")" class="form-control input EditDisplayWidth" />
                 @Html.ValidationMessageFor(model => model.BuchungVon, "", new { @class = "text-danger" })
@@ -82,7 +82,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.BuchungBis, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">               
+            <div class="col-md-10">
                 @*@Html.EditorFor(model => model.BuchungBis, new { htmlAttributes = new { @class = "form-control" } })*@
                 @* class form-control muss beim style der wert von Display: auf inline-block geschalten werden *@
                 <input type="date" id="BuchungBis" name="BuchungBis" value="@Model.BuchungBis.ToString("yyyy-MM-dd")" class="form-control input EditDisplayWidth" />
@@ -119,12 +119,56 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.BuchungStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            
+            <label class="control-label col-md-2">BuchungStatus</label>
             <div class="col-md-10">
+               
+                <p class="form-control input EditDisplayWidth disabledField">
+                    @Model.BuchungStatus
+                </p>
+                @*@Html.LabelFor(model => model.BuchungStatus, htmlAttributes: new { @class = "control-label col-md-2" }) 
                 @Html.DropDownList("BuchungStatus", Model.options, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.BuchungStatus, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.BuchungStatus, "", new { @class = "text-danger" })*@
             </div>
         </div>
+        @if (Model.BuchungStatus == "erstellt")
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2">Auto Abgeholt</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.abgeholt)
+                        @Html.ValidationMessageFor(model => model.abgeholt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+        @if(Model.BuchungStatus == "abgeholt")
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2">Auto Rückgabe</label>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.abgeholt)
+                        @Html.ValidationMessageFor(model => model.abgeholt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.BuchungStatus == "zurueck")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Storno, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.DisplayFor(model => model.Storno)
+                        @Html.ValidationMessageFor(model => model.Storno, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.BuchungStatus == "erstellt")
+        {
         <div class="form-group">
             @Html.LabelFor(model => model.Storno, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -133,16 +177,34 @@
                     @Html.ValidationMessageFor(model => model.Storno, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Versicherung, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Versicherung)
-                    @Html.ValidationMessageFor(model => model.Versicherung, "", new { @class = "text-danger" })
+        </div>        
+        }
+        @if (Model.BuchungStatus == "erstellt")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Versicherung, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Versicherung)
+                        @Html.ValidationMessageFor(model => model.Versicherung, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+        @if (Model.BuchungStatus == "abgeholt")
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Versicherung, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.DisplayFor(model => model.Versicherung)
+                        @Html.ValidationMessageFor(model => model.Versicherung, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        }
+
+
 
 
 

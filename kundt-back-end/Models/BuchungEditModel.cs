@@ -11,7 +11,7 @@ namespace kundt_back_end.Models
     {
         public BuchungEditModel()
         {
-            options = new SelectList(new[] { "erstellt", "abgeholt", "zurueck" });
+            //options = new SelectList(new[] { "erstellt", "abgeholt", "zurueck" });
         }
         /// Abklären ob die Anotationen nötig sind oder ob man sie weglassen kann??
         public int IDBuchung { get; set; }
@@ -28,7 +28,9 @@ namespace kundt_back_end.Models
         public int FKAuto { get; set; }
         public string BuchungStatus { get; set; }
         public bool Storno { get; set; }
-        public SelectList options { get; set; }
+        //public SelectList options { get; set; }
         public decimal MietPreis { get; set; }
+        public bool abgeholt { get; set; }
+        public bool zurueck { get; set; }
     }
 }

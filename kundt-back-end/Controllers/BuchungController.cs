@@ -34,12 +34,12 @@ namespace kundt_back_end.Controllers
         /// allerdings Post der Partial View oder Index?
         /// Prozedur für Suchfilter einbauen, evtl dazupassendes Model anlegen wenn unbedingt nötig?
 
-        [HttpPost]
-        public ActionResult Index(int idbuchung,string nachname,int idkunde,string ort,string plz,bool offen,bool abgeschlossen,bool problem)
-        {
-            
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult Index(int idbuchung, string nachname, int idkunde, string ort, string plz, bool offen, bool abgeschlossen, bool problem)
+        //{
+
+        //    return View();
+        //}
 
 
 
@@ -76,7 +76,7 @@ namespace kundt_back_end.Controllers
             /// auto generierter Teil sinnvoll????
             ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
             ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
-                        
+
             return View(BEM);
         }
 
@@ -91,35 +91,51 @@ namespace kundt_back_end.Controllers
             if (ModelState.IsValid)
             {
                 /// Alte Variante
-                //var Buchung = (from b in db.tblBuchung where b.IDBuchung == BEM.IDBuchung select b).FirstOrDefault<tblBuchung>();            
+                //var Buchung = (from b in db.tblBuchung where b.IDBuchung == BEM.IDBuchung select b).FirstOrDefault<tblBuchung>();
+
+
                 if (BEM.BuchungBis < BEM.BuchungVon)
                 {
-                    TempData["fail"] = "DatumBis muss > sein als DatumVon du spasti!";
-                    return RedirectToAction("Edit", BEM.IDBuchung);                    
+                    TempData["fail"] = "DatumBis muss > sein als DatumVon!";
+                    return RedirectToAction("Edit", BEM.IDBuchung);
                 }
-                else if (BEM.BuchungStatus == "abgeholt")
+                if (!BEM.abgeholt)
                 {
-
-                    //prozedur
-                }
-                else if (BEM.BuchungStatus == "zurueck")
-                {
-                    //prozedur
+                    BEM.BuchungStatus = "abgeholt";
                 }
                 else
                 {
-                    /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
-                    /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
-                    /// und update die bearbeiteten Felder.
-                    db.BuchungUpdate(BEM.IDBuchung, BEM.BuchungVon, BEM.BuchungBis, BEM.BuchungStatus, BEM.Storno, BEM.Versicherung);
-
-                    /// Alte Variante
-                    //Buchung.BuchungVon = BEM.BuchungVon;
-                    //Buchung.BuchungBis = BEM.BuchungBis;
-                    //Buchung.BuchungStatus = BEM.BuchungStatus;
-                    //Buchung.Versicherung = BEM.Versicherung;
-                    //Buchung.Storno = BEM.Storno;
+                    BEM.BuchungStatus = "erstellt";
                 }
+                if (BEM.zurueck)
+                {
+                    BEM.BuchungStatus = "zurueck";
+                }
+                else
+                {
+                    BEM.BuchungStatus = "abgeholt";
+                }
+                //if (BEM.BuchungStatus == "abgeholt")
+                //{
+
+                //    //prozedur
+                //}
+                //if (BEM.BuchungStatus == "zurueck")
+                //{
+                //    //prozedur
+                //}
+                /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
+                /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
+                /// und update die bearbeiteten Felder.
+                db.BuchungUpdate(BEM.IDBuchung, BEM.BuchungVon, BEM.BuchungBis, BEM.BuchungStatus, BEM.Storno, BEM.Versicherung);
+
+                /// Alte Variante
+                //Buchung.BuchungVon = BEM.BuchungVon;
+                //Buchung.BuchungBis = BEM.BuchungBis;
+                //Buchung.BuchungStatus = BEM.BuchungStatus;
+                //Buchung.Versicherung = BEM.Versicherung;
+                //Buchung.Storno = BEM.Storno;
+
                 /// Alte Variante
                 //db.SaveChanges();
                 /// Standartmäßige Weiterleitung auf BuchungUebersicht nach dem speichern, oder evtl per ViewBag
