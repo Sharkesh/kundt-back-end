@@ -67,15 +67,17 @@
 <div class="container" style="border:2px solid black;">
     <div class="row">
         <div class="col-lg-3">
-            <div class="row" style="margin:10px;padding:10px;height:400px;">
+            <div class="row" style="margin: 10px; padding: 10px; height: 400px;">
+                @*<form method="@Url.Action("KundenUebersicht", "Home")" action="KundenUebersicht.cshtml"></form>*@
+                <form method="post" action="../Home/KundenUebersicht.cshtml"></form>
                 <center><h3>Suchen</h3></center>
-                <input type="text" placeholder="Name" class="col-lg-12 SuchFilter_abstand" />
-                <input type="text" placeholder="Kunden-Nr." class="col-lg-12 SuchFilter_abstand" />
-                <input type="text" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
-                <input type="text" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
+                <input type="text" placeholder="Name" name="Name" class="col-lg-12 SuchFilter_abstand"/>
+                <input type="text" placeholder="Kunden-Nr." name="KundenNr" class="col-lg-12 SuchFilter_abstand"/>
+                <input type="text" placeholder="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand"/>
+                <input type="text" placeholder="PLZ" name="PLZ" class="col-lg-12 SuchFilter_abstand"/>
                 <center><label class="SuchFilter_abstand">Offene Buchung</label></center>
-                <center><input type="checkbox" class="SuchFilter_abstand" /></center>
-                <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen" />
+                <center><input type="checkbox" class="SuchFilter_abstand"/></center>
+                <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen"/>
             </div>
         </div>
         <div class="col-lg-9">

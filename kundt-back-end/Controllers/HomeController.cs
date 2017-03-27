@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Net;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
@@ -23,65 +24,54 @@ namespace kundt_back_end.Controllers
         // it22Autoverlei in eine Objeckt mit namen db für weiterverwendung und weiterleitung
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
-        //GET:
-        public ActionResult KundenUebersicht()
+        //GET: /Home/KundenBearbeiten
+        public ActionResult KundenUebersicht()//(endl)
         {
-            // Variable deklarieren und mit der tblKunde befüllen
-            var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
-
-            //var varKundenListe = db.tblKunde.OrderBy(x => x.IDKunde);
-            // Gib dem View die Liste von Kunden
-
+            //Setzte alle Parameter auf null, um beim Aufruf alle Kunden anzuzeigen
             string searchName = null;
-
-            int searchKundenNr;
-            searchKundenNr = DBNull; //--> irgendiwe so vielleicht
+            int? searchKundenNr = null;
             string searchOrt = null;
             string searchPlz = null;
             var ku = db.pKundenAnzeigen(searchName, searchKundenNr, searchOrt, searchPlz);
             return View(ku);
         }
 
+
+        //ObjectResult ist vielleicht falsch. 
+        [HttpPost]
+        public ObjectResult KundenUebersicht(string Name, int KundenNr, string Ort, string PLZ) //Funktioniert so sicher noch nicht?(endl)
+        {
+            string FilterName = Name;
+            int FilterKundenNr = KundenNr;
+            string FilterOrt = Ort;
+            string FilterPLZ = PLZ;
+
+            var ku = db.pKundenAnzeigen(FilterName, FilterKundenNr, FilterOrt, FilterPLZ);
+
+            return (ku);    
+        }
+
         //GET: /Home/KundenBearbeiten/id
         public ActionResult KundenBearbeiten(int? id) //(endl)
         {
 
-        
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tblKunde tblKundenKunde = db.tblKunde.Find(id);
-            if (tblKundenKunde == null)
+            tblKunde tblKundeID = db.tblKunde.Find(id);
+            if (tblKundeID == null)
             {
                 return HttpNotFound();
             }
             Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
             //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "MietPreis", tblKunde.FKPLZOrt);
             //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
-            return View(tblKundenKunde);
+            return View(tblKundeID);
         }
 
-        //SET: /Home/KundenBearbeiten/id
-        //[HttpPost]
-        //public ActionResult KundenBearbeiten(int? id) //Funktioniert so sicher noch nicht?(endl)
-        //{
 
-
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tblKunde tblKundenKunde = db.tblKunde.Find(id);
-        //    if (tblKundenKunde == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
-        //    //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "MietPreis", tblKunde.FKPLZOrt);
-        //    //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
-        //    return View(tblKundenKunde);
-        //}
 
         public ActionResult AutoUebersicht()
         {
@@ -105,7 +95,7 @@ namespace kundt_back_end.Controllers
         public ActionResult BuchungDetail()
         {
             return View();
-        }      
+        }
         // Get: tblMitarbeiter 
         public ActionResult MitarbeiterHinzufuegen()
         {// Mario Anfang
@@ -114,13 +104,13 @@ namespace kundt_back_end.Controllers
         }
         // Überprüfung ob die ID die mitgegeben wurde, wenn null ist mach Fehlerbehebung
         public ActionResult MitarbeiterHinzufugen(int? id) // Frage: richtige ID aus der Datenbank?
-        { 
-            if(id == null)
+        {
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tblMitarbeiter tblMA = db.tblMitarbeiter.Find(id);
-            if(tblMA == null)
+            if (tblMA == null)
             {
                 return HttpNotFound();
             }
