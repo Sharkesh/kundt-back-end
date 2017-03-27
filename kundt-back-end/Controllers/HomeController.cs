@@ -21,7 +21,6 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        // it22Autoverlei in eine Objeckt mit namen db für weiterverwendung und weiterleitung
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
         //GET: /Home/KundenBearbeiten
