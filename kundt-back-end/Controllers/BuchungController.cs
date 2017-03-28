@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using kundt_back_end.Models;
 using System.Threading;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace kundt_back_end.Controllers
 {
@@ -60,14 +61,16 @@ namespace kundt_back_end.Controllers
         // GET: Buchung/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.AusgangsUrl = Request.UrlReferrer;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            /// Hier abklären ob evtl ein eigenes Model sinn macht oder ob das original Model ausreichend ist
-            /// auch in Bezug auf Sicherheit
 
+            /// Besser wäre es das eigene Modell zu verwenden anstelle der tblBuchung
+            /// allerdings hat unser eigenes modell nicht alle Felder aus tblbuchung
             tblBuchung tblBuchung = db.tblBuchung.Find(id);
             if (tblBuchung == null)
             {
@@ -87,9 +90,9 @@ namespace kundt_back_end.Controllers
             BEM.MietPreis = tblBuchung.tblAuto.MietPreis;
 
 
-            /// auto generierter Teil sinnvoll????
-            ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
+            ///// auto generierter Teil sinnvoll????
+            //ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
+            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
 
             return View(BEM);
         }
@@ -102,6 +105,13 @@ namespace kundt_back_end.Controllers
         public ActionResult Edit(BuchungEditModel BEM)
         //public ActionResult Edit(tblBuchung tblBuchung)
         {
+            var Url = ViewBag.AusgangsUrl;
+            ViewBag.AusgangsUrl = "";
+
+            Trace.Write("\n");
+            Trace.Write((string)Url);
+            Trace.Write("\n");
+
             if (ModelState.IsValid)
             {
                 /// Alte Variante
@@ -116,10 +126,19 @@ namespace kundt_back_end.Controllers
                 if (BEM.abgeholt)
                 {
                     BEM.BuchungStatus = "abgeholt";
+
+                    /// Parameter für die Proc IDMA,IDBuchung
+                    /// Prozedur für den 1. Eintrag in tblHistorie
+                    
+
                 }
                 if (BEM.zurueck)
                 {
                     BEM.BuchungStatus = "zurueck";
+
+                    /// Parameter für die Proc IDMA,IDBuchung
+                    /// Prozedur für den 2. Eintrag in tblHistorie
+
                 }
 
                 /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
@@ -136,14 +155,19 @@ namespace kundt_back_end.Controllers
 
                 /// Alte Variante
                 //db.SaveChanges();
+
                 /// Standartmäßige Weiterleitung auf BuchungUebersicht nach dem speichern, oder evtl per ViewBag
                 /// den Ausgangspunkt speichern über den man zur Edit Seite gekommen ist? Wenn ja wie?
-                return RedirectToAction("Index");
+
+
+                
+
+                return RedirectToAction(Url);
             }
 
-            /// auto generierter Teil sinnvoll???
-            ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", BEM.FKAuto);
-            ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", BEM.FKKunde);
+            ///// auto generierter Teil sinnvoll???
+            //ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", BEM.FKAuto);
+            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", BEM.FKKunde);
 
             return View(BEM);
         }
