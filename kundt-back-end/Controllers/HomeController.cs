@@ -23,37 +23,38 @@ namespace kundt_back_end.Controllers
         }
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
-        //GET: /Home/KundenBearbeiten
+        //GET: /Home/KundenUebersicht
+        [HttpGet]
         public ActionResult KundenUebersicht()//(endl)
         {
-            //Setzte alle Parameter auf null, um beim Aufruf alle Kunden anzuzeigen
-            string searchName = null;
-            int? searchKundenNr = null;
-            string searchOrt = null;
-            string searchPlz = null;
-            var ku = db.pKundenAnzeigen(searchName, searchKundenNr, searchOrt, searchPlz);
-            return View(ku);
+            KundenUebersichtContainerModel cm = new KundenUebersichtContainerModel();
+            cm.filtermodel = (KundenUebersichtFilterModel)Session["Filterparameter"];
+           
+            if (cm.filtermodel == null)
+            {
+                cm.kundenlist = db.pKundenAnzeigen(null, null, null, null);
+            }
+            else
+            {
+                cm.kundenlist = db.pKundenAnzeigen(cm.filtermodel.KundenName, cm.filtermodel.KundenNr, cm.filtermodel.Ort, cm.filtermodel.Plz);
+            }
+            
+            return View(cm);
         }
-
-
-        //ObjectResult ist vielleicht falsch. 
+        
         [HttpPost]
-        public ObjectResult KundenUebersicht(string Name, int KundenNr, string Ort, string PLZ) //Funktioniert so sicher noch nicht?(endl)
+        public ActionResult KundenUebersichtFilter(KundenUebersichtFilterModel km) //Funktioniert so sicher noch nicht?(endl)
         {
-            string FilterName = Name;
-            int FilterKundenNr = KundenNr;
-            string FilterOrt = Ort;
-            string FilterPLZ = PLZ;
-
-            var ku = db.pKundenAnzeigen(FilterName, FilterKundenNr, FilterOrt, FilterPLZ);
-
-            return (ku);    
+            Session["Filterparameter"] = km;
+            return RedirectToAction("KundenUebersicht", "Home");
         }
+
+       
 
         //GET: /Home/KundenBearbeiten/id
+        [HttpPost]
         public ActionResult KundenBearbeiten(int? id) //(endl)
         {
-
 
             if (id == null)
             {

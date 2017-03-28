@@ -1,5 +1,8 @@
-﻿@using kundt_back_end.Models
-@model IEnumerable<kundt_back_end.Models.pKundenAnzeigen_Result>
+﻿@using kundt_back_end.Models;
+
+  
+@model KundenUebersichtContainerModel
+
 
 
 @{
@@ -33,12 +36,12 @@
         display: block;
     }
 
-        tr:after {
-            content: ' ';
-            display: block;
-            visibility: hidden;
-            clear: both;
-        }
+    tr:after {
+        content: ' ';
+        display: block;
+        visibility: hidden;
+        clear: both;
+    }
 
     thead th {
         height: 30px;
@@ -49,18 +52,18 @@
         overflow-y: auto;
     }
 
-        tbody td, thead th {
-            width: auto;
-            float: left;
-        }
-        .costomListOnKlick {
-            border: none;
-            margin: -10px;
-            margin-bottom: 0px;
-            padding-top: 0px;
-            padding: 0px;
-            border-bottom: 1px solid gray;
-        }
+    tbody td, thead th {
+        width: auto;
+        float: left;
+    }
+    .costomListOnKlick {
+        border: none;
+        margin: -10px;
+        margin-bottom: 0px;
+        padding-top: 0px;
+        padding: 0px;
+        border-bottom: 1px solid gray;
+    }
 </style>
 
 
@@ -69,15 +72,16 @@
         <div class="col-lg-3">
             <div class="row" style="margin: 10px; padding: 10px; height: 400px;">
                 @*<form method="@Url.Action("KundenUebersicht", "Home")" action="KundenUebersicht.cshtml"></form>*@
-                <form method="post" action="../Home/KundenUebersicht.cshtml"></form>
-                <center><h3>Suchen</h3></center>
-                <input type="text" placeholder="Name" name="Name" class="col-lg-12 SuchFilter_abstand"/>
-                <input type="text" placeholder="Kunden-Nr." name="KundenNr" class="col-lg-12 SuchFilter_abstand"/>
-                <input type="text" placeholder="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand"/>
-                <input type="text" placeholder="PLZ" name="PLZ" class="col-lg-12 SuchFilter_abstand"/>
-                <center><label class="SuchFilter_abstand">Offene Buchung</label></center>
-                <center><input type="checkbox" class="SuchFilter_abstand"/></center>
-                <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen"/>
+                <form method="post" action="/Home/KundenUebersichtFilter">
+                    <center><h3>Suchen</h3></center>
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenName }" placeholder="Nachname" id="KundenName" name="KundenName" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text"  value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenNr }" placeholder="Kunden-Nr." id="KundenNr" name="KundenNr" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Ort }" placeholder="Ort" id="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Plz }" placeholder="PLZ" id="PLZ" name="PLZ" class="col-lg-12 SuchFilter_abstand" />
+                    <center><label class="SuchFilter_abstand">Offene Buchung</label></center>
+                    <center><input type="checkbox" class="SuchFilter_abstand" /></center>
+                    <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen" />
+                </form>
             </div>
         </div>
         <div class="col-lg-9">
@@ -93,7 +97,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in @Model.kundenlist)
                     {
                         <tr>
                             <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.IDKunde)</a></td>

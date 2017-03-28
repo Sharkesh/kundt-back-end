@@ -166,6 +166,8 @@
       <DependentUpon>It22AutoverleihModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\KundeEditModel.cs" />
+    <Compile Include="Models\KundenUebersichtContainerModel.cs" />
+    <Compile Include="Models\KundenUebersichtFilterModel.cs" />
     <Compile Include="Models\OffeneBuchungenTodayPlus13_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>

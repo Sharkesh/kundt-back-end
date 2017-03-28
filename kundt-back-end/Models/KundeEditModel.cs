@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,30 +9,28 @@ namespace kundt_back_end.Models
     public class KundeEditModel
     {
         //Nicht fertig - Endl
-        //public KundeEditModel()
-        //{
-            
-        //}
+       
+        public int idkunde { get; set; }
 
+        public string Vorname { get; set; }
 
-        //public int IDKunden { get; set; }
+        public string Nachname { get; set; }
 
-        //public string Vorname { get; set; }
-        
-        //public string Nachname { get; set; }
+        public string Straße { get; set; }
 
-        //public string Strasse { get; set; }
+        public string Plz { get; set; }
 
-        //public int FKPLZOrt { get; set; }
+        public  string Ort { get; set; }
 
-        
+        public string Email { get; set; }
+        public string Telefon { get; set; }
+        public string PassNr { get; set; }
+        public System.DateTime GebDat { get; set; }
 
-        //public bool Versicherung { get; set; }
-        //public int FKKunde { get; set; }
-        //public int FKAuto { get; set; }
-        //public string BuchungStatus { get; set; }
-        //public bool Storno { get; set; }
-        //public SelectList options { get; set; }
+        //??
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+
     }
     
 }
