@@ -61,7 +61,6 @@ namespace kundt_back_end.Controllers
         // GET: Buchung/Edit/5
         public ActionResult Edit(int? id)
         {
-            ViewBag.AusgangsUrl = Request.UrlReferrer;
 
             if (id == null)
             {
@@ -104,13 +103,6 @@ namespace kundt_back_end.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(BuchungEditModel BEM)
         //public ActionResult Edit(tblBuchung tblBuchung)
-        {
-            var Url = ViewBag.AusgangsUrl;
-            ViewBag.AusgangsUrl = "";
-
-            Trace.Write("\n");
-            Trace.Write((string)Url);
-            Trace.Write("\n");
 
             if (ModelState.IsValid)
             {
@@ -159,10 +151,7 @@ namespace kundt_back_end.Controllers
                 /// Standartmäßige Weiterleitung auf BuchungUebersicht nach dem speichern, oder evtl per ViewBag
                 /// den Ausgangspunkt speichern über den man zur Edit Seite gekommen ist? Wenn ja wie?
 
-
                 
-
-                return RedirectToAction(Url);
             }
 
             ///// auto generierter Teil sinnvoll???
