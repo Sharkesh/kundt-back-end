@@ -61,7 +61,6 @@ namespace kundt_back_end.Controllers
         // GET: Buchung/Edit/5
         public ActionResult Edit(int? id)
         {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -103,6 +102,7 @@ namespace kundt_back_end.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(BuchungEditModel BEM)
         //public ActionResult Edit(tblBuchung tblBuchung)
+        {                     
 
             if (ModelState.IsValid)
             {
@@ -152,6 +152,7 @@ namespace kundt_back_end.Controllers
                 /// den Ausgangspunkt speichern über den man zur Edit Seite gekommen ist? Wenn ja wie?
 
                 
+                return RedirectToAction("Index","BuchungUebersicht");
             }
 
             ///// auto generierter Teil sinnvoll???
