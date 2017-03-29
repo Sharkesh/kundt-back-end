@@ -12,5 +12,6 @@ namespace kundt_back_end.Models
         public int? KundenNr { get; set; }      
         public string Plz { get; set; }
         public string Ort { get; set; }
+        public  string Buchungsstatus { get; set; }
     }
 }

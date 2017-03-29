@@ -92,7 +92,52 @@ namespace kundt_back_end.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<OffeneBuchungenTodayPlus13_Result>("OffeneBuchungenTodayPlus13");
         }
     
-        public virtual ObjectResult<pKundenAnzeigen_Result> pKundenAnzeigen(string searchName, Nullable<int> searchKundenNr, string searchOrt, string searchPLZ)
+        public virtual int pKundeEdit(Nullable<int> idkunde, string vorname, string nachname, string strasse, string plz, string ort, string email, string telefon, string passnr, Nullable<System.DateTime> gebdat)
+        {
+            var idkundeParameter = idkunde.HasValue ?
+                new ObjectParameter("idkunde", idkunde) :
+                new ObjectParameter("idkunde", typeof(int));
+    
+            var vornameParameter = vorname != null ?
+                new ObjectParameter("vorname", vorname) :
+                new ObjectParameter("vorname", typeof(string));
+    
+            var nachnameParameter = nachname != null ?
+                new ObjectParameter("nachname", nachname) :
+                new ObjectParameter("nachname", typeof(string));
+    
+            var strasseParameter = strasse != null ?
+                new ObjectParameter("strasse", strasse) :
+                new ObjectParameter("strasse", typeof(string));
+    
+            var plzParameter = plz != null ?
+                new ObjectParameter("plz", plz) :
+                new ObjectParameter("plz", typeof(string));
+    
+            var ortParameter = ort != null ?
+                new ObjectParameter("ort", ort) :
+                new ObjectParameter("ort", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var telefonParameter = telefon != null ?
+                new ObjectParameter("telefon", telefon) :
+                new ObjectParameter("telefon", typeof(string));
+    
+            var passnrParameter = passnr != null ?
+                new ObjectParameter("passnr", passnr) :
+                new ObjectParameter("passnr", typeof(string));
+    
+            var gebdatParameter = gebdat.HasValue ?
+                new ObjectParameter("gebdat", gebdat) :
+                new ObjectParameter("gebdat", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pKundeEdit", idkundeParameter, vornameParameter, nachnameParameter, strasseParameter, plzParameter, ortParameter, emailParameter, telefonParameter, passnrParameter, gebdatParameter);
+        }
+    
+        public virtual ObjectResult<pKundenAnzeigen_Result> pKundenAnzeigen(string searchName, Nullable<int> searchKundenNr, string searchOrt, string searchPLZ, string searchBuchung)
         {
             var searchNameParameter = searchName != null ?
                 new ObjectParameter("searchName", searchName) :
@@ -110,7 +155,11 @@ namespace kundt_back_end.Models
                 new ObjectParameter("searchPLZ", searchPLZ) :
                 new ObjectParameter("searchPLZ", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter);
+            var searchBuchungParameter = searchBuchung != null ?
+                new ObjectParameter("searchBuchung", searchBuchung) :
+                new ObjectParameter("searchBuchung", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter, searchBuchungParameter);
         }
     }
 }

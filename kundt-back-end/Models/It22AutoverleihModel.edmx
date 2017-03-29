@@ -345,11 +345,24 @@
           <Parameter Name="idBuchung" Type="int" Mode="In" />
         </Function>
         <Function Name="OffeneBuchungenTodayPlus13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pKundeEdit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idkunde" Type="int" Mode="In" />
+          <Parameter Name="vorname" Type="varchar" Mode="In" />
+          <Parameter Name="nachname" Type="varchar" Mode="In" />
+          <Parameter Name="strasse" Type="varchar" Mode="In" />
+          <Parameter Name="plz" Type="varchar" Mode="In" />
+          <Parameter Name="ort" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="telefon" Type="varchar" Mode="In" />
+          <Parameter Name="passnr" Type="varchar" Mode="In" />
+          <Parameter Name="gebdat" Type="date" Mode="In" />
+        </Function>
         <Function Name="pKundenAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="searchName" Type="varchar" Mode="In" />
           <Parameter Name="searchKundenNr" Type="int" Mode="In" />
           <Parameter Name="searchOrt" Type="varchar" Mode="In" />
           <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
+          <Parameter Name="searchBuchung" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="it22AutoverleihModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -829,11 +842,24 @@
             <Parameter Name="versicherung" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="OffeneBuchungenTodayPlus13" ReturnType="Collection(it22AutoverleihModel.OffeneBuchungenTodayPlus13_Result)" />
+          <FunctionImport Name="pKundeEdit">
+            <Parameter Name="idkunde" Mode="In" Type="Int32" />
+            <Parameter Name="vorname" Mode="In" Type="String" />
+            <Parameter Name="nachname" Mode="In" Type="String" />
+            <Parameter Name="strasse" Mode="In" Type="String" />
+            <Parameter Name="plz" Mode="In" Type="String" />
+            <Parameter Name="ort" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="telefon" Mode="In" Type="String" />
+            <Parameter Name="passnr" Mode="In" Type="String" />
+            <Parameter Name="gebdat" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="pKundenAnzeigen" ReturnType="Collection(it22AutoverleihModel.pKundenAnzeigen_Result)">
             <Parameter Name="searchName" Mode="In" Type="String" />
             <Parameter Name="searchKundenNr" Mode="In" Type="Int32" />
             <Parameter Name="searchOrt" Mode="In" Type="String" />
             <Parameter Name="searchPLZ" Mode="In" Type="String" />
+            <Parameter Name="searchBuchung" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
@@ -869,6 +895,7 @@
           <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1089,6 +1116,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pKundeEdit" FunctionName="it22AutoverleihModel.Store.pKundeEdit" />
           <FunctionImportMapping FunctionImportName="pKundenAnzeigen" FunctionName="it22AutoverleihModel.Store.pKundenAnzeigen">
             <ResultMapping>
               <ComplexTypeMapping TypeName="it22AutoverleihModel.pKundenAnzeigen_Result">
@@ -1097,6 +1125,7 @@
                 <ScalarProperty Name="Nachname" ColumnName="Nachname" />
                 <ScalarProperty Name="PLZ" ColumnName="PLZ" />
                 <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

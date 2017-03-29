@@ -29,30 +29,30 @@ namespace kundt_back_end.Controllers
         {
             KundenUebersichtContainerModel cm = new KundenUebersichtContainerModel();
             cm.filtermodel = (KundenUebersichtFilterModel)Session["Filterparameter"];
-           
+
             if (cm.filtermodel == null)
             {
-                cm.kundenlist = db.pKundenAnzeigen(null, null, null, null);
+                cm.kundenlist = db.pKundenAnzeigen(null, null, null, null, null);
             }
             else
             {
-                cm.kundenlist = db.pKundenAnzeigen(cm.filtermodel.KundenName, cm.filtermodel.KundenNr, cm.filtermodel.Ort, cm.filtermodel.Plz);
+                cm.kundenlist = db.pKundenAnzeigen(cm.filtermodel.KundenName, cm.filtermodel.KundenNr, cm.filtermodel.Ort, cm.filtermodel.Plz, cm.filtermodel.Buchungsstatus);
             }
-            
+
             return View(cm);
         }
-        
+
         [HttpPost]
-        public ActionResult KundenUebersichtFilter(KundenUebersichtFilterModel km) //Funktioniert so sicher noch nicht?(endl)
+        public ActionResult KundenUebersichtFilter(KundenUebersichtFilterModel km) //(endl)
         {
+
             Session["Filterparameter"] = km;
             return RedirectToAction("KundenUebersicht", "Home");
         }
 
-       
+
 
         //GET: /Home/KundenBearbeiten/id
-        [HttpPost]
         public ActionResult KundenBearbeiten(int? id) //(endl)
         {
 
@@ -60,15 +60,39 @@ namespace kundt_back_end.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tblKunde tblKundeID = db.tblKunde.Find(id);
-            if (tblKundeID == null)
+            tblKunde idk = db.tblKunde.Find(id);
+            if (idk == null)
             {
                 return HttpNotFound();
             }
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("de-AT");
-            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "MietPreis", tblKunde.FKPLZOrt);
-            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
-            return View(tblKundeID);
+           
+            KundeEditModel kem = new KundeEditModel();
+            kem.idkunde = idk.IDKunde;
+            kem.Vorname = idk.Vorname;
+            kem.Nachname = idk.Nachname;
+            kem.Straße = idk.Strasse;
+            kem.Plz = idk.tblPLZOrt.PLZ;
+            kem.Ort = idk.tblPLZOrt.Ort;
+            kem.Email = idk.tblLogin.Email;
+            kem.Telefon = idk.Telefon;
+            kem.PassNr = idk.ReisepassNr;
+            kem.GebDat = idk.GebDatum;
+
+            return View(kem);
+        }
+
+        //POST: /Home/KundeBearbeiten
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult KundenBearbeiten(KundeEditModel kem) //(endl)
+        {
+            if (ModelState.IsValid)
+            {
+                db.pKundeEdit(kem.idkunde, kem.Vorname, kem.Nachname, kem.Straße, kem.Plz, kem.Ort, kem.Email,
+                    kem.Telefon, kem.PassNr, kem.GebDat);
+                return RedirectToAction("KundenUebersicht", "Home");
+            }
+            return View(kem);
         }
 
 
