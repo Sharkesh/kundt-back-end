@@ -403,6 +403,24 @@
           <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
           <Parameter Name="searchBuchung" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="pMitarbeiterEditieren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDLogin" Type="int" Mode="InOut" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Passwort" Type="varchar" Mode="In" />
+          <Parameter Name="Rolle" Type="char" Mode="In" />
+          <Parameter Name="Deaktiviert" Type="bit" Mode="In" />
+          <Parameter Name="MAVorname" Type="varchar" Mode="In" />
+          <Parameter Name="MANachname" Type="varchar" Mode="In" />
+          <Parameter Name="MAAnrede" Type="char" Mode="In" />
+        </Function>
+        <Function Name="pNeuenMitarbeiterAnlegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Passwort" Type="varchar" Mode="In" />
+          <Parameter Name="Deaktiviert" Type="bit" Mode="In" />
+          <Parameter Name="MAVorname" Type="varchar" Mode="In" />
+          <Parameter Name="MANachname" Type="varchar" Mode="In" />
+          <Parameter Name="MAAnrede" Type="char" Mode="In" />
+        </Function>
         <EntityContainer Name="it22AutoverleihModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAusstattung" EntityType="Self.tblAusstattung" Schema="dbo" store:Type="Tables" />
@@ -925,6 +943,24 @@
             <Parameter Name="Typ" Mode="In" Type="String" />
             <Parameter Name="Kategorie" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="pMitarbeiterEditieren">
+            <Parameter Name="IDLogin" Mode="InOut" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Passwort" Mode="In" Type="String" />
+            <Parameter Name="Rolle" Mode="In" Type="String" />
+            <Parameter Name="Deaktiviert" Mode="In" Type="Boolean" />
+            <Parameter Name="MAVorname" Mode="In" Type="String" />
+            <Parameter Name="MANachname" Mode="In" Type="String" />
+            <Parameter Name="MAAnrede" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pNeuenMitarbeiterAnlegen" ReturnType="Collection(Int32)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Passwort" Mode="In" Type="String" />
+            <Parameter Name="Deaktiviert" Mode="In" Type="Boolean" />
+            <Parameter Name="MAVorname" Mode="In" Type="String" />
+            <Parameter Name="MANachname" Mode="In" Type="String" />
+            <Parameter Name="MAAnrede" Mode="In" Type="String" />
+          </FunctionImport>
 
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
@@ -1219,6 +1255,8 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pAutoHinzufuegen" FunctionName="it22AutoverleihModel.Store.pAutoHinzufuegen" />
+          <FunctionImportMapping FunctionImportName="pMitarbeiterEditieren" FunctionName="it22AutoverleihModel.Store.pMitarbeiterEditieren" />
+          <FunctionImportMapping FunctionImportName="pNeuenMitarbeiterAnlegen" FunctionName="it22AutoverleihModel.Store.pNeuenMitarbeiterAnlegen" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
