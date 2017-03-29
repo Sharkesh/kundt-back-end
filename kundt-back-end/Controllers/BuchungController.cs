@@ -10,6 +10,8 @@ using kundt_back_end.Models;
 using System.Threading;
 using System.Globalization;
 using System.Diagnostics;
+using System.Data.SqlClient;
+using System.Data.Common;
 
 namespace kundt_back_end.Controllers
 {
@@ -24,13 +26,14 @@ namespace kundt_back_end.Controllers
             /// Hier die Prozedur der Buchungsauflistung der nächsten 14 Tage einfügen
             /// Evtl. neues Model dafür erstellen und die Buchungsauflistung als Liste übergeben
             //var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);
+            List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
 
             var test = db.OffeneBuchungenTodayPlus13();
-            var BuchungListe = new List<BuchungViewModel>();
+            //var BuchungListe = new List<BuchungViewModel>();
             
             foreach (var b in test)
             {
-                BuchungViewModel res = new BuchungViewModel();
+                GefilterteBuchungen res = new GefilterteBuchungen();
                 res.IDBuchung = b.IDBuchung;
                 res.IDKunde = b.IDKunde;
                 res.BuchungStatus = b.BuchungStatus;
@@ -38,23 +41,75 @@ namespace kundt_back_end.Controllers
                 res.Vorname = b.Vorname;
                 res.Ort = b.Ort;
                 res.PLZ = b.PLZ;
+                
+                
 
-                BuchungListe.Add(res);
+                buchungList.Add(res);
             }
             //return View(buchungUebersicht.ToList());
-            return View(BuchungListe);
+            return View(buchungList);
         }
 
         /// Hier einen Teil einbauen für die Suchmaske, HttpPost
         /// allerdings Post der Partial View oder Index?
         /// Prozedur für Suchfilter einbauen, evtl dazupassendes Model anlegen wenn unbedingt nötig?
 
-        //[HttpPost]
-        //public ActionResult Index(int idbuchung, string nachname, int idkunde, string ort, string plz, bool offen, bool abgeschlossen, bool problem)
-        //{
+        [HttpPost]
+        public ActionResult Index(int? idbuchung, string nachname, int? idkunde, string ort, string plz, string checkStatus)
+        {
+            bool open = false;
+            bool problems = false;
+            bool finished = false;
+            if (checkStatus == "o")
+            {
+               open = true;
+                
+            }
+            else if (checkStatus == "a")
+            {
+                
+                finished = true;
+            }
+            else if (checkStatus == "p")
+            {
+                
+                problems = true;
+            }
+            if (idbuchung == null)
+            {
+                idbuchung = 0;
+            }
+            if (idkunde == null)
+            {
+                idkunde = 0;
+            }
+            List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
 
-        //    return View();
-        //}
+            DbConnection con = db.Database.Connection;
+            if (con.State != ConnectionState.Open)
+            {
+                con.Open();
+            }
+
+            
+            SqlCommand cmd = new SqlCommand(GefilterteBuchungen.SQL, (SqlConnection)con);
+            cmd.Parameters.AddWithValue("@idBuchung", idbuchung);
+            cmd.Parameters.AddWithValue("@nachname", nachname);
+            cmd.Parameters.AddWithValue("@idkunde", idkunde);
+            cmd.Parameters.AddWithValue("@ort", ort);
+            cmd.Parameters.AddWithValue("@plz", plz);
+            cmd.Parameters.AddWithValue("@offen", open);
+            cmd.Parameters.AddWithValue("@abgeschlossen", finished);
+            cmd.Parameters.AddWithValue("@problem", problems);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read()) {
+                buchungList.Add(new GefilterteBuchungen(reader));
+            }
+
+            return View(buchungList);
+        }
 
 
 

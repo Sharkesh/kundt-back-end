@@ -112,5 +112,43 @@ namespace kundt_back_end.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter);
         }
+    
+        [DbFunction("it22AutoverleihEntities", "BuchungFilter")]
+        public virtual IQueryable<BuchungFilter_Result> BuchungFilter(Nullable<int> searchBuchungNr, string searchName, Nullable<int> searchKundeNr, string searchOrt, string searchPLZ, Nullable<bool> checkOffen, Nullable<bool> checkAbgeschlossen, Nullable<bool> checkProblem)
+        {
+            var searchBuchungNrParameter = searchBuchungNr.HasValue ?
+                new ObjectParameter("searchBuchungNr", searchBuchungNr) :
+                new ObjectParameter("searchBuchungNr", typeof(int));
+    
+            var searchNameParameter = searchName != null ?
+                new ObjectParameter("searchName", searchName) :
+                new ObjectParameter("searchName", typeof(string));
+    
+            var searchKundeNrParameter = searchKundeNr.HasValue ?
+                new ObjectParameter("searchKundeNr", searchKundeNr) :
+                new ObjectParameter("searchKundeNr", typeof(int));
+    
+            var searchOrtParameter = searchOrt != null ?
+                new ObjectParameter("searchOrt", searchOrt) :
+                new ObjectParameter("searchOrt", typeof(string));
+    
+            var searchPLZParameter = searchPLZ != null ?
+                new ObjectParameter("searchPLZ", searchPLZ) :
+                new ObjectParameter("searchPLZ", typeof(string));
+    
+            var checkOffenParameter = checkOffen.HasValue ?
+                new ObjectParameter("checkOffen", checkOffen) :
+                new ObjectParameter("checkOffen", typeof(bool));
+    
+            var checkAbgeschlossenParameter = checkAbgeschlossen.HasValue ?
+                new ObjectParameter("checkAbgeschlossen", checkAbgeschlossen) :
+                new ObjectParameter("checkAbgeschlossen", typeof(bool));
+    
+            var checkProblemParameter = checkProblem.HasValue ?
+                new ObjectParameter("checkProblem", checkProblem) :
+                new ObjectParameter("checkProblem", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<BuchungFilter_Result>("[it22AutoverleihEntities].[BuchungFilter](@searchBuchungNr, @searchName, @searchKundeNr, @searchOrt, @searchPLZ, @checkOffen, @checkAbgeschlossen, @checkProblem)", searchBuchungNrParameter, searchNameParameter, searchKundeNrParameter, searchOrtParameter, searchPLZParameter, checkOffenParameter, checkAbgeschlossenParameter, checkProblemParameter);
+        }
     }
 }

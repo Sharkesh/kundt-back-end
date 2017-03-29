@@ -328,6 +328,30 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="BuchungAbholung" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="BuchungFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchBuchungNr" Type="int" Mode="In" />
+          <Parameter Name="searchName" Type="varchar" Mode="In" />
+          <Parameter Name="searchKundeNr" Type="int" Mode="In" />
+          <Parameter Name="searchOrt" Type="varchar" Mode="In" />
+          <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
+          <Parameter Name="checkOffen" Type="bit" Mode="In" />
+          <Parameter Name="checkAbgeschlossen" Type="bit" Mode="In" />
+          <Parameter Name="checkProblem" Type="bit" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="BuchungNr" Type="int" />
+                <Property Name="Vorname" Type="varchar" MaxLength="50" />
+                <Property Name="Nachname" Type="varchar" MaxLength="50" />
+                <Property Name="KundenNr" Type="int" />
+                <Property Name="Ort" Type="varchar" MaxLength="50" />
+                <Property Name="Plz" Type="varchar" MaxLength="50" />
+                <Property Name="BuchungStatus" Type="varchar" MaxLength="10" />
+                <Property Name="Problem" Type="varchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="BuchungProblem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="BuchungRueckgabe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="BuchungUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -835,6 +859,16 @@
             <Parameter Name="searchOrt" Mode="In" Type="String" />
             <Parameter Name="searchPLZ" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="BuchungFilter" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.BuchungFilter_Result)">
+            <Parameter Name="searchBuchungNr" Mode="In" Type="Int32" />
+            <Parameter Name="searchName" Mode="In" Type="String" />
+            <Parameter Name="searchKundeNr" Mode="In" Type="Int32" />
+            <Parameter Name="searchOrt" Mode="In" Type="String" />
+            <Parameter Name="searchPLZ" Mode="In" Type="String" />
+            <Parameter Name="checkOffen" Mode="In" Type="Boolean" />
+            <Parameter Name="checkAbgeschlossen" Mode="In" Type="Boolean" />
+            <Parameter Name="checkProblem" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
           <Property Type="Int32" Name="IDBuchung" Nullable="false" />
@@ -869,6 +903,16 @@
           <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="BuchungFilter_Result">
+          <Property Type="Int32" Name="BuchungNr" Nullable="true" />
+          <Property Type="String" Name="Vorname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nachname" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="KundenNr" Nullable="true" />
+          <Property Type="String" Name="Ort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Plz" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Problem" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1097,6 +1141,20 @@
                 <ScalarProperty Name="Nachname" ColumnName="Nachname" />
                 <ScalarProperty Name="PLZ" ColumnName="PLZ" />
                 <ScalarProperty Name="Ort" ColumnName="Ort" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuchungFilter" FunctionName="it22AutoverleihModel.Store.BuchungFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.BuchungFilter_Result">
+                <ScalarProperty Name="BuchungNr" ColumnName="BuchungNr" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="KundenNr" ColumnName="KundenNr" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="Plz" ColumnName="Plz" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

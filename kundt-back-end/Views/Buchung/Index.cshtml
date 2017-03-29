@@ -1,4 +1,6 @@
-﻿@model IEnumerable<kundt_back_end.Models.BuchungViewModel>
+﻿@using kundt_back_end.Models;
+
+@model List<GefilterteBuchungen> 
 
 @{
     ViewBag.Title = "Übersicht Buchungen";
@@ -145,9 +147,9 @@
                     <input type="text" id="ort" name="ort" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="plz" name="plz" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
                     <center><h3>Buchungs Status</h3></center>
-                    <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" checked="checked" />
-                    <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" />
-                    <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" />
+                    <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" checked="checked" />
+                    <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
+                    <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand"value="p" />
                     <input class="col-lg-6 SuchFilter_abstand buttonOrangeNextStep" type="submit" id="suchen" name="suchen" value="Suchen" />
                 </form>
             </div>

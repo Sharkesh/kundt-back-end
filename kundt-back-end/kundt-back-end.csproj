@@ -142,6 +142,9 @@
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BuchungEditModel.cs" />
+    <Compile Include="Models\BuchungFilter_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BuchungProblem_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -150,6 +153,7 @@
     </Compile>
     <Compile Include="Models\BuchungsUebersicht.cs" />
     <Compile Include="Models\BuchungViewModel.cs" />
+    <Compile Include="Models\GefilterteBuchungen.cs" />
     <Compile Include="Models\It22AutoverleihModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
