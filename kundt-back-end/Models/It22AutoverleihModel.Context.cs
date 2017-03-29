@@ -161,5 +161,100 @@ namespace kundt_back_end.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter, searchBuchungParameter);
         }
+    
+        public virtual int pAutoHinzufuegen(Nullable<short> baujahr, string pS, string getriebe, string tueren, Nullable<byte> sitze, Nullable<decimal> mietpreis, Nullable<decimal> verkaufPreis, Nullable<decimal> kilometerstand, byte[] autobild, Nullable<bool> anzeigen, string treibstoff, string typ, string kategorie)
+        {
+            var baujahrParameter = baujahr.HasValue ?
+                new ObjectParameter("Baujahr", baujahr) :
+                new ObjectParameter("Baujahr", typeof(short));
+    
+            var pSParameter = pS != null ?
+                new ObjectParameter("PS", pS) :
+                new ObjectParameter("PS", typeof(string));
+    
+            var getriebeParameter = getriebe != null ?
+                new ObjectParameter("Getriebe", getriebe) :
+                new ObjectParameter("Getriebe", typeof(string));
+    
+            var tuerenParameter = tueren != null ?
+                new ObjectParameter("Tueren", tueren) :
+                new ObjectParameter("Tueren", typeof(string));
+    
+            var sitzeParameter = sitze.HasValue ?
+                new ObjectParameter("Sitze", sitze) :
+                new ObjectParameter("Sitze", typeof(byte));
+    
+            var mietpreisParameter = mietpreis.HasValue ?
+                new ObjectParameter("Mietpreis", mietpreis) :
+                new ObjectParameter("Mietpreis", typeof(decimal));
+    
+            var verkaufPreisParameter = verkaufPreis.HasValue ?
+                new ObjectParameter("VerkaufPreis", verkaufPreis) :
+                new ObjectParameter("VerkaufPreis", typeof(decimal));
+    
+            var kilometerstandParameter = kilometerstand.HasValue ?
+                new ObjectParameter("Kilometerstand", kilometerstand) :
+                new ObjectParameter("Kilometerstand", typeof(decimal));
+    
+            var autobildParameter = autobild != null ?
+                new ObjectParameter("Autobild", autobild) :
+                new ObjectParameter("Autobild", typeof(byte[]));
+    
+            var anzeigenParameter = anzeigen.HasValue ?
+                new ObjectParameter("Anzeigen", anzeigen) :
+                new ObjectParameter("Anzeigen", typeof(bool));
+    
+            var treibstoffParameter = treibstoff != null ?
+                new ObjectParameter("Treibstoff", treibstoff) :
+                new ObjectParameter("Treibstoff", typeof(string));
+    
+            var typParameter = typ != null ?
+                new ObjectParameter("Typ", typ) :
+                new ObjectParameter("Typ", typeof(string));
+    
+            var kategorieParameter = kategorie != null ?
+                new ObjectParameter("Kategorie", kategorie) :
+                new ObjectParameter("Kategorie", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoHinzufuegen", baujahrParameter, pSParameter, getriebeParameter, tuerenParameter, sitzeParameter, mietpreisParameter, verkaufPreisParameter, kilometerstandParameter, autobildParameter, anzeigenParameter, treibstoffParameter, typParameter, kategorieParameter);
+
+        [DbFunction("it22AutoverleihEntities", "BuchungFilter")]
+        public virtual IQueryable<BuchungFilter_Result> BuchungFilter(Nullable<int> searchBuchungNr, string searchName, Nullable<int> searchKundeNr, string searchOrt, string searchPLZ, Nullable<bool> checkOffen, Nullable<bool> checkAbgeschlossen, Nullable<bool> checkProblem)
+        {
+            var searchBuchungNrParameter = searchBuchungNr.HasValue ?
+                new ObjectParameter("searchBuchungNr", searchBuchungNr) :
+                new ObjectParameter("searchBuchungNr", typeof(int));
+    
+            var searchNameParameter = searchName != null ?
+                new ObjectParameter("searchName", searchName) :
+                new ObjectParameter("searchName", typeof(string));
+    
+            var searchKundeNrParameter = searchKundeNr.HasValue ?
+                new ObjectParameter("searchKundeNr", searchKundeNr) :
+                new ObjectParameter("searchKundeNr", typeof(int));
+    
+            var searchOrtParameter = searchOrt != null ?
+                new ObjectParameter("searchOrt", searchOrt) :
+                new ObjectParameter("searchOrt", typeof(string));
+    
+            var searchPLZParameter = searchPLZ != null ?
+                new ObjectParameter("searchPLZ", searchPLZ) :
+                new ObjectParameter("searchPLZ", typeof(string));
+    
+            var checkOffenParameter = checkOffen.HasValue ?
+                new ObjectParameter("checkOffen", checkOffen) :
+                new ObjectParameter("checkOffen", typeof(bool));
+    
+            var checkAbgeschlossenParameter = checkAbgeschlossen.HasValue ?
+                new ObjectParameter("checkAbgeschlossen", checkAbgeschlossen) :
+                new ObjectParameter("checkAbgeschlossen", typeof(bool));
+    
+            var checkProblemParameter = checkProblem.HasValue ?
+                new ObjectParameter("checkProblem", checkProblem) :
+                new ObjectParameter("checkProblem", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<BuchungFilter_Result>("[it22AutoverleihEntities].[BuchungFilter](@searchBuchungNr, @searchName, @searchKundeNr, @searchOrt, @searchPLZ, @checkOffen, @checkAbgeschlossen, @checkProblem)", searchBuchungNrParameter, searchNameParameter, searchKundeNrParameter, searchOrtParameter, searchPLZParameter, checkOffenParameter, checkAbgeschlossenParameter, checkProblemParameter);
+
+        }
     }
 }

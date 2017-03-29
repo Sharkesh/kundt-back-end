@@ -19,7 +19,7 @@ namespace kundt_back_end.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index","BuchungUebersicht");
         }
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
