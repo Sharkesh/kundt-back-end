@@ -889,7 +889,7 @@
             <Parameter Name="Treibstoff" Mode="In" Type="String" />
             <Parameter Name="Typ" Mode="In" Type="String" />
             <Parameter Name="Kategorie" Mode="In" Type="String" />
-
+          </FunctionImport>
           <FunctionImport Name="BuchungFilter" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.BuchungFilter_Result)">
             <Parameter Name="searchBuchungNr" Mode="In" Type="Int32" />
             <Parameter Name="searchName" Mode="In" Type="String" />
@@ -901,6 +901,7 @@
             <Parameter Name="checkProblem" Mode="In" Type="Boolean" />
 
           </FunctionImport>
+            
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
           <Property Type="Int32" Name="IDBuchung" Nullable="false" />
