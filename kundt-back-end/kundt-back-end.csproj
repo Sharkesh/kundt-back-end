@@ -170,6 +170,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>It22AutoverleihModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\It22AutoverleihModel1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>It22AutoverleihModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\KundeEditModel.cs" />
     <Compile Include="Models\KundenUebersichtContainerModel.cs" />
     <Compile Include="Models\KundenUebersichtFilterModel.cs" />
@@ -310,6 +315,7 @@
     <Content Include="Content\bootstrap-select\bootstrap-select.less" />
     <EntityDeploy Include="Models\It22AutoverleihModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>It22AutoverleihModel1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\It22AutoverleihModel.edmx.diagram">
       <DependentUpon>It22AutoverleihModel.edmx</DependentUpon>

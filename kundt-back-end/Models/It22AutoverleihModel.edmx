@@ -369,6 +369,9 @@
           <Parameter Name="idBuchung" Type="int" Mode="In" />
         </Function>
         <Function Name="OffeneBuchungenTodayPlus13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pAusstattungZuAuto2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="daten" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="pAutoHinzufuegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Baujahr" Type="smallint" Mode="In" />
           <Parameter Name="PS" Type="varchar" Mode="In" />
@@ -925,6 +928,9 @@
             <Parameter Name="Typ" Mode="In" Type="String" />
             <Parameter Name="Kategorie" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="pAusstattungZuAuto2">
+            <Parameter Name="daten" Mode="In" Type="String" />
+          </FunctionImport>
 
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
@@ -1219,6 +1225,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pAutoHinzufuegen" FunctionName="it22AutoverleihModel.Store.pAutoHinzufuegen" />
+          <FunctionImportMapping FunctionImportName="pAusstattungZuAuto2" FunctionName="it22AutoverleihModel.Store.pAusstattungZuAuto2" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

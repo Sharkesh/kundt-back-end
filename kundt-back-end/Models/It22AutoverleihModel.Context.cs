@@ -256,5 +256,14 @@ namespace kundt_back_end.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoHinzufuegen", baujahrParameter, pSParameter, getriebeParameter, tuerenParameter, sitzeParameter, mietpreisParameter, verkaufPreisParameter, kilometerstandParameter, autobildParameter, anzeigenParameter, treibstoffParameter, typParameter, kategorieParameter);
         }
+    
+        public virtual int pAusstattungZuAuto2(string daten)
+        {
+            var datenParameter = daten != null ?
+                new ObjectParameter("daten", daten) :
+                new ObjectParameter("daten", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAusstattungZuAuto2", datenParameter);
+        }
     }
 }

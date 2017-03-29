@@ -13,6 +13,7 @@ namespace kundt_back_end.Controllers
     public class tblAutoController : Controller
     {
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
+
         [HttpGet]
         public ActionResult AutoHinzu()
         {
@@ -27,20 +28,20 @@ namespace kundt_back_end.Controllers
             am.getriebeListe = res.ToList();
             return View(am);
         }
-        [HttpPost]
 
-        public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
-        {
-            //var treibstoff = Convert.ToInt32(db.tblTreibstoff.Select(x => x.IDTreibstoff).Where(x => treibstoff == ));
-            //var typ = Convert.ToInt32(db.tblTyp.Where(x => x.Typ == am.myTyp).Select(x => x.IDTyp));
-            //var kategorie = Convert.ToInt32(db.tblKategorie.Where(x => x.Kategorie == am.myKategorie).Select(x => x.IDKategorie));
-            if (ModelState.IsValid)
+        [HttpPost]
+        public ActionResult AutoHinzu(AutoModel am, string[] ausstattungListe)
+        //public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
+        {            
+            db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS, am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze), am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand, null, am.myAnzeigen, am.myTreibstoff, am.myTyp, am.myKategorie);
+            foreach (string item in ausstattungListe)
             {
-                
-                db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS, am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze), am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand, null, am.myAnzeigen, am.myTreibstoff, am.myTyp, am.myKategorie);
-                //ausstattungListe noch über Proc an DB übergeben!!!
-                return RedirectToAction("Index", "Mitarbeiter");
+                if (item != null)
+                {
+                    db.pAusstattungZuAuto2(item);
+                }
             }
+
             return View();
 
         }
