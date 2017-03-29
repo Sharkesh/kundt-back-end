@@ -19,7 +19,10 @@ namespace kundt_back_end.Controllers
     {
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
-        // GET: Buchung
+        /// <summary>
+        /// GET: Buchung
+        /// </summary>
+        /// <returns>Liste offener Buchungen von heute und der nächsten 13 Tage</returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -30,7 +33,7 @@ namespace kundt_back_end.Controllers
 
             var test = db.OffeneBuchungenTodayPlus13();
             //var BuchungListe = new List<BuchungViewModel>();
-            
+
             foreach (var b in test)
             {
                 GefilterteBuchungen res = new GefilterteBuchungen();
@@ -41,8 +44,8 @@ namespace kundt_back_end.Controllers
                 res.Vorname = b.Vorname;
                 res.Ort = b.Ort;
                 res.PLZ = b.PLZ;
-                
-                
+
+
 
                 buchungList.Add(res);
             }
@@ -50,48 +53,74 @@ namespace kundt_back_end.Controllers
             return View(buchungList);
         }
 
-        /// Hier einen Teil einbauen für die Suchmaske, HttpPost
-        /// allerdings Post der Partial View oder Index?
-        /// Prozedur für Suchfilter einbauen, evtl dazupassendes Model anlegen wenn unbedingt nötig?
 
+        /// <summary>
+        /// POST: Buchung
+        /// </summary>
+        /// <param name="idbuchung"></param>
+        /// <param name="nachname"></param>
+        /// <param name="idkunde"></param>
+        /// <param name="ort"></param>
+        /// <param name="plz"></param>
+        /// <param name="checkStatus"></param>
+        /// <returns>Gefilterte Liste von Buchungen</returns>
         [HttpPost]
         public ActionResult Index(int? idbuchung, string nachname, int? idkunde, string ort, string plz, string checkStatus)
         {
             bool open = false;
             bool problems = false;
             bool finished = false;
+            /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == o ist
+            /// wird der bool Wert auf true gesetzt und ein Tempdata["open"] generiert
+            /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
+            /// Radio Button haben soll (checked/unchecked)
             if (checkStatus == "o")
             {
-               open = true;
-                
+                open = true;
+                TempData["open"] = "offen";
+
             }
+            /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == a ist
+            /// wird der bool Wert auf true gesetzt und ein Tempdata["finished"] generiert
+            /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
+            /// Radio Button haben soll (checked/unchecked)
             else if (checkStatus == "a")
             {
-                
                 finished = true;
+                TempData["finished"] = "abgeschlossen";
             }
+            /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == p ist
+            /// wird der bool Wert auf true gesetzt und ein Tempdata["problems"] generiert
+            /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
+            /// Radio Button haben soll (checked/unchecked)
             else if (checkStatus == "p")
             {
-                
                 problems = true;
+                TempData["problems"] = "problem";
             }
+            /// Wenn kein Wert (null) im Suchfeld für IDBuchung angegeben wird setze IDBuchung auf 0
             if (idbuchung == null)
             {
                 idbuchung = 0;
             }
+            /// Wenn kein Wert (null) im Suchfeld für IDKunde angegeben wird setze IDBuchung auf 0
             if (idkunde == null)
             {
                 idkunde = 0;
             }
-            List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
 
+
+            List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
+            
             DbConnection con = db.Database.Connection;
+            ///Checkt ob die Datenbankverbindung offen ist, falls nicht wird sie geöffnet
             if (con.State != ConnectionState.Open)
             {
                 con.Open();
             }
 
-            
+
+            /// Erzeugt ein SQLCommand Objekt mit Parametern
             SqlCommand cmd = new SqlCommand(GefilterteBuchungen.SQL, (SqlConnection)con);
             cmd.Parameters.AddWithValue("@idBuchung", idbuchung);
             cmd.Parameters.AddWithValue("@nachname", nachname);
@@ -104,7 +133,8 @@ namespace kundt_back_end.Controllers
 
             SqlDataReader reader = cmd.ExecuteReader();
 
-            while (reader.Read()) {
+            while (reader.Read())
+            {
                 buchungList.Add(new GefilterteBuchungen(reader));
             }
 
@@ -116,6 +146,7 @@ namespace kundt_back_end.Controllers
         // GET: Buchung/Edit/5
         public ActionResult Edit(int? id)
         {
+            /// Hier wird die aufrufende Seite ermittelt und abgespeichert
             var url = Convert.ToString(Request.UrlReferrer);
             TempData["AusgangsURL"] = url;
 
@@ -156,7 +187,7 @@ namespace kundt_back_end.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(BuchungEditModel BEM)
         //public ActionResult Edit(tblBuchung tblBuchung)
-        {                     
+        {
 
             if (ModelState.IsValid)
             {
@@ -179,7 +210,7 @@ namespace kundt_back_end.Controllers
 
                     /// Parameter für die Proc IDMA,IDBuchung
                     /// Prozedur für den 1. Eintrag in tblHistorie
-                    
+
 
                 }
                 /// bool Wert der ermittelt wird um den BuchungStatus auf 'zurueck' zu setzen
