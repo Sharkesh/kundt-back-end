@@ -53,6 +53,14 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IDBuchung)
         <div class="form-group">
+            @Html.LabelFor(model => model.IDBuchung, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <p name="IDBuchung" id="IDBuchung" class="form-control input EditDisplayWidth disabledField">
+                    @Model.IDBuchung
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             @Html.LabelFor(model => model.BuchungAm, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <p name="BuchungAm" id="BuchungAm" class="form-control input EditDisplayWidth disabledField">
@@ -60,26 +68,14 @@
                 </p>
             </div>
         </div>
-
-        <!--
-             Datumspicker im Editbereich muss noch konfiguriert werden dass
-            das DatumBis nicht < als DatumVon sein kann sonst gibt es eine Exception
-            beim speichern in die Datenbank
-
-            Abklären ob dieser Problemfall im Controller ausreichend behandelt wurde!
-        -->
-
         <div class="form-group">
             @Html.LabelFor(model => model.BuchungVon, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.BuchungVon, new { htmlAttributes = new { @class = "form-control"} })*@
-
-
                 <input type="date" id="BuchungVon" name="BuchungVon" value="@Model.BuchungVon.ToString("yyyy-MM-dd")" class="form-control input EditDisplayWidth" />
                 @Html.ValidationMessageFor(model => model.BuchungVon, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.BuchungBis, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -98,6 +94,14 @@
             <div class="col-md-10">
                 <p name="KundeId" id="KundeId" class="form-control input EditDisplayWidth disabledField">
                     @Model.FKKunde
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Kunde Name</label>
+            <div class="col-md-10">                
+                <p name="name" id="name" class="form-control input EditDisplayWidth disabledField">
+                    @Model.Vorname @Model.Nachname
                 </p>
             </div>
         </div>
