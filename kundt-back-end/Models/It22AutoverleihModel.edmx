@@ -861,6 +861,33 @@
             <Parameter Name="searchPLZ" Mode="In" Type="String" />
             <Parameter Name="searchBuchung" Mode="In" Type="String" />
           </FunctionImport>
+
+          <FunctionImport Name="pAutoHinzufuegen">
+            <Parameter Name="Baujahr" Mode="In" Type="Int16" />
+            <Parameter Name="PS" Mode="In" Type="String" />
+            <Parameter Name="Getriebe" Mode="In" Type="String" />
+            <Parameter Name="Tueren" Mode="In" Type="String" />
+            <Parameter Name="Sitze" Mode="In" Type="Byte" />
+            <Parameter Name="Mietpreis" Mode="In" Type="Decimal" />
+            <Parameter Name="VerkaufPreis" Mode="In" Type="Decimal" />
+            <Parameter Name="Kilometerstand" Mode="In" Type="Decimal" />
+            <Parameter Name="Autobild" Mode="In" Type="Binary" />
+            <Parameter Name="Anzeigen" Mode="In" Type="Boolean" />
+            <Parameter Name="Treibstoff" Mode="In" Type="String" />
+            <Parameter Name="Typ" Mode="In" Type="String" />
+            <Parameter Name="Kategorie" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BuchungFilter" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.BuchungFilter_Result)">
+            <Parameter Name="searchBuchungNr" Mode="In" Type="Int32" />
+            <Parameter Name="searchName" Mode="In" Type="String" />
+            <Parameter Name="searchKundeNr" Mode="In" Type="Int32" />
+            <Parameter Name="searchOrt" Mode="In" Type="String" />
+            <Parameter Name="searchPLZ" Mode="In" Type="String" />
+            <Parameter Name="checkOffen" Mode="In" Type="Boolean" />
+            <Parameter Name="checkAbgeschlossen" Mode="In" Type="Boolean" />
+            <Parameter Name="checkProblem" Mode="In" Type="Boolean" />
+          </FunctionImport>
+            
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
           <Property Type="Int32" Name="IDBuchung" Nullable="false" />
