@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutoModel.cs" />
     <Compile Include="Models\BuchungAbholung_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -465,7 +466,7 @@
     <Content Include="Views\tblAuto\Delete.cshtml" />
     <Content Include="Views\tblAuto\Details.cshtml" />
     <Content Include="Views\tblAuto\Edit.cshtml" />
-    <Content Include="Views\tblAuto\Index.cshtml" />
+    <Content Include="Views\tblAuto\AutoHinzu.cshtml" />
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
     <Content Include="Views\Buchung\Edit.cshtml" />
     <Content Include="Views\Buchung\Index.cshtml" />

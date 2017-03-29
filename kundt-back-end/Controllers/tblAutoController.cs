@@ -13,7 +13,37 @@ namespace kundt_back_end.Controllers
     public class tblAutoController : Controller
     {
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
+        [HttpGet]
+        public ActionResult AutoHinzu()
+        {
+            AutoModel am = new AutoModel();
+            am.autoListe = db.tblAuto.ToList();
+            am.ausstattungListe = db.tblAusstattung.ToList();
+            am.typListe = db.tblTyp.ToList();
+            am.markeListe = db.tblMarke.ToList();
+            am.kategorieListe = db.tblKategorie.ToList();
+            am.treibstoffListe = db.tblTreibstoff.ToList();
+            var res = db.tblAuto.Select(x => x.Getriebe);
+            am.getriebeListe = res.ToList();
+            return View(am);
+        }
+        [HttpPost]
 
+        public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
+        {
+            //var treibstoff = Convert.ToInt32(db.tblTreibstoff.Select(x => x.IDTreibstoff).Where(x => treibstoff == ));
+            //var typ = Convert.ToInt32(db.tblTyp.Where(x => x.Typ == am.myTyp).Select(x => x.IDTyp));
+            //var kategorie = Convert.ToInt32(db.tblKategorie.Where(x => x.Kategorie == am.myKategorie).Select(x => x.IDKategorie));
+            if (ModelState.IsValid)
+            {
+                
+                db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS, am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze), am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand, null, am.myAnzeigen, am.myTreibstoff, am.myTyp, am.myKategorie);
+                //ausstattungListe noch über Proc an DB übergeben!!!
+                return RedirectToAction("Index", "Mitarbeiter");
+            }
+            return View();
+
+        }
         // GET: tblAuto
         public ActionResult Index()
         {
