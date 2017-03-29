@@ -39,8 +39,9 @@ namespace kundt_back_end.Controllers
         // GET: Mitarbeiter/Create
         public ActionResult Create()
         {
+            MitarbeiterModel test = new MitarbeiterModel();
             ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email");
-            return View();
+            return View(test);
         }
 
         // POST: Mitarbeiter/Create
@@ -48,12 +49,15 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(MitarbeiterModel MM)
+        public ActionResult Create(MitarbeiterModel MM)
+        //public ActionResult Edit(BuchungEditModel BEM)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //ModelStat.IsValid funtzt nicht!
             {
                 //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
-                db.SaveChanges();
+
+                db.pNeuenMitarbeiterAnlegen(MM.Email, MM.Passwort, MM.Deaktiviert = false, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+                //db.SaveChanges;
                 return RedirectToAction("Index");
             }
             else
@@ -61,6 +65,7 @@ namespace kundt_back_end.Controllers
                 //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
+
         }
 
         // GET: Mitarbeiter/Edit/5
@@ -79,20 +84,18 @@ namespace kundt_back_end.Controllers
             return View(tblMitarbeiter);
         }
 
+
         // POST: Mitarbeiter/Edit/5
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(MitarbeiterModel MM)
-        //public ActionResult Edit(BuchungEditModel BEM)
+        public ActionResult Edit(MitarbeiterModel MM)
         {
-            if (ModelState.IsValid) //ModelStat.IsValid funtzt nicht!
+            if (ModelState.IsValid)
             {
                 //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
-
-                db.pNeuenMitarbeiterAnlegen(MM.Email, MM.Passwort, MM.Deaktiviert = false, MM.MitarbeiterVorname, MM.MitarbeiterNachname, MM.MitarbeiterAnrede);
-                //db.SaveChanges;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             else
@@ -100,7 +103,6 @@ namespace kundt_back_end.Controllers
                 //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
-
         }
 
         protected override void Dispose(bool disposing)

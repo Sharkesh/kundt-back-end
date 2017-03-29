@@ -10,18 +10,24 @@ namespace kundt_back_end.Models
     {
 
         public int IDMitarbeiter { get; set; }
+
         [Required(ErrorMessage = "Bitte Vorname Eingebe")]
         [StringLength(100, MinimumLength = 2)]
-        public string MitarbeiterVorname { get; set; }
+        public string MAVorname { get; set; }
+
         [Required(ErrorMessage = "Bitte Nachname Eingeben")]
         [StringLength(100, MinimumLength = 2)]
-        public string MitarbeiterNachname { get; set; }
-        public string MitarbeiterAnrede { get; set; }
+        public string MANachname { get; set; }
+
+        public string MAAnrede { get; set; }
+
         [Required(ErrorMessage = "Bitte Email Eingeben")]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Muss nach einer Email Schmecken!")]
         public string Email { get; set; }
+
         [Required(ErrorMessage = "Bitte Passwort Eingeben")]
         public string Passwort { get; set; }
+
         public bool Deaktiviert { get; set; }
     }
 }
