@@ -61,6 +61,9 @@ namespace kundt_back_end.Controllers
         // GET: Buchung/Edit/5
         public ActionResult Edit(int? id)
         {
+            var url = Convert.ToString(Request.UrlReferrer);
+            TempData["AusgangsURL"] = url;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -88,10 +91,6 @@ namespace kundt_back_end.Controllers
             BEM.MietPreis = tblBuchung.tblAuto.MietPreis;
 
 
-            ///// auto generierter Teil sinnvoll????
-            //ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "MietPreis", tblBuchung.FKAuto);
-            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "IDKunde", tblBuchung.FKKunde);
-
             return View(BEM);
         }
 
@@ -110,11 +109,15 @@ namespace kundt_back_end.Controllers
                 //var Buchung = (from b in db.tblBuchung where b.IDBuchung == BEM.IDBuchung select b).FirstOrDefault<tblBuchung>();
 
 
+                /// Wenn im Edit-View das Feld BuchungBis kleiner als BuchungVon ist wird ein TempData erzeugt
+                /// das im Edit View eine Fehlermeldung einblendet und den User darauf hinweist
+                /// dass das BuchungBis Feld nur Werte annimmt die größer sind als der Wert im BuchungVon Feld.
                 if (BEM.BuchungBis < BEM.BuchungVon)
                 {
                     TempData["fail"] = "DatumBis muss > sein als DatumVon!";
                     return RedirectToAction("Edit", BEM.IDBuchung);
                 }
+                /// bool Wert der ermittelt wird um den BuchungStatus auf 'abgeholt' zu setzen
                 if (BEM.abgeholt)
                 {
                     BEM.BuchungStatus = "abgeholt";
@@ -124,6 +127,7 @@ namespace kundt_back_end.Controllers
                     
 
                 }
+                /// bool Wert der ermittelt wird um den BuchungStatus auf 'zurueck' zu setzen
                 if (BEM.zurueck)
                 {
                     BEM.BuchungStatus = "zurueck";
@@ -132,6 +136,16 @@ namespace kundt_back_end.Controllers
                     /// Prozedur für den 2. Eintrag in tblHistorie
 
                 }
+
+                /// Abklären was passiert wenn storniert wurde.
+                /// Eintrag in tblHistorie machen oder nicht?
+                /// Wenn ja proc dafür machen?
+                /// Wenn nein was dann?
+                //if (BEM.Storno)
+                //{
+                //    BEM.BuchungStatus = "zurueck";
+                //}
+
 
                 /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
                 /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
@@ -143,21 +157,14 @@ namespace kundt_back_end.Controllers
                 //Buchung.BuchungBis = BEM.BuchungBis;
                 //Buchung.BuchungStatus = BEM.BuchungStatus;
                 //Buchung.Versicherung = BEM.Versicherung;
-                //Buchung.Storno = BEM.Storno;
-
-                /// Alte Variante
+                //Buchung.Storno = BEM.Storno;                
                 //db.SaveChanges();
 
-                /// Standartmäßige Weiterleitung auf BuchungUebersicht nach dem speichern, oder evtl per ViewBag
-                /// den Ausgangspunkt speichern über den man zur Edit Seite gekommen ist? Wenn ja wie?
 
-                
-                return RedirectToAction("Index","BuchungUebersicht");
+                /// Nach dem Speichern wird man zum Aufrufpunkt der Edit Seite redirected
+                var urlStr = (string)TempData["AusgangsURL"];
+                return Redirect(urlStr);
             }
-
-            ///// auto generierter Teil sinnvoll???
-            //ViewBag.FKAuto = new SelectList(db.tblAuto, "IDAuto", "PS", BEM.FKAuto);
-            //ViewBag.FKKunde = new SelectList(db.tblKunde, "IDKunde", "Vorname", BEM.FKKunde);
 
             return View(BEM);
         }
