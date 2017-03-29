@@ -310,7 +310,6 @@
     <Content Include="Content\bootstrap-select\bootstrap-select.less" />
     <EntityDeploy Include="Models\It22AutoverleihModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>It22AutoverleihModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Models\It22AutoverleihModel.edmx.diagram">
       <DependentUpon>It22AutoverleihModel.edmx</DependentUpon>
