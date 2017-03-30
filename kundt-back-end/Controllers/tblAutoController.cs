@@ -30,7 +30,7 @@ namespace kundt_back_end.Controllers
         }
 
         [HttpPost]
-        public ActionResult AutoHinzu(AutoModel am, string[] ausstattungListe)
+        public ActionResult AutoHinzu(AutoModel am, int[] ausstattungListe)
         //public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
         {            
             db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS, am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze), am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand, null, am.myAnzeigen, am.myTreibstoff, am.myTyp, am.myKategorie);

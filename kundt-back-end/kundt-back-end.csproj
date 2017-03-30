@@ -178,6 +178,7 @@
     <Compile Include="Models\KundeEditModel.cs" />
     <Compile Include="Models\KundenUebersichtContainerModel.cs" />
     <Compile Include="Models\KundenUebersichtFilterModel.cs" />
+    <Compile Include="Models\MitarbeiterModel.cs" />
     <Compile Include="Models\OffeneBuchungenTodayPlus13_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -481,8 +482,6 @@
     <Content Include="Views\Buchung\Index.cshtml" />
     <Content Include="Views\Buchung\_BuchungTable.cshtml" />
     <Content Include="Views\Mitarbeiter\Create.cshtml" />
-    <Content Include="Views\Mitarbeiter\Delete.cshtml" />
-    <Content Include="Views\Mitarbeiter\Details.cshtml" />
     <Content Include="Views\Mitarbeiter\Edit.cshtml" />
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
   </ItemGroup>

@@ -120,7 +120,7 @@ namespace kundt_back_end.Controllers
             }
 
 
-            /// Erzeugt ein SQLCommand Objekt mit Parametern
+            /// Erzeugt ein SQLCommand Objekt mit Parametern das an die Db geschickt wird
             SqlCommand cmd = new SqlCommand(GefilterteBuchungen.SQL, (SqlConnection)con);
             cmd.Parameters.AddWithValue("@idBuchung", idbuchung);
             cmd.Parameters.AddWithValue("@nachname", nachname);
@@ -131,8 +131,9 @@ namespace kundt_back_end.Controllers
             cmd.Parameters.AddWithValue("@abgeschlossen", finished);
             cmd.Parameters.AddWithValue("@problem", problems);
 
+            /// Hier wird ein SqlDataReader Objekt angelegt das die Ergebnise des abgesetzten SQLCommands
+            /// ausliest und in eine Liste speichert
             SqlDataReader reader = cmd.ExecuteReader();
-
             while (reader.Read())
             {
                 buchungList.Add(new GefilterteBuchungen(reader));
@@ -175,6 +176,8 @@ namespace kundt_back_end.Controllers
             BEM.Versicherung = tblBuchung.Versicherung;
             BEM.Tage = tblBuchung.Tage;
             BEM.MietPreis = tblBuchung.tblAuto.MietPreis;
+            BEM.Vorname = tblBuchung.tblKunde.Vorname;
+            BEM.Nachname = tblBuchung.tblKunde.Nachname;
 
 
             return View(BEM);

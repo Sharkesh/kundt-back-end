@@ -21,26 +21,27 @@ namespace kundt_back_end.Controllers
             return View(tblMitarbeiter.ToList());
         }
 
-        // GET: Mitarbeiter/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblMitarbeiter tblMitarbeiter = db.tblMitarbeiter.Find(id);
-            if (tblMitarbeiter == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblMitarbeiter);
-        }
+        //// GET: Mitarbeiter/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tblMitarbeiter tblMitarbeiter = db.tblMitarbeiter.Find(id);
+        //    if (tblMitarbeiter == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(tblMitarbeiter);
+        //}
 
         // GET: Mitarbeiter/Create
         public ActionResult Create()
         {
+            MitarbeiterModel test = new MitarbeiterModel();
             ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email");
-            return View();
+            return View(test);
         }
 
         // POST: Mitarbeiter/Create
@@ -48,17 +49,23 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDMitarbeiter,MAVorname,MANachname,MAAnrede")] tblMitarbeiter tblMitarbeiter)
+        public ActionResult Create(MitarbeiterModel MM)
+        //public ActionResult Edit(BuchungEditModel BEM)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) //ModelStat.IsValid funtzt nicht!
             {
-                db.tblMitarbeiter.Add(tblMitarbeiter);
-                db.SaveChanges();
+                //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
+
+                db.pNeuenMitarbeiterAnlegen(MM.Email, MM.Passwort, MM.Deaktiviert = false, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+                //db.SaveChanges;
                 return RedirectToAction("Index");
             }
+            else
+            {
+                //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
+                return RedirectToAction("Edit", MM.IDMitarbeiter);
+            }
 
-            ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", tblMitarbeiter.IDMitarbeiter);
-            return View(tblMitarbeiter);
         }
 
         // GET: Mitarbeiter/Edit/5
@@ -77,47 +84,25 @@ namespace kundt_back_end.Controllers
             return View(tblMitarbeiter);
         }
 
+
         // POST: Mitarbeiter/Edit/5
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDMitarbeiter,MAVorname,MANachname,MAAnrede")] tblMitarbeiter tblMitarbeiter)
+        public ActionResult Edit(MitarbeiterModel MM)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblMitarbeiter).State = EntityState.Modified;
+                //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", tblMitarbeiter.IDMitarbeiter);
-            return View(tblMitarbeiter);
-        }
-
-        // GET: Mitarbeiter/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
+            else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
+                return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
-            tblMitarbeiter tblMitarbeiter = db.tblMitarbeiter.Find(id);
-            if (tblMitarbeiter == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblMitarbeiter);
-        }
-
-        // POST: Mitarbeiter/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tblMitarbeiter tblMitarbeiter = db.tblMitarbeiter.Find(id);
-            db.tblMitarbeiter.Remove(tblMitarbeiter);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

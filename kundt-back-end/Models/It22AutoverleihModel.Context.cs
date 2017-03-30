@@ -257,13 +257,75 @@ namespace kundt_back_end.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoHinzufuegen", baujahrParameter, pSParameter, getriebeParameter, tuerenParameter, sitzeParameter, mietpreisParameter, verkaufPreisParameter, kilometerstandParameter, autobildParameter, anzeigenParameter, treibstoffParameter, typParameter, kategorieParameter);
         }
     
-        public virtual int pAusstattungZuAuto2(string daten)
+        public virtual int pAusstattungZuAuto2(Nullable<int> daten)
         {
-            var datenParameter = daten != null ?
+            var datenParameter = daten.HasValue ?
                 new ObjectParameter("daten", daten) :
-                new ObjectParameter("daten", typeof(string));
+                new ObjectParameter("daten", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAusstattungZuAuto2", datenParameter);
+        }
+    
+        public virtual int pMitarbeiterEditieren(ObjectParameter iDLogin, string email, string passwort, string rolle, Nullable<bool> deaktiviert, string mAVorname, string mANachname, string mAAnrede)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var passwortParameter = passwort != null ?
+                new ObjectParameter("Passwort", passwort) :
+                new ObjectParameter("Passwort", typeof(string));
+    
+            var rolleParameter = rolle != null ?
+                new ObjectParameter("Rolle", rolle) :
+                new ObjectParameter("Rolle", typeof(string));
+    
+            var deaktiviertParameter = deaktiviert.HasValue ?
+                new ObjectParameter("Deaktiviert", deaktiviert) :
+                new ObjectParameter("Deaktiviert", typeof(bool));
+    
+            var mAVornameParameter = mAVorname != null ?
+                new ObjectParameter("MAVorname", mAVorname) :
+                new ObjectParameter("MAVorname", typeof(string));
+    
+            var mANachnameParameter = mANachname != null ?
+                new ObjectParameter("MANachname", mANachname) :
+                new ObjectParameter("MANachname", typeof(string));
+    
+            var mAAnredeParameter = mAAnrede != null ?
+                new ObjectParameter("MAAnrede", mAAnrede) :
+                new ObjectParameter("MAAnrede", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pMitarbeiterEditieren", iDLogin, emailParameter, passwortParameter, rolleParameter, deaktiviertParameter, mAVornameParameter, mANachnameParameter, mAAnredeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> pNeuenMitarbeiterAnlegen(string email, string passwort, Nullable<bool> deaktiviert, string mAVorname, string mANachname, string mAAnrede)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var passwortParameter = passwort != null ?
+                new ObjectParameter("Passwort", passwort) :
+                new ObjectParameter("Passwort", typeof(string));
+    
+            var deaktiviertParameter = deaktiviert.HasValue ?
+                new ObjectParameter("Deaktiviert", deaktiviert) :
+                new ObjectParameter("Deaktiviert", typeof(bool));
+    
+            var mAVornameParameter = mAVorname != null ?
+                new ObjectParameter("MAVorname", mAVorname) :
+                new ObjectParameter("MAVorname", typeof(string));
+    
+            var mANachnameParameter = mANachname != null ?
+                new ObjectParameter("MANachname", mANachname) :
+                new ObjectParameter("MANachname", typeof(string));
+    
+            var mAAnredeParameter = mAAnrede != null ?
+                new ObjectParameter("MAAnrede", mAAnrede) :
+                new ObjectParameter("MAAnrede", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("pNeuenMitarbeiterAnlegen", emailParameter, passwortParameter, deaktiviertParameter, mAVornameParameter, mANachnameParameter, mAAnredeParameter);
         }
     }
 }

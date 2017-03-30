@@ -2,62 +2,10 @@
 
 @{
     ViewBag.Title = "Übersicht Mitarbeiter";
-   
+
 }
 
-<h2>MitarbeiterUebersicht</h2>
-
-
-@*<style>
-    .CenteredButton {
-        display: block;
-        margin: auto;
-    }
-
-    .SuchFilter_abstand {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    table {
-        width: 100%;
-    }
-
-    thead, tbody, tr, td, th {
-        text-align: center;
-    }
-
-    .table > thead > tr > th {
-        vertical-align: bottom;
-        border-bottom: 0px;
-    }
-
-    tbody, tr /*, td,th, thead*/ {
-        display: block;
-    }
-
-        tr:after {
-            content: ' ';
-            display: block;
-            visibility: hidden;
-            clear: both;
-        }
-
-    thead th {
-        height: 30px;
-    }
-
-    tbody {
-        height: 300px;
-        overflow-y: auto;
-    }
-
-        tbody td, thead th {
-            width: auto;
-            float: left;
-        }
-</style>*@
-
+<h2>Mitarbeiter Übersicht</h2>
 
 <div class="container" style="border:3px solid black;">
     <div class="row">
@@ -113,18 +61,19 @@
                                     @Html.DisplayFor(modelItem => item.tblLogin.Email)
                                 </td>
                                 <td>
-                                <td>
-                                    <button type="button" class="btn btn-primary">                               
-                                        @Html.ActionLink("Details", "Details", new { id = item.IDMitarbeiter }) 
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.IDMitarbeiter })*@
-                                    </button>
+                                    <center>
+                                        <button>
+                                            @Html.ActionLink("Bearbeiten", "Edit", new { id = item.IDMitarbeiter })
+                                            @*@Html.ActionLink("Delete", "Delete", new { id = item.IDMitarbeiter })*@
+                                        </button>
+                                    </center>
                                 </td>
                             </tr>
                         }
 
-                        </tbody>
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>

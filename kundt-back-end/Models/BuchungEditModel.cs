@@ -32,5 +32,7 @@ namespace kundt_back_end.Models
         public decimal MietPreis { get; set; }
         public bool abgeholt { get; set; }
         public bool zurueck { get; set; }
+        public string Vorname { get; set; }
+        public string Nachname { get; set; }
     }
 }

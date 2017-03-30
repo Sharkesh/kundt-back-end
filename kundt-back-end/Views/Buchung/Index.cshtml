@@ -69,7 +69,7 @@
         margin-bottom: 10px;
     }
 
-    .buttonOrangeNextStep {
+    .buttonOrangeSuchen {
         background-color: #f99b1c;
         border: none;
         color: #ffffff;
@@ -82,6 +82,49 @@
         display: inline-block;
         border-radius: 4px;
         margin-top: 50px;
+    }
+
+    .buttonOrangeSuchen:hover {
+        background-color: #f99b1c;
+        border: none;
+        color: black;
+        font-size: 15px;
+        height: 50px;
+        width: 221.5px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+        margin-top: 50px;
+    }
+
+    .buttonOrangeEdit {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 40px;
+        width: 100px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+    .buttonOrangeEdit:hover {
+        background-color: #f99b1c;
+        border: none;
+        color: black;
+        font-size: 15px;
+        height: 40px;
+        width: 100px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
     }
 
     .headingFormat {
@@ -166,7 +209,7 @@
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p"  />
                     }                    
-                    <input class="col-lg-6 SuchFilter_abstand buttonOrangeNextStep" type="submit" id="suchen" name="suchen" value="Suchen" />
+                    <input class="col-lg-6 SuchFilter_abstand buttonOrangeSuchen" type="submit" id="suchen" name="suchen" value="Suchen" />
                 </form>
             </div>
         </div>
@@ -178,26 +221,28 @@
                     <table class="table">
                         <thead>
                             <tr style="margin-right:16px;">
-                                <th style="width:15%;">IDBuchung</th>
-                                <th style="width:15%;">IDKunden</th>
+                                <th style="width:10%;">IDBuchung</th>
+                                <th style="width:10%;">IDKunden</th>
                                 <th style="width:15%;">Vorname</th>
                                 <th style="width:15%;">Nachname</th>
-                                <th style="width:20%;">Ort</th>
+                                <th style="width:15%;">Ort</th>
                                 <th style="width:10%;">PLZ</th>
                                 <th style="width:10%;">Status</th>
+                                <th style="width:15%;">Bearbeiten</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
-                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDKunde)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDKunde)</a></td>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Vorname)</a></td>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Nachname)</a></td>
-                                    <td style="width:20%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Ort)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Ort)</a></td>
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.PLZ)</a></td>
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungStatus)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })"><input type="button" class="btn buttonOrangeEdit" value="Bearbeiten" /></a></td>
                                 </tr>
                             }
                         </tbody>
