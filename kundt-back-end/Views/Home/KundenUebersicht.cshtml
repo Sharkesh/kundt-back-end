@@ -1,4 +1,5 @@
-﻿@using kundt_back_end.Models;
+﻿@using System.Web.UI.WebControls
+@using kundt_back_end.Models;
 
   
 @model KundenUebersichtContainerModel
@@ -79,7 +80,7 @@
                     <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Ort }" placeholder="Ort" id="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Plz }" placeholder="PLZ" id="PLZ" name="PLZ" class="col-lg-12 SuchFilter_abstand" />
                     <center><label class="SuchFilter_abstand">Offene Buchung</label></center>
-                    <center><input type="checkbox" name="Buchungsstatus" value="zurueck" class="SuchFilter_abstand" /></center>
+                <center><input type="checkbox" name="Buchungsstatus" value="zurueck" class="SuchFilter_abstand" /></center>
                     <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen" />
                 </form>
             </div>
