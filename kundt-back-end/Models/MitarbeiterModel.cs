@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace kundt_back_end.Models
 {
     public class MitarbeiterModel
     {
-
+        public MitarbeiterModel()
+        { // Anrede Optionen geben die verschiedenen Angaben für das Dropdown an!
+            AnredeOptionen = new SelectList(new[] { "Herr", "Frau" });
+        }
+        // Hier gibt es haufenweise Clienseitige Validierungen die durch [] angekündigt werden
         public int IDMitarbeiter { get; set; }
 
         [Required(ErrorMessage = "Bitte Vorname Eingebe")]
@@ -22,12 +27,16 @@ namespace kundt_back_end.Models
         public string MAAnrede { get; set; }
 
         [Required(ErrorMessage = "Bitte Email Eingeben")]
-        [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Muss nach einer Email Schmecken!")]
+        [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Muss einer Email ähneln! bsp: test@user.com")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Bitte Passwort Eingeben")]
         public string Passwort { get; set; }
 
+        public SelectList AnredeOptionen { get; set; }
+
         public bool Deaktiviert { get; set; }
+
+        public char Rolle { get; set; }
     }
 }
