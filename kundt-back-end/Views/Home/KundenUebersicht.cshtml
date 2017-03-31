@@ -1,7 +1,7 @@
 ﻿@using System.Web.UI.WebControls
 @using kundt_back_end.Models;
 
-  
+
 @model KundenUebersichtContainerModel
 
 
@@ -37,12 +37,12 @@
         display: block;
     }
 
-    tr:after {
-        content: ' ';
-        display: block;
-        visibility: hidden;
-        clear: both;
-    }
+        tr:after {
+            content: ' ';
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
 
     thead th {
         height: 30px;
@@ -53,10 +53,11 @@
         overflow-y: auto;
     }
 
-    tbody td, thead th {
-        width: auto;
-        float: left;
-    }
+        tbody td, thead th {
+            width: auto;
+            float: left;
+        }
+
     .costomListOnKlick {
         border: none;
         margin: -10px;
@@ -76,11 +77,23 @@
                 <form method="post" action="/Home/KundenUebersichtFilter">
                     <center><h3>Suchen</h3></center>
                     <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenName }" placeholder="Nachname" id="KundenName" name="KundenName" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text"  value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenNr }" placeholder="Kunden-Nr." id="KundenNr" name="KundenNr" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenNr }" placeholder="Kunden-Nr." id="KundenNr" name="KundenNr" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Ort }" placeholder="Ort" id="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Plz }" placeholder="PLZ" id="PLZ" name="PLZ" class="col-lg-12 SuchFilter_abstand" />
                     <center><label class="SuchFilter_abstand">Offene Buchung</label></center>
-                <center><input type="checkbox" name="Buchungsstatus" value="zurueck" class="SuchFilter_abstand" /></center>
+                    @if (Model.filtermodel.Buchungsstatus == null)
+                    {
+                        <center><input type="checkbox"  name="Buchungsstatus" value="zurueck" class="SuchFilter_abstand" /></center>
+                    }
+                    else if (Model.filtermodel.Buchungsstatus == "zurueck")
+                    {
+                        <center><input type="checkbox" checked="checked" name="Buchungsstatus" value="zurueck" class="SuchFilter_abstand" /></center>
+                    }
+                    else
+                    {
+                        <p>FEHLER!</p>
+                    }
+
                     <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen" />
                 </form>
             </div>
@@ -89,25 +102,25 @@
             <div class="row table-responsive" style="height: 500px;">
                 <table class="table">
                     <thead>
-                    <tr style="margin-right: 16px; margin-bottom: 10px; border-bottom: 1px solid black"> 
-                        <th style="width: 15%;">Kunden-Nr.</th>
-                        <th style="width: 20%;">Vorname</th>
-                        <th style="width: 20%;">Nachname</th>
-                        <th style="width: 20%;">PLZ</th>
-                        <th style="width: 22%;">Ort</th>
-                    </tr>
+                        <tr style="margin-right: 16px; margin-bottom: 10px; border-bottom: 1px solid black">
+                            <th style="width: 15%;">Kunden-Nr.</th>
+                            <th style="width: 20%;">Vorname</th>
+                            <th style="width: 20%;">Nachname</th>
+                            <th style="width: 20%;">PLZ</th>
+                            <th style="width: 22%;">Ort</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in @Model.kundenlist)
-                    {
-                        <tr>
-                            <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.IDKunde)</a></td>
-                            <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Vorname)</a></td>
-                            <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Nachname)</a></td>
-                            <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.PLZ)</a></td>
-                            <td style="width: 22%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Ort)</a></td>
-                        </tr>
-                    }
+                        @foreach (var item in @Model.kundenlist)
+                        {
+                            <tr>
+                                <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.IDKunde)</a></td>
+                                <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Vorname)</a></td>
+                                <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Nachname)</a></td>
+                                <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.PLZ)</a></td>
+                                <td style="width: 22%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Ort)</a></td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
