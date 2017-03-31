@@ -1,33 +1,9 @@
 ﻿@model kundt_back_end.Models.MitarbeiterModel
-
+@* Hier wird zur Validirungs Klasse MitarbeiterModel gemampt*@
 @{
     ViewBag.Title = "Create";
 }
-<script>
-
-    function checkEmail() {
-
-        var email = document.getElementById('txtEmail');
-        var filter = /^([a-zA-Z0-9_\.\-])+\@@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-        if (!filter.test(email.value)) {
-            alert('Please provide a valid email address');
-            email.focus;
-            return false;
-        }
-    }
-</script>
-
-<style>
-    .validationMSG{
-        display:inline-block;
-    }
-</style>
-
 <h2>Mitarbeiter Anlegen</h2>
-
-
-
 
 @using (Html.BeginForm())
 {
@@ -37,34 +13,25 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @*@Html.LabelFor(model => model.IDMitarbeiter, "IDMitarbeiter", htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
-
                 @*@Html.EditorForModel()*@
                 @*Schnelle Variante da immer alle tbl Daten raus geholt werden aus der Tabelle!*@
             </div>
         </div>
-        @* @*Mitarbeiter ID Nötig???
-            <div class="form-group">
-                @Html.LabelFor(model => model.IDMitarbeiter, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.IDMitarbeiter, new { htmlAttributes = new { @class = "form-control validationMSG"  } })
-                    @Html.ValidationMessageFor(model => model.IDMitarbeiter, "", new { @class = "text-danger" })
-                </div> </div>*@
-
         @*Mitarbeiter Vorname*@
         <div class="form-group">
             @Html.LabelFor(model => model.MAVorname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MAVorname, new { htmlAttributes = new { @class = "form-control validationMSG"  } })
+                @Html.EditorFor(model => model.MAVorname, new { htmlAttributes = new { @class = "form-control validationMSG" } })
                 @Html.ValidationMessageFor(model => model.MAVorname, "", new { @class = "text-danger" })
+                @* EditorFor erzeugt eine Texbox zum eingaben von Informationen. Über das Model.MaVorname wird der Angezeigte Name und die verbindung zum Vornamen generirt. *@
             </div>
         </div>
         @*Mitarbeiter Nachname*@
         <div class="form-group">
             @Html.LabelFor(model => model.MANachname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MANachname, new { htmlAttributes = new { @class = "form-control validationMSG"  } })
+                @Html.EditorFor(model => model.MANachname, new { htmlAttributes = new { @class = "form-control validationMSG" } })
                 @Html.ValidationMessageFor(model => model.MANachname, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,16 +39,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.MAAnrede, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Anrede", new List<SelectListItem>
-                { new SelectListItem { Text = "Herr", Value = "Herr", Selected = true},
-                  new SelectListItem { Text = "Frau", Value = "Frau"}})
+                @* Im Model wird diese dropdown Liste erzeugt über AnredeOptionen *@
+                @Html.DropDownList("MAAnrede", Model.AnredeOptionen, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MAAnrede, "", new { @class = "text-danger" })
+
             </div>
         </div>
         @*Login Email *@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control validationMSG" , onsubmit = "checkEmail();" } }) @*Vielleicht Probleme mit onsubmit???*@
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control validationMSG" } }) @*Vielleicht Probleme mit onsubmit???*@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -89,7 +57,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Passwort, new { htmlAttributes = new { @class = "form-control validationMSG"  } })
+                @Html.EditorFor(model => model.Passwort, new { htmlAttributes = new { @class = "form-control validationMSG" } })
                 @Html.ValidationMessageFor(model => model.Passwort, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -110,7 +78,3 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-@*TO DO
-    Procedur für die Email noch ein Betten
-    Java Script Abgleichung ob Email auch nach Email ausschaut
-*@

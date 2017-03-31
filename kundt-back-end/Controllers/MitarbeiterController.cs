@@ -52,18 +52,26 @@ namespace kundt_back_end.Controllers
         public ActionResult Create(MitarbeiterModel MM)
         //public ActionResult Edit(BuchungEditModel BEM)
         {
-            if (ModelState.IsValid) //ModelStat.IsValid funtzt nicht!
+            //Versuch diese Prozedur "pNeuenMitarbeiterAnlegen" ansonsten schicke den user zur 404 Error Seite
+            // Sollte noch ersetzt werden durch ServerSeitige Validierung der email!
+            try
             {
-                //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
-
-                db.pNeuenMitarbeiterAnlegen(MM.Email, MM.Passwort, MM.Deaktiviert = false, MM.MAVorname, MM.MANachname, MM.MAAnrede);
-                //db.SaveChanges;
-                return RedirectToAction("Index");
+                if (ModelState.IsValid) //ModelStat.IsValid funtzt nicht!
+                {
+                    // Die gespeicherte Prozedur in der Datenbank werden mit den Parametern (richtige reihenfolge beachten) gefüttert!
+                    db.pNeuenMitarbeiterAnlegen(MM.Email, MM.Passwort, MM.Deaktiviert = false, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+                    return RedirectToAction("Index");
+                    //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
+                }
+                else
+                {
+                    //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
+                    return RedirectToAction("Edit", MM.IDMitarbeiter);
+                }
             }
-            else
+            catch
             {
-                //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
-                return RedirectToAction("Edit", MM.IDMitarbeiter);
+                return HttpNotFound(); 
             }
 
         }
