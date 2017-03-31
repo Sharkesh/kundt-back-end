@@ -42,7 +42,6 @@
                 @* Im Model wird diese dropdown Liste erzeugt über AnredeOptionen *@
                 @Html.DropDownList("MAAnrede", Model.AnredeOptionen, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.MAAnrede, "", new { @class = "text-danger" })
-
             </div>
         </div>
         @*Login Email *@

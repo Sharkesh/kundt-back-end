@@ -102,8 +102,11 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                //db.pNeuenMitarbeiterAnlegen(MM.Email, MM.Passwort, MM.Deaktiviert = false, MM.MAVorname, MM.MANachname, MM.MAAnrede);
                 //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
-                db.SaveChanges();
+               /* db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle, MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);*/ // Probleme mit IDMitarbeiter da er es in irgend ein Data ding convertieren will
+                //Und eventuell auch mit Rolle da er den "eigentlichen" char in einen string umwandeln will....warum ?
                 return RedirectToAction("Index");
             }
             else

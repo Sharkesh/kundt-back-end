@@ -36,5 +36,7 @@ namespace kundt_back_end.Models
         public SelectList AnredeOptionen { get; set; }
 
         public bool Deaktiviert { get; set; }
+
+        public char Rolle { get; set; }
     }
 }
