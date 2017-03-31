@@ -42,7 +42,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.idkunde, "Kunden-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.IDKunde, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
                 <input type="text" id="idkunde" name="idkunde" value="@if (@Model != null){ @Model.idkunde }" readonly="readonly"/>
                 @Html.ValidationMessageFor(model => model.idkunde, "", new { @class = "text-danger" })
             </div>
@@ -51,9 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                
-                @*@Html.EditorFor(model => model.Vorname, new {htmlAttributes = new {@class = "form-control"}})*@
-                <input type="text" id="Vorname" name="Vorname" value="@if (@Model != null){ @Model.Vorname }"/>
+                <input type="text" id="Vorname" name="Vorname" value="@if (@Model != null){ @Model.Vorname }" />
                 @Html.ValidationMessageFor(model => model.Vorname, "", new {@class = "text-danger"})
             </div>
         </div>
@@ -61,7 +58,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Nachname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Nachname, new { htmlAttributes = new { @class = "form-control" } })*@
                 <input type="text" id="Nachname" name="Nachname" value="@if (@Model != null){ @Model.Nachname }"/>
                 @Html.ValidationMessageFor(model => model.Nachname, "", new { @class = "text-danger" })
             </div>
@@ -70,7 +66,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Straße, "Straße", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Strasse, new { htmlAttributes = new { @class = "form-control" } })*@
                 <input type="text" id="Straße" name="Straße" value="@if (@Model != null){ @Model.Straße }"/>
                 @Html.ValidationMessageFor(model => model.Straße, "", new { @class = "text-danger"})
             </div>
@@ -79,8 +74,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Plz, "PLZ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.tblPLZOrt.PLZ, new { htmlAttributes = new { @class = "form-control"} })*@
-                <input type="text" id="Plz" name="Plz" value="@if (@Model != null){ @Model.Plz }"/>
+                <input type="text" id="Plz" name="Plz" value="@if (@Model != null){ @Model.Plz }"/><p>Bitte nur PLZ angeben - Ort wird atomatisch editiert.</p>
+                
                 @Html.ValidationMessageFor(model => model.Plz, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -88,8 +83,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Ort, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.tblPLZOrt.Ort, new { htmlAttributes = new { @class = "form-control"} })*@
-                <input type="text" id="Ort" name="Ort" value="@if (@Model != null){ @Model.Ort }"/>
+                <input type="text" id="Ort" name="Ort" value="@if (@Model != null){ @Model.Ort }" readonly="readonly"/>
                 @Html.ValidationMessageFor(model => model.Ort, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -97,7 +91,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.tblLogin.Email, new { htmlAttributes = new { @class = "form-control" } })*@
                 <input type="text" id="Email" name="Email" readonly="readonly" value="@if (@Model != null){ @Model.Email }"/>
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
@@ -107,7 +100,6 @@
             @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @*@Html.EditorFor(model => model.Telefon, new { htmlAttributes = new { @class = "form-control" } })*@
                     <input type="text" id="Telefon" name="Telefon" value="@if (@Model != null){ @Model.Telefon }"/>
                     @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
                 </div>
@@ -117,7 +109,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PassNr, "Pass-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.ReisepassNr, new { htmlAttributes = new { @class = "form-control" } })*@
                 <input type="text" id="PassNr" name="PassNr" value="@if (@Model != null){ @Model.PassNr }"/>
                 @Html.ValidationMessageFor(model => model.PassNr, "", new { @class = "text-danger" })
             </div>
@@ -126,7 +117,6 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GebDat,"Geburtsdatum", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.GebDatum, new { htmlAttributes = new { @class = "form-control" } })*@
                 <input type="text" id="GebDat" name="GebDat" value="@if (@Model != null){ @Model.GebDat }"/>
                 @Html.ValidationMessageFor(model => model.GebDat, "", new { @class = "text-danger" })
             </div>
