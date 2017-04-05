@@ -51,7 +51,7 @@
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                <a class="navbar-brand" href="@if (User.IsInRole("M") || User.IsInRole("A")) {@Url.Action("Index", "Home")}else{@Url.Action("Index", "Login")}">
                     <img alt="Brand" src="~/Content/img/kundt_logo_with_slogan_right.png" />
                 </a>
             </div>

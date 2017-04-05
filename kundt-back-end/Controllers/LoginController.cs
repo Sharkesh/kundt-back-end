@@ -23,6 +23,8 @@ namespace kundt_back_end.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            if (User.IsInRole("A") || User.IsInRole("M"))
+                return RedirectToAction("Index", "Home", null);
             return View();
         }
 
@@ -71,9 +73,6 @@ namespace kundt_back_end.Controllers
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
 
                     System.Web.HttpContext.Current.Response.Cookies.Add(authCookie);
-
-                    //System.Web.HttpContext.Current.Session["IDMitarbeiter"] = ViewBag.loginResult;
-                    //System.Web.HttpContext.Current.Session["Role"] = ViewBag.role;
 
                     return RedirectToAction("Index", "Home", null);
                 }
