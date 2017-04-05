@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "Mitarbeiter Login";
+}
+<style>
+    .buttonOrangeForwardStep3 {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 1em;
+        height: 37.5px;
+        width: 150px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        border-radius: 4px;
+    }
+
+    .buttonOrangeForwardStep3OhneAnimation {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 1em;
+        height: 37.5px;
+        width: 150px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+    .buttonOrangeForwardStep3 span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .buttonOrangeForwardStep3 span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -30px;
+            transition: 0.5s;
+            font-size: 15px;
+        }
+
+    .buttonOrangeForwardStep3:hover span {
+        padding-right: 15px;
+    }
+
+        .buttonOrangeForwardStep3:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+
+    .buttonOrangeForwardStep3:hover {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 1em;
+        height: 37.5px;
+        width: 150px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-8 formFeldLinks">
+            <div class="form-horizontal" style="padding: 20px;">
+                <form action="@Url.Action("Index", "Login")" method="post">
+                    <div class="form-group">
+                        @*E-Mail1*@
+                        <label for="emailLogin" class="col-md-2 control-label">Email:</label>
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" id="emailLogin" name="Email" placeholder="max.mustermann@kundt.at" onkeyup="ValidateEmail('Login'), ValidateInput('Login')">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*Passwort1*@
+                        <label for="passwordLogin" class="col-md-2 control-label">Passwort:</label>
+                        <div class="col-md-10">
+                            <input type="password" class="form-control" id="passwordLogin" name="Password" placeholder="⋅⋅⋅⋅⋅⋅⋅⋅⋅" onkeyup="PasswordCheck('Login'), ValidateInput('Login')">
+                        </div>
+                    </div>
+                    @{
+                        if (ViewBag.loginResult == -1)
+                        {
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <p class="text-danger">Email oder Password ist Falsch!</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="row">
+                                <div class="hidden-sm hidden-xs col-md-12">
+                                    @*Button Login*@
+                                    <button type="submit" id="submitLogin" class="buttonOrangeForwardStep3OhneAnimation" style="float:left; margin-left:10px" value="Login" disabled><span>Login</span></button>
+                                </div>
+                                <div class="hidden-lg hidden-md">
+                                    @*Button Login*@
+                                    <div class="col-sm-12 col-xs-12">
+                                        <button type="submit" id="submitLoginMobile" class="buttonOrangeForwardStep3OhneAnimation" style="width: 280px;" disabled><span>Login</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

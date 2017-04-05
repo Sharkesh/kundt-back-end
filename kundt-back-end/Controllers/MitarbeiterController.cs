@@ -15,6 +15,7 @@ namespace kundt_back_end.Controllers
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
         // GET: Mitarbeiter
+        [Authorize(Roles = "A")]
         public ActionResult Index()
         {
             var tblMitarbeiter = db.tblMitarbeiter.Include(t => t.tblLogin);
@@ -37,6 +38,7 @@ namespace kundt_back_end.Controllers
         //}
 
         // GET: Mitarbeiter/Create
+        [Authorize(Roles = "A")]
         public ActionResult Create()
         {
             MitarbeiterModel test = new MitarbeiterModel();
@@ -49,6 +51,7 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "A")]
         public ActionResult Create(MitarbeiterModel MM)
         //public ActionResult Edit(BuchungEditModel BEM)
         {
@@ -77,6 +80,7 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: Mitarbeiter/Edit/5
+        [Authorize(Roles = "A")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -98,6 +102,7 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "A")]
         public ActionResult Edit(MitarbeiterModel MM)
         {
             if (ModelState.IsValid)
