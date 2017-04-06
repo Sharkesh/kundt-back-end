@@ -24,6 +24,7 @@ namespace kundt_back_end.Controllers
         /// </summary>
         /// <returns>Liste offener Buchungen von heute und der nächsten 13 Tage</returns>
         [HttpGet]
+        [Authorize(Roles = "M,A")]
         public ActionResult Index()
         {
             /// Hier die Prozedur der Buchungsauflistung der nächsten 14 Tage einfügen
@@ -65,6 +66,7 @@ namespace kundt_back_end.Controllers
         /// <param name="checkStatus"></param>
         /// <returns>Gefilterte Liste von Buchungen</returns>
         [HttpPost]
+        [Authorize(Roles = "M,A")]
         public ActionResult Index(int? idbuchung, string nachname, int? idkunde, string ort, string plz, string checkStatus)
         {
             bool open = false;
@@ -145,6 +147,7 @@ namespace kundt_back_end.Controllers
 
 
         // GET: Buchung/Edit/5
+        [Authorize(Roles = "M,A")]
         public ActionResult Edit(int? id)
         {
             /// Hier wird die aufrufende Seite ermittelt und abgespeichert
@@ -188,6 +191,7 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "M,A")]
         public ActionResult Edit(BuchungEditModel BEM)
         //public ActionResult Edit(tblBuchung tblBuchung)
         {

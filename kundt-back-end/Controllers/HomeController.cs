@@ -17,6 +17,7 @@ namespace kundt_back_end.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize(Roles = "M,A")]
         public ActionResult Index()
         {
             return RedirectToAction("Index","BuchungUebersicht");
@@ -25,6 +26,7 @@ namespace kundt_back_end.Controllers
 
         //GET: /Home/KundenUebersicht
         [HttpGet]
+        [Authorize(Roles = "M,A")]
         public ActionResult KundenUebersicht()//(endl)
         {
             KundenUebersichtContainerModel cm = new KundenUebersichtContainerModel();
@@ -43,6 +45,7 @@ namespace kundt_back_end.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "M,A")]
         public ActionResult KundenUebersichtFilter(KundenUebersichtFilterModel km) //(endl)
         {
 
@@ -53,6 +56,7 @@ namespace kundt_back_end.Controllers
 
 
         //GET: /Home/KundenBearbeiten/id
+        [Authorize(Roles = "M,A")]
         public ActionResult KundenBearbeiten(int? id) //(endl)
         {
 
@@ -84,6 +88,7 @@ namespace kundt_back_end.Controllers
         //POST: /Home/KundeBearbeiten
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "M,A")]
         public ActionResult KundenBearbeiten(KundeEditModel kem) //(endl)
         {
             if (ModelState.IsValid)
@@ -97,30 +102,44 @@ namespace kundt_back_end.Controllers
 
 
 
-        
+        [Authorize(Roles = "M,A")]
+        public ActionResult AutoUebersicht()
+        {
+            // die variable "tblAuto" enthält die daten aus der Tabelle Kunde/ort/Login
+            var tblAuto = db.tblAuto;
+            // Schmeis dem View die Liste mit allen Daten aus der Variable "tblAuto" ins Gsicht!
+            return View(tblAuto.ToList());
+        }
+        [Authorize(Roles = "A")]
+
         public ActionResult Einstellung()
         {
             return View();
         }
+        [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzufuegen()
         {
             return View();
         }
+        [Authorize(Roles = "M,A")]
         public ActionResult AutoDetail()
         {
             return View();
         }
+        [Authorize(Roles = "M,A")]
         public ActionResult BuchungDetail()
         {
             return View();
         }
         // Get: tblMitarbeiter 
+        [Authorize(Roles = "A")]
         public ActionResult MitarbeiterHinzufuegen()
         {// Mario Anfang
             var tblMA = db.tblMitarbeiter.Include(tblMitarbeiter => tblMitarbeiter.tblLogin);
             return View(tblMA.ToList());
         }
         // Überprüfung ob die ID die mitgegeben wurde, wenn null ist mach Fehlerbehebung
+        [Authorize(Roles = "A")]
         public ActionResult MitarbeiterHinzufugen(int? id) // Frage: richtige ID aus der Datenbank?
         {
             if (id == null)
@@ -135,6 +154,7 @@ namespace kundt_back_end.Controllers
             return View(tblMA);
         }
         // Generiere ein neues Datenbank Objekt
+        [Authorize(Roles = "A")]
         public ActionResult MitarbeiterHinzufuegenCreate()
         {
             ViewBag.FKKategorie = new SelectList(db.tblMitarbeiter, "IDMitarbeiter", "MAVorname", "MANachname");
@@ -145,6 +165,7 @@ namespace kundt_back_end.Controllers
         //// finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "A")]
         public ActionResult Create([Bind(Include = "IDMitarbeiter, MAVorname, MANachname")] tblMitarbeiter tblMA)
         {
             if (ModelState.IsValid)
@@ -159,12 +180,14 @@ namespace kundt_back_end.Controllers
             return View(tblMA);
         } // Mario Ende
 
+        [Authorize(Roles = "A")]
         public ActionResult MitarbeiterDetail()
         {// Mario Anfang
             var tblMA = db.tblMitarbeiter.Include(tblMitarbeiter => tblMitarbeiter.tblLogin);
             return View(tblMA.ToList());
         }
         // Überprüfung ob die ID die mitgegeben wurde, wenn null ist mach Fehlerbehebung
+        [Authorize(Roles = "A")]
         public ActionResult MitarbeiterDetails(int? id) // Frage: richtige ID aus der Datenbank?
         {
             if (id == null)
@@ -179,6 +202,7 @@ namespace kundt_back_end.Controllers
             return View(tblMA);
         }
         // Generiere ein neues Datenbank Objekt
+        [Authorize(Roles = "A")]
         public ActionResult MitarbeiterDetailsCreate()
         {
             ViewBag.FKKategorie = new SelectList(db.tblMitarbeiter, "IDMitarbeiter", "MAVorname", "MANachname");
@@ -189,6 +213,7 @@ namespace kundt_back_end.Controllers
         //// finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "A")]
         public ActionResult MitarbeiterHinzufuegenCreate([Bind(Include = "IDMitarbeiter, MAVorname, MANachname")] tblMitarbeiter tblMA)
         {
             if (ModelState.IsValid)
@@ -202,11 +227,13 @@ namespace kundt_back_end.Controllers
             ViewBag.FKLogin = new SelectList(db.tblLogin, "IDLogin", "Email");
             return View(tblMA);
         } // Mario Ende
+        [Authorize(Roles = "A")]
         public ActionResult MitarbeiterUebersicht()
 
         {
             return View();
         }
+        [Authorize(Roles = "M,A")]
         public ActionResult BuchungUebersicht()
         {
             return View();

@@ -15,6 +15,7 @@ namespace kundt_back_end.Controllers
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
         [HttpGet]
+        [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzu()
         {
             AutoModel am = new AutoModel();
@@ -30,6 +31,7 @@ namespace kundt_back_end.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzu(AutoModel am, int[] ausstattungListe)
         //public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
         {
@@ -56,7 +58,9 @@ namespace kundt_back_end.Controllers
 
         }
         // GET: tblAuto
+
         [HttpGet]
+        [Authorize(Roles = "M,A")]
         public ActionResult AutoUebersicht()
         {
             AutoModel am = new AutoModel();
@@ -65,11 +69,11 @@ namespace kundt_back_end.Controllers
             am.markeListe = db.tblMarke.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
 
-            
             return View(am);
         }
 
         // GET: tblAuto/Details/5
+        [Authorize(Roles = "M,A")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -85,6 +89,7 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: tblAuto/Create
+        [Authorize(Roles = "M,A")]
         public ActionResult Create()
         {
             ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie");
@@ -98,6 +103,7 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "M,A")]
         public ActionResult Create([Bind(Include = "IDAuto,Baujahr,PS,Getriebe,Tueren,Sitze,MietPreis,VerkaufPreis,Kilometerstand,AutoBild,Anzeigen,FKTreibstoff,FKTyp,FKKategorie")] tblAuto tblAuto)
         {
             if (ModelState.IsValid)
@@ -114,6 +120,7 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: tblAuto/Edit/5
+        [Authorize(Roles = "M,A")]
         public ActionResult AutoUpdate(int? id)
         {
             if (id == null)
@@ -136,6 +143,7 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "M,A")]
         public ActionResult Edit([Bind(Include = "IDAuto,Baujahr,PS,Getriebe,Tueren,Sitze,MietPreis,VerkaufPreis,Kilometerstand,AutoBild,Anzeigen,FKTreibstoff,FKTyp,FKKategorie")] tblAuto tblAuto)
         {
             if (ModelState.IsValid)
@@ -151,6 +159,7 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: tblAuto/Delete/5
+        [Authorize(Roles = "M,A")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -168,6 +177,7 @@ namespace kundt_back_end.Controllers
         // POST: tblAuto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "M,A")]
         public ActionResult DeleteConfirmed(int id)
         {
             tblAuto tblAuto = db.tblAuto.Find(id);

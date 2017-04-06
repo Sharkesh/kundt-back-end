@@ -17,6 +17,7 @@ namespace kundt_back_end.Controllers
         /// <summary>
         /// GET: BuchungUebersicht
         /// </summary>
+        [Authorize(Roles = "M,A")]
         public ActionResult Index()
         {
             /// Zeigt alle Buchungen an die am heutigen Tag abgeholt werden , der Status erstellt ist, 
