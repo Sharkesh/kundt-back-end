@@ -97,13 +97,7 @@ namespace kundt_back_end.Controllers
 
 
 
-        public ActionResult AutoUebersicht()
-        {
-            // die variable "tblAuto" enthält die daten aus der Tabelle Kunde/ort/Login
-            var tblAuto = db.tblAuto;
-            // Schmeis dem View die Liste mit allen Daten aus der Variable "tblAuto" ins Gsicht!
-            return View(tblAuto.ToList());
-        }
+        
         public ActionResult Einstellung()
         {
             return View();

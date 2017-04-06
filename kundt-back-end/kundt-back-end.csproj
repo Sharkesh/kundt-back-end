@@ -462,7 +462,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\KundenBearbeiten.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\AutoUebersicht.cshtml" />
+    <Content Include="Views\tblAuto\AutoUebersicht.cshtml" />
     <Content Include="Views\Home\Einstellung.cshtml" />
     <Content Include="Views\Home\AutoHinzufuegen.cshtml" />
     <Content Include="Views\Home\KundenUebersicht.cshtml" />
@@ -475,7 +475,7 @@
     <Content Include="Views\tblAuto\Create.cshtml" />
     <Content Include="Views\tblAuto\Delete.cshtml" />
     <Content Include="Views\tblAuto\Details.cshtml" />
-    <Content Include="Views\tblAuto\Edit.cshtml" />
+    <Content Include="Views\tblAuto\AutoUpdate.cshtml" />
     <Content Include="Views\tblAuto\AutoHinzu.cshtml" />
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
     <Content Include="Views\Buchung\Edit.cshtml" />
@@ -484,6 +484,7 @@
     <Content Include="Views\Mitarbeiter\Create.cshtml" />
     <Content Include="Views\Mitarbeiter\Edit.cshtml" />
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
+    <Content Include="Views\tblAuto\AutoBearbeiten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
