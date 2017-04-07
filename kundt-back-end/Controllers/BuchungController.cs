@@ -12,6 +12,7 @@ using System.Globalization;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Data.Common;
+using System.Web.Security;
 
 namespace kundt_back_end.Controllers
 {
@@ -215,8 +216,12 @@ namespace kundt_back_end.Controllers
                 {
                     BEM.BuchungStatus = "abgeholt";
 
-                    /// Parameter für die Proc IDMA,IDBuchung
-                    /// Prozedur für den 1. Eintrag in tblHistorie
+                    HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                    string email = ticket.Name;
+
+                    db.ptblHistorieInsert(BEM.IDBuchung, email);
 
 
                 }
@@ -225,8 +230,13 @@ namespace kundt_back_end.Controllers
                 {
                     BEM.BuchungStatus = "zurueck";
 
-                    /// Parameter für die Proc IDMA,IDBuchung
-                    /// Prozedur für den 2. Eintrag in tblHistorie
+                    HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                    string email = ticket.Name;
+
+                    db.ptblHistorieInsert(BEM.IDBuchung, email);
+
 
                 }
 

@@ -328,17 +328,17 @@ namespace kundt_back_end.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("pNeuenMitarbeiterAnlegen", emailParameter, passwortParameter, deaktiviertParameter, mAVornameParameter, mANachnameParameter, mAAnredeParameter);
         }
     
-        public virtual int ptblHistorieInsert(Nullable<int> iDBuchung, Nullable<int> iDMitarbeiter)
+        public virtual int ptblHistorieInsert(Nullable<int> iDBuchung, string email)
         {
             var iDBuchungParameter = iDBuchung.HasValue ?
                 new ObjectParameter("IDBuchung", iDBuchung) :
                 new ObjectParameter("IDBuchung", typeof(int));
     
-            var iDMitarbeiterParameter = iDMitarbeiter.HasValue ?
-                new ObjectParameter("IDMitarbeiter", iDMitarbeiter) :
-                new ObjectParameter("IDMitarbeiter", typeof(int));
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ptblHistorieInsert", iDBuchungParameter, iDMitarbeiterParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ptblHistorieInsert", iDBuchungParameter, emailParameter);
         }
     }
 }
