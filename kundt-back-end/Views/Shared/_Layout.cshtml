@@ -61,13 +61,13 @@
                     {
                         <li>@Html.ActionLink("Einstellungen", "Einstellung", "Home")</li>
                     }
-                    @if (User.Identity.Name == "")
+                    @if (User.IsInRole("M") || User.IsInRole("A"))
                     {
-                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
                     }
                 </ul>
             </div>
