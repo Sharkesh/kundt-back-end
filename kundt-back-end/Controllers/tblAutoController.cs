@@ -59,7 +59,7 @@ namespace kundt_back_end.Controllers
         }
         // GET: tblAuto
 
-        [HttpGet]
+        
         [Authorize(Roles = "M,A")]
         public ActionResult AutoUebersicht()
         {
@@ -121,7 +121,7 @@ namespace kundt_back_end.Controllers
 
         // GET: tblAuto/Edit/5
         [Authorize(Roles = "M,A")]
-        public ActionResult AutoUpdate(int? id)
+        public ActionResult AutoBearbeiten(int? id)
         {
             if (id == null)
             {
@@ -141,22 +141,22 @@ namespace kundt_back_end.Controllers
         // POST: tblAuto/Edit/5
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "M,A")]
-        public ActionResult Edit([Bind(Include = "IDAuto,Baujahr,PS,Getriebe,Tueren,Sitze,MietPreis,VerkaufPreis,Kilometerstand,AutoBild,Anzeigen,FKTreibstoff,FKTyp,FKKategorie")] tblAuto tblAuto)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(tblAuto).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie", tblAuto.FKKategorie);
-            ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff", tblAuto.FKTreibstoff);
-            ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ", tblAuto.FKTyp);
-            return View(tblAuto);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "M,A")]
+        //public ActionResult AutoBearbeiten([Bind(Include = "IDAuto,Baujahr,PS,Getriebe,Tueren,Sitze,MietPreis,VerkaufPreis,Kilometerstand,AutoBild,Anzeigen,FKTreibstoff,FKTyp,FKKategorie")] tblAuto tblAuto)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(tblAuto).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie", tblAuto.FKKategorie);
+        //    ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff", tblAuto.FKTreibstoff);
+        //    ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ", tblAuto.FKTyp);
+        //    return View(tblAuto);
+        //}
 
         // GET: tblAuto/Delete/5
         [Authorize(Roles = "M,A")]

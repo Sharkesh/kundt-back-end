@@ -45,7 +45,7 @@
     }
 </style>
 <div class="row">
-    <div class="col-xs-12 myTitleMarkUp" style="padding-top:10px;">Auto- Übersicht</div>
+    <div class="col-xs-12 myTitleMarkUp" style="padding-top:10px;">Auto-Übersicht</div>
     <div class="col-xs-3">
         <div class="table-responsive">
             <table class="table-condensed myTableBorder2">
@@ -93,7 +93,8 @@
     </div>
     <div class="col-xs-8 col-xs-offset-1">
         <div class="table-responsive">
-            <form method="post">
+
+            <form method="post" action="@Url.Action("AutoBearbeiten","tblAuto", new {id = item.IDAuto})">
                 <table class="table-hover">
 
                     @foreach (var item in Model.autoListe)
@@ -124,15 +125,19 @@
                             </td>
 
                             <td style="padding-left:15px">
-                                <a href="@Url.Action("AutoBearbeiten","tblAuto", new {id = Model.myIDAuto})">
-                                    <input type="submit" class="btn btn-default" value="Bearbeiten" style="border:solid 1px; border-color:darkgrey; border-radius:5px;" />
-                                </a>
+
+                                <input type="submit" class="btn btn-default" value="Bearbeiten" style="border:solid 1px; border-color:darkgrey; border-radius:5px;" />
+
                             </td>
                         </tr>
+
                     }
                 </table>
             </form>
+
         </div>
+
+
 
     </div>
 </div>
