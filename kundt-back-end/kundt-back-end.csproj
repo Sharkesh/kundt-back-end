@@ -204,6 +204,7 @@
     <Compile Include="Models\tblHistorie.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblHistorieInsert.cs" />
     <Compile Include="Models\tblKategorie.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>

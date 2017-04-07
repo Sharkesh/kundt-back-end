@@ -424,6 +424,10 @@
           <Parameter Name="MANachname" Type="varchar" Mode="In" />
           <Parameter Name="MAAnrede" Type="char" Mode="In" />
         </Function>
+        <Function Name="ptblHistorieInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDBuchung" Type="int" Mode="In" />
+          <Parameter Name="IDMitarbeiter" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="it22AutoverleihModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblAusstattung" EntityType="Self.tblAusstattung" Schema="dbo" store:Type="Tables" />
@@ -969,6 +973,10 @@
             <Parameter Name="MANachname" Mode="In" Type="String" />
             <Parameter Name="MAAnrede" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="ptblHistorieInsert">
+            <Parameter Name="IDBuchung" Mode="In" Type="Int32" />
+            <Parameter Name="IDMitarbeiter" Mode="In" Type="Int32" />
+          </FunctionImport>
 
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
@@ -1268,6 +1276,7 @@
 
           <FunctionImportMapping FunctionImportName="pMitarbeiterEditieren" FunctionName="it22AutoverleihModel.Store.pMitarbeiterEditieren" />
           <FunctionImportMapping FunctionImportName="pNeuenMitarbeiterAnlegen" FunctionName="it22AutoverleihModel.Store.pNeuenMitarbeiterAnlegen" />
+          <FunctionImportMapping FunctionImportName="ptblHistorieInsert" FunctionName="it22AutoverleihModel.Store.ptblHistorieInsert" />
 
         </EntityContainerMapping>
       </Mapping>
