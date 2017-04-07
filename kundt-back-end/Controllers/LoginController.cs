@@ -14,13 +14,14 @@ namespace kundt_back_end.Controllers
 {
     public class LoginController : Controller
     {
-        public static SqlConnection con = new SqlConnection("Data Source=192.168.188.2;Initial Catalog=it22Autoverleih;Persist Security Info=True;User ID=it22;Password=123user!;MultipleActiveResultSets=True;Application Name=EntityFramework");
+        public static SqlConnection con = new SqlConnection("Data Source=sql1;Initial Catalog=it22Autoverleih;Persist Security Info=True;User ID=it22;Password=123user!");
         /// <summary>
         /// GET: Login
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult Index()
         {
             if (User.IsInRole("A") || User.IsInRole("M"))
@@ -30,6 +31,7 @@ namespace kundt_back_end.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [RequireHttps]
         public ActionResult Index(UserLogin user)
         {
             user.Password = Logic.Helper.PasswordConverter(user.Password);
@@ -86,6 +88,7 @@ namespace kundt_back_end.Controllers
 
         [HttpGet]
         [Authorize(Roles = "M,A")]
+        [RequireHttps]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

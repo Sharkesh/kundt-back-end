@@ -101,6 +101,7 @@ namespace kundt_back_end.Controllers
         }
 
 
+
         [Authorize(Roles = "M,A")]
         public ActionResult AutoUebersicht()
         {
@@ -110,6 +111,7 @@ namespace kundt_back_end.Controllers
             return View(tblAuto.ToList());
         }
         [Authorize(Roles = "A")]
+
         public ActionResult Einstellung()
         {
             return View();

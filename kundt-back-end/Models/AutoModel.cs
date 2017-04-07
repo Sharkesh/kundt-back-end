@@ -28,7 +28,7 @@ namespace kundt_back_end.Models
         public byte[] myAutobild { get; set; }
         public bool myAnzeigen { get; set; }
         public string myTreibstoff { get; set; }
-        
+        public int myIDAuto { get; set; }
 
     }
 }

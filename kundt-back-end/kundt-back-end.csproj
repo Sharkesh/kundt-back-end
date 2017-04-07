@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44318</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -467,7 +467,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\KundenBearbeiten.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\AutoUebersicht.cshtml" />
+    <Content Include="Views\tblAuto\AutoUebersicht.cshtml" />
     <Content Include="Views\Home\Einstellung.cshtml" />
     <Content Include="Views\Home\AutoHinzufuegen.cshtml" />
     <Content Include="Views\Home\KundenUebersicht.cshtml" />
@@ -480,7 +480,7 @@
     <Content Include="Views\tblAuto\Create.cshtml" />
     <Content Include="Views\tblAuto\Delete.cshtml" />
     <Content Include="Views\tblAuto\Details.cshtml" />
-    <Content Include="Views\tblAuto\Edit.cshtml" />
+    <Content Include="Views\tblAuto\AutoUpdate.cshtml" />
     <Content Include="Views\tblAuto\AutoHinzu.cshtml" />
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
     <Content Include="Views\Buchung\Edit.cshtml" />
@@ -489,7 +489,9 @@
     <Content Include="Views\Mitarbeiter\Create.cshtml" />
     <Content Include="Views\Mitarbeiter\Edit.cshtml" />
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
+    <Content Include="Views\tblAuto\AutoBearbeiten.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -518,7 +520,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61808</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61808/</IISUrl>
+          <IISUrl>https://localhost:44318/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -61,19 +61,38 @@
                     {
                         <li>@Html.ActionLink("Einstellungen", "Einstellung", "Home")</li>
                     }
-                    @if (User.Identity.Name == "")
+                    @if (User.IsInRole("M") || User.IsInRole("A"))
                     {
-                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
                     }
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container" style="margin-top:20px;margin-bottom:20px;">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div id="navbar" class="navbar-collapse collapse" style="max-height:50px;">
+                    <ul class="nav navbar-nav">
+                        <li id="uebersicht">@Html.ActionLink("Übersicht", "Index", "BuchungUebersicht")</li>
+                        <li id="fahrzeug" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fahrzeug<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("AutoUebersicht","tblAuto")">Liste</a></li>
+                                <li><a href="@Url.Action("AutoHinzu","tblAuto")">Hinzufügen</a></li>
+                            </ul>
+                        </li>
+                        <li id="kunden">
+                            @Html.ActionLink("Kunden", "KundenUebersicht", "Home")
+                        </li>
+                        @*<li id="kunden" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kunden<span class="caret"></span></a>
+
         @if (User.IsInRole("A") || User.IsInRole("M"))
         {
             <nav class="navbar navbar-default">
@@ -83,6 +102,7 @@
                             <li id="uebersicht">@Html.ActionLink("Übersicht", "Index", "BuchungUebersicht")</li>
                             <li id="fahrzeug" class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fahrzeug<span class="caret"></span></a>
+
                                 <ul class="dropdown-menu">
                                     <li><a href="@Url.Action("AutoUebersicht","Home")">Liste</a></li>
                                     <li><a href="@Url.Action("AutoHinzu","tblAuto")">Hinzufügen</a></li>
