@@ -14,7 +14,14 @@ namespace kundt_back_end.Controllers
 {
     public class LoginController : Controller
     {
-        public static SqlConnection con = new SqlConnection("Data Source=sql1;Initial Catalog=it22Autoverleih;Persist Security Info=True;User ID=it22;Password=123user!");
+        /// <summary>
+        /// ConnectionString
+        /// </summary>
+        public static string connString = System.Configuration.ConfigurationManager.ConnectionStrings["it22AutoverleihEntities"].ConnectionString.Substring(System.Configuration.ConfigurationManager.ConnectionStrings["it22AutoverleihEntities"].ConnectionString.IndexOf("\"") + 1, 156);
+        /// <summary>
+        /// Connection
+        /// </summary>
+        public static SqlConnection con = new SqlConnection(connString);
         /// <summary>
         /// GET: Login
         /// </summary>
