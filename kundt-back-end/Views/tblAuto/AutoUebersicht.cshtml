@@ -94,46 +94,48 @@
     <div class="col-xs-8 col-xs-offset-1">
         <div class="table-responsive">
 
-            <form method="post" action="@Url.Action("AutoBearbeiten","tblAuto", new {id = item.IDAuto})">
-                <table class="table-hover">
 
-                    @foreach (var item in Model.autoListe)
-                    {
+            <table class="table-hover">
 
-                        <tr class="myTableBorder" style="margin-bottom:15px;">
-                            <td class="myTd">
-                                @if (item.AutoBild != null)
-                                {
+                @foreach (var item in Model.autoListe)
+                {
 
-                                }
-                                else
-                                {
-                                    <img class="img-responsive myImg" src="~/Content/img/alfa-romeo-giulia-silber-2016.png" />
-                                }
-                            </td>
-                            <td class="myTd">
-                                <p>Marke: @item.tblTyp.tblMarke.Marke</p>
-                                <p>Typ: @item.tblTyp.Typ</p>
-                            </td>
-                            <td class="myTd">
-                                <p>Baujahr: @item.Baujahr</p>
-                                <p>PS: @item.PS</p>
-                            </td>
-                            <td class="myTd">
-                                <p>Mietpreis: @Html.DisplayFor(Model => item.MietPreis)€</p>
-                                <p>Verkaufspreis: @Html.DisplayFor(Model => item.VerkaufPreis)€</p>
-                            </td>
+                    <tr class="myTableBorder" style="margin-bottom:15px;">
+                        <td class="myTd">
+                            @if (item.AutoBild != null)
+                            {
 
-                            <td style="padding-left:15px">
+                            }
+                            else
+                            {
+                                <img class="img-responsive myImg" src="~/Content/img/alfa-romeo-giulia-silber-2016.png" />
+                            }
+                        </td>
+                        <td class="myTd">
+                            <p>Marke: @item.tblTyp.tblMarke.Marke</p>
+                            <p>Typ: @item.tblTyp.Typ</p>
+                        </td>
+                        <td class="myTd">
+                            <p>Baujahr: @item.Baujahr</p>
+                            <p>PS: @item.PS</p>
+                        </td>
+                        <td class="myTd">
+                            <p>Mietpreis: @Html.DisplayFor(Model => item.MietPreis)€</p>
+                            <p>Verkaufspreis: @Html.DisplayFor(Model => item.VerkaufPreis)€</p>
+                        </td>
 
-                                <input type="submit" class="btn btn-default" value="Bearbeiten" style="border:solid 1px; border-color:darkgrey; border-radius:5px;" />
+                        <td style="padding-left:15px">
+                            @*<form method="post" action="@Url.Action("AutoBearbeiten","tblAuto", new {id = Model.myIDAuto })">*@
+                            <form method="post" action="@Url.Action("AutoBearbeiten","tblAuto", new {id = item.IDAuto })">
+                                
+                                <input type="submit" class="btn btn-default" value="Bearbeiten" style="border:solid 1px; border-color:darkgrey; border-radius:5px;"/>
+                            </form>
+                        </td>
+                    </tr>
 
-                            </td>
-                        </tr>
+                }
+            </table>
 
-                    }
-                </table>
-            </form>
 
         </div>
 

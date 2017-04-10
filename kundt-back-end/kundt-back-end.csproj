@@ -183,6 +183,15 @@
     <Compile Include="Models\OffeneBuchungenTodayPlus13_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pAusstattung_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pAutoBearbeitenAnzeigen2_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pAutoBearbeitenAnzeigen_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pKundenAnzeigen_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -491,7 +500,6 @@
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
     <Content Include="Views\tblAuto\AutoBearbeiten.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

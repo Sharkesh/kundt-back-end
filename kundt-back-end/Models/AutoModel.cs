@@ -9,6 +9,7 @@ namespace kundt_back_end.Models
     {
         public List<tblAuto> autoListe { get; set; }
         public List<tblAusstattung> ausstattungListe { get; set; }
+        public List<tblAusstattung> plainAusstattungListe { get; set; }
         public List<tblTyp> typListe { get; set; }
         public List<tblMarke> markeListe { get; set; }
         public List<tblKategorie> kategorieListe { get; set; }
@@ -29,6 +30,7 @@ namespace kundt_back_end.Models
         public bool myAnzeigen { get; set; }
         public string myTreibstoff { get; set; }
         public int myIDAuto { get; set; }
-
+        public tblAusstattung myTblAusstattung { get; set; }
+        public List<pAutoBearbeitenAnzeigen2_Result> autoBearbeiten { get; set; }
     }
 }

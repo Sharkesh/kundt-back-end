@@ -45,13 +45,6 @@ namespace kundt_back_end.Controllers
                 }
             }
 
-            //foreach (string item in ausstattungListe)
-            //{
-            //    if (item != null)
-            //    {
-            //        db.pAusstattungZuAuto2(item);
-            //    }
-            //}
 
 
             return View();
@@ -59,7 +52,7 @@ namespace kundt_back_end.Controllers
         }
         // GET: tblAuto
 
-        
+
         [Authorize(Roles = "M,A")]
         public ActionResult AutoUebersicht()
         {
@@ -120,59 +113,26 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: tblAuto/Edit/5
+        
         [Authorize(Roles = "M,A")]
         public ActionResult AutoBearbeiten(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblAuto tblAuto = db.tblAuto.Find(id);
-            if (tblAuto == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie", tblAuto.FKKategorie);
-            ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff", tblAuto.FKTreibstoff);
-            ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ", tblAuto.FKTyp);
-            return View(tblAuto);
+            AutoModel am = new AutoModel();
+            am.ausstattungListe = db.pAusstattung(id).ToList();
+            am.autoBearbeiten = db.pAutoBearbeitenAnzeigen2(id).ToList();
+            am.plainAusstattungListe = db.tblAusstattung.ToList();
+            //Stattdessen proc für alles (außer ausstattung) erstellen...!!!
+            //am.myTreibstoff = Convert.ToString(db.tblTreibstoff.SqlQuery("select treibstoff from tbltreibstoff where idtreibstoff = " + id));
+            //am.kategorieListe
+            return View(am);
         }
-
-        // POST: tblAuto/Edit/5
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
-        //[ValidateAntiForgeryToken]
         //[Authorize(Roles = "M,A")]
-        //public ActionResult AutoBearbeiten([Bind(Include = "IDAuto,Baujahr,PS,Getriebe,Tueren,Sitze,MietPreis,VerkaufPreis,Kilometerstand,AutoBild,Anzeigen,FKTreibstoff,FKTyp,FKKategorie")] tblAuto tblAuto)
+        //public ActionResult AutoBearbeiten(List<tblAusstattung> ausstattung,  List<pAutoBearbeitenAnzeigen2_Result> auto, int? id)
         //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(tblAuto).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie", tblAuto.FKKategorie);
-        //    ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff", tblAuto.FKTreibstoff);
-        //    ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ", tblAuto.FKTyp);
-        //    return View(tblAuto);
+            
+        //    return View();
         //}
-
-        // GET: tblAuto/Delete/5
-        [Authorize(Roles = "M,A")]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblAuto tblAuto = db.tblAuto.Find(id);
-            if (tblAuto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblAuto);
-        }
 
         // POST: tblAuto/Delete/5
         [HttpPost, ActionName("Delete")]

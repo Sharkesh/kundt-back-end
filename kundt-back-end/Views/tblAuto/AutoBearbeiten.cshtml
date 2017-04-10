@@ -22,7 +22,7 @@
     .picBorder {
         border: solid 1px;
         border-color: lightgray;
-        
+
     }
 
     .labelCheckbox {
@@ -54,20 +54,22 @@
             <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" alt="Alternate Text" style="max-height:200px" class="picBorder" />
             <p><a href="#">Bild hinzufügen/ändern</a></p>
             <div class="col-xs-12" style="margin:20px 0px 0px -12px">
-
                 <p>Ausstattungsoptionen:</p>
-                @foreach (var item in Model.ausstattungListe)
+                @for (int i = 0; i < Model.ausstattungListe.Count; i++)
                 {
+                    if (!string.IsNullOrEmpty(Model.ausstattungListe.ElementAt(i).Ausstattung))
                     {
-                        if (item != null)
-                        {
-                            <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
-                                <label class="labelCheckbox"><input type="checkbox" name="ausstattungListe" value="@item.IDAusstattung">@Html.DisplayFor(m => item.Ausstattung)</label>
-                            </div>
-                        }
+                        <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
+                            <label class="labelCheckbox"><input type="checkbox" checked name="ausstattungListe" value="@Model.ausstattungListe.ElementAt(i).Ausstattung ">@Html.DisplayFor(model => Model.ausstattungListe.ElementAt(i).Ausstattung)</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
+                            <label class="labelCheckbox"><input type="checkbox" name="ausstattungListe" value="@Model.plainAusstattungListe.ElementAt(i).Ausstattung ">@Html.DisplayNameFor(model => Model.plainAusstattungListe.ElementAt(i).Ausstattung)</label>
+                        </div>
                     }
                 }
-
             </div>
         </div>
         <div class="col-xs-6 col-xs-offset-1 table-responsive text-right" style="max-width:400px">
@@ -77,10 +79,9 @@
                     <td>
                         <select name="myMarke" id="myMarke" class="hinzuAuto form-control">
                             <optgroup label="Kategorie wählen">
-                                @foreach (var item in Model.markeListe)
-                                {
-                                    <option name="myMarke" value="@item.Marke">@Html.DisplayFor(m => item.Marke)</option>
-                                }
+
+                                @*<option name="myMarke" value="@Model.FKKategorie">@Html.DisplayFor(model => model.tblKategorie.Kategorie)</option>*@
+
                             </optgroup>
                         </select>
                     </td>
@@ -90,10 +91,10 @@
                     <td>
                         <select name="myTyp" id="myTyp" class="autoHinzu form-control">
                             <optgroup label="Typ wählen">
-                                @foreach (var item in Model.typListe)
-                                {
-                                    <option name="myTyp" value="@item.Typ">@Html.DisplayFor(m => item.Typ)</option>
-                                }
+                                @*@foreach (var item in Model.tblTyp.Typ)
+                                    {
+                                        <option name="myTyp" value="@item">@Html.DisplayFor(m => item)</option>
+                                    }*@
                             </optgroup>
                         </select>
                     </td>
@@ -104,19 +105,19 @@
 
                         <select name="myKategorie" id="myKategorie" class="hinzuAuto form-control">
                             <optgroup label="Kategorie wählen">
-                                @foreach (var item in Model.kategorieListe)
-                                {
-                                    <option name="myKategorie" value="@item.Kategorie">@Html.DisplayFor(m => item.Kategorie)</option>
-                                }
+                                @*@foreach (var item in Model.tblKategorie.Kategorie)
+                                    {
+                                        <option name="myKategorie" value="@item">@Html.DisplayFor(m => item)</option>
+                                    }*@
                             </optgroup>
                         </select>
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>PS:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myPS, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
+                    @*<td>
+                            @Html.EditorFor(model => model.PS, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>Getriebe:</td>
@@ -131,50 +132,50 @@
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>Baujahr:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myBauJahr, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
+                    @*<td>
+                            @Html.EditorFor(model => model.Baujahr, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>Türen:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myTueren, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
+                    @*<td>
+                            @Html.EditorFor(model => model.Tueren, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>Sitze:</td>
-                    <td>
-                        @Html.EditorFor(model => model.mySitze, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
+                    @*<td>
+                            @Html.EditorFor(model => model.Sitze, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>KM-Stand:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myKilometerStand, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
+                    @*<td>
+                            @Html.EditorFor(model => model.Kilometerstand, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>Treibstoff:</td>
                     <td>
                         <select name="myTreibstoff" id="myTreibstoff" class="hinzuAuto form-control">
                             <optgroup label="Treibstoff wählen">
-                                @foreach (var item in Model.treibstoffListe)
-                                {
-                                    <option name="myTreibstoff" value="@item.Treibstoff">@Html.DisplayFor(m => item.Treibstoff)</option>
-                                }
+                                @*@foreach (var item in Model.treibstoffListe)
+                                    {
+                                        <option name="myTreibstoff" value="@item.Treibstoff">@Html.DisplayFor(m => item.Treibstoff)</option>
+                                    }*@
                             </optgroup>
                         </select>
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr hinzuAuto">
                     <td>Mietpreis:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myMietPreis, new { htmlAttributes = new { @class = "form-control" } })
-                    </td>
+                    @*<td>
+                            @Html.EditorFor(model => model.MietPreis, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>*@
                 </tr>
             </table>
         </div>
-                
+
         <div class="col-xs-12 text-center">
             @*<form action="@Url.Action("AutoHinzu","tblAuto",Model)" method="post">
                     <button class="buttonOrangeNextStep">Aktualisieren</button>
