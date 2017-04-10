@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -48,7 +49,17 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "M,A")]
         public ActionResult KundenUebersichtFilter(KundenUebersichtFilterModel km) //(endl)
         {
-
+            //Versuche zu validieren(endl)
+            //if (string.IsNullOrEmpty(km.KundenName))
+            //                {
+            //                    ModelState.AddModelError("KundenName", "Name ist ungültig!");
+            //                }
+            //if (ModelState.IsValid)
+            //{
+                
+               
+            
+            //}
             Session["Filterparameter"] = km;
             return RedirectToAction("KundenUebersicht", "Home");
         }
