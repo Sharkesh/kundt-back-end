@@ -985,6 +985,7 @@
           <FunctionImport Name="ptblHistorieInsert">
             <Parameter Name="IDBuchung" Mode="In" Type="Int32" />
             <Parameter Name="Email" Mode="In" Type="String" />
+
           </FunctionImport>
           <FunctionImport Name="pAusstattung" EntitySet="tblAusstattung" ReturnType="Collection(it22AutoverleihModel.tblAusstattung)">
           <Parameter Name="id" Mode="In" Type="Int32" />
@@ -994,6 +995,7 @@
           </FunctionImport>
           <FunctionImport Name="pAutoBearbeitenAnzeigen2" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenAnzeigen2_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
+
           </FunctionImport>
 
         </EntityContainer>

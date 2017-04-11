@@ -29,12 +29,25 @@
 
 
 </style>
+@*<script>
+    function vVorname() {
+        var vorname = document.form["formVorname"]["Vorname"].value;
+        if (vorname == "") {
+            alert("Vorname bitte eintragen");
+            return false;
+        }
+        return true;
+
+    }
+
+
+</script>*@
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal" name="formVorname">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.idkunde)
@@ -50,7 +63,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" id="Vorname" name="Vorname" value="@if (@Model != null){ @Model.Vorname }" />
+                <input type="text" id="Vorname" name="Vorname" value="@if (@Model != null){ @Model.Vorname }"/>
                 @Html.ValidationMessageFor(model => model.Vorname, "", new {@class = "text-danger"})
             </div>
         </div>
@@ -66,7 +79,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Straße, "Straße", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" id="Straße" name="Straße" value="@if (@Model != null){ @Model.Straße }"/>
+                <input type="text" id="Straße" name="Straße" value="@if (@Model != null){ @Model.Straße }" required="required"/>
                 @Html.ValidationMessageFor(model => model.Straße, "", new { @class = "text-danger"})
             </div>
         </div>
@@ -117,7 +130,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GebDat,"Geburtsdatum", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" id="GebDat" name="GebDat" value="@if (@Model != null){ @Model.GebDat }"/>
+                <input type="text" id="GebDat" name="GebDat" value="@if (@Model != null){ @Model.GebDat.ToString("yyyy-MM-dd") }"/>
                 @Html.ValidationMessageFor(model => model.GebDat, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -126,7 +139,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default"/>
             </div>
         </div>
     </div>

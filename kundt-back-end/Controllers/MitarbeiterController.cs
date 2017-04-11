@@ -87,13 +87,25 @@ namespace kundt_back_end.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tblMitarbeiter tblMitarbeiter = db.tblMitarbeiter.Find(id);
-            if (tblMitarbeiter == null)
+            tblMitarbeiter ma = db.tblMitarbeiter.Find(id);
+            if (ma == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", tblMitarbeiter.IDMitarbeiter);
-            return View(tblMitarbeiter);
+
+            MitarbeiterModel b = new MitarbeiterModel();
+            b.IDMitarbeiter = ma.IDMitarbeiter;
+            b.Email = ma.tblLogin.Email;
+            b.Deaktiviert = ma.tblLogin.Deaktiviert;
+            b.MAAnrede = ma.MAAnrede;
+            b.Passwort = ma.tblLogin.Passwort;
+            b.Rolle = Convert.ToChar(ma.tblLogin.Rolle);
+            b.MANachname = ma.MANachname;
+            b.MAVorname = ma.MAVorname;
+
+
+            ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", ma.IDMitarbeiter);
+            return View(ma);
         }
 
 
@@ -131,3 +143,8 @@ namespace kundt_back_end.Controllers
         }
     }
 }
+
+
+
+
+

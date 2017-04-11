@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -48,7 +49,17 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "M,A")]
         public ActionResult KundenUebersichtFilter(KundenUebersichtFilterModel km) //(endl)
         {
-
+            //Versuche zu validieren(endl)
+            //if (string.IsNullOrEmpty(km.KundenName))
+            //                {
+            //                    ModelState.AddModelError("KundenName", "Name ist ungültig!");
+            //                }
+            //if (ModelState.IsValid)
+            //{
+                
+               
+            
+            //}
             Session["Filterparameter"] = km;
             return RedirectToAction("KundenUebersicht", "Home");
         }
@@ -131,35 +142,39 @@ namespace kundt_back_end.Controllers
         {
             return View();
         }
-        // Get: tblMitarbeiter 
-        [Authorize(Roles = "A")]
-        public ActionResult MitarbeiterHinzufuegen()
-        {// Mario Anfang
-            var tblMA = db.tblMitarbeiter.Include(tblMitarbeiter => tblMitarbeiter.tblLogin);
-            return View(tblMA.ToList());
-        }
-        // Überprüfung ob die ID die mitgegeben wurde, wenn null ist mach Fehlerbehebung
-        [Authorize(Roles = "A")]
-        public ActionResult MitarbeiterHinzufugen(int? id) // Frage: richtige ID aus der Datenbank?
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblMitarbeiter tblMA = db.tblMitarbeiter.Find(id);
-            if (tblMA == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblMA);
-        }
-        // Generiere ein neues Datenbank Objekt
-        [Authorize(Roles = "A")]
-        public ActionResult MitarbeiterHinzufuegenCreate()
-        {
-            ViewBag.FKKategorie = new SelectList(db.tblMitarbeiter, "IDMitarbeiter", "MAVorname", "MANachname");
-            return View();
-        }
+
+        #region MA Seite alt
+        //// Get: tblMitarbeiter 
+        //[Authorize(Roles = "A")]
+        //public ActionResult MitarbeiterHinzufuegen()
+        //{// Mario Anfang
+        //    var tblMA = db.tblMitarbeiter.Include(tblMitarbeiter => tblMitarbeiter.tblLogin);
+        //    return View(tblMA.ToList());
+        //}
+        //// Überprüfung ob die ID die mitgegeben wurde, wenn null ist mach Fehlerbehebung
+        //[Authorize(Roles = "A")]
+        //public ActionResult MitarbeiterHinzufugen(int? id) // Frage: richtige ID aus der Datenbank?
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tblMitarbeiter tblMA = db.tblMitarbeiter.Find(id);
+        //    if (tblMA == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(tblMA);
+        //}
+        //// Generiere ein neues Datenbank Objekt
+        //[Authorize(Roles = "A")]
+        //public ActionResult MitarbeiterHinzufuegenCreate()
+        //{
+        //    ViewBag.FKKategorie = new SelectList(db.tblMitarbeiter, "IDMitarbeiter", "MAVorname", "MANachname");
+        //    return View();
+        //}
+        #endregion
+
         //// POST: tblAuto/Create
         //// Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         //// finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
