@@ -12,6 +12,7 @@ using System.Net;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Threading;
 using kundt_back_end.Models;
+using Microsoft.Ajax.Utilities;
 
 
 namespace kundt_back_end.Controllers
@@ -27,7 +28,7 @@ namespace kundt_back_end.Controllers
 
         //GET: /Home/KundenUebersicht
         [HttpGet]
-        [Authorize(Roles = "M,A")]
+        //[Authorize(Roles = "M,A")]
         public ActionResult KundenUebersicht()//(endl)
         {
             KundenUebersichtContainerModel cm = new KundenUebersichtContainerModel();
@@ -46,20 +47,10 @@ namespace kundt_back_end.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "M,A")]
+        //[Authorize(Roles = "M,A")]
         public ActionResult KundenUebersichtFilter(KundenUebersichtFilterModel km) //(endl)
         {
-            //Versuche zu validieren(endl)
-            //if (string.IsNullOrEmpty(km.KundenName))
-            //                {
-            //                    ModelState.AddModelError("KundenName", "Name ist ungültig!");
-            //                }
-            //if (ModelState.IsValid)
-            //{
-                
-               
-            
-            //}
+           
             Session["Filterparameter"] = km;
             return RedirectToAction("KundenUebersicht", "Home");
         }
@@ -67,7 +58,7 @@ namespace kundt_back_end.Controllers
 
 
         //GET: /Home/KundenBearbeiten/id
-        [Authorize(Roles = "M,A")]
+        //[Authorize(Roles = "M,A")]
         public ActionResult KundenBearbeiten(int? id) //(endl)
         {
 
@@ -99,9 +90,10 @@ namespace kundt_back_end.Controllers
         //POST: /Home/KundeBearbeiten
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "M,A")]
+        //[Authorize(Roles = "M,A")]
         public ActionResult KundenBearbeiten(KundeEditModel kem) //(endl)
         {
+            
             if (ModelState.IsValid)
             {
                 db.pKundeEdit(kem.idkunde, kem.Vorname, kem.Nachname, kem.Straße, kem.Plz, kem.Ort, kem.Email,
