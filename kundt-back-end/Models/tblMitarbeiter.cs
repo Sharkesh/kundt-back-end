@@ -24,6 +24,8 @@ namespace kundt_back_end.Models
         public string MAVorname { get; set; }
         public string MANachname { get; set; }
         public string MAAnrede { get; set; }
+        public string MANkachname { get; set; }
+        public string MANachname1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblHistorie> tblHistorie { get; set; }
