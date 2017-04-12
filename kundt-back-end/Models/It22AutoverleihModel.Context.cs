@@ -265,9 +265,13 @@ namespace kundt_back_end.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAusstattungZuAuto2", datenParameter);
         }
-    
-        public virtual int pMitarbeiterEditieren(ObjectParameter iDLogin, string email, string passwort, string rolle, Nullable<bool> deaktiviert, string mAVorname, string mANachname, string mAAnrede)
+
+        //public virtual int pMitarbeiterEditieren(ObjectParameter iDLogin, string email, string passwort, string rolle, Nullable<bool> deaktiviert, string mAVorname, string mANachname, string mAAnrede)
+
+        public virtual int pMitarbeiterEditieren(int iDLogin, string email, string passwort, string rolle, Nullable<bool> deaktiviert, string mAVorname, string mANachname, string mAAnrede)
         {
+            var iDLoginParameter = new ObjectParameter("IDLogin", iDLogin);
+
             var emailParameter = email != null ?
                 new ObjectParameter("Email", email) :
                 new ObjectParameter("Email", typeof(string));
@@ -296,7 +300,7 @@ namespace kundt_back_end.Models
                 new ObjectParameter("MAAnrede", mAAnrede) :
                 new ObjectParameter("MAAnrede", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pMitarbeiterEditieren", iDLogin, emailParameter, passwortParameter, rolleParameter, deaktiviertParameter, mAVornameParameter, mANachnameParameter, mAAnredeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pMitarbeiterEditieren", iDLoginParameter, emailParameter, passwortParameter, rolleParameter, deaktiviertParameter, mAVornameParameter, mANachnameParameter, mAAnredeParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> pNeuenMitarbeiterAnlegen(string email, string passwort, Nullable<bool> deaktiviert, string mAVorname, string mANachname, string mAAnrede)
