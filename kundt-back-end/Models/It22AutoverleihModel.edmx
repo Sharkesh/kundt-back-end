@@ -61,7 +61,7 @@
           <Property Name="FKKunde" Type="int" Nullable="false" />
           <Property Name="FKAuto" Type="int" Nullable="false" />
           <Property Name="Tage" Type="int" StoreGeneratedPattern="Computed" />
-          <Property Name="BuchungStatus" Type="varchar" MaxLength="10" />
+          <Property Name="BuchungStatus" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Storno" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tblEyecatcher">
@@ -569,7 +569,7 @@
           <Property Name="FKKunde" Type="Int32" Nullable="false" />
           <Property Name="FKAuto" Type="Int32" Nullable="false" />
           <Property Name="Tage" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="BuchungStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BuchungStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Storno" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tblAuto" Relationship="Self.FK__tblBuchun__FKAut__6D0D32F4" FromRole="tblBuchung" ToRole="tblAuto" />
           <NavigationProperty Name="tblKunde" Relationship="Self.FK__tblBuchun__FKKun__6C190EBB" FromRole="tblBuchung" ToRole="tblKunde" />
@@ -985,7 +985,6 @@
           <FunctionImport Name="ptblHistorieInsert">
             <Parameter Name="IDBuchung" Mode="In" Type="Int32" />
             <Parameter Name="Email" Mode="In" Type="String" />
-
           </FunctionImport>
           <FunctionImport Name="pAusstattung" EntitySet="tblAusstattung" ReturnType="Collection(it22AutoverleihModel.tblAusstattung)">
           <Parameter Name="id" Mode="In" Type="Int32" />
@@ -994,8 +993,8 @@
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pAutoBearbeitenAnzeigen2" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenAnzeigen2_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
 
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
 
         </EntityContainer>

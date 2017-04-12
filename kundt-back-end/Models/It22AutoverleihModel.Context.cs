@@ -384,7 +384,6 @@ namespace kundt_back_end.Models
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pAutoBearbeitenAnzeigen2_Result>("pAutoBearbeitenAnzeigen2", idParameter);
-
         }
     }
 }
