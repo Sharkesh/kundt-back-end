@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using kundt_back_end.Models;
+using System.Data.SqlClient;
 
 namespace kundt_back_end.Controllers
 {
@@ -61,6 +62,7 @@ namespace kundt_back_end.Controllers
             {
                 if (ModelState.IsValid) //ModelStat.IsValid funtzt nicht!
                 {
+                    MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
                     // Die gespeicherte Prozedur in der Datenbank werden mit den Parametern (richtige reihenfolge beachten) gefüttert!
                     db.pNeuenMitarbeiterAnlegen(MM.Email, MM.Passwort, MM.Deaktiviert = false, MM.MAVorname, MM.MANachname, MM.MAAnrede);
                     return RedirectToAction("Index");
@@ -105,7 +107,7 @@ namespace kundt_back_end.Controllers
 
 
             ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", ma.IDMitarbeiter);
-            return View(ma);
+            return View(b);
         }
 
 
@@ -119,10 +121,15 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
+                MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
 
-                //db.pNeuenMitarbeiterAnlegen(MM.Email, MM.Passwort, MM.Deaktiviert = false, MM.MAVorname, MM.MANachname, MM.MAAnrede);
                 //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
-               /* db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle, MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);*/ // Probleme mit IDMitarbeiter da er es in irgend ein Data ding convertieren will
+                //db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle, MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+
+
+
+
+                // Probleme mit IDMitarbeiter da er es in irgend ein Systhem.Data.Entity.Core.Objects.ObjectParameter ding convertieren will
                 //Und eventuell auch mit Rolle da er den "eigentlichen" char in einen string umwandeln will....warum ?
                 return RedirectToAction("Index");
             }
