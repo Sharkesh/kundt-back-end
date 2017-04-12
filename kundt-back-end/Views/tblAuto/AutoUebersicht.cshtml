@@ -102,13 +102,16 @@
 
                     <tr class="myTableBorder" style="margin-bottom:15px;">
                         <td class="myTd">
-                            @if (item.AutoBild != null)
-                            {
-
-                            }
-                            else
-                            {
-                                <img class="img-responsive myImg" src="~/Content/img/alfa-romeo-giulia-silber-2016.png" />
+                            @{
+                                if (item.AutoBild != null)
+                                {
+                                    var image = Convert.ToBase64String(item.AutoBild);
+                                    @Html.Raw("<img src=\"data:image/png;base64," + image + "\" class=\"img-responsive myImg\" />");
+                                }
+                                else
+                                {
+                                    <b>nix gucken</b>
+                                }
                             }
                         </td>
                         <td class="myTd">

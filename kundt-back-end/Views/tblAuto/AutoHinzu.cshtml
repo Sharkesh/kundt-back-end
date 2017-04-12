@@ -44,15 +44,14 @@
         border-radius: 4px;
     }
 </style>
-@using (Html.BeginForm())
-{
+<form action="@Url.Action("AutoHinzu", "tblAuto", null)" method="post" enctype="multipart/form-data">
     <div class="container">
         <div class="col-xs-12 text-center" style="margin:auto auto 20px auto; color:white; background-color:#f99b1c; vertical-align:middle; padding:0px; border-radius:4px; box-shadow:lightgray 1px 1px 0px;">
             <h4>Fahrzeug hinzufügen</h4>
         </div>
         <div class="col-xs-6" style="margin:auto; display:inline-block; padding:0px">
             <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" alt="Alternate Text" style="max-height:200px" class="picBorder" />
-            <p><a href="#">Bild hinzufügen/ändern</a></p>
+            <p><input type="file" id="upload" name="upload" accept="image/*" /></p>
             <div class="col-xs-12" style="margin:20px 0px 0px -12px">
 
                 <p>Ausstattungsoptionen:</p>
@@ -182,7 +181,7 @@
             <input type="submit" value="Hinzufügen" class="btn buttonOrangeNextStep" />
         </div>
     </div>
-}
+</form>
 @*<div class="checkbox">
             <label class="labelCheckbox"><input type="checkbox" value="">Option 2</label>
         </div>
