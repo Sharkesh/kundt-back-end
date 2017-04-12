@@ -10,6 +10,7 @@ using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Net;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Text.RegularExpressions;
 using System.Threading;
 using kundt_back_end.Models;
 using Microsoft.Ajax.Utilities;
@@ -63,7 +64,7 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "M,A")]
         public ActionResult KundenBearbeiten(int? id) //(endl)
         {
-
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
