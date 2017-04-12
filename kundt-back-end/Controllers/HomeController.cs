@@ -28,15 +28,17 @@ namespace kundt_back_end.Controllers
 
         //GET: /Home/KundenUebersicht
         [HttpGet]
-        //[Authorize(Roles = "M,A")]
+        [Authorize(Roles = "M,A")]
         public ActionResult KundenUebersicht()//(endl)
         {
             KundenUebersichtContainerModel cm = new KundenUebersichtContainerModel();
             cm.filtermodel = (KundenUebersichtFilterModel)Session["Filterparameter"];
 
+            
+
             if (cm.filtermodel == null)
             {
-                cm.kundenlist = db.pKundenAnzeigen(null, null, null, null, null);
+                cm.kundenlist = db.pKundenAnzeigen(null, null, null, null, "zurueck");
             }
             else
             {
@@ -47,7 +49,7 @@ namespace kundt_back_end.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "M,A")]
+        [Authorize(Roles = "M,A")]
         public ActionResult KundenUebersichtFilter(KundenUebersichtFilterModel km) //(endl)
         {
            
@@ -58,7 +60,7 @@ namespace kundt_back_end.Controllers
 
 
         //GET: /Home/KundenBearbeiten/id
-        //[Authorize(Roles = "M,A")]
+        [Authorize(Roles = "M,A")]
         public ActionResult KundenBearbeiten(int? id) //(endl)
         {
 
@@ -90,7 +92,7 @@ namespace kundt_back_end.Controllers
         //POST: /Home/KundeBearbeiten
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "M,A")]
+        [Authorize(Roles = "M,A")]
         public ActionResult KundenBearbeiten(KundeEditModel kem) //(endl)
         {
             

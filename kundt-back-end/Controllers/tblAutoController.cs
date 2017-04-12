@@ -113,26 +113,40 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: tblAuto/Edit/5
-        
+        [HttpGet]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoBearbeiten(int? id)
         {
             AutoModel am = new AutoModel();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            am.myIDAuto = (int)id;
+            am.markeListe = db.tblMarke.SqlQuery("SELECT* FROM tblMarke").ToList();
             am.ausstattungListe = db.pAusstattung(id).ToList();
             am.autoBearbeiten = db.pAutoBearbeitenAnzeigen2(id).ToList();
-            am.plainAusstattungListe = db.tblAusstattung.ToList();
-            //Stattdessen proc für alles (außer ausstattung) erstellen...!!!
-            //am.myTreibstoff = Convert.ToString(db.tblTreibstoff.SqlQuery("select treibstoff from tbltreibstoff where idtreibstoff = " + id));
-            //am.kategorieListe
+            am.markeListe = db.tblMarke.ToList();
+            am.typListe = db.tblTyp.ToList();
+            am.treibstoffListe = db.tblTreibstoff.ToList();
+            am.kategorieListe = db.tblKategorie.ToList();
+            am.plainAusstattungListe = db.tblAusstattung.SqlQuery("SELECT* FROM tblAusstattung").ToList();
+            for (int i = 0; i < am.ausstattungListe.Count; i++)
+            {
+                if (am.plainAusstattungListe[i].IDAusstattung == am.ausstattungListe[i].IDAusstattung)
+                {
+                    am.plainAusstattungListe.RemoveAt(i);
+                }
+            }
             return View(am);
         }
-        //[HttpPost]
-        //[Authorize(Roles = "M,A")]
-        //public ActionResult AutoBearbeiten(List<tblAusstattung> ausstattung,  List<pAutoBearbeitenAnzeigen2_Result> auto, int? id)
-        //{
-            
-        //    return View();
-        //}
+        [HttpPost]
+        [Authorize(Roles = "M,A")]
+        public ActionResult AutoBearbeiten(AutoModel am, int[] ausstattungListe, int[] plainAusstattungListe)
+        {
+            //update-proc implementieren!
+            return RedirectToAction("AutoUebersicht", "tblAuto");
+        }
 
         // POST: tblAuto/Delete/5
         [HttpPost, ActionName("Delete")]

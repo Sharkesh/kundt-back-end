@@ -79,7 +79,7 @@
           <Property Name="IDHistorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FKMitarbeiter" Type="int" Nullable="false" />
           <Property Name="FKBuchung" Type="int" Nullable="false" />
-          <Property Name="AenderungsDatum" Type="smalldatetime" />
+          <Property Name="AenderungsDatum" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tblKategorie">
           <Key>
@@ -114,7 +114,7 @@
             <PropertyRef Name="IDLogin" />
           </Key>
           <Property Name="IDLogin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Passwort" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Rolle" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Deaktiviert" Type="bit" Nullable="false" />
@@ -159,7 +159,7 @@
           <Property Name="Typ" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="FKMarke" Type="int" />
         </EntityType>
-        <Association Name="FK__tblAuto__FKKateg__628FA481">
+        <Association Name="FK__tblAuto__FKKateg__3FD07829">
           <End Role="tblKategorie" Type="Self.tblKategorie" Multiplicity="1" />
           <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -171,7 +171,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblAuto__FKTreib__60A75C0F">
+        <Association Name="FK__tblAuto__FKTreib__3DE82FB7">
           <End Role="tblTreibstoff" Type="Self.tblTreibstoff" Multiplicity="1" />
           <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -183,7 +183,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblAuto__FKTyp__619B8048">
+        <Association Name="FK__tblAuto__FKTyp__3EDC53F0">
           <End Role="tblTyp" Type="Self.tblTyp" Multiplicity="1" />
           <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -195,7 +195,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblAutode__FKAus__66603565">
+        <Association Name="FK__tblAutode__FKAus__43A1090D">
           <End Role="tblAusstattung" Type="Self.tblAusstattung" Multiplicity="1" />
           <End Role="tblAutodetail" Type="Self.tblAutodetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -207,7 +207,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblAutode__FKAut__656C112C">
+        <Association Name="FK__tblAutode__FKAut__42ACE4D4">
           <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="1" />
           <End Role="tblAutodetail" Type="Self.tblAutodetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -219,7 +219,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblBuchun__FKAut__6D0D32F4">
+        <Association Name="FK__tblBuchun__FKAut__4A4E069C">
           <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="1" />
           <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="*" />
           <ReferentialConstraint>
@@ -231,7 +231,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblBuchun__FKKun__6C190EBB">
+        <Association Name="FK__tblBuchun__FKKun__4959E263">
           <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="1" />
           <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="*" />
           <ReferentialConstraint>
@@ -243,7 +243,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHistor__FKBuc__72C60C4A">
+        <Association Name="FK__tblHistor__FKBuc__5006DFF2">
           <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="1" />
           <End Role="tblHistorie" Type="Self.tblHistorie" Multiplicity="*" />
           <ReferentialConstraint>
@@ -255,7 +255,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHistor__FKMit__71D1E811">
+        <Association Name="FK__tblHistor__FKMit__4F12BBB9">
           <End Role="tblMitarbeiter" Type="Self.tblMitarbeiter" Multiplicity="1" />
           <End Role="tblHistorie" Type="Self.tblHistorie" Multiplicity="*" />
           <ReferentialConstraint>
@@ -267,7 +267,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblKunde__FKPLZO__47DBAE45">
+        <Association Name="FK__tblKunde__FKPLZO__308E3499">
           <End Role="tblPLZOrt" Type="Self.tblPLZOrt" Multiplicity="0..1" />
           <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="*" />
           <ReferentialConstraint>
@@ -279,7 +279,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblKunde__IDKund__44FF419A">
+        <Association Name="FK__tblKunde__IDKund__2DB1C7EE">
           <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="1" />
           <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -291,7 +291,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblMitarb__IDMit__3B75D760">
+        <Association Name="FK__tblMitarb__IDMit__29E1370A">
           <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="1" />
           <End Role="tblMitarbeiter" Type="Self.tblMitarbeiter" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -315,7 +315,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblTyp__FKMarke__4E88ABD4">
+        <Association Name="FK__tblTyp__FKMarke__345EC57D">
           <End Role="tblMarke" Type="Self.tblMarke" Multiplicity="0..1" />
           <End Role="tblTyp" Type="Self.tblTyp" Multiplicity="*" />
           <ReferentialConstraint>
@@ -416,7 +416,7 @@
           <Parameter Name="searchBuchung" Type="varchar" Mode="In" />
         </Function>
         <Function Name="pMitarbeiterEditieren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="IDLogin" Type="int" Mode="InOut" />
+          <Parameter Name="IDLogin" Type="int" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="Passwort" Type="varchar" Mode="In" />
           <Parameter Name="Rolle" Type="char" Mode="In" />
@@ -454,51 +454,51 @@
           <EntitySet Name="tblPLZOrt" EntityType="Self.tblPLZOrt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTreibstoff" EntityType="Self.tblTreibstoff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTyp" EntityType="Self.tblTyp" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblAuto__FKKateg__628FA481" Association="Self.FK__tblAuto__FKKateg__628FA481">
+          <AssociationSet Name="FK__tblAuto__FKKateg__3FD07829" Association="Self.FK__tblAuto__FKKateg__3FD07829">
             <End Role="tblKategorie" EntitySet="tblKategorie" />
             <End Role="tblAuto" EntitySet="tblAuto" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblAuto__FKTreib__60A75C0F" Association="Self.FK__tblAuto__FKTreib__60A75C0F">
+          <AssociationSet Name="FK__tblAuto__FKTreib__3DE82FB7" Association="Self.FK__tblAuto__FKTreib__3DE82FB7">
             <End Role="tblTreibstoff" EntitySet="tblTreibstoff" />
             <End Role="tblAuto" EntitySet="tblAuto" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblAuto__FKTyp__619B8048" Association="Self.FK__tblAuto__FKTyp__619B8048">
+          <AssociationSet Name="FK__tblAuto__FKTyp__3EDC53F0" Association="Self.FK__tblAuto__FKTyp__3EDC53F0">
             <End Role="tblTyp" EntitySet="tblTyp" />
             <End Role="tblAuto" EntitySet="tblAuto" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblAutode__FKAus__66603565" Association="Self.FK__tblAutode__FKAus__66603565">
+          <AssociationSet Name="FK__tblAutode__FKAus__43A1090D" Association="Self.FK__tblAutode__FKAus__43A1090D">
             <End Role="tblAusstattung" EntitySet="tblAusstattung" />
             <End Role="tblAutodetail" EntitySet="tblAutodetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblAutode__FKAut__656C112C" Association="Self.FK__tblAutode__FKAut__656C112C">
+          <AssociationSet Name="FK__tblAutode__FKAut__42ACE4D4" Association="Self.FK__tblAutode__FKAut__42ACE4D4">
             <End Role="tblAuto" EntitySet="tblAuto" />
             <End Role="tblAutodetail" EntitySet="tblAutodetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblBuchun__FKAut__6D0D32F4" Association="Self.FK__tblBuchun__FKAut__6D0D32F4">
+          <AssociationSet Name="FK__tblBuchun__FKAut__4A4E069C" Association="Self.FK__tblBuchun__FKAut__4A4E069C">
             <End Role="tblAuto" EntitySet="tblAuto" />
             <End Role="tblBuchung" EntitySet="tblBuchung" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblBuchun__FKKun__6C190EBB" Association="Self.FK__tblBuchun__FKKun__6C190EBB">
+          <AssociationSet Name="FK__tblBuchun__FKKun__4959E263" Association="Self.FK__tblBuchun__FKKun__4959E263">
             <End Role="tblKunde" EntitySet="tblKunde" />
             <End Role="tblBuchung" EntitySet="tblBuchung" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHistor__FKBuc__72C60C4A" Association="Self.FK__tblHistor__FKBuc__72C60C4A">
+          <AssociationSet Name="FK__tblHistor__FKBuc__5006DFF2" Association="Self.FK__tblHistor__FKBuc__5006DFF2">
             <End Role="tblBuchung" EntitySet="tblBuchung" />
             <End Role="tblHistorie" EntitySet="tblHistorie" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHistor__FKMit__71D1E811" Association="Self.FK__tblHistor__FKMit__71D1E811">
+          <AssociationSet Name="FK__tblHistor__FKMit__4F12BBB9" Association="Self.FK__tblHistor__FKMit__4F12BBB9">
             <End Role="tblMitarbeiter" EntitySet="tblMitarbeiter" />
             <End Role="tblHistorie" EntitySet="tblHistorie" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblKunde__FKPLZO__47DBAE45" Association="Self.FK__tblKunde__FKPLZO__47DBAE45">
+          <AssociationSet Name="FK__tblKunde__FKPLZO__308E3499" Association="Self.FK__tblKunde__FKPLZO__308E3499">
             <End Role="tblPLZOrt" EntitySet="tblPLZOrt" />
             <End Role="tblKunde" EntitySet="tblKunde" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblKunde__IDKund__44FF419A" Association="Self.FK__tblKunde__IDKund__44FF419A">
+          <AssociationSet Name="FK__tblKunde__IDKund__2DB1C7EE" Association="Self.FK__tblKunde__IDKund__2DB1C7EE">
             <End Role="tblLogin" EntitySet="tblLogin" />
             <End Role="tblKunde" EntitySet="tblKunde" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblMitarb__IDMit__3B75D760" Association="Self.FK__tblMitarb__IDMit__3B75D760">
+          <AssociationSet Name="FK__tblMitarb__IDMit__29E1370A" Association="Self.FK__tblMitarb__IDMit__29E1370A">
             <End Role="tblLogin" EntitySet="tblLogin" />
             <End Role="tblMitarbeiter" EntitySet="tblMitarbeiter" />
           </AssociationSet>
@@ -506,7 +506,7 @@
             <End Role="tblLand" EntitySet="tblLand" />
             <End Role="tblPLZOrt" EntitySet="tblPLZOrt" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblTyp__FKMarke__4E88ABD4" Association="Self.FK__tblTyp__FKMarke__4E88ABD4">
+          <AssociationSet Name="FK__tblTyp__FKMarke__345EC57D" Association="Self.FK__tblTyp__FKMarke__345EC57D">
             <End Role="tblMarke" EntitySet="tblMarke" />
             <End Role="tblTyp" EntitySet="tblTyp" />
           </AssociationSet>
@@ -590,7 +590,7 @@
           <Property Name="IDHistorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FKMitarbeiter" Type="Int32" Nullable="false" />
           <Property Name="FKBuchung" Type="Int32" Nullable="false" />
-          <Property Name="AenderungsDatum" Type="DateTime" Precision="0" />
+          <Property Name="AenderungsDatum" Type="DateTime" Precision="0" Nullable="false" />
           <NavigationProperty Name="tblBuchung" Relationship="Self.FK__tblHistor__FKBuc__72C60C4A" FromRole="tblHistorie" ToRole="tblBuchung" />
           <NavigationProperty Name="tblMitarbeiter" Relationship="Self.FK__tblHistor__FKMit__71D1E811" FromRole="tblHistorie" ToRole="tblMitarbeiter" />
         </EntityType>
@@ -632,7 +632,7 @@
             <PropertyRef Name="IDLogin" />
           </Key>
           <Property Name="IDLogin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Passwort" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Rolle" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Deaktiviert" Type="Boolean" Nullable="false" />
@@ -965,7 +965,7 @@
           </FunctionImport>
 
           <FunctionImport Name="pMitarbeiterEditieren">
-            <Parameter Name="IDLogin" Mode="InOut" Type="Int32" />
+            <Parameter Name="IDLogin" Mode="In" Type="Int32" />
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Passwort" Mode="In" Type="String" />
             <Parameter Name="Rolle" Mode="In" Type="String" />
@@ -993,7 +993,6 @@
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pAutoBearbeitenAnzeigen2" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenAnzeigen2_Result)">
-
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
 
@@ -1213,9 +1212,9 @@
           <EntitySetMapping Name="tblMitarbeiter">
             <EntityTypeMapping TypeName="it22AutoverleihModel.tblMitarbeiter">
               <MappingFragment StoreEntitySet="tblMitarbeiter">
+                <ScalarProperty Name="MANachname" ColumnName="MANachname" />
                 <ScalarProperty Name="IDMitarbeiter" ColumnName="IDMitarbeiter" />
                 <ScalarProperty Name="MAVorname" ColumnName="MAVorname" />
-                <ScalarProperty Name="MANachname" ColumnName="MANachname" />
                 <ScalarProperty Name="MAAnrede" ColumnName="MAAnrede" />
               </MappingFragment>
             </EntityTypeMapping>
