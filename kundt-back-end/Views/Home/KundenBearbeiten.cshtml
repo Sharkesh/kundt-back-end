@@ -87,7 +87,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Plz, "PLZ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="text" id="Plz" name="Plz" value="@if (@Model != null){ @Model.Plz }"/><p>Bitte nur PLZ angeben - Ort wird atomatisch editiert.</p>
+                <input type="text" id="Plz" name="Plz" value="@if (@Model != null){ @Model.Plz }"/><p>Bitte nur PLZ angeben - Ort wird automatisch editiert.</p>
                 
                 @Html.ValidationMessageFor(model => model.Plz, "", new { @class = "text-danger" })
             </div>

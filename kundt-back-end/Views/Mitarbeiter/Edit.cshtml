@@ -3,6 +3,17 @@
 @{
     ViewBag.Title = "Edit";
 }
+<script>
+    function PasswortReset()
+    {
+       @Model.Passwort = "PasswortReset";
+    }
+
+
+</script>
+
+
+
 
 <h2>Mitarbeiter Bearbeiten</h2>
 
@@ -15,7 +26,12 @@
         <h4>tblMitarbeiter</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IDMitarbeiter)
+        @Html.HiddenFor(model => model.IDMitarbeiter)Html.HiddenFor(model => model.title, new { id = "natureOfVisitField" })
+
+        @*@Html.HiddenFor(model => model.Rolle,"",)
+    @Html.HiddenFor(model => model.Rolle, new { id = "natureOfVisitField", value = "M" })*@
+        <input type="hidden" name="Rolle" value="@Model.Rolle"/>
+        @*Übergibt die Rolle von View an die Prozedur im Controller*@
 
         @*Vorname*@
         <div class="form-group">
@@ -51,12 +67,10 @@
             </div>
         </div>
         @*Passwort ändern*@
-        <div class="form-group">
-            @Html.LabelFor(model => model.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Passwort, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Passwort, "", new { @class = "text-danger" })
-            </div>
+        <div></div>
+       
+        <button onclick="PasswortReset()">Passwort Resetten</button>
+        <input type="hidden" name="Passwort" value="@Model.Passwort" />
             @*Password abgleichen*@
             @*<div class="form-group">
                 @Html.LabelFor(model => model.tblLogin.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -64,6 +78,7 @@
                     @Html.EditorFor(model => model.tblLogin.Passwort, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.tblLogin.Passwort, "", new { @class = "text-danger" })
                 </div>*@
+            
         </div>
 
         <div class="form-group">
@@ -71,7 +86,7 @@
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-    </div>
+    
 }
 
 <div>

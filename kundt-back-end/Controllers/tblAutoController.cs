@@ -32,10 +32,20 @@ namespace kundt_back_end.Controllers
 
         [HttpPost]
         [Authorize(Roles = "M,A")]
-        public ActionResult AutoHinzu(AutoModel am, int[] ausstattungListe)
+        public ActionResult AutoHinzu(AutoModel am, int[] ausstattungListe, HttpPostedFileBase upload)
         //public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
         {
-            db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS, am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze), am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand, null, am.myAnzeigen, am.myTreibstoff, am.myTyp, am.myKategorie);
+
+            
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                    {
+                        am.myAutobild = reader.ReadBytes(upload.ContentLength);
+                    }
+                }
+
+            db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS, am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze), am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand, am.myAutobild, am.myAnzeigen, am.myTreibstoff, am.myTyp, am.myKategorie);
 
             foreach (int? item in ausstattungListe)
             {
