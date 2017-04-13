@@ -132,6 +132,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BuchungController.cs" />
     <Compile Include="Controllers\BuchungUebersichtController.cs" />
+    <Compile Include="Controllers\EyecatchersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MitarbeiterController.cs" />
@@ -477,7 +478,7 @@
     <Content Include="Views\Home\KundenBearbeiten.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\tblAuto\AutoUebersicht.cshtml" />
-    <Content Include="Views\Home\Einstellung.cshtml" />
+    <Content Include="Views\Eyecatchers\Einstellung.cshtml" />
     <Content Include="Views\Home\AutoHinzufuegen.cshtml" />
     <Content Include="Views\Home\KundenUebersicht.cshtml" />
     <Content Include="Views\Home\AutoDetail.cshtml" />
@@ -500,6 +501,11 @@
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
     <Content Include="Views\tblAuto\AutoBearbeiten.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Eyecatchers\Create.cshtml" />
+    <Content Include="Views\Eyecatchers\Delete.cshtml" />
+    <Content Include="Views\Eyecatchers\Details.cshtml" />
+    <Content Include="Views\Eyecatchers\Edit.cshtml" />
+    <Content Include="Views\Eyecatchers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
