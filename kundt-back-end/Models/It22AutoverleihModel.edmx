@@ -394,6 +394,9 @@
           <Parameter Name="idBuchung" Type="int" Mode="In" />
         </Function>
         <Function Name="OffeneBuchungenTodayPlus13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p8Passwort" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NPasswort" Type="nvarchar" Mode="InOut" />
+        </Function>
         <Function Name="pAusstattung" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -441,10 +444,10 @@
           <Parameter Name="searchMarke" Type="varchar" Mode="In" />
           <Parameter Name="searchTyp" Type="varchar" Mode="In" />
           <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
-          <Parameter Name="searchBaujahrAB" Type="smallint" Mode="In" />
-          <Parameter Name="searchBaujahrBIS" Type="smallint" Mode="In" />
-          <Parameter Name="searchKilometerstandAB" Type="decimal" Mode="In" />
-          <Parameter Name="searchKilometerstandBIS" Type="decimal" Mode="In" />
+          <Parameter Name="searchBaujahrVon" Type="smallint" Mode="In" />
+          <Parameter Name="searchBaujahrBis" Type="smallint" Mode="In" />
+          <Parameter Name="searchKilometerstandVon" Type="decimal" Mode="In" />
+          <Parameter Name="searchKilometerstandBis" Type="decimal" Mode="In" />
           <Parameter Name="searchAnzeigen" Type="bit" Mode="In" />
         </Function>
         <Function Name="pAutoHinzufuegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1096,11 +1099,14 @@
             <Parameter Name="searchMarke" Mode="In" Type="String" />
             <Parameter Name="searchTyp" Mode="In" Type="String" />
             <Parameter Name="searchKategorie" Mode="In" Type="String" />
-            <Parameter Name="searchBaujahrAB" Mode="In" Type="Int16" />
-            <Parameter Name="searchBaujahrBIS" Mode="In" Type="Int16" />
-            <Parameter Name="searchKilometerstandAB" Mode="In" Type="Decimal" />
-            <Parameter Name="searchKilometerstandBIS" Mode="In" Type="Decimal" />
+            <Parameter Name="searchBaujahrVon" Mode="In" Type="Int16" />
+            <Parameter Name="searchBaujahrBis" Mode="In" Type="Int16" />
+            <Parameter Name="searchKilometerstandVon" Mode="In" Type="Decimal" />
+            <Parameter Name="searchKilometerstandBis" Mode="In" Type="Decimal" />
             <Parameter Name="searchAnzeigen" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="p8Passwort">
+            <Parameter Name="NPasswort" Mode="InOut" Type="String" />
           </FunctionImport>
 
         </EntityContainer>
@@ -1648,6 +1654,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p8Passwort" FunctionName="it22AutoverleihModel.Store.p8Passwort" />
 
         </EntityContainerMapping>
       </Mapping>

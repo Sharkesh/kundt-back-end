@@ -6,7 +6,7 @@
 <script>
     function PasswortReset()
     {
-       @Model.Passwort = "PasswortReset";
+        document.getElementsByName("#Passwort").value = "PasswortResetten";
     }
 
 
@@ -25,9 +25,6 @@
     <div class="form-horizontal">
         <h4>tblMitarbeiter</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IDMitarbeiter)Html.HiddenFor(model => model.title, new { id = "natureOfVisitField" })
-
         @*@Html.HiddenFor(model => model.Rolle,"",)
     @Html.HiddenFor(model => model.Rolle, new { id = "natureOfVisitField", value = "M" })*@
         <input type="hidden" name="Rolle" value="@Model.Rolle"/>
