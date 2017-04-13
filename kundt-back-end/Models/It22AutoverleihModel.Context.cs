@@ -268,11 +268,10 @@ namespace kundt_back_end.Models
     
         public virtual int pMitarbeiterEditieren(Nullable<int> iDLogin, string email, string passwort, string rolle, Nullable<bool> deaktiviert, string mAVorname, string mANachname, string mAAnrede)
         {
-
             var iDLoginParameter = iDLogin.HasValue ?
                 new ObjectParameter("IDLogin", iDLogin) :
                 new ObjectParameter("IDLogin", typeof(int));
-
+    
             var emailParameter = email != null ?
                 new ObjectParameter("Email", email) :
                 new ObjectParameter("Email", typeof(string));
@@ -500,7 +499,7 @@ namespace kundt_back_end.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pAutoBearbeitenInklFilterFinal_Result>("pAutoBearbeitenInklFilterFinal", searchIDAutoParameter, searchMarkeParameter, searchTypParameter, searchKategorieParameter, searchBaujahrParameter, searchKilometerstandParameter, searchAnzeigenParameter);
         }
     
-        public virtual ObjectResult<pAutoBearbeitenInklFilterFinal2_Result> pAutoBearbeitenInklFilterFinal2(Nullable<int> searchIDAuto, string searchMarke, string searchTyp, string searchKategorie, Nullable<short> searchBaujahrAB, Nullable<short> searchBaujahrBIS, Nullable<decimal> searchKilometerstandAB, Nullable<decimal> searchKilometerstandBIS, Nullable<bool> searchAnzeigen)
+        public virtual ObjectResult<pAutoBearbeitenInklFilterFinal2_Result> pAutoBearbeitenInklFilterFinal2(Nullable<int> searchIDAuto, string searchMarke, string searchTyp, string searchKategorie, Nullable<short> searchBaujahr, Nullable<decimal> searchKilometerstand, Nullable<bool> searchAnzeigen)
         {
             var searchIDAutoParameter = searchIDAuto.HasValue ?
                 new ObjectParameter("searchIDAuto", searchIDAuto) :
@@ -518,27 +517,19 @@ namespace kundt_back_end.Models
                 new ObjectParameter("searchKategorie", searchKategorie) :
                 new ObjectParameter("searchKategorie", typeof(string));
     
-            var searchBaujahrABParameter = searchBaujahrAB.HasValue ?
-                new ObjectParameter("searchBaujahrAB", searchBaujahrAB) :
-                new ObjectParameter("searchBaujahrAB", typeof(short));
+            var searchBaujahrParameter = searchBaujahr.HasValue ?
+                new ObjectParameter("searchBaujahr", searchBaujahr) :
+                new ObjectParameter("searchBaujahr", typeof(short));
     
-            var searchBaujahrBISParameter = searchBaujahrBIS.HasValue ?
-                new ObjectParameter("searchBaujahrBIS", searchBaujahrBIS) :
-                new ObjectParameter("searchBaujahrBIS", typeof(short));
-    
-            var searchKilometerstandABParameter = searchKilometerstandAB.HasValue ?
-                new ObjectParameter("searchKilometerstandAB", searchKilometerstandAB) :
-                new ObjectParameter("searchKilometerstandAB", typeof(decimal));
-    
-            var searchKilometerstandBISParameter = searchKilometerstandBIS.HasValue ?
-                new ObjectParameter("searchKilometerstandBIS", searchKilometerstandBIS) :
-                new ObjectParameter("searchKilometerstandBIS", typeof(decimal));
+            var searchKilometerstandParameter = searchKilometerstand.HasValue ?
+                new ObjectParameter("searchKilometerstand", searchKilometerstand) :
+                new ObjectParameter("searchKilometerstand", typeof(decimal));
     
             var searchAnzeigenParameter = searchAnzeigen.HasValue ?
                 new ObjectParameter("searchAnzeigen", searchAnzeigen) :
                 new ObjectParameter("searchAnzeigen", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pAutoBearbeitenInklFilterFinal2_Result>("pAutoBearbeitenInklFilterFinal2", searchIDAutoParameter, searchMarkeParameter, searchTypParameter, searchKategorieParameter, searchBaujahrABParameter, searchBaujahrBISParameter, searchKilometerstandABParameter, searchKilometerstandBISParameter, searchAnzeigenParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pAutoBearbeitenInklFilterFinal2_Result>("pAutoBearbeitenInklFilterFinal2", searchIDAutoParameter, searchMarkeParameter, searchTypParameter, searchKategorieParameter, searchBaujahrParameter, searchKilometerstandParameter, searchAnzeigenParameter);
         }
     }
 }

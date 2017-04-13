@@ -75,20 +75,16 @@ namespace kundt_back_end.Controllers
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
                                             am.myIDAuto, am.myMarke, am.myTyp,
-                                            am.myKategorie, umwandlerINT16(am.myBauJahrAB),
-                                            umwandlerINT16(am.myBauJahrBIS),
-                                            umwandlerDEC(am.myKilometerStandAB),
-                                            umwandlerDEC(am.myKilometerStandBIS),
+                                            am.myKategorie, umwandlerINT16(am.myBauJahr),
+                                            umwandlerDEC(am.myKilometerStand),                                            
                                             am.myAnzeigen).ToList();
             }
             else
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
                                             null, am.myMarke, am.myTyp,
-                                            am.myKategorie, umwandlerINT16(am.myBauJahrAB),
-                                            umwandlerINT16(am.myBauJahrBIS),
-                                            umwandlerDEC(am.myKilometerStandAB),
-                                            umwandlerDEC(am.myKilometerStandBIS),
+                                            am.myKategorie, umwandlerINT16(am.myBauJahr),
+                                            umwandlerDEC(am.myKilometerStand),                                            
                                             am.myAnzeigen).ToList();
             }
 
