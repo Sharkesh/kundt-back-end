@@ -50,19 +50,64 @@ namespace kundt_back_end.Controllers
             return View();
 
         }
-        // GET: tblAuto
-
 
         [Authorize(Roles = "M,A")]
-        public ActionResult AutoUebersicht()
+        public ActionResult AutoUebersicht(AutoModel am)
         {
-            AutoModel am = new AutoModel();
+
+            //AutoModel am = new AutoModel();
             am.autoListe = db.tblAuto.ToList();
             am.typListe = db.tblTyp.ToList();
             am.markeListe = db.tblMarke.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
+            
+            if (am.myIDAuto != 0)
+            {
+                am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
+                                            am.myIDAuto, am.myMarke, am.myTyp,
+                                            am.myKategorie, umwandlerINT16(am.myBauJahrAB),
+                                            umwandlerINT16(am.myBauJahrBIS),
+                                            umwandlerDEC(am.myKilometerStandAB),
+                                            umwandlerDEC(am.myKilometerStandBIS),
+                                            am.myAnzeigen).ToList();
+            }
+            else
+            {
+                am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
+                                            null, am.myMarke, am.myTyp,
+                                            am.myKategorie, umwandlerINT16(am.myBauJahrAB),
+                                            umwandlerINT16(am.myBauJahrBIS),
+                                            umwandlerDEC(am.myKilometerStandAB),
+                                            umwandlerDEC(am.myKilometerStandBIS),
+                                            am.myAnzeigen).ToList();
+            }
 
             return View(am);
+        }
+        private short? umwandlerINT16(int? x)
+        {
+            short? output = null;
+            try
+            {
+                return Convert.ToInt16(x);
+
+            }
+            catch (Exception)
+            {
+                return output;
+            }
+        }
+        private decimal? umwandlerDEC(decimal? x)
+        {
+            decimal? output = null;
+            try
+            {
+                return Convert.ToDecimal(x);
+            }
+            catch (Exception)
+            {
+                return output;
+            }
         }
 
         // GET: tblAuto/Details/5

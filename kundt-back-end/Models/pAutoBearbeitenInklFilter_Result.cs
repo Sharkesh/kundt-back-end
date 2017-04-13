@@ -10,13 +10,20 @@
 namespace kundt_back_end.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class tblEyecatcher
+    public partial class pAutoBearbeitenInklFilter_Result
     {
-        public int IDEyecatcher { get; set; }
-        public System.Guid GUIDBild { get; set; }
-        public byte[] Eyecatcher { get; set; }
+        public int IDAuto { get; set; }
+        public short Baujahr { get; set; }
+        public string PS { get; set; }
+        public decimal MietPreis { get; set; }
+        public decimal VerkaufPreis { get; set; }
+        public byte[] AutoBild { get; set; }
+        public string Marke { get; set; }
         public string Typ { get; set; }
+        public string Kategorie { get; set; }
+        public bool Anzeigen { get; set; }
+        public string BuchungStatus { get; set; }
+        public string Problem { get; set; }
     }
 }
