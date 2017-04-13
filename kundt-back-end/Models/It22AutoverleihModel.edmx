@@ -482,7 +482,7 @@
           <Parameter Name="searchBuchung" Type="varchar" Mode="In" />
         </Function>
         <Function Name="pMitarbeiterEditieren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="IDLogin" Type="int" Mode="InOut" />
+          <Parameter Name="IDLogin" Type="int" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="Passwort" Type="varchar" Mode="In" />
           <Parameter Name="Rolle" Type="char" Mode="In" />
@@ -1031,7 +1031,7 @@
           </FunctionImport>
 
           <FunctionImport Name="pMitarbeiterEditieren">
-            <Parameter Name="IDLogin" Mode="InOut" Type="Int32" />
+            <Parameter Name="IDLogin" Mode="In" Type="Int32" />
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Passwort" Mode="In" Type="String" />
             <Parameter Name="Rolle" Mode="In" Type="String" />
