@@ -17,6 +17,5 @@ namespace kundt_back_end.Models
         public int IDEyecatcher { get; set; }
         public System.Guid GUIDBild { get; set; }
         public byte[] Eyecatcher { get; set; }
-        public string Typ { get; set; }
     }
 }
