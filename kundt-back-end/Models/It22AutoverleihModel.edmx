@@ -441,8 +441,10 @@
           <Parameter Name="searchMarke" Type="varchar" Mode="In" />
           <Parameter Name="searchTyp" Type="varchar" Mode="In" />
           <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
-          <Parameter Name="searchBaujahr" Type="smallint" Mode="In" />
-          <Parameter Name="searchKilometerstand" Type="decimal" Mode="In" />
+          <Parameter Name="searchBaujahrVon" Type="smallint" Mode="In" />
+          <Parameter Name="searchBaujahrBis" Type="smallint" Mode="In" />
+          <Parameter Name="searchKilometerstandVon" Type="decimal" Mode="In" />
+          <Parameter Name="searchKilometerstandBis" Type="decimal" Mode="In" />
           <Parameter Name="searchAnzeigen" Type="bit" Mode="In" />
         </Function>
         <Function Name="pAutoHinzufuegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1094,8 +1096,10 @@
             <Parameter Name="searchMarke" Mode="In" Type="String" />
             <Parameter Name="searchTyp" Mode="In" Type="String" />
             <Parameter Name="searchKategorie" Mode="In" Type="String" />
-            <Parameter Name="searchBaujahr" Mode="In" Type="Int16" />
-            <Parameter Name="searchKilometerstand" Mode="In" Type="Decimal" />
+            <Parameter Name="searchBaujahrVon" Mode="In" Type="Int16" />
+            <Parameter Name="searchBaujahrBis" Mode="In" Type="Int16" />
+            <Parameter Name="searchKilometerstandVon" Mode="In" Type="Decimal" />
+            <Parameter Name="searchKilometerstandBis" Mode="In" Type="Decimal" />
             <Parameter Name="searchAnzeigen" Mode="In" Type="Boolean" />
           </FunctionImport>
 

@@ -21,11 +21,15 @@ namespace kundt_back_end.Models
         public string myKategorie { get; set; }
         public string myPS { get; set; }
         public int myBauJahr { get; set; }
+        public int myBauJahrVon { get; set; }
+        public int myBauJahrBis { get; set; }
         public string myTueren { get; set; }
         public int mySitze { get; set; }
         public decimal myMietPreis { get; set; }
         public decimal myVerkaufsPreis { get; set; }
         public decimal myKilometerStand { get; set; }
+        public decimal myKilometerStandVon { get; set; }
+        public decimal myKilometerStandBis { get; set; }
         public byte[] myAutobild { get; set; }
         public bool? myAnzeigen { get; set; }
         public string myTreibstoff { get; set; }
