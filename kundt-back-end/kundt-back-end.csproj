@@ -156,6 +156,9 @@
     </Compile>
     <Compile Include="Models\BuchungsUebersicht.cs" />
     <Compile Include="Models\BuchungViewModel.cs" />
+    <Compile Include="Models\fAutoBearbeitenInklFilter_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GefilterteBuchungen.cs" />
     <Compile Include="Models\It22AutoverleihModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -191,6 +194,21 @@
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pAutoBearbeitenAnzeigen_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pAutoBearbeitenInklFilter2_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pAutoBearbeitenInklFilter3_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pAutoBearbeitenInklFilterFinal2_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pAutoBearbeitenInklFilterFinal_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pAutoBearbeitenInklFilter_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pKundenAnzeigen_Result.cs">

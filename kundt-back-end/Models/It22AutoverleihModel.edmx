@@ -362,6 +362,31 @@
           <Parameter Name="storno" Type="bit" Mode="In" />
           <Parameter Name="versicherung" Type="bit" Mode="In" />
         </Function>
+        <Function Name="fAutoBearbeitenInklFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchStatus" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="IDAuto" Type="int" Nullable="false" />
+                <Property Name="Baujahr" Type="smallint" Nullable="false" />
+                <Property Name="PS" Type="varchar" MaxLength="5" Nullable="false" />
+                <Property Name="MietPreis" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+                <Property Name="VerkaufPreis" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+                <Property Name="AutoBild" Type="varbinary(max)" />
+                <Property Name="Anzeigen" Type="bit" Nullable="false" />
+                <Property Name="Marke" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="Typ" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="Kategorie" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="BuchungStatus" Type="varchar" MaxLength="10" />
+                <Property Name="Problem" Type="varchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="fBuchungProblem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="idBuchung" Type="int" Mode="In" />
         </Function>
@@ -380,6 +405,47 @@
         </Function>
         <Function Name="pAutoBearbeitenAnzeigen2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilter2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilter3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilterFinal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchBaujahr" Type="smallint" Mode="In" />
+          <Parameter Name="searchKilometerstand" Type="decimal" Mode="In" />
+          <Parameter Name="searchAnzeigen" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilterFinal2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchBaujahrAB" Type="smallint" Mode="In" />
+          <Parameter Name="searchBaujahrBIS" Type="smallint" Mode="In" />
+          <Parameter Name="searchKilometerstandAB" Type="decimal" Mode="In" />
+          <Parameter Name="searchKilometerstandBIS" Type="decimal" Mode="In" />
+          <Parameter Name="searchAnzeigen" Type="bit" Mode="In" />
         </Function>
         <Function Name="pAutoHinzufuegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Baujahr" Type="smallint" Mode="In" />
@@ -582,6 +648,7 @@
           <Property Name="IDEyecatcher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GUIDBild" Type="Guid" Nullable="false" />
           <Property Name="Eyecatcher" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Typ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblHistorie">
           <Key>
@@ -995,6 +1062,47 @@
           <FunctionImport Name="pAutoBearbeitenAnzeigen2" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenAnzeigen2_Result)">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="fAutoBearbeitenInklFilter" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.fAutoBearbeitenInklFilter_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenInklFilter" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenInklFilter_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenInklFilter3" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenInklFilter3_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenInklFilterFinal" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenInklFilterFinal_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchBaujahr" Mode="In" Type="Int16" />
+            <Parameter Name="searchKilometerstand" Mode="In" Type="Decimal" />
+            <Parameter Name="searchAnzeigen" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenInklFilterFinal2" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenInklFilterFinal2_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchBaujahrAB" Mode="In" Type="Int16" />
+            <Parameter Name="searchBaujahrBIS" Mode="In" Type="Int16" />
+            <Parameter Name="searchKilometerstandAB" Mode="In" Type="Decimal" />
+            <Parameter Name="searchKilometerstandBIS" Mode="In" Type="Decimal" />
+            <Parameter Name="searchAnzeigen" Mode="In" Type="Boolean" />
+          </FunctionImport>
 
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
@@ -1078,6 +1186,95 @@
           <Property Type="String" Name="Treibstoff" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="fAutoBearbeitenInklFilter_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Problem" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilter_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Problem" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilter2_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Problem" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilter3_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilterFinal_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="Decimal" Name="Kilometerstand" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Byte" Name="Sitze" Nullable="false" />
+          <Property Type="String" Name="Tueren" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Getriebe" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Treibstoff" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilterFinal2_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="Decimal" Name="Kilometerstand" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Byte" Name="Sitze" Nullable="false" />
+          <Property Type="String" Name="Tueren" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Getriebe" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Treibstoff" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1354,6 +1551,101 @@
                 <ScalarProperty Name="Treibstoff" ColumnName="Treibstoff" />
                 <ScalarProperty Name="Typ" ColumnName="Typ" />
                 <ScalarProperty Name="Marke" ColumnName="Marke" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fAutoBearbeitenInklFilter" FunctionName="it22AutoverleihModel.Store.fAutoBearbeitenInklFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.fAutoBearbeitenInklFilter_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenInklFilter" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenInklFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenInklFilter_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenInklFilter3" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenInklFilter3">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenInklFilter3_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenInklFilterFinal" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenInklFilterFinal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenInklFilterFinal_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="Kilometerstand" ColumnName="Kilometerstand" />
+                <ScalarProperty Name="Sitze" ColumnName="Sitze" />
+                <ScalarProperty Name="Tueren" ColumnName="Tueren" />
+                <ScalarProperty Name="Getriebe" ColumnName="Getriebe" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Treibstoff" ColumnName="Treibstoff" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenInklFilterFinal2" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenInklFilterFinal2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenInklFilterFinal2_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="Kilometerstand" ColumnName="Kilometerstand" />
+                <ScalarProperty Name="Sitze" ColumnName="Sitze" />
+                <ScalarProperty Name="Tueren" ColumnName="Tueren" />
+                <ScalarProperty Name="Getriebe" ColumnName="Getriebe" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Treibstoff" ColumnName="Treibstoff" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

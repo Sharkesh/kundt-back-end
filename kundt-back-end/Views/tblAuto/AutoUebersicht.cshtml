@@ -1,8 +1,9 @@
 ﻿@model kundt_back_end.Models.AutoModel
-@{
-    ViewBag.Title = "Autouebersicht 2.0";
-}
+
 <style>
+    .DefaultFilter{
+        font-weight:700;
+    }
     .myImg {
         max-height: 100px;
     }
@@ -13,11 +14,12 @@
         border-color: darkgray;
         max-height: 100px;
     }
+
     .myTableBorder2 {
         border-left: solid 1px;
-        border-top:solid 1px;
+        border-top: solid 1px;
         border-color: darkgray;
-        margin-left:35px;
+        margin-left: 35px;
     }
 
     .myTd {
@@ -28,118 +30,159 @@
         min-width: 200px;
         min-height: 35px;
     }
+    .myInput2 {
+        min-width: 100px;
+        min-height: 35px;
+    }
 
     .myTitleMarkUp {
         border-radius: 5px;
         background-color: darkorange;
         height: 50px;
         width: 100%;
-        padding-right:5%;
-        padding-left:5%;
+        padding-right: 5%;
+        padding-left: 5%;
         color: white;
         display: inline-block;
         text-align: center;
         font-size: 24px;
         margin-bottom: 20px;
-
     }
 </style>
-<div class="row">
-    <div class="col-xs-12 myTitleMarkUp" style="padding-top:10px;">Auto-Übersicht</div>
-    <div class="col-xs-3">
-        <div class="table-responsive">
-            <table class="table-condensed myTableBorder2">
 
-                <tr>
-                    <td class="myTd"><header>Suche:</header><input type="text" name="name" value="" placeholder="Suche" class="myInput" /></td>
-                </tr>
-
-                <tr>
-                    <td class="myTd">
-                        <header>Marke wählen:</header>
-                        <select id="FilterMarke" name="Marke" class="myInput">
-                            @foreach (var item in Model.markeListe)
-                            {
-                                <option class="myInput">@item.Marke</option>
-                            }
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="myTd">
-                        <header>Typ wählen:</header><select id="FilterTyp" name="Typ" class="myInput">
-                            @foreach (var item in Model.typListe)
-                            {
-                                <option class="myInput">@item.Typ</option>
-                            }
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="myTd">
-                        <header>Kategorie wählen:</header><select id="FilterKategorie" name="Kategorie" class="myInput">
-                            @foreach (var item in Model.kategorieListe)
-                            {
-                                <option class="myInput">@item.Kategorie</option>
-                            }
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="myTd"><header>Status wählen:</header><input type="text" name="name" value="" class="myInput" /></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div class="col-xs-8 col-xs-offset-1">
-        <div class="table-responsive">
-
-
-            <table class="table-hover">
-
-                @foreach (var item in Model.autoListe)
-                {
-
-                    <tr class="myTableBorder" style="margin-bottom:15px;">
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-xs-12 myTitleMarkUp" style="padding-top:10px;">Auto-Übersicht</div>
+        <div class="col-xs-3">
+            @*<form method="post" action="@Url.Action("AutoUebersicht2", "tblAuto", Model)">*@
+            <div class="table-responsive">
+                <table class="table-condensed myTableBorder2">
+                    <tr>
                         <td class="myTd">
-                            @if (item.AutoBild != null)
-                            {
-
-                            }
-                            else
-                            {
-                                <img class="img-responsive myImg" src="~/Content/img/alfa-romeo-giulia-silber-2016.png" />
-                            }
-                        </td>
-                        <td class="myTd">
-                            <p>Marke: @item.tblTyp.tblMarke.Marke</p>
-                            <p>Typ: @item.tblTyp.Typ</p>
-                        </td>
-                        <td class="myTd">
-                            <p>Baujahr: @item.Baujahr</p>
-                            <p>PS: @item.PS</p>
-                        </td>
-                        <td class="myTd">
-                            <p>Mietpreis: @Html.DisplayFor(Model => item.MietPreis)€</p>
-                            <p>Verkaufspreis: @Html.DisplayFor(Model => item.VerkaufPreis)€</p>
-                        </td>
-
-                        <td style="padding-left:15px">
-                            @*<form method="post" action="@Url.Action("AutoBearbeiten","tblAuto", new {id = Model.myIDAuto })">*@
-                            <form method="get" action="@Url.Action("AutoBearbeiten","tblAuto", new {id = item.IDAuto })">
-                  
-                                <input type="submit" class="btn btn-default" value="Bearbeiten" style="border:solid 1px; border-color:darkgrey; border-radius:5px;"/>
-                            </form>
+                            <header>ID-Suche:</header>
+                            <select id="FilterID" name="myIDAuto" class="myInput">
+                                <option class="myInput DefaultFilter" value="">Alle IDs</option>
+                                @foreach (var item in Model.autoListe)
+                                {
+                                    <option class="myInput" value="@item.IDAuto">@Html.DisplayFor(Model => item.IDAuto)</option>
+                                }
+                            </select>
                         </td>
                     </tr>
-
-                }
-            </table>
-
-
+                    <tr>
+                        <td class="myTd">
+                            <header>Marke wählen:</header>
+                            <select id="FilterMarke" name="myMarke" class="myInput">
+                                <option class="myInput DefaultFilter" value="">Alle Marken</option>
+                                @foreach (var item in Model.markeListe)
+                                {
+                                    <option class="myInput" value="@item.Marke">@Html.DisplayFor(Model => item.Marke)</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="myTd">
+                            <header>Typ wählen:</header>
+                            <select id="FilterTyp" name="myTyp" class="myInput">
+                                <option class="myInput DefaultFilter" value="">Alle Typen</option>
+                                @foreach (var item in Model.typListe)
+                                {
+                                    <option class="myInput" value="@item.Typ">@Html.DisplayFor(Model => item.Typ)</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="myTd">
+                            <header>Kategorie wählen:</header>
+                            <select id="FilterKategorie" name="myKategorie" class="myInput">
+                                <option class="myInput DefaultFilter" name="searchMarke" value="">Alle Kategorien</option>
+                                @foreach (var item in Model.kategorieListe)
+                                {
+                                    <option class="myInput" value="@item.Kategorie">@item.Kategorie</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="myTd">
+                            <header>Baujahr wählen:</header>
+                            <input class="myInput2" type="number" name="myBauJahrAB" value="" />
+                            <input class="myInput2" type="number" name="myBauJahrBIS" value=""/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="myTd">
+                            <header>Kilometerstand wählen:</header>
+                            <input class="myInput2" type="number" name="myKilometerStand" value="" />
+                            <input class="myInput2" type="number" name="myKilometerStand" value="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="myTd">
+                            <header>Sichtbarkeit wählen:</header>
+                            <select id="FilterKategorie" name="myAnzeigen" class="myInput">
+                                <option class="myInput" value="">Alle Autos</option>
+                                <option class="myInput" value="true">Sichtbare Autos</option>
+                                <option class="myInput" value="false">Versteckte Autos</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="submit" class="btn btn-default" value="Suchen" style="border:solid 1px; border-color:darkgrey; border-radius:5px;" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            @*</form>*@
         </div>
 
+        <div class="col-xs-8 col-xs-offset-1">
+            <div class="table-responsive">
+                <table class="table-hover">
+                    @foreach (var item in Model.autoBearbeitenFilter)
+                {
+                        <tr class="myTableBorder" style="margin-bottom:15px;">
+                            <td class="myTd">
+                                @if (item.AutoBild != null)
+                                {
+                                    var image = Convert.ToBase64String(item.AutoBild);
+                                    @Html.Raw("<img src=\"data:image/png;base64," + image + "\" class=\"img-responsive myImg\" />");
+                                }
+                                else
+                                {
+                                    <p>Kein Bild vorhanden</p>
+                                }
+                            </td>
+                            <td class="myTd">
+                                <p>Marke: @Html.DisplayFor(Model => item.Marke)</p>
+                                <p>Typ: @Html.DisplayFor(Model => item.Typ)</p>
+                            </td>
+                            <td class="myTd">
+                                <p>Baujahr: @Html.DisplayFor(Model => item.Baujahr)</p>
+                                <p>PS: @Html.DisplayFor(Model => item.PS)</p>
+                            </td>
+                            <td class="myTd">
+                                <p>Mietpreis: @Html.DisplayFor(Model => item.MietPreis)€</p>
+                                <p>Verkaufspreis: @Html.DisplayFor(Model => item.VerkaufPreis)€</p>
+                            </td>
 
+                            <td style="padding-left:15px">
+                                @*<form method="post" action="@Url.Action("AutoBearbeiten","tblAuto", new {id = Model.myIDAuto })">*@
+                                <form method="get" action="@Url.Action("AutoBearbeiten", "tblAuto", new { id = item.IDAuto })">
 
+                                    <input type="submit" class="btn btn-default" value="Bearbeiten" style="border:solid 1px; border-color:darkgrey; border-radius:5px;" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
     </div>
-</div>
+}

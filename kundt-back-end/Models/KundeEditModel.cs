@@ -23,7 +23,7 @@ namespace kundt_back_end.Models
         [Required(ErrorMessage = "Bitte Vorname eingeben")]
         [MinLength(2, ErrorMessage = "Vorname muss mindesten 2 Zeichen enthalten")]
         [MaxLength(100, ErrorMessage = "Vorname darf nicht mehr als 100 Zeichen enthalten")]
-        [RegularExpression("^[a-zA-Z''-'\\s]{2,100}", ErrorMessage = "Bitte nur Buchstaben eingeben")]
+        [RegularExpression("^[a-zA-Z''-'\\s]{1,40}$", ErrorMessage = "Bitte nur Buchstaben eingeben")]
         public string Vorname { get; set; }
 
         [Required(ErrorMessage = "Bitte Nachname eingeben")]

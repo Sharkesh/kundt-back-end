@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using kundt_back_end.Models;
 using System.Data.SqlClient;
+using System.Data.Entity.Core.Objects;
 
 namespace kundt_back_end.Controllers
 {
@@ -121,10 +122,18 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (MM.Passwort == "PasswortResetten")
+                {
+                    //db.pMitarbeiterPasswort
+
+                }
+                
                 MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
 
+                //ObjectParameter MID = new ObjectParameter("IDMitarbeiter", MM.IDMitarbeiter);
+
                 //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
-                //db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle, MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+                db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort,MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
 
 
