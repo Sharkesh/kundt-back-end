@@ -268,10 +268,6 @@ namespace kundt_back_end.Models
     
         public virtual int pMitarbeiterEditieren(ObjectParameter iDLogin, string email, string passwort, string rolle, Nullable<bool> deaktiviert, string mAVorname, string mANachname, string mAAnrede)
         {
-            var iDLoginParameter = iDLogin.HasValue ?
-                new ObjectParameter("IDLogin", iDLogin) :
-                new ObjectParameter("IDLogin", typeof(int));
-
             var emailParameter = email != null ?
                 new ObjectParameter("Email", email) :
                 new ObjectParameter("Email", typeof(string));

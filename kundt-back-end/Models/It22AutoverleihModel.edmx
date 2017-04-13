@@ -648,7 +648,6 @@
           <Property Name="IDEyecatcher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GUIDBild" Type="Guid" Nullable="false" />
           <Property Name="Eyecatcher" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Typ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblHistorie">
           <Key>
