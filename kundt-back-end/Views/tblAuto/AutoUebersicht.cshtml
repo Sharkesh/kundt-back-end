@@ -102,6 +102,7 @@
                             <td class="myTd">
                                 <header>Marke wählen:</header>
                                 <select id="FilterMarke" name="myMarke" class="myInput">
+                                    <option class="myInput DefaultFilter" value="">Alle Marken</option>
                                     @foreach (var item in Model.markeListe)
                                     {
                                         <option class="myInput" value="@item.Marke">@Html.DisplayFor(Model => item.Marke)</option>
