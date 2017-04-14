@@ -20,37 +20,15 @@ namespace kundt_back_end.Controllers
         {
             return View(db.tblEyecatcher.ToList());
         }
+
         // GET: Eyecatchers
+        [HttpGet]
         public ActionResult Einstellung()
         {
             return View();
         }
 
-        // GET: Eyecatchers/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblEyecatcher tblEyecatcher = db.tblEyecatcher.Find(id);
-            if (tblEyecatcher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblEyecatcher);
-        }
-
-        // GET: Eyecatchers/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Eyecatchers/Create
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
-
+        //Falls alle bilder aus der Datenbank gelöscht werden, benutze diese Methode zum einfügen der ersten Bilder
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -75,20 +53,6 @@ namespace kundt_back_end.Controllers
         //    return View(tblEyecatcher);
         //}
 
-        // GET: Eyecatchers/Edit/5
-        public ActionResult Erstellen(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblEyecatcher tblEyecatcher = db.tblEyecatcher.Find(id);
-            if (tblEyecatcher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblEyecatcher);
-        }
 
         // POST: Eyecatchers/Edit/5
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
@@ -113,32 +77,6 @@ namespace kundt_back_end.Controllers
 
             }
             return RedirectToAction("Einstellung");
-        }
-
-        // GET: Eyecatchers/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblEyecatcher tblEyecatcher = db.tblEyecatcher.Find(id);
-            if (tblEyecatcher == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblEyecatcher);
-        }
-
-        // POST: Eyecatchers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tblEyecatcher tblEyecatcher = db.tblEyecatcher.Find(id);
-            db.tblEyecatcher.Remove(tblEyecatcher);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
