@@ -54,9 +54,6 @@ namespace kundt_back_end.Controllers
                     db.pAusstattungZuAuto2(item);
                 }
             }
-
-
-
             return View();
 
         }
@@ -75,16 +72,22 @@ namespace kundt_back_end.Controllers
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
                                             am.myIDAuto, am.myMarke, am.myTyp,
-                                            am.myKategorie, umwandlerINT16(am.myBauJahr),
-                                            umwandlerDEC(am.myKilometerStand),                                            
+                                            am.myKategorie,
+                                            umwandlerINT16(am.myBauJahrVon),
+                                            umwandlerINT16(am.myBauJahrBis),
+                                            umwandlerDEC(am.myKilometerStandVon),
+                                            umwandlerDEC(am.myKilometerStandBis),
                                             am.myAnzeigen).ToList();
             }
             else
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
                                             null, am.myMarke, am.myTyp,
-                                            am.myKategorie, umwandlerINT16(am.myBauJahr),
-                                            umwandlerDEC(am.myKilometerStand),                                            
+                                            am.myKategorie,
+                                            umwandlerINT16(am.myBauJahrVon),
+                                            umwandlerINT16(am.myBauJahrBis),
+                                            umwandlerDEC(am.myKilometerStandVon),
+                                            umwandlerDEC(am.myKilometerStandBis),
                                             am.myAnzeigen).ToList();
             }
 
@@ -92,7 +95,7 @@ namespace kundt_back_end.Controllers
         }
         private short? umwandlerINT16(int? x)
         {
-            if (x == null)
+            if (x == null || x == 0)
             {
                 return null;
             }
@@ -103,7 +106,7 @@ namespace kundt_back_end.Controllers
         }
         private decimal? umwandlerDEC(decimal? x)
         {
-            if (x == null)
+            if (x == null || x == 0)
             {
                 return null;
             }

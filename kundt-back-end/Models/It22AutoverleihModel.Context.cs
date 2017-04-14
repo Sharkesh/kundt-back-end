@@ -520,11 +520,11 @@ namespace kundt_back_end.Models
             var searchBaujahrVonParameter = searchBaujahrVon.HasValue ?
                 new ObjectParameter("searchBaujahrVon", searchBaujahrVon) :
                 new ObjectParameter("searchBaujahrVon", typeof(short));
-    
+
             var searchBaujahrBisParameter = searchBaujahrBis.HasValue ?
                 new ObjectParameter("searchBaujahrBis", searchBaujahrBis) :
                 new ObjectParameter("searchBaujahrBis", typeof(short));
-    
+
             var searchKilometerstandVonParameter = searchKilometerstandVon.HasValue ?
                 new ObjectParameter("searchKilometerstandVon", searchKilometerstandVon) :
                 new ObjectParameter("searchKilometerstandVon", typeof(decimal));
