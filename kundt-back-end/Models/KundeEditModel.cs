@@ -17,6 +17,14 @@ namespace kundt_back_end.Models
     {
         //Nicht fertig - Endl
 
+        //public List<tblPLZOrt> plzList { get; set; }
+
+
+
+        //public List<int> li = new List<int>
+            
+        
+
         [Required]
         public int idkunde { get; set; }
 
@@ -37,10 +45,31 @@ namespace kundt_back_end.Models
         public string Straße { get; set; }
 
         [Required(ErrorMessage = "Bitte PLZ eingeben")]
-        [MinLength(2, ErrorMessage = "PLZ muss min. 2 Buchstaben haben")]
+        [Range(0, 999999, ErrorMessage = "Bitte eine gültige PLZ eingeben")]
+        [MinLength(2, ErrorMessage = "PLZ muss min. 2 Zeichen haben")]
         [MaxLength(30, ErrorMessage = "PLZ darf nicht mehr als 30 Zeichen enthalten")]
-        //[RegularExpression("^(\\d{5}-\\d{4}|\\d{5}|\\d{9})$|^([a-zA-Z]\\d[a-zA-Z] \\d[a-zA-Z]\\d)$", ErrorMessage = "Bitte nur Zahlen eingeben")] - noch nicht richtig
         public string Plz { get; set; }
+        //private string plz;
+        //public string Plz
+        //{
+        //    get { return plz; }
+        //    set
+        //    {
+
+        //        foreach (var item in plzList)
+        //        {
+
+        //            if ((plzList.Select(x => x.PLZ)).Contains(value))
+        //            {
+        //                plz = value;
+        //            }
+        //            else
+        //            {
+        //                throw new ArgumentException("Bitte geben Sie eine gültige PLZ ein");
+        //            };
+        //        }
+        //    }
+        //}
 
         public string Ort { get; set; }
 
