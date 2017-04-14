@@ -36,14 +36,14 @@ namespace kundt_back_end.Controllers
         //public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
         {
 
-            
-                if (upload != null && upload.ContentLength > 0)
+
+            if (upload != null && upload.ContentLength > 0)
+            {
+                using (var reader = new System.IO.BinaryReader(upload.InputStream))
                 {
-                    using (var reader = new System.IO.BinaryReader(upload.InputStream))
-                    {
-                        am.myAutobild = reader.ReadBytes(upload.ContentLength);
-                    }
+                    am.myAutobild = reader.ReadBytes(upload.ContentLength);
                 }
+            }
 
             db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS, am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze), am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand, am.myAutobild, am.myAnzeigen, am.myTreibstoff, am.myTyp, am.myKategorie);
 
@@ -70,25 +70,21 @@ namespace kundt_back_end.Controllers
             am.typListe = db.tblTyp.ToList();
             am.markeListe = db.tblMarke.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
-            
+
             if (am.myIDAuto != 0)
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
                                             am.myIDAuto, am.myMarke, am.myTyp,
-                                            am.myKategorie, umwandlerINT16(am.myBauJahrAB),
-                                            umwandlerINT16(am.myBauJahrBIS),
-                                            umwandlerDEC(am.myKilometerStandAB),
-                                            umwandlerDEC(am.myKilometerStandBIS),
+                                            am.myKategorie, umwandlerINT16(am.myBauJahr),
+                                            umwandlerDEC(am.myKilometerStand),                                            
                                             am.myAnzeigen).ToList();
             }
             else
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
                                             null, am.myMarke, am.myTyp,
-                                            am.myKategorie, umwandlerINT16(am.myBauJahrAB),
-                                            umwandlerINT16(am.myBauJahrBIS),
-                                            umwandlerDEC(am.myKilometerStandAB),
-                                            umwandlerDEC(am.myKilometerStandBIS),
+                                            am.myKategorie, umwandlerINT16(am.myBauJahr),
+                                            umwandlerDEC(am.myKilometerStand),                                            
                                             am.myAnzeigen).ToList();
             }
 
@@ -96,27 +92,24 @@ namespace kundt_back_end.Controllers
         }
         private short? umwandlerINT16(int? x)
         {
-            short? output = null;
-            try
+            if (x == null)
+            {
+                return null;
+            }
+            else
             {
                 return Convert.ToInt16(x);
-
-            }
-            catch (Exception)
-            {
-                return output;
             }
         }
         private decimal? umwandlerDEC(decimal? x)
         {
-            decimal? output = null;
-            try
+            if (x == null)
+            {
+                return null;
+            }
+            else
             {
                 return Convert.ToDecimal(x);
-            }
-            catch (Exception)
-            {
-                return output;
             }
         }
 

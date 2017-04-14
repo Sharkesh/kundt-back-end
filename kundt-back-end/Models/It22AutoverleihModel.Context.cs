@@ -516,7 +516,7 @@ namespace kundt_back_end.Models
             var searchKategorieParameter = searchKategorie != null ?
                 new ObjectParameter("searchKategorie", searchKategorie) :
                 new ObjectParameter("searchKategorie", typeof(string));
-    
+
             var searchBaujahrVonParameter = searchBaujahrVon.HasValue ?
                 new ObjectParameter("searchBaujahrVon", searchBaujahrVon) :
                 new ObjectParameter("searchBaujahrVon", typeof(short));
@@ -536,7 +536,7 @@ namespace kundt_back_end.Models
             var searchAnzeigenParameter = searchAnzeigen.HasValue ?
                 new ObjectParameter("searchAnzeigen", searchAnzeigen) :
                 new ObjectParameter("searchAnzeigen", typeof(bool));
-    
+
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pAutoBearbeitenInklFilterFinal2_Result>("pAutoBearbeitenInklFilterFinal2", searchIDAutoParameter, searchMarkeParameter, searchTypParameter, searchKategorieParameter, searchBaujahrVonParameter, searchBaujahrBisParameter, searchKilometerstandVonParameter, searchKilometerstandBisParameter, searchAnzeigenParameter);
         }
     

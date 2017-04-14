@@ -1,9 +1,10 @@
 ﻿@model kundt_back_end.Models.AutoModel
 
 <style>
-    .DefaultFilter{
-        font-weight:700;
+    .DefaultFilter {
+        font-weight: 700;
     }
+
     .myImg {
         max-height: 100px;
     }
@@ -30,6 +31,7 @@
         min-width: 200px;
         min-height: 35px;
     }
+
     .myInput2 {
         min-width: 100px;
         min-height: 35px;
@@ -98,7 +100,7 @@
                         <td class="myTd">
                             <header>Kategorie wählen:</header>
                             <select id="FilterKategorie" name="myKategorie" class="myInput">
-                                <option class="myInput DefaultFilter" name="searchMarke" value="">Alle Kategorien</option>
+                                <option class="myInput DefaultFilter" value="">Alle Kategorien</option>
                                 @foreach (var item in Model.kategorieListe)
                                 {
                                     <option class="myInput" value="@item.Kategorie">@item.Kategorie</option>
@@ -109,15 +111,25 @@
                     <tr>
                         <td class="myTd">
                             <header>Baujahr wählen:</header>
-                            <input class="myInput2" type="number" name="myBauJahrAB" value="" />
-                            <input class="myInput2" type="number" name="myBauJahrBIS" value=""/>
+                            <select id="FilterBaujahr" name="myBauJahr" class="myInput">
+                                <option class="myInput DefaultFilter" value="">Alle Baujahre</option>
+                                @foreach (var item in Model.autoListe)
+                                {
+                                    <option class="myInput" value="@item.Baujahr">@item.Baujahr</option>
+                                }
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td class="myTd">
                             <header>Kilometerstand wählen:</header>
-                            <input class="myInput2" type="number" name="myKilometerStand" value="" />
-                            <input class="myInput2" type="number" name="myKilometerStand" value="" />
+                            <select id="FilterKilometerstand" name="myKilometerStand" class="myInput">
+                                <option class="myInput DefaultFilter" value="">Alle KM-Stände</option>
+                                @foreach (var item in Model.autoListe)
+                                {
+                                    <option class="myInput" value="@item.Kilometerstand">@item.Kilometerstand</option>
+                                }
+                            </select>
                         </td>
                     </tr>
                     <tr>
