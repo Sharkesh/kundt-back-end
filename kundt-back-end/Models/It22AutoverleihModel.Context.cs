@@ -539,5 +539,66 @@ namespace kundt_back_end.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pAutoBearbeitenInklFilterFinal2_Result>("pAutoBearbeitenInklFilterFinal2", searchIDAutoParameter, searchMarkeParameter, searchTypParameter, searchKategorieParameter, searchBaujahrVonParameter, searchBaujahrBisParameter, searchKilometerstandVonParameter, searchKilometerstandBisParameter, searchAnzeigenParameter);
         }
+    
+        public virtual int pAutoBearbeiten(Nullable<int> iDAuto, Nullable<short> baujahr, string pS, string getriebe, string tueren, Nullable<byte> sitze, Nullable<decimal> mietPreis, Nullable<decimal> verkaufPreis, Nullable<decimal> kilometerstand, byte[] autobild, Nullable<bool> anzeigen, string treibstoff, string typ, string kategorie)
+        {
+            var iDAutoParameter = iDAuto.HasValue ?
+                new ObjectParameter("IDAuto", iDAuto) :
+                new ObjectParameter("IDAuto", typeof(int));
+    
+            var baujahrParameter = baujahr.HasValue ?
+                new ObjectParameter("Baujahr", baujahr) :
+                new ObjectParameter("Baujahr", typeof(short));
+    
+            var pSParameter = pS != null ?
+                new ObjectParameter("PS", pS) :
+                new ObjectParameter("PS", typeof(string));
+    
+            var getriebeParameter = getriebe != null ?
+                new ObjectParameter("Getriebe", getriebe) :
+                new ObjectParameter("Getriebe", typeof(string));
+    
+            var tuerenParameter = tueren != null ?
+                new ObjectParameter("Tueren", tueren) :
+                new ObjectParameter("Tueren", typeof(string));
+    
+            var sitzeParameter = sitze.HasValue ?
+                new ObjectParameter("Sitze", sitze) :
+                new ObjectParameter("Sitze", typeof(byte));
+    
+            var mietPreisParameter = mietPreis.HasValue ?
+                new ObjectParameter("MietPreis", mietPreis) :
+                new ObjectParameter("MietPreis", typeof(decimal));
+    
+            var verkaufPreisParameter = verkaufPreis.HasValue ?
+                new ObjectParameter("VerkaufPreis", verkaufPreis) :
+                new ObjectParameter("VerkaufPreis", typeof(decimal));
+    
+            var kilometerstandParameter = kilometerstand.HasValue ?
+                new ObjectParameter("Kilometerstand", kilometerstand) :
+                new ObjectParameter("Kilometerstand", typeof(decimal));
+    
+            var autobildParameter = autobild != null ?
+                new ObjectParameter("Autobild", autobild) :
+                new ObjectParameter("Autobild", typeof(byte[]));
+    
+            var anzeigenParameter = anzeigen.HasValue ?
+                new ObjectParameter("Anzeigen", anzeigen) :
+                new ObjectParameter("Anzeigen", typeof(bool));
+    
+            var treibstoffParameter = treibstoff != null ?
+                new ObjectParameter("Treibstoff", treibstoff) :
+                new ObjectParameter("Treibstoff", typeof(string));
+    
+            var typParameter = typ != null ?
+                new ObjectParameter("Typ", typ) :
+                new ObjectParameter("Typ", typeof(string));
+    
+            var kategorieParameter = kategorie != null ?
+                new ObjectParameter("Kategorie", kategorie) :
+                new ObjectParameter("Kategorie", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoBearbeiten", iDAutoParameter, baujahrParameter, pSParameter, getriebeParameter, tuerenParameter, sitzeParameter, mietPreisParameter, verkaufPreisParameter, kilometerstandParameter, autobildParameter, anzeigenParameter, treibstoffParameter, typParameter, kategorieParameter);
+        }
     }
 }

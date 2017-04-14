@@ -63,6 +63,7 @@ namespace kundt_back_end.Controllers
         {
 
             //AutoModel am = new AutoModel();
+            
             am.autoListe = db.tblAuto.ToList();
             am.typListe = db.tblTyp.ToList();
             am.markeListe = db.tblMarke.ToList();
@@ -112,7 +113,7 @@ namespace kundt_back_end.Controllers
             }
             else
             {
-                return Convert.ToDecimal(x);
+                return x;
             }
         }
 
@@ -169,7 +170,7 @@ namespace kundt_back_end.Controllers
         public ActionResult AutoBearbeiten(int? id)
         {
             AutoModel am = new AutoModel();
-            if (id == null)
+            if (id == 0 || id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -193,9 +194,36 @@ namespace kundt_back_end.Controllers
         }
         [HttpPost]
         [Authorize(Roles = "M,A")]
-        public ActionResult AutoBearbeiten(AutoModel am, int[] ausstattungListe, int[] plainAusstattungListe)
+        public ActionResult AutoBearbeiten(AutoModel am, int[] ausstattungListe, int[] plainAusstattungListe, HttpPostedFileBase upload)
         {
-            //update-proc implementieren!
+            //Abfrage ob binary-daten vorhanden
+            if (upload != null && upload.ContentLength > 0)
+            {
+                using (var reader = new System.IO.BinaryReader(upload.InputStream))
+                {
+                    am.myAutobild = reader.ReadBytes(upload.ContentLength);
+                }
+            }
+            //Autoupdate proc:
+            if (am.myIDAuto != 0)
+            {
+                db.pAutoBearbeiten(am.myIDAuto, umwandlerINT16(am.autoBearbeiten[0].Baujahr),
+                    am.autoBearbeiten[0].PS, am.myGetriebe, am.autoBearbeiten[0].Tueren,
+                    am.autoBearbeiten[0].Sitze, am.autoBearbeiten[0].MietPreis,
+                    am.autoBearbeiten[0].VerkaufPreis, am.autoBearbeiten[0].Kilometerstand,
+                    am.myAutobild, am.autoBearbeiten[0].Anzeigen, am.myTreibstoff,
+                    am.myTyp, am.myKategorie);
+            }
+            //Ausstattungsupdate proc:
+            
+            foreach (var item in ausstattungListe)
+            {
+                
+            }
+            foreach (var item in plainAusstattungListe)
+            {
+
+            }
             return RedirectToAction("AutoUebersicht", "tblAuto");
         }
 

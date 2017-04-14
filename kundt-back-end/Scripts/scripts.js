@@ -52,3 +52,24 @@ function CheckTime(i) {
     };
     return i;
 }
+
+
+$(document).ready(function () {
+    if (document.title = "Auto Übersicht") {
+        $(window).scroll(function () {
+
+            console.log($(window).scrollTop());
+
+            if ($(window).scrollTop() < 250) {
+                $('#filter').removeClass('navbar-fixed-top');
+                $('#filter').removeClass('filterPos');
+
+            }
+
+            if ($(window).scrollTop() > 250) {
+                $('#filter').addClass('navbar-fixed-top');
+                $('#filter').addClass('filterPos');
+            }
+        });
+    }
+});

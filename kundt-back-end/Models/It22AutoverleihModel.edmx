@@ -400,6 +400,22 @@
         <Function Name="pAusstattungZuAuto2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="daten" Type="int" Mode="In" />
         </Function>
+        <Function Name="pAutoBearbeiten" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDAuto" Type="int" Mode="In" />
+          <Parameter Name="Baujahr" Type="smallint" Mode="In" />
+          <Parameter Name="PS" Type="varchar" Mode="In" />
+          <Parameter Name="Getriebe" Type="varchar" Mode="In" />
+          <Parameter Name="Tueren" Type="varchar" Mode="In" />
+          <Parameter Name="Sitze" Type="tinyint" Mode="In" />
+          <Parameter Name="MietPreis" Type="decimal" Mode="In" />
+          <Parameter Name="VerkaufPreis" Type="decimal" Mode="In" />
+          <Parameter Name="Kilometerstand" Type="decimal" Mode="In" />
+          <Parameter Name="Autobild" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Anzeigen" Type="bit" Mode="In" />
+          <Parameter Name="Treibstoff" Type="varchar" Mode="In" />
+          <Parameter Name="Typ" Type="varchar" Mode="In" />
+          <Parameter Name="Kategorie" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="pAutoBearbeitenAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -1102,6 +1118,22 @@
             <Parameter Name="searchKilometerstandBis" Mode="In" Type="Decimal" />
             <Parameter Name="searchAnzeigen" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="pAutoBearbeiten">
+            <Parameter Name="IDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="Baujahr" Mode="In" Type="Int16" />
+            <Parameter Name="PS" Mode="In" Type="String" />
+            <Parameter Name="Getriebe" Mode="In" Type="String" />
+            <Parameter Name="Tueren" Mode="In" Type="String" />
+            <Parameter Name="Sitze" Mode="In" Type="Byte" />
+            <Parameter Name="MietPreis" Mode="In" Type="Decimal" />
+            <Parameter Name="VerkaufPreis" Mode="In" Type="Decimal" />
+            <Parameter Name="Kilometerstand" Mode="In" Type="Decimal" />
+            <Parameter Name="Autobild" Mode="In" Type="Binary" />
+            <Parameter Name="Anzeigen" Mode="In" Type="Boolean" />
+            <Parameter Name="Treibstoff" Mode="In" Type="String" />
+            <Parameter Name="Typ" Mode="In" Type="String" />
+            <Parameter Name="Kategorie" Mode="In" Type="String" />
+          </FunctionImport>
 
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
@@ -1648,6 +1680,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeiten" FunctionName="it22AutoverleihModel.Store.pAutoBearbeiten" />
 
         </EntityContainerMapping>
       </Mapping>
