@@ -39,7 +39,7 @@ namespace kundt_back_end.Controllers
 
             if (cm.filtermodel == null)
             {
-                cm.kundenlist = db.pKundenAnzeigen(null, null, null, null, "zurueck");
+                cm.kundenlist = db.pKundenAnzeigen(null, null, null, null, "Alle");
             }
             else
             {
