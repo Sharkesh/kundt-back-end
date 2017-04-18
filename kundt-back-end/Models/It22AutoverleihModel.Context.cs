@@ -516,15 +516,15 @@ namespace kundt_back_end.Models
             var searchKategorieParameter = searchKategorie != null ?
                 new ObjectParameter("searchKategorie", searchKategorie) :
                 new ObjectParameter("searchKategorie", typeof(string));
-
+    
             var searchBaujahrVonParameter = searchBaujahrVon.HasValue ?
                 new ObjectParameter("searchBaujahrVon", searchBaujahrVon) :
                 new ObjectParameter("searchBaujahrVon", typeof(short));
-
+    
             var searchBaujahrBisParameter = searchBaujahrBis.HasValue ?
                 new ObjectParameter("searchBaujahrBis", searchBaujahrBis) :
                 new ObjectParameter("searchBaujahrBis", typeof(short));
-
+    
             var searchKilometerstandVonParameter = searchKilometerstandVon.HasValue ?
                 new ObjectParameter("searchKilometerstandVon", searchKilometerstandVon) :
                 new ObjectParameter("searchKilometerstandVon", typeof(decimal));
@@ -536,10 +536,10 @@ namespace kundt_back_end.Models
             var searchAnzeigenParameter = searchAnzeigen.HasValue ?
                 new ObjectParameter("searchAnzeigen", searchAnzeigen) :
                 new ObjectParameter("searchAnzeigen", typeof(bool));
-
+    
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pAutoBearbeitenInklFilterFinal2_Result>("pAutoBearbeitenInklFilterFinal2", searchIDAutoParameter, searchMarkeParameter, searchTypParameter, searchKategorieParameter, searchBaujahrVonParameter, searchBaujahrBisParameter, searchKilometerstandVonParameter, searchKilometerstandBisParameter, searchAnzeigenParameter);
         }
-
+    
         public virtual int pAutoBearbeiten(Nullable<int> iDAuto, Nullable<short> baujahr, string pS, string getriebe, string tueren, Nullable<byte> sitze, Nullable<decimal> mietPreis, Nullable<decimal> verkaufPreis, Nullable<decimal> kilometerstand, byte[] autobild, Nullable<bool> anzeigen, string treibstoff, string typ, string kategorie)
         {
             var iDAutoParameter = iDAuto.HasValue ?
@@ -600,16 +600,32 @@ namespace kundt_back_end.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoBearbeiten", iDAutoParameter, baujahrParameter, pSParameter, getriebeParameter, tuerenParameter, sitzeParameter, mietPreisParameter, verkaufPreisParameter, kilometerstandParameter, autobildParameter, anzeigenParameter, treibstoffParameter, typParameter, kategorieParameter);
         }
-
-        //public virtual string p8Passwort(string nPasswort)
-        //{
-        //    var nPasswortParameter = nPasswort != null ?
-        //        new ObjectParameter("nPasswort", nPasswort) :
-        //        new ObjectParameter("nPasswort", typeof(string));
-
-
-        //    return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p8Passwort", nPasswort);
-        //}
-
+    
+        public virtual int p8Passwort(ObjectParameter nPasswort)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p8Passwort", nPasswort);
+        }
+    
+        public virtual int pAutoBearbeitenCreate(Nullable<int> daten, Nullable<int> id)
+        {
+            var datenParameter = daten.HasValue ?
+                new ObjectParameter("daten", daten) :
+                new ObjectParameter("daten", typeof(int));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoBearbeitenCreate", datenParameter, idParameter);
+        }
+    
+        public virtual int pAutoBearbeitenDelete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoBearbeitenDelete", idParameter);
+        }
     }
 }

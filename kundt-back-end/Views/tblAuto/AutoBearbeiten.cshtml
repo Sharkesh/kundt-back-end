@@ -3,11 +3,12 @@
     ViewBag.Title = "Auto bearbeiten";
 }
 <style>
-    .myImg{
-        max-height:200px;
+    .myImg {
+        max-height: 200px;
         border: 1px solid #ccc;
-        border-radius:5px;
+        border-radius: 5px;
     }
+
     .table1 {
         font-family: arial, sans-serif;
     }
@@ -27,7 +28,6 @@
     .picBorder {
         border: solid 1px;
         border-color: lightgray;
-
     }
 
     .labelCheckbox {
@@ -51,7 +51,7 @@
 </style>
 
 @*@using (Html.BeginForm())
-{*@
+    {*@
 <form action="@Url.Action("AutoBearbeiten","tblAuto", null)" method="post" enctype="multipart/form-data">
     <div class="container">
         <div class="col-xs-12 text-center" style="margin:auto auto 20px auto; color:white; background-color:#f99b1c; vertical-align:middle; padding:0px; border-radius:4px; box-shadow:lightgray 1px 1px 0px;">
@@ -74,14 +74,12 @@
                 {
                     <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
                         <label class="labelCheckbox"><input type="checkbox" checked name="ausstattungListe" value="@item.IDAusstattung">@Html.DisplayFor(model => item.Ausstattung)</label>
-
                     </div>
                 }
                 @foreach (var item in Model.plainAusstattungListe)
                 {
                     <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
                         <label class="labelCheckbox"><input type="checkbox" name="plainAusstattungListe" value="@item.IDAusstattung">@Html.DisplayFor(model => item.Ausstattung)</label>
-
                     </div>
                 }
             </div>
@@ -196,7 +194,7 @@
                                 }
                             </optgroup>
                         </select>
-                        
+
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">

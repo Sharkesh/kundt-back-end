@@ -63,7 +63,7 @@ namespace kundt_back_end.Controllers
         {
 
             //AutoModel am = new AutoModel();
-            
+
             am.autoListe = db.tblAuto.ToList();
             am.typListe = db.tblTyp.ToList();
             am.markeListe = db.tblMarke.ToList();
@@ -183,11 +183,18 @@ namespace kundt_back_end.Controllers
             am.treibstoffListe = db.tblTreibstoff.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
             am.plainAusstattungListe = db.tblAusstattung.SqlQuery("SELECT* FROM tblAusstattung").ToList();
-            for (int i = 0; i < am.ausstattungListe.Count; i++)
+            if (am.ausstattungListe != null)
             {
-                if (am.plainAusstattungListe[i].IDAusstattung == am.ausstattungListe[i].IDAusstattung)
+
+                for (int i = 0; i < am.ausstattungListe.Count; i++)
                 {
-                    am.plainAusstattungListe.RemoveAt(i);
+                    for (int j = 0; j < am.plainAusstattungListe.Count; j++)
+                    {
+                        if (am.plainAusstattungListe[j].IDAusstattung == am.ausstattungListe[i].IDAusstattung)
+                        {
+                            am.plainAusstattungListe.RemoveAt(j);
+                        }
+                    }
                 }
             }
             return View(am);
@@ -204,6 +211,10 @@ namespace kundt_back_end.Controllers
                     am.myAutobild = reader.ReadBytes(upload.ContentLength);
                 }
             }
+            else
+            {
+                am.myAutobild = null;
+            }
             //Autoupdate proc:
             if (am.myIDAuto != 0)
             {
@@ -213,16 +224,28 @@ namespace kundt_back_end.Controllers
                     am.autoBearbeiten[0].VerkaufPreis, am.autoBearbeiten[0].Kilometerstand,
                     am.myAutobild, am.autoBearbeiten[0].Anzeigen, am.myTreibstoff,
                     am.myTyp, am.myKategorie);
-            }
-            //Ausstattungsupdate proc:
-            
-            foreach (var item in ausstattungListe)
-            {
-                
-            }
-            foreach (var item in plainAusstattungListe)
-            {
 
+                //Entfernen der bereits existierenden Ausstattung @tblAutodetail
+                db.pAutoBearbeitenDelete(am.myIDAuto);
+
+                //Neue Ausstattung eintragen @tblAutodetail
+                if (ausstattungListe != null)
+                {
+                    foreach (var item in ausstattungListe)
+                    {
+                        db.pAutoBearbeitenCreate(item, am.myIDAuto);
+                    }
+                }
+                if (plainAusstattungListe != null)
+                {
+                    foreach (var item in plainAusstattungListe)
+                    {
+                        if (item != 0)
+                        {
+                            db.pAutoBearbeitenCreate(item, am.myIDAuto);
+                        }
+                    }
+                }
             }
             return RedirectToAction("AutoUebersicht", "tblAuto");
         }

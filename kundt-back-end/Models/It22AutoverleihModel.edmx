@@ -425,6 +425,13 @@
         <Function Name="pAutoBearbeitenAnzeigen2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="pAutoBearbeitenCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="daten" Type="int" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="pAutoBearbeitenInklFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="searchIDAuto" Type="int" Mode="In" />
           <Parameter Name="searchMarke" Type="varchar" Mode="In" />
@@ -1137,10 +1144,17 @@
             <Parameter Name="Treibstoff" Mode="In" Type="String" />
             <Parameter Name="Typ" Mode="In" Type="String" />
             <Parameter Name="Kategorie" Mode="In" Type="String" />
-	  </FunctionImport>
+          </FunctionImport>
 
           <FunctionImport Name="p8Passwort">
-            <Parameter Name="NPasswort" Mode="InOut" Type="String" />
+          <Parameter Name="NPasswort" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenCreate">
+            <Parameter Name="daten" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenDelete">
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
 
         </EntityContainer>
@@ -1692,6 +1706,8 @@
           <FunctionImportMapping FunctionImportName="pAutoBearbeiten" FunctionName="it22AutoverleihModel.Store.pAutoBearbeiten" />
 
           <FunctionImportMapping FunctionImportName="p8Passwort" FunctionName="it22AutoverleihModel.Store.p8Passwort" />
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenCreate" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenCreate" />
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenDelete" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenDelete" />
 
 
         </EntityContainerMapping>
