@@ -6,7 +6,7 @@ using System.Web;
 
 namespace kundt_back_end.Models
 {
-    public class KundenUebersichtFilterModel
+    public class KundenUebersichtFilterModel 
     {
 
         public string KundenName { get; set; }
@@ -15,9 +15,20 @@ namespace kundt_back_end.Models
         public string Ort { get; set; }
 
         public string Buchungsstatus { get; set; }
+        
 
-
+        public List<string> BuStat =  new List<string>()
+        {
+            "Alle",
+            "Erstellt",
+            "Abgeholt",
+            "Zurueck"
+        };
 
       
+
+
+
+
     }
 }

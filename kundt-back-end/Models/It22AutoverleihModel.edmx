@@ -394,6 +394,9 @@
           <Parameter Name="idBuchung" Type="int" Mode="In" />
         </Function>
         <Function Name="OffeneBuchungenTodayPlus13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p8Passwort" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NPasswort" Type="nvarchar" Mode="InOut" />
+        </Function>
         <Function Name="pAusstattung" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -1118,6 +1121,7 @@
             <Parameter Name="searchKilometerstandBis" Mode="In" Type="Decimal" />
             <Parameter Name="searchAnzeigen" Mode="In" Type="Boolean" />
           </FunctionImport>
+
           <FunctionImport Name="pAutoBearbeiten">
             <Parameter Name="IDAuto" Mode="In" Type="Int32" />
             <Parameter Name="Baujahr" Mode="In" Type="Int16" />
@@ -1133,6 +1137,10 @@
             <Parameter Name="Treibstoff" Mode="In" Type="String" />
             <Parameter Name="Typ" Mode="In" Type="String" />
             <Parameter Name="Kategorie" Mode="In" Type="String" />
+	  </FunctionImport>
+
+          <FunctionImport Name="p8Passwort">
+            <Parameter Name="NPasswort" Mode="InOut" Type="String" />
           </FunctionImport>
 
         </EntityContainer>
@@ -1680,7 +1688,11 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+
           <FunctionImportMapping FunctionImportName="pAutoBearbeiten" FunctionName="it22AutoverleihModel.Store.pAutoBearbeiten" />
+
+          <FunctionImportMapping FunctionImportName="p8Passwort" FunctionName="it22AutoverleihModel.Store.p8Passwort" />
+
 
         </EntityContainerMapping>
       </Mapping>

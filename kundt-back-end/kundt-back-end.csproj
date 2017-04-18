@@ -519,10 +519,6 @@
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
     <Content Include="Views\tblAuto\AutoBearbeiten.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Eyecatchers\Create.cshtml" />
-    <Content Include="Views\Eyecatchers\Delete.cshtml" />
-    <Content Include="Views\Eyecatchers\Details.cshtml" />
-    <Content Include="Views\Eyecatchers\Edit.cshtml" />
     <Content Include="Views\Eyecatchers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

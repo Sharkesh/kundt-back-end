@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using kundt_back_end.Models;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.Objects;
+using System.Net.Mail;
 
 namespace kundt_back_end.Controllers
 {
@@ -124,10 +125,38 @@ namespace kundt_back_end.Controllers
             {
                 if (MM.Passwort == "PasswortResetten")
                 {
-                    //db.pMitarbeiterPasswort
 
+                    //MM.Passwort = db.p8Passwort;
+                    // Passwort neu setzen auf das RND Generierte der procedure 
+
+                    //db.pMitarbeiterPasswort
+                    using (MailMessage mailmessage = new MailMessage(/*"noreply@sharkesh.com"*/"test.sharkesh@gmail.com", MM.Email))
+                    {
+                        mailmessage.Subject = "Account Aktivierung";
+                        //Nachrichten Text wird "zusammengebaut".
+                        string body = "<p>Hallo," + MM.MAAnrede + MM.MANachname;
+                        body += "<br /><br />Hier ist ihr neues Passwort: " + MM.Passwort;
+                        body += "<br /><a Bei problemen wenden sie sich bitte an den Admin ihres Vertrauens ;)</a>";
+                        body += "<br /><br />Danke!</p>";
+                        //Nachrichten Text wird an das MailMessage Objekt gehängt.
+                        mailmessage.Body = body;
+                        mailmessage.IsBodyHtml = true;
+                        //Logindaten für den SmtpClient weiter unten.
+                        NetworkCredential NetworkCred = new NetworkCredential(/*"noreply"*/"test.sharkesh@gmail.com", /*"~S[%a(1<`(eN"*/"123user!");
+                        //Verbindungs Variablen werden gesetzt.
+                        SmtpClient smtp = new SmtpClient()
+                        {
+                            Host = "smtp.gmail.com"/*"cloud.sharkesh.com"*/,
+                            EnableSsl = true,
+                            UseDefaultCredentials = true,
+                            Credentials = NetworkCred,
+                            Port = 587
+                        };
+                        smtp.Send(mailmessage);
+                    }
                 }
                 
+                //Das Passwort nun Hashen und ab in die Datenbank
                 MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
 
                 //ObjectParameter MID = new ObjectParameter("IDMitarbeiter", MM.IDMitarbeiter);
@@ -135,11 +164,7 @@ namespace kundt_back_end.Controllers
                 //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
                 db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort,MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
-
-
-
-                // Probleme mit IDMitarbeiter da er es in irgend ein Systhem.Data.Entity.Core.Objects.ObjectParameter ding convertieren will
-                //Und eventuell auch mit Rolle da er den "eigentlichen" char in einen string umwandeln will....warum ?
+                //Nach Erfolgreichem Ändern schick den Benutzer auf den Index zurück
                 return RedirectToAction("Index");
             }
             else

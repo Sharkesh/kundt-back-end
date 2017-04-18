@@ -114,7 +114,7 @@ namespace kundt_back_end.Controllers
 
 
             List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
-            
+
             DbConnection con = db.Database.Connection;
             ///Checkt ob die Datenbankverbindung offen ist, falls nicht wird sie geöffnet
             if (con.State != ConnectionState.Open)
@@ -196,7 +196,6 @@ namespace kundt_back_end.Controllers
         public ActionResult Edit(BuchungEditModel BEM)
         //public ActionResult Edit(tblBuchung tblBuchung)
         {
-
             if (ModelState.IsValid)
             {
                 /// Alte Variante
@@ -239,15 +238,19 @@ namespace kundt_back_end.Controllers
 
 
                 }
-
                 /// Abklären was passiert wenn storniert wurde.
                 /// Eintrag in tblHistorie machen oder nicht?
                 /// Wenn ja proc dafür machen?
                 /// Wenn nein was dann?
-                //if (BEM.Storno)
-                //{
-                //    BEM.BuchungStatus = "zurueck";
-                //}
+                if (BEM.Storno)
+                {
+                    BEM.BuchungStatus = "zurueck";
+                }
+
+                if (!BEM.Storno && !BEM.zurueck && !BEM.abgeholt)
+                {
+                    BEM.BuchungStatus = db.tblBuchung.Find(BEM.IDBuchung).BuchungStatus;
+                }
 
 
                 /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
@@ -262,7 +265,6 @@ namespace kundt_back_end.Controllers
                 //Buchung.Versicherung = BEM.Versicherung;
                 //Buchung.Storno = BEM.Storno;                
                 //db.SaveChanges();
-
 
                 /// Nach dem Speichern wird man zum Aufrufpunkt der Edit Seite redirected
                 var urlStr = (string)TempData["AusgangsURL"];
