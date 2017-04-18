@@ -99,6 +99,11 @@ namespace kundt_back_end.Controllers
             
             if (ModelState.IsValid)
             {
+                //abfragen ob kem.Plz in sb.tblPLZOrt enthalten ist
+                //if ()
+                //{
+
+                //}
                 db.pKundeEdit(kem.idkunde, kem.Vorname, kem.Nachname, kem.Straße, kem.Plz, kem.Ort, kem.Email,
                     kem.Telefon, kem.PassNr, kem.GebDat);
                 return RedirectToAction("KundenUebersicht", "Home");

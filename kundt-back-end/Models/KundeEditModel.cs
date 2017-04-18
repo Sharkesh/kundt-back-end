@@ -13,17 +13,11 @@ using System.Web.DynamicData;
 namespace kundt_back_end.Models
 {
 
-    public class KundeEditModel
+    public class KundeEditModel : it22AutoverleihEntities
     {
         //Nicht fertig - Endl
 
-        //public List<tblPLZOrt> plzList { get; set; }
-
-
-
-        //public List<int> li = new List<int>
-            
-        
+    
 
         [Required]
         public int idkunde { get; set; }
@@ -49,27 +43,7 @@ namespace kundt_back_end.Models
         [MinLength(2, ErrorMessage = "PLZ muss min. 2 Zeichen haben")]
         [MaxLength(30, ErrorMessage = "PLZ darf nicht mehr als 30 Zeichen enthalten")]
         public string Plz { get; set; }
-        //private string plz;
-        //public string Plz
-        //{
-        //    get { return plz; }
-        //    set
-        //    {
-
-        //        foreach (var item in plzList)
-        //        {
-
-        //            if ((plzList.Select(x => x.PLZ)).Contains(value))
-        //            {
-        //                plz = value;
-        //            }
-        //            else
-        //            {
-        //                throw new ArgumentException("Bitte geben Sie eine gültige PLZ ein");
-        //            };
-        //        }
-        //    }
-        //}
+       
 
         public string Ort { get; set; }
 
@@ -91,49 +65,8 @@ namespace kundt_back_end.Models
         //[RegularExpression("^(?!^0+$)[a-zA-Z0-9]{3,20}$", ErrorMessage = "Bitte Geburtstag eingeben (Z.b.: )")]
         public System.DateTime GebDat { get; set; }
 
-        //??
-        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        //[DataType(DataType.Date)]
 
     }
 
-    //[MetadataType(typeof(KundeEditModelMetadata))]
-    //public partial class KundeEditModelllll
-    //{
-    //    partial void OnContextCreated()
-    //    {
-    //        this.SavingChanges += new System.EventHandler(OnSavingChanges);
-    //    }
-
-    //    public void OnSavingChanges(KundeEditModel kundChange, System.EventArgs e)
-    //    {
-    //        var stateManager = ((KundeEditModel) kundChange).ObjectStateManager;
-    //        var changedEntities =
-    //            ObjectStateManager.GetObjectStateEntries(EntityState.Modified);
-    //        foreach (ObjectStateEntry stateEntryEntity in
-    //            changedEntities)
-    //        {
-    //            if (stateEntryEntity.Entity is Product)
-    //            {
-    //                Product prod = (Product) stateEntryEntity.Entity;
-    //                rValidateDate(prod.SellStartDate);
-    //                rValidateDate(prod.SellEndDate);
-    //                rValidateDate(prod.DiscontinuedDate);
-    //            }
-    //        }
-    //    }
-
-    //    void ValidateVorname(KundeEditModel value)
-    //    {
-    //        string Vorname = (string) value;
-    //        if (Vorname.Length <= 0)
-    //            throw new ValidationException("Bitte geben Sie einen Vornamen ein");
-    //    }
-
-    //    public class KundeEditModelMetadata
-    //    {
-    //        [Required(AllowEmptyStrings = false)] public string Vorname;
-    //    }
-
-    //}
+   
 }
