@@ -1,6 +1,7 @@
 ﻿@model kundt_back_end.Models.AutoModel
 @{
     ViewBag.Title = "Auto Übersicht";
+    
 }
 
 <style>
@@ -39,6 +40,7 @@
         min-width: 200px;
         min-height: 35px;
         /*width: 200px;*/
+        border-radius: 3px;
     }
 
     .myInput2 {
@@ -60,18 +62,12 @@
         font-size: 24px;
         margin-bottom: 20px;
     }
-    .btn-default{
-        color:black;
-    }
-    .btn{
-        color:black;
-    }
-    
+
     .a:focus, a:hover {
-        color: darkorange;
+        color: deepskyblue;
         text-decoration: none;
     }
-    
+
     .a {
         color: black;
         text-decoration: none;
@@ -80,26 +76,79 @@
     .myButton {
         min-width: 150px;
         max-height: 35px;
-        color: white;
-        text-align:center;
-        vertical-align:middle;
-        padding-bottom:10px;
+        text-align: center;
+        vertical-align: middle;
+        padding-bottom: 10px;
         text-decoration: none;
         text-decoration-color: none;
+        border-radius: 5px;
+        font-size: 22px;
+        text-align: match-parent;
+        background-color: darkorange;
+        box-shadow: dimgrey 1px 1px 0px;
+        color: white;
+    }
+
+    .myButtonFilter {
+        min-width: 150px;
+        max-height: 35px;
+        color: steelblue;
+        text-align: center;
+        border-radius: 5px;
+        font-size: 22px;
+        background-color: lightgrey;
+        text-align: match-parent;
+        box-shadow: dimgrey 1px 2px 0px;
+        border: 2px solid;
+        border-color: lightgray;
+    }
+
+        .myButtonFilter:hover {
+            min-width: 150px;
+            max-height: 35px;
+            color: deepskyblue;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 22px;
+            background-color: lightgray;
+            text-align: match-parent;
+            box-shadow: gray 1px 2px 0px;
+            border: 2px solid;
+            border-color: lightgray;
+        }
+
+    .MyHead {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        vertical-align: middle;
+        padding: 0px;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+    }
+
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+        height: 40px;
+        font-size: 32px;
     }
 </style>
-
+<div class="headingFormat">
+    Auto Übersicht
+</div>
 @using (Html.BeginForm())
 {
     <div class="row">
-        <div class="col-xs-12 text-center" style="margin:auto auto 20px auto; color:white; background-color:#f99b1c; vertical-align:middle; padding:0px; border-radius:4px; box-shadow:lightgray 1px 1px 0px;">
-            <h4>Auto Übersicht</h4>
-        </div>
         <div class="col-xs-3">
             @*<form method="post" action="@Url.Action("AutoUebersicht2", "tblAuto", Model)">*@
             <nav class="nav" style="max-width:250px;" id="filter">
                 <div class="table-hover">
-                    <table class="table-condensed myTableBorder2" style="background-color:lightgrey; border-radius:5px;">
+                    <table class="table-condensed myTableBorder2" style="background-color:lightgrey; border-radius:5px; box-shadow:dimgrey 2px 2px 3px;">
                         <tr>
                             <td class="myTd">
                                 <header>ID-Suche:</header>
@@ -118,9 +167,9 @@
                                 <select id="FilterMarke" name="myMarke" class="myInput">
                                     <option class="myInput DefaultFilter" value="">Alle Marken</option>
                                     @foreach (var item in Model.markeListe)
-                                    {
-                                        <option class="myInput" value="@item.Marke">@Html.DisplayFor(Model => item.Marke)</option>
-                                    }
+                                        {
+                                            <option class="myInput" value="@item.Marke">@Html.DisplayFor(Model => item.Marke)</option>
+                                        }                                    
                                 </select>
                             </td>
                         </tr>
@@ -159,7 +208,7 @@
                             <td class="myTd">
                                 <header>Kilometerstand wählen:</header>
                                 <input class="myInput" type="number" name="myKilometerStandVon" value="" placeholder="Von" />
-                                <input class="myInput" type="number" name="myKilometerStandBis" value="" placeholder="Bis" />
+                                <input class="myInput" type="number" name="myKilometerStandBis" value="" placeholder=" Bis" />
                             </td>
                         </tr>
                         <tr>
@@ -176,7 +225,7 @@
                             <tr>
                                 <td>
                                     <center>
-                                        <input type="submit" class="btn btn-default" value="Suchen" style="border:solid 1px; border-color:darkgrey; border-radius:5px; width:150px; margin-left:-5px" />
+                                        <input type="submit" class="btn-default myButtonFilter" value="Suchen" style="border:solid 1px; border-color:darkgrey; border-radius:5px; width:150px; margin-left:-5px" />
                                     </center>
                                 </td>
                             </tr>
@@ -194,7 +243,6 @@
 
                     @foreach (var item in Model.autoBearbeitenFilter)
                     {
-
                         <tr class="myTableBorder" style="margin-bottom:15px;">
                             <td class="myTd">
                                 @if (item.AutoBild != null)
@@ -219,8 +267,8 @@
                                 <p>Mietpreis: @Html.DisplayFor(Model => item.MietPreis)€</p>
                                 <p>Verkaufspreis: @Html.DisplayFor(Model => item.VerkaufPreis)€</p>
                             </td>
-                            <td style="padding-left:15px">
-                                <button class="btn btn-default myButton">@Html.ActionLink("Bearbeiten", "AutoBearbeiten", new { id = item.IDAuto })</button>
+                            <td style="padding-left:15px;">
+                                <button class="btn-default myButton">@Html.ActionLink("Bearbeiten", "AutoBearbeiten", new { id = item.IDAuto })</button>
                             </td>
                         </tr>
                     }
@@ -228,4 +276,4 @@
             </div>
         </div>
     </div>
-}
+                                        }

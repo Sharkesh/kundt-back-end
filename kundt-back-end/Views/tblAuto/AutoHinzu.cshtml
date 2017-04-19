@@ -22,7 +22,6 @@
     .picBorder {
         border: solid 1px;
         border-color: lightgray;
-        
     }
 
     .labelCheckbox {
@@ -43,12 +42,24 @@
         display: inline-block;
         border-radius: 4px;
     }
+
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+        height: 40px;
+        font-size: 32px;
+    }
 </style>
+<div class="headingFormat">
+    Fahrzeug hinzufügen
+</div>
 <form action="@Url.Action("AutoHinzu", "tblAuto", null)" method="post" enctype="multipart/form-data">
     <div class="container">
-        <div class="col-xs-12 text-center" style="margin:auto auto 20px auto; color:white; background-color:#f99b1c; vertical-align:middle; padding:0px; border-radius:4px; box-shadow:lightgray 1px 1px 0px;">
-            <h4>Fahrzeug hinzufügen</h4>
-        </div>
+
         <div class="col-xs-6" style="margin:auto; display:inline-block; padding:0px">
             <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" alt="Alternate Text" style="max-height:200px" class="picBorder" />
             <p><input type="file" id="upload" name="upload" accept="image/*" /></p>
@@ -159,7 +170,7 @@
                             <optgroup label="Treibstoff wählen">
                                 @foreach (var item in Model.treibstoffListe)
                                 {
-                                    <option name="myTreibstoff" value="@item.Treibstoff">@Html.DisplayFor(m => item.Treibstoff)</option>
+                                    <option value="@item.Treibstoff">@Html.DisplayFor(m => item.Treibstoff)</option>
                                 }
                             </optgroup>
                         </select>
@@ -171,9 +182,20 @@
                         @Html.EditorFor(model => model.myMietPreis, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
+                <tr class="autoHinzu_tr hinzuAuto">
+                    <td>Anzeigen:</td>
+                    <td>
+                        <select name="myAnzeigen" id="myAnzeigen" class="hinzuAuto form-control">
+                            <optgroup label="Treibstoff wählen">
+                                <option value="true">Sichtbar</option>
+                                <option value="false">Versteckt</option>
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
             </table>
         </div>
-                
+
         <div class="col-xs-12 text-center">
             @*<form action="@Url.Action("AutoHinzu","tblAuto",Model)" method="post">
                     <button class="buttonOrangeNextStep">Aktualisieren</button>

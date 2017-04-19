@@ -45,7 +45,11 @@ namespace kundt_back_end.Controllers
                 }
             }
 
-            db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS, am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze), am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand, am.myAutobild, am.myAnzeigen, am.myTreibstoff, am.myTyp, am.myKategorie);
+            db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS,
+                am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze),
+                am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand,
+                am.myAutobild, am.myAnzeigen, am.myTreibstoff, am.myTyp,
+                am.myKategorie);
 
             foreach (int? item in ausstattungListe)
             {
@@ -54,7 +58,8 @@ namespace kundt_back_end.Controllers
                     db.pAusstattungZuAuto2(item);
                 }
             }
-            return View();
+
+            return RedirectToAction("AutoUebersicht", "tblAuto");
 
         }
 
@@ -68,7 +73,7 @@ namespace kundt_back_end.Controllers
             am.typListe = db.tblTyp.ToList();
             am.markeListe = db.tblMarke.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
-
+            
             if (am.myIDAuto != 0)
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
@@ -118,51 +123,51 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: tblAuto/Details/5
-        [Authorize(Roles = "M,A")]
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblAuto tblAuto = db.tblAuto.Find(id);
-            if (tblAuto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tblAuto);
-        }
+        //[Authorize(Roles = "M,A")]
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    tblAuto tblAuto = db.tblAuto.Find(id);
+        //    if (tblAuto == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(tblAuto);
+        //}
 
         // GET: tblAuto/Create
-        [Authorize(Roles = "M,A")]
-        public ActionResult Create()
-        {
-            ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie");
-            ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff");
-            ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ");
-            return View();
-        }
+        //[Authorize(Roles = "M,A")]
+        //public ActionResult Create()
+        //{
+        //    ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie");
+        //    ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff");
+        //    ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ");
+        //    return View();
+        //}
 
         // POST: tblAuto/Create
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "M,A")]
-        public ActionResult Create([Bind(Include = "IDAuto,Baujahr,PS,Getriebe,Tueren,Sitze,MietPreis,VerkaufPreis,Kilometerstand,AutoBild,Anzeigen,FKTreibstoff,FKTyp,FKKategorie")] tblAuto tblAuto)
-        {
-            if (ModelState.IsValid)
-            {
-                db.tblAuto.Add(tblAuto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "M,A")]
+        //public ActionResult Create([Bind(Include = "IDAuto,Baujahr,PS,Getriebe,Tueren,Sitze,MietPreis,VerkaufPreis,Kilometerstand,AutoBild,Anzeigen,FKTreibstoff,FKTyp,FKKategorie")] tblAuto tblAuto)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.tblAuto.Add(tblAuto);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie", tblAuto.FKKategorie);
-            ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff", tblAuto.FKTreibstoff);
-            ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ", tblAuto.FKTyp);
-            return View(tblAuto);
-        }
+        //    ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie", tblAuto.FKKategorie);
+        //    ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff", tblAuto.FKTreibstoff);
+        //    ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ", tblAuto.FKTyp);
+        //    return View(tblAuto);
+        //}
 
         // GET: tblAuto/Edit/5
         [HttpGet]
@@ -211,10 +216,7 @@ namespace kundt_back_end.Controllers
                     am.myAutobild = reader.ReadBytes(upload.ContentLength);
                 }
             }
-            else
-            {
-                am.myAutobild = null;
-            }
+
             //Autoupdate proc:
             if (am.myIDAuto != 0)
             {
@@ -251,16 +253,16 @@ namespace kundt_back_end.Controllers
         }
 
         // POST: tblAuto/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "M,A")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            tblAuto tblAuto = db.tblAuto.Find(id);
-            db.tblAuto.Remove(tblAuto);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "M,A")]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    tblAuto tblAuto = db.tblAuto.Find(id);
+        //    db.tblAuto.Remove(tblAuto);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

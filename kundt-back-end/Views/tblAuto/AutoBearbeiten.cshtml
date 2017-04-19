@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Auto bearbeiten";
 }
+
 <style>
     .myImg {
         max-height: 200px;
@@ -48,15 +49,24 @@
         display: inline-block;
         border-radius: 4px;
     }
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+        height: 40px;
+        font-size: 32px;
+    }
 </style>
 
-@*@using (Html.BeginForm())
-    {*@
+<div class="headingFormat">
+    Fahrzeug bearbeiten
+</div>
 <form action="@Url.Action("AutoBearbeiten","tblAuto", null)" method="post" enctype="multipart/form-data">
     <div class="container">
-        <div class="col-xs-12 text-center" style="margin:auto auto 20px auto; color:white; background-color:#f99b1c; vertical-align:middle; padding:0px; border-radius:4px; box-shadow:lightgray 1px 1px 0px;">
-            <h4>Fahrzeug bearbeiten</h4>
-        </div>
+
         <div class="col-xs-6" style="margin:auto; display:inline-block; padding:0px">
             @if (Model.autoBearbeiten[0].AutoBild != null)
             {
@@ -91,12 +101,13 @@
                     <td>
                         <select name="myMarke" id="Marke" class="hinzuAuto form-control">
                             <optgroup label="Kategorie wählen">
-                                <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(model => model.autoBearbeiten[0].Marke)</option>
+    
+                                <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => m.autoBearbeiten[0].Marke)</option>
                                 @foreach (var item in Model.markeListe)
                                 {
                                     if (item.Marke != Model.autoBearbeiten[0].Marke)
                                     {
-                                        <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(model => item.Marke)</option>
+                                        <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => item.Marke)</option>
                                     }
                                 }
                             </optgroup>

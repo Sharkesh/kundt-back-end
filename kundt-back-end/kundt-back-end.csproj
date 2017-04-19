@@ -505,9 +505,6 @@
     <Content Include="Views\Home\BuchungUebersicht.cshtml" />
     <Content Include="Views\Home\MitarbeiterDetail.cshtml" />
     <Content Include="Views\Home\MitarbeiterUebersicht.cshtml" />
-    <Content Include="Views\tblAuto\Create.cshtml" />
-    <Content Include="Views\tblAuto\Delete.cshtml" />
-    <Content Include="Views\tblAuto\Details.cshtml" />
     <Content Include="Views\tblAuto\AutoUpdate.cshtml" />
     <Content Include="Views\tblAuto\AutoHinzu.cshtml" />
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
