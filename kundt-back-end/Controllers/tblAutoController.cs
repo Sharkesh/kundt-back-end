@@ -188,6 +188,7 @@ namespace kundt_back_end.Controllers
             am.treibstoffListe = db.tblTreibstoff.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
             am.plainAusstattungListe = db.tblAusstattung.SqlQuery("SELECT* FROM tblAusstattung").ToList();
+            am.myAnzeigen = db.tblAuto.Find((int)id).Anzeigen;
             if (am.ausstattungListe != null)
             {
 
@@ -208,6 +209,7 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "M,A")]
         public ActionResult AutoBearbeiten(AutoModel am, int[] ausstattungListe, int[] plainAusstattungListe, HttpPostedFileBase upload)
         {
+
             //Abfrage ob binary-daten vorhanden
             if (upload != null && upload.ContentLength > 0)
             {
@@ -224,7 +226,7 @@ namespace kundt_back_end.Controllers
                     am.autoBearbeiten[0].PS, am.myGetriebe, am.autoBearbeiten[0].Tueren,
                     am.autoBearbeiten[0].Sitze, am.autoBearbeiten[0].MietPreis,
                     am.autoBearbeiten[0].VerkaufPreis, am.autoBearbeiten[0].Kilometerstand,
-                    am.myAutobild, am.autoBearbeiten[0].Anzeigen, am.myTreibstoff,
+                    am.myAutobild, am.myAnzeigen, am.myTreibstoff,
                     am.myTyp, am.myKategorie);
 
                 //Entfernen der bereits existierenden Ausstattung @tblAutodetail

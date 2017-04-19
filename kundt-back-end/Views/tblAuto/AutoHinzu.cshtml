@@ -126,6 +126,7 @@
                     <td>PS:</td>
                     <td>
                         @Html.EditorFor(model => model.myPS, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myPS, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
@@ -143,24 +144,28 @@
                     <td>Baujahr:</td>
                     <td>
                         @Html.EditorFor(model => model.myBauJahr, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myBauJahr, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>Türen:</td>
                     <td>
                         @Html.EditorFor(model => model.myTueren, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myTueren, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>Sitze:</td>
                     <td>
                         @Html.EditorFor(model => model.mySitze, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.mySitze, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
                     <td>KM-Stand:</td>
                     <td>
                         @Html.EditorFor(model => model.myKilometerStand, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myKilometerStand, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
@@ -180,13 +185,14 @@
                     <td>Mietpreis:</td>
                     <td>
                         @Html.EditorFor(model => model.myMietPreis, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myMietPreis, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr hinzuAuto">
                     <td>Anzeigen:</td>
                     <td>
                         <select name="myAnzeigen" id="myAnzeigen" class="hinzuAuto form-control">
-                            <optgroup label="Treibstoff wählen">
+                            <optgroup label="Auto anzeigen">
                                 <option value="true">Sichtbar</option>
                                 <option value="false">Versteckt</option>
                             </optgroup>
@@ -204,42 +210,3 @@
         </div>
     </div>
 </form>
-@*<div class="checkbox">
-            <label class="labelCheckbox"><input type="checkbox" value="">Option 2</label>
-        </div>
-
-        <div class="checkbox">
-            <label class="labelCheckbox"><input type="checkbox" value="">Option 3</label>
-        </div>
-
-    </div>
-    <div class="col-xs-2">
-        <div class="checkbox">
-            <label class="labelCheckbox"><input type="checkbox" value="">Option 1</label>
-        </div>
-
-        <div class="checkbox">
-            <label class="labelCheckbox"><input type="checkbox" value="">Option 2</label>
-        </div>
-
-        <div class="checkbox">
-            <label class="labelCheckbox"><input type="checkbox" value="">Option 3</label>
-        </div>
-
-    </div>
-    <div class="col-xs-2">
-        <div class="checkbox">
-            <label class="labelCheckbox"><input type="checkbox" value="">Option 1</label>
-        </div>
-
-        <div class="checkbox">
-            <label class="labelCheckbox"><input type="checkbox" value="">Option 2</label>
-        </div>
-
-        <div class="checkbox">
-            <label class="labelCheckbox"><input type="checkbox" value="">Option 3</label>
-        </div>*@
-
-
-
-@*</form>*@
