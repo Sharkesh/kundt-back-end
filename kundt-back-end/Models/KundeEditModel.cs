@@ -15,11 +15,8 @@ namespace kundt_back_end.Models
 
     public class KundeEditModel : it22AutoverleihEntities
     {
-        //Nicht fertig - Endl
-
-    
-
-        [Required]
+        //fertig soweit
+         [Required]
         public int idkunde { get; set; }
 
         [Required(ErrorMessage = "Bitte Vorname eingeben")]
@@ -31,6 +28,7 @@ namespace kundt_back_end.Models
         [Required(ErrorMessage = "Bitte Nachname eingeben")]
         [MinLength(2, ErrorMessage = "Nachname muss min. 2 Buchstaben haben")]
         [MaxLength(100, ErrorMessage = "Nachname darf nicht mehr als 100 Zeichen enthalten")]
+        [RegularExpression("^[a-zA-Z''-'\\s]{1,40}$", ErrorMessage = "Bitte nur Buchstaben eingeben")]
         public string Nachname { get; set; }
 
         [Required(ErrorMessage = "Bitte Straßenname eingeben")]
