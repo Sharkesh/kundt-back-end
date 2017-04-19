@@ -521,6 +521,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Eyecatchers\Index.cshtml" />
     <Content Include="Views\Mitarbeiter\PasswortZuruecksetzen.cshtml" />
+    <Content Include="Views\Mitarbeiter\MitarbeiterDaten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

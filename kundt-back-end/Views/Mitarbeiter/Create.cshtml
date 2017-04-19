@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Create";
 }
+<style>
+    .EditDisplayWidth {
+        max-width: 280px;
+    }
+</style>
+
 <h2>Mitarbeiter Anlegen</h2>
 
 @using (Html.BeginForm())
@@ -56,7 +62,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Passwort, new { htmlAttributes = new { @class = "form-control validationMSG" } })
+                <input type="password" id="Passwort" name="Passwort" class="form-control input EditDisplayWidth" />
+                @*@Html.PasswordFor(model => model.Passwort, new { htmlAttributes = new { @class = "form-control validationMSG" } })*@
                 @Html.ValidationMessageFor(model => model.Passwort, "", new { @class = "text-danger" })
             </div>
         </div>

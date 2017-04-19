@@ -10,6 +10,7 @@ using kundt_back_end.Models;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.Objects;
 using System.Net.Mail;
+using System.Web.Security;
 
 namespace kundt_back_end.Controllers
 {
@@ -100,6 +101,7 @@ namespace kundt_back_end.Controllers
             MitarbeiterModel b = new MitarbeiterModel();
             b.IDMitarbeiter = ma.IDMitarbeiter;
             b.Email = ma.tblLogin.Email;
+            b.EmailAlt = ma.tblLogin.Email;
             b.Deaktiviert = ma.tblLogin.Deaktiviert;
             b.MAAnrede = ma.MAAnrede;
             b.Passwort = ma.tblLogin.Passwort;
@@ -123,7 +125,7 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-                var dbLogin = db.tblLogin.Where(i => i.Email == MM.Email).FirstOrDefault();
+                var dbLogin = db.tblLogin.Where(i => i.Email == MM.EmailAlt).FirstOrDefault();
 
                 MM.IDMitarbeiter = dbLogin.IDLogin;
 
@@ -179,6 +181,42 @@ namespace kundt_back_end.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        // GET: Mitarbeiter/Edit/5
+        [Authorize(Roles = "A")]
+        public ActionResult MitarbeiterDaten(/*int? id*/)
+        {            
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+
+            string email = ticket.Name;
+            var blub = db.tblMitarbeiter.Include(l => l.tblLogin).Where(l => l.tblLogin.Email == email);
+            tblLogin log = new tblLogin();
+            foreach (var item in blub)
+            {
+                log.IDLogin = item.tblLogin.IDLogin;
+            }
+
+
+            tblMitarbeiter ma = db.tblMitarbeiter.Find(log.IDLogin);
+            if (ma == null)
+            {
+                return HttpNotFound();
+            }
+
+            MitarbeiterModel b = new MitarbeiterModel();
+            b.IDMitarbeiter = ma.IDMitarbeiter;
+            b.Email = ma.tblLogin.Email;
+            b.Deaktiviert = ma.tblLogin.Deaktiviert;
+            b.MAAnrede = ma.MAAnrede;
+            b.Passwort = ma.tblLogin.Passwort;
+            b.Rolle = Convert.ToChar(ma.tblLogin.Rolle);
+            b.MANachname = ma.MANachname;
+            b.MAVorname = ma.MAVorname;
+
+
+            ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", ma.IDMitarbeiter);
+            return View(b);
         }
     }
 }

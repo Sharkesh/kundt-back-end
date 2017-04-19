@@ -33,6 +33,8 @@ namespace kundt_back_end.Models
         [Required(ErrorMessage = "Bitte Passwort Eingeben")]
         public string Passwort { get; set; }
 
+        public string EmailAlt { get; set; }
+
         public SelectList AnredeOptionen { get; set; }
 
         public bool Deaktiviert { get; set; }
