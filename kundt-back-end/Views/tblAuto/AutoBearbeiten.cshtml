@@ -209,6 +209,12 @@
                         @Html.EditorFor(model => model.autoBearbeiten[0].MietPreis, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
+                <tr class="autoHinzu_tr hinzuAuto">
+                    <td>Verkaufspreis:</td>
+                    <td>
+                        @Html.EditorFor(model => model.autoBearbeiten[0].VerkaufPreis, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="col-xs-12 text-center">
