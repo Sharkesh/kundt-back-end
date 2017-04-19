@@ -497,14 +497,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\tblAuto\AutoUebersicht.cshtml" />
     <Content Include="Views\Eyecatchers\Einstellung.cshtml" />
-    <Content Include="Views\Home\AutoHinzufuegen.cshtml" />
     <Content Include="Views\Home\KundenUebersicht.cshtml" />
-    <Content Include="Views\Home\AutoDetail.cshtml" />
-    <Content Include="Views\Home\BuchungDetail.cshtml" />
-    <Content Include="Views\Home\MitarbeiterHinzufuegen.cshtml" />
-    <Content Include="Views\Home\BuchungUebersicht.cshtml" />
-    <Content Include="Views\Home\MitarbeiterDetail.cshtml" />
-    <Content Include="Views\Home\MitarbeiterUebersicht.cshtml" />
     <Content Include="Views\tblAuto\AutoUpdate.cshtml" />
     <Content Include="Views\tblAuto\AutoHinzu.cshtml" />
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
