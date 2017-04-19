@@ -601,11 +601,6 @@ namespace kundt_back_end.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoBearbeiten", iDAutoParameter, baujahrParameter, pSParameter, getriebeParameter, tuerenParameter, sitzeParameter, mietPreisParameter, verkaufPreisParameter, kilometerstandParameter, autobildParameter, anzeigenParameter, treibstoffParameter, typParameter, kategorieParameter);
         }
     
-        public virtual int p8Passwort(ObjectParameter nPasswort)
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p8Passwort", nPasswort);
-        }
-    
         public virtual int pAutoBearbeitenCreate(Nullable<int> daten, Nullable<int> id)
         {
             var datenParameter = daten.HasValue ?
@@ -626,6 +621,11 @@ namespace kundt_back_end.Models
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pAutoBearbeitenDelete", idParameter);
+        }
+    
+        public virtual int p8Passwort(ObjectParameter nPasswort)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p8Passwort", nPasswort);
         }
     }
 }

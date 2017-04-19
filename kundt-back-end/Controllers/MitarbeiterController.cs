@@ -123,46 +123,18 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MM.Passwort == "PasswortResetten")
-                {
+                var dbLogin = db.tblLogin.Where(i => i.Email == MM.Email).FirstOrDefault();
 
-                    //MM.Passwort = db.p8Passwort;
-                    // Passwort neu setzen auf das RND Generierte der procedure 
+                MM.IDMitarbeiter = dbLogin.IDLogin;
 
-                    //db.pMitarbeiterPasswort
-                    using (MailMessage mailmessage = new MailMessage(/*"noreply@sharkesh.com"*/"test.sharkesh@gmail.com", MM.Email))
-                    {
-                        mailmessage.Subject = "Account Aktivierung";
-                        //Nachrichten Text wird "zusammengebaut".
-                        string body = "<p>Hallo," + MM.MAAnrede + MM.MANachname;
-                        body += "<br /><br />Hier ist ihr neues Passwort: " + MM.Passwort;
-                        body += "<br /><a Bei problemen wenden sie sich bitte an den Admin ihres Vertrauens ;)</a>";
-                        body += "<br /><br />Danke!</p>";
-                        //Nachrichten Text wird an das MailMessage Objekt gehängt.
-                        mailmessage.Body = body;
-                        mailmessage.IsBodyHtml = true;
-                        //Logindaten für den SmtpClient weiter unten.
-                        NetworkCredential NetworkCred = new NetworkCredential(/*"noreply"*/"test.sharkesh@gmail.com", /*"~S[%a(1<`(eN"*/"123user!");
-                        //Verbindungs Variablen werden gesetzt.
-                        SmtpClient smtp = new SmtpClient()
-                        {
-                            Host = "smtp.gmail.com"/*"cloud.sharkesh.com"*/,
-                            EnableSsl = true,
-                            UseDefaultCredentials = true,
-                            Credentials = NetworkCred,
-                            Port = 587
-                        };
-                        smtp.Send(mailmessage);
-                    }
-                }
-                
-                //Das Passwort nun Hashen und ab in die Datenbank
-                MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
+                //MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
 
                 //ObjectParameter MID = new ObjectParameter("IDMitarbeiter", MM.IDMitarbeiter);
 
                 //Nach dem Gespeichert wurde schick den Benutzer zum Index zurück
-                db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort,MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+                var res = db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort,MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+
+
 
                 //Nach Erfolgreichem Ändern schick den Benutzer auf den Index zurück
                 return RedirectToAction("Index");
@@ -172,6 +144,32 @@ namespace kundt_back_end.Controllers
                 //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
+        }
+
+        public ActionResult PasswortZuruecksetzen(int id)
+        {
+
+            string erzeugtesPW = "error";
+
+            ObjectParameter output = new ObjectParameter("NPasswort", typeof(string));
+
+            db.p8Passwort(output);
+
+            erzeugtesPW = output.Value as string;
+
+            if (erzeugtesPW == null)
+                throw new Exception("SprocError");
+
+            var login = db.tblLogin.Find(id);
+            login.Passwort = Logic.Helper.PasswordConverter(erzeugtesPW);
+            db.Entry(login).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var MM = new MitarbeiterModel();
+            MM.IDMitarbeiter = id;
+            MM.Passwort = erzeugtesPW;
+
+            return View(MM);
         }
 
         protected override void Dispose(bool disposing)

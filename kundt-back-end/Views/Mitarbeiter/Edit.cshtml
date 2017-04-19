@@ -62,10 +62,18 @@
             </div>
         </div>
         @*Passwort ändern*@
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Passwort, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Passwort, "", new { @class = "text-danger" })
+            </div>*@
+            @Html.ActionLink("Passwort zurücksetzen","PasswortZuruecksetzen",new { id = Model.IDMitarbeiter })
+        </div>
 
 
-        <button onclick="PasswortReset()">Passwort Resetten</button>
-        <input type="hidden" name="Passwort" value="@Model.Passwort" />
+        @*<button onclick="PasswortReset()">Passwort Resetten</button>
+        <input type="hidden" name="Passwort" value="@Model.Passwort" />*@
 
 
         @*Password abgleichen*@

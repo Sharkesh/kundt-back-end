@@ -1145,16 +1145,15 @@
             <Parameter Name="Typ" Mode="In" Type="String" />
             <Parameter Name="Kategorie" Mode="In" Type="String" />
           </FunctionImport>
-
-          <FunctionImport Name="p8Passwort">
-          <Parameter Name="NPasswort" Mode="InOut" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="pAutoBearbeitenCreate">
             <Parameter Name="daten" Mode="In" Type="Int32" />
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pAutoBearbeitenDelete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p8Passwort">
+            <Parameter Name="NPasswort" Mode="InOut" Type="String" />
           </FunctionImport>
 
         </EntityContainer>
@@ -1704,10 +1703,9 @@
           </FunctionImportMapping>
 
           <FunctionImportMapping FunctionImportName="pAutoBearbeiten" FunctionName="it22AutoverleihModel.Store.pAutoBearbeiten" />
-
-          <FunctionImportMapping FunctionImportName="p8Passwort" FunctionName="it22AutoverleihModel.Store.p8Passwort" />
           <FunctionImportMapping FunctionImportName="pAutoBearbeitenCreate" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenCreate" />
           <FunctionImportMapping FunctionImportName="pAutoBearbeitenDelete" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenDelete" />
+          <FunctionImportMapping FunctionImportName="p8Passwort" FunctionName="it22AutoverleihModel.Store.p8Passwort" />
 
 
         </EntityContainerMapping>
