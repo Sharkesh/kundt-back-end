@@ -210,7 +210,7 @@ namespace kundt_back_end.Controllers
             }
         }
         // GET: ÄnderungenErfolgreich
-        [Authorize(Roles = "M")]
+        [Authorize(Roles = "M, A")]
         public ActionResult ÄnderungenErfolgreich()
         {
             return View();
