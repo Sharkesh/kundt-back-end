@@ -26,10 +26,7 @@
         @Html.HiddenFor(model => model.IDMitarbeiter)
         @Html.HiddenFor(model => model.Passwort)
         @Html.HiddenFor(model => model.EmailAlt)
-        @*@Html.HiddenFor(model => model.Rolle,"",)
-            @Html.HiddenFor(model => model.Rolle, new { id = "natureOfVisitField", value = "M" })*@
-        <input type="hidden" name="Rolle" value="@Model.Rolle" />
-        @*Übergibt die Rolle von View an die Prozedur im Controller*@
+        @Html.HiddenFor(model => model.Rolle)
 
         @*Vorname*@
         <div class="form-group">
