@@ -357,6 +357,7 @@
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\FilterScript.js" />
     <Content Include="Scripts\i18n\bootstrap-select\defaults-bg_BG.js" />
     <Content Include="Scripts\i18n\bootstrap-select\defaults-bg_BG.min.js" />
     <Content Include="Scripts\i18n\bootstrap-select\defaults-cs_CZ.js" />
@@ -494,7 +495,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\KundenBearbeiten.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\tblAuto\AutoUebersicht.cshtml" />
     <Content Include="Views\Eyecatchers\Einstellung.cshtml" />
     <Content Include="Views\Home\KundenUebersicht.cshtml" />

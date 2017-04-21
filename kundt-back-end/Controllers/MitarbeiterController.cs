@@ -154,7 +154,7 @@ namespace kundt_back_end.Controllers
             base.Dispose(disposing);
         }
         // GET: Mitarbeiter/MitarbeiterDaten
-        [Authorize(Roles = "M")]
+        [Authorize(Roles = "M,A")]
         public ActionResult MitarbeiterDaten(/*int? id*/)
         {            
             HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
@@ -193,7 +193,7 @@ namespace kundt_back_end.Controllers
         //POST: MitarbeiterDaten
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "M")]
+        [Authorize(Roles = "M,A")]
         public ActionResult MitarbeiterDaten(MitarbeiterModel MM)
         {
             if (ModelState.IsValid)

@@ -1,6 +1,6 @@
 ﻿@model kundt_back_end.Models.AutoModel
 @{
-    ViewBag.Title = "Fahrzeug Übersicht";
+    ViewBag.Title = "Übersicht Autos";
 }
 
 <style>
@@ -332,4 +332,8 @@
             </div>
         </div>
     </div>
+}
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/FilterScript.js")    
 }
