@@ -40,7 +40,7 @@
 </style>
 
 <div class="headingFormat">
-    <h2>Buchung bearbeiten</h2>
+    <h2 style="padding:5px;">Buchung bearbeiten</h2>
 </div>
 
 
@@ -49,7 +49,6 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IDBuchung)
         <div class="form-group">

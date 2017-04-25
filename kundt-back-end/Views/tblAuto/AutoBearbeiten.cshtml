@@ -49,6 +49,7 @@
         display: inline-block;
         border-radius: 4px;
     }
+
     .headingFormat {
         margin: auto auto 20px auto;
         color: white;
@@ -62,7 +63,7 @@
 </style>
 
 <div class="headingFormat">
-    Fahrzeug bearbeiten
+    <h2 style="padding:5px;">Fahrzeug bearbeiten</h2>
 </div>
 <form action="@Url.Action("AutoBearbeiten","tblAuto", null)" method="post" enctype="multipart/form-data">
     <div class="container">
@@ -101,7 +102,7 @@
                     <td>
                         <select name="myMarke" id="Marke" class="hinzuAuto form-control">
                             <optgroup label="Kategorie wählen">
-    
+
                                 <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => m.autoBearbeiten[0].Marke)</option>
                                 @foreach (var item in Model.markeListe)
                                 {
@@ -221,8 +222,8 @@
                                 @if (Model.autoBearbeiten[0].Anzeigen == false)
                                 {
                                     <option value="false">Versteckt</option>
-                                    <option value="true">Sichtbar</option>                                    
-                                }                                                                
+                                    <option value="true">Sichtbar</option>
+                                }
                             </optgroup>
                         </select>
                     </td>

@@ -3,143 +3,149 @@
 
 @model kundt_back_end.Models.KundeEditModel
 
-    
+
 
 @{
     ViewBag.Title = "KundenBearbeiten";
 }
 <style>
-    .CenteredButton{
+    .CenteredButton {
         display: block;
         margin: auto;
     }
-    .TabellenGitter{
-        border:1px solid black;
-        height:2em;
-        
-    }
-    #Kopfzeile{
-        height:4em;
-    }
-    #Tabelle{
-        margin-left:auto;
-        margin-right:auto;
-        margin-bottom:1em;
+
+    .TabellenGitter {
+        border: 1px solid black;
+        height: 2em;
     }
 
+    #Kopfzeile {
+        height: 4em;
+    }
 
+    #Tabelle {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1em;
+    }
+
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+        height: 40px;
+        font-size: 32px;
+    }
 </style>
 
+<div class="headingFormat">
+    <h2 style="padding:5px;">Kunden bearbeiten</h2>
+</div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="form-horizontal" name="formVorname">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idkunde)
 
-    <div class="form-horizontal" name="formVorname">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.idkunde)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.idkunde, "Kunden-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="idkunde" name="idkunde" value="@if (@Model != null){ @Model.idkunde }" readonly="readonly"/>
-                @Html.ValidationMessageFor(model => model.idkunde, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.idkunde, "Kunden-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="idkunde" name="idkunde" value="@if (@Model != null){ @Model.idkunde }" readonly="readonly" />
+            @Html.ValidationMessageFor(model => model.idkunde, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Vorname" name="Vorname" value="@if (@Model != null){ @Model.Vorname }"/>
-                @Html.ValidationMessageFor(model => model.Vorname, "", new {@class = "text-danger"})
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="Vorname" name="Vorname" value="@if (@Model != null){ @Model.Vorname }" />
+            @Html.ValidationMessageFor(model => model.Vorname, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nachname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Nachname" name="Nachname" value="@if (@Model != null){ @Model.Nachname }"/>
-                @Html.ValidationMessageFor(model => model.Nachname, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nachname, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="Nachname" name="Nachname" value="@if (@Model != null){ @Model.Nachname }" />
+            @Html.ValidationMessageFor(model => model.Nachname, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Straße, "Straße", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Straße" name="Straße" value="@if (@Model != null){ @Model.Straße }" required="required"/>
-                @Html.ValidationMessageFor(model => model.Straße, "", new { @class = "text-danger"})
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Straße, "Straße", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="Straße" name="Straße" value="@if (@Model != null){ @Model.Straße }" required="required" />
+            @Html.ValidationMessageFor(model => model.Straße, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Plz, "PLZ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Plz" name="Plz" value="@if (@Model != null){ @Model.Plz }"/><p>Bitte nur PLZ angeben - Ort wird automatisch editiert.</p>
-                
-                @Html.ValidationMessageFor(model => model.Plz, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Plz, "PLZ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="Plz" name="Plz" value="@if (@Model != null){ @Model.Plz }" /><p>Bitte nur PLZ angeben - Ort wird automatisch editiert.</p>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ort, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Ort" name="Ort" value="@if (@Model != null){ @Model.Ort }" readonly="readonly"/>
-                @Html.ValidationMessageFor(model => model.Ort, "", new { @class = "text-danger" })
-            </div>
+            @Html.ValidationMessageFor(model => model.Plz, "", new { @class = "text-danger" })
         </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Email" name="Email" readonly="readonly" value="@if (@Model != null){ @Model.Email }"/>
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    <input type="text" id="Telefon" name="Telefon" value="@if (@Model != null){ @Model.Telefon }"/>
-                    @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PassNr, "Pass-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="PassNr" name="PassNr" value="@if (@Model != null){ @Model.PassNr }"/>
-                @Html.ValidationMessageFor(model => model.PassNr, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ort, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="Ort" name="Ort" value="@if (@Model != null){ @Model.Ort }" readonly="readonly" />
+            @Html.ValidationMessageFor(model => model.Ort, "", new { @class = "text-danger" })
         </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.GebDat,"Geburtsdatum", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="GebDat" name="GebDat" value="@if (@Model != null){ @Model.GebDat.ToString("yyyy-MM-dd") }"/>
-                @Html.ValidationMessageFor(model => model.GebDat, "", new { @class = "text-danger" })
-            </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="Email" name="Email" readonly="readonly" value="@if (@Model != null){ @Model.Email }" />
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default"/>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                <input type="text" id="Telefon" name="Telefon" value="@if (@Model != null){ @Model.Telefon }" />
+                @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-}
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PassNr, "Pass-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="PassNr" name="PassNr" value="@if (@Model != null){ @Model.PassNr }" />
+            @Html.ValidationMessageFor(model => model.PassNr, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.GebDat, "Geburtsdatum", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="GebDat" name="GebDat" value="@if (@Model != null){ @Model.GebDat.ToString("yyyy-MM-dd") }" />
+            @Html.ValidationMessageFor(model => model.GebDat, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "KundenUebersicht")
 </div>
 
-        
 
 
 
 
- 
+

@@ -16,14 +16,17 @@ namespace kundt_back_end.Models
         // Hier gibt es haufenweise Clienseitige Validierungen die durch [] angekündigt werden
         public int IDMitarbeiter { get; set; }
 
+        [Display(Name ="Vorname")]
         [Required(ErrorMessage = "Bitte Vorname Eingebe")]
         [StringLength(100, MinimumLength = 2)]
         public string MAVorname { get; set; }
 
+        [Display(Name ="Nachname")]
         [Required(ErrorMessage = "Bitte Nachname Eingeben")]
         [StringLength(100, MinimumLength = 2)]
         public string MANachname { get; set; }
 
+        [Display(Name = "Anrede")]
         public string MAAnrede { get; set; }
 
         [Required(ErrorMessage = "Bitte Email Eingeben")]

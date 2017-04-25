@@ -69,7 +69,60 @@
         margin-bottom: 10px;
     }
 
+
     .buttonOrangeSuchen {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+        .buttonOrangeSuchen span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .buttonOrangeSuchen span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -30px;
+                transition: 0.5s;
+                font-size: 15px;
+            }
+
+        .buttonOrangeSuchen:hover span {
+            padding-right: 15px;
+        }
+
+            .buttonOrangeSuchen:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+        .buttonOrangeSuchen:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+        }
+
+    /*.buttonOrangeSuchen {
         background-color: #f99b1c;
         border: none;
         color: #ffffff;
@@ -84,20 +137,20 @@
         margin-top: 50px;
     }
 
-    .buttonOrangeSuchen:hover {
-        background-color: #f99b1c;
-        border: none;
-        color: black;
-        font-size: 15px;
-        height: 50px;
-        width: 221.5px;
-        font-weight: 700;
-        letter-spacing: .5px;
-        text-align: center;
-        display: inline-block;
-        border-radius: 4px;
-        margin-top: 50px;
-    }
+        .buttonOrangeSuchen:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: black;
+            font-size: 15px;
+            height: 50px;
+            width: 221.5px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 4px;
+            margin-top: 50px;
+        }*/
 
     .buttonOrangeEdit {
         background-color: #f99b1c;
@@ -113,19 +166,19 @@
         border-radius: 4px;
     }
 
-    .buttonOrangeEdit:hover {
-        background-color: #f99b1c;
-        border: none;
-        color: black;
-        font-size: 15px;
-        height: 40px;
-        width: 100px;
-        font-weight: 700;
-        letter-spacing: .5px;
-        text-align: center;
-        display: inline-block;
-        border-radius: 4px;
-    }
+        .buttonOrangeEdit:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: black;
+            font-size: 15px;
+            height: 40px;
+            width: 100px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 4px;
+        }
 
     .headingFormat {
         margin: auto auto 20px auto;
@@ -172,10 +225,9 @@
 </style>
 
 <div class="headingFormat">
-    <h2>Buchungen Übersicht</h2>
+    <h2 style="padding:5px;">Buchungen Übersicht</h2>
 </div>
 
-<hr />
 <div class="container">
     <div class="row">
         <div class="col-lg-3">
@@ -202,14 +254,14 @@
                         <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" checked="checked" />
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
-                    }                    
+                    }
                     else
                     {
                         <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" checked="checked" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
-                        <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p"  />
-                    }                    
-                    <input class="col-lg-6 SuchFilter_abstand buttonOrangeSuchen" type="submit" id="suchen" name="suchen" value="Suchen" />
+                        <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
+                    }
+                    <button class="col-lg-6 SuchFilter_abstand buttonOrangeSuchen" type="submit" id="suchen" name="suchen" value="Suchen"><span>Suchen</span></button>
                 </form>
             </div>
         </div>

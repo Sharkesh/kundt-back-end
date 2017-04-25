@@ -8,27 +8,41 @@
         margin-bottom: 2%;
         margin-top: 2%;
     }
+
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+        height: 40px;
+        font-size: 32px;
+    }
 </style>
 @*@using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
+    {
+        @Html.AntiForgeryToken()
 
-<div class="row">
-   
-    <div class="col-lg-1 einstellungLayout">Bild 1</div>
-    <div class="col-lg-3 einstellungLayout">
-        <input type="hidden" value="1" name="Id" />
+    <div class="row">
 
-        <input type="file" id="upload" name="upload" />
-        
+        <div class="col-lg-1 einstellungLayout">Bild 1</div>
+        <div class="col-lg-3 einstellungLayout">
+            <input type="hidden" value="1" name="Id" />
+
+            <input type="file" id="upload" name="upload" />
+
+        </div>
+        <div class="col-lg-1 einstellungLayout">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
     </div>
-    <div class="col-lg-1 einstellungLayout">
-        <input type="submit" value="Create" class="btn btn-default" />
-    </div>
+    }*@
+
+
+<div class="headingFormat">
+    <h2 style="padding:5px;">Eyecatcher Einstellungen</h2>
 </div>
-}*@
-
-
 @using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -36,10 +50,10 @@
     <div class="form-horizontal">
         <h4>Bild: 1</h4>
         <hr />
-      
+
         <input type="hidden" value="1" name="IDEyecatcher" />
         <div class="form-group">
-           @Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" id="upload" name="upload" />
                 @Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })
@@ -61,7 +75,7 @@
         <h4>Bild: 2</h4>
         <hr />
 
-        <input type="hidden" value="2" name="IDEyecatcher"/>
+        <input type="hidden" value="2" name="IDEyecatcher" />
         <div class="form-group">
             @Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -85,7 +99,7 @@
         <h4>Bild: 3</h4>
         <hr />
 
-        <input type="hidden" value="3" name="IDEyecatcher"/>
+        <input type="hidden" value="3" name="IDEyecatcher" />
         <div class="form-group">
             @Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
