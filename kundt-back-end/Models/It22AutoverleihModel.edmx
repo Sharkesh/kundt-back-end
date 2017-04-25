@@ -505,12 +505,11 @@
           <Parameter Name="searchKundenNr" Type="int" Mode="In" />
           <Parameter Name="searchOrt" Type="varchar" Mode="In" />
           <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
-          <Parameter Name="searchBuchung" Type="varchar" Mode="In" />
         </Function>
         <Function Name="pMitarbeiterEditieren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IDLogin" Type="int" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
-          <Parameter Name="Passwort" Type="varchar" Mode="In" />
+          <Parameter Name="Passwort" Type="varchar(max)" Mode="In" />
           <Parameter Name="Rolle" Type="char" Mode="In" />
           <Parameter Name="Deaktiviert" Type="bit" Mode="In" />
           <Parameter Name="MAVorname" Type="varchar" Mode="In" />
@@ -1024,7 +1023,6 @@
             <Parameter Name="searchKundenNr" Mode="In" Type="Int32" />
             <Parameter Name="searchOrt" Mode="In" Type="String" />
             <Parameter Name="searchPLZ" Mode="In" Type="String" />
-            <Parameter Name="searchBuchung" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuchungFilter" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.BuchungFilter_Result)">
             <Parameter Name="searchBuchungNr" Mode="In" Type="Int32" />
@@ -1153,7 +1151,7 @@
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="p8Passwort">
-            <Parameter Name="NPasswort" Mode="InOut" Type="String" />
+          <Parameter Name="NPasswort" Mode="InOut" Type="String" />
           </FunctionImport>
 
         </EntityContainer>
@@ -1186,11 +1184,10 @@
         </ComplexType>
         <ComplexType Name="pKundenAnzeigen_Result">
           <Property Type="Int32" Name="IDKunde" Nullable="false" />
-          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="BuchungFilter_Result">
           <Property Type="Int32" Name="BuchungNr" Nullable="true" />
@@ -1552,11 +1549,10 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="it22AutoverleihModel.pKundenAnzeigen_Result">
                 <ScalarProperty Name="IDKunde" ColumnName="IDKunde" />
-                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
                 <ScalarProperty Name="Nachname" ColumnName="Nachname" />
                 <ScalarProperty Name="PLZ" ColumnName="PLZ" />
                 <ScalarProperty Name="Ort" ColumnName="Ort" />
-                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

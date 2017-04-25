@@ -137,7 +137,7 @@ namespace kundt_back_end.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pKundeEdit", idkundeParameter, vornameParameter, nachnameParameter, strasseParameter, plzParameter, ortParameter, emailParameter, telefonParameter, passnrParameter, gebdatParameter);
         }
     
-        public virtual ObjectResult<pKundenAnzeigen_Result> pKundenAnzeigen(string searchName, Nullable<int> searchKundenNr, string searchOrt, string searchPLZ, string searchBuchung)
+        public virtual ObjectResult<pKundenAnzeigen_Result> pKundenAnzeigen(string searchName, Nullable<int> searchKundenNr, string searchOrt, string searchPLZ)
         {
             var searchNameParameter = searchName != null ?
                 new ObjectParameter("searchName", searchName) :
@@ -155,11 +155,7 @@ namespace kundt_back_end.Models
                 new ObjectParameter("searchPLZ", searchPLZ) :
                 new ObjectParameter("searchPLZ", typeof(string));
     
-            var searchBuchungParameter = searchBuchung != null ?
-                new ObjectParameter("searchBuchung", searchBuchung) :
-                new ObjectParameter("searchBuchung", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter, searchBuchungParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter);
         }
     
         [DbFunction("it22AutoverleihEntities", "BuchungFilter")]

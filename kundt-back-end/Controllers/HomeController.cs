@@ -39,11 +39,11 @@ namespace kundt_back_end.Controllers
 
             if (cm.filtermodel == null)
             {
-                cm.kundenlist = db.pKundenAnzeigen(null, null, null, null, "Alle");
+                cm.kundenlist = db.pKundenAnzeigen(null,null,null,null);
             }
             else
             {
-                cm.kundenlist = db.pKundenAnzeigen(cm.filtermodel.KundenName, cm.filtermodel.KundenNr, cm.filtermodel.Ort, cm.filtermodel.Plz, cm.filtermodel.Buchungsstatus);
+                cm.kundenlist = db.pKundenAnzeigen(cm.filtermodel.KundenName, cm.filtermodel.KundenNr, cm.filtermodel.Ort, cm.filtermodel.Plz);
             }
 
             return View(cm);
