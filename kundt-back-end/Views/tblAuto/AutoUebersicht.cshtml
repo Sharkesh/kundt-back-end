@@ -1,7 +1,6 @@
 ﻿@model kundt_back_end.Models.AutoModel
 @{
-    ViewBag.Title = "Auto Übersicht";
-
+    ViewBag.Title = "Übersicht Autos";
 }
 
 <style>
@@ -73,43 +72,100 @@
         max-height: 35px;
         text-align: center;
         vertical-align: middle;
-        padding-bottom: 10px;
-        text-decoration: none;
         text-decoration-color: none;
         border-radius: 5px;
-        font-size: 22px;
+        font-size: 15px;
         text-align: match-parent;
         background-color: darkorange;
         box-shadow: dimgrey 1px 1px 0px;
-        color: white;
+        padding:10px 10px 10px 10px;
+        color:white;
+        margin-right:5px;
+        outline:none;
     }
 
-    .myButtonFilter {
-        min-width: 150px;
+    .myButton:hover, myButton:visited {
+        min-width: 120px;
         max-height: 35px;
-        color: steelblue;
         text-align: center;
+        vertical-align: middle;
+        text-decoration-color: none;
         border-radius: 5px;
-        font-size: 22px;
-        background-color: lightgrey;
+        font-size: 15px;
         text-align: match-parent;
-        box-shadow: dimgrey 1px 2px 0px;
-        border: 2px solid;
-        border-color: lightgray;
+        background-color: darkorange;
+        box-shadow: black 2px 2px 1px;
+        padding:10px 10px 10px 10px;
+        color:white;
+        margin-right:5px;
+        opacity:0.8;
+        outline:none;
     }
 
-        .myButtonFilter:hover {
-            min-width: 150px;
-            max-height: 35px;
-            color: deepskyblue;
-            text-align: center;
-            border-radius: 5px;
-            font-size: 22px;
-            background-color: lightgray;
-            text-align: match-parent;
-            box-shadow: gray 1px 2px 0px;
-            border: 2px solid;
-            border-color: lightgray;
+    .myButton:active {
+        min-width: 120px;
+        max-height: 35px;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration-color: none;
+        border-radius: 5px;
+        font-size: 15px;
+        text-align: match-parent;
+        background-color: orange;
+        box-shadow: dimgrey 2px 2px 1px;
+        padding:10px 10px 10px 10px;
+        color:white;
+        margin-right:5px;
+        outline:none;
+    }
+
+        .myButtonFilter {
+        min-width: 120px;
+        max-height: 35px;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration-color: none;
+        border-radius: 5px;
+        font-size: 19px;
+        text-align: match-parent;
+        background-color: darkorange;
+        box-shadow: dimgrey 1px 1px 0px;
+        padding:3px 10px 10px 10px;
+        color:white;
+        outline:none;
+    }
+
+        .myButtonFilter:hover, myButtonFilter:visited {
+        min-width: 120px;
+        max-height: 35px;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration-color: none;
+        border-radius: 5px;
+        font-size: 19px;
+        text-align: match-parent;
+        background-color: darkorange;
+        box-shadow: black 2px 2px 1px;
+        padding:3px 10px 10px 10px;
+        color:white;
+        opacity:0.8;
+        outline:none;
+        }
+
+        .myButtonFilter:active {
+        min-width: 120px;
+        max-height: 35px;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration-color: none;
+        outline:none;
+        border-radius: 5px;
+        font-size: 19px;
+        text-align: match-parent;
+        background-color: darkorange;
+        box-shadow: dimgrey 2px 2px 1px;
+        padding:3px 10px 10px 10px;
+        color:white;
         }
 
     .MyHead {
@@ -133,14 +189,16 @@
         font-size: 32px;
     }
 </style>
+
 <div class="headingFormat">
     <h2 style="padding:5px;">Auto Übersicht</h2>
 </div>
+
 @using (Html.BeginForm())
 {
     <div class="row">
         <div class="col-xs-3">
-            @*<form method="post" action="@Url.Action("AutoUebersicht2", "tblAuto", Model)">*@
+            @*Beginn Filter zur Fahrzeugsuche*@
             <nav class="nav" style="max-width:250px;" id="filter">
                 <div class="table-hover">
                     <table class="table-condensed myTableBorder2" style="background-color:lightgrey; border-radius:5px; box-shadow:dimgrey 2px 2px 3px;">
@@ -220,22 +278,21 @@
                             <tr>
                                 <td>
                                     <center>
-                                        <input type="submit" class="btn-default myButtonFilter" value="Suchen" style="border:solid 1px; border-color:darkgrey; border-radius:5px; width:150px; margin-left:-5px" />
+                                        <input type="submit" class="myButtonFilter" value="Suchen" style="border:solid 1px; border-color:darkgrey; border-radius:5px; width:150px; margin-left:-5px" />
                                     </center>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
             </nav>
-            @*</form>*@
         </div>
+        @*Ende Filter zur Fahrzeugsuche*@
 
         <div class="col-xs-8 col-xs-offset-1">
             <div class="table-responsive">
                 <table class="table-hover">
-
+                    @*Start Auflistung der Fahrzeuge*@
                     @foreach (var item in Model.autoBearbeitenFilter)
                     {
                         <tr class="myTableBorder" style="margin-bottom:15px;">
@@ -251,24 +308,34 @@
                                 }
                             </td>
                             <td class="myTd">
+                                <p><h4>ID</h4></p><p><h4>@Html.DisplayFor(Model => item.IDAuto)</h4></p>
+                                
+                            </td>
+                            <td class="myTd">                                
                                 <p>Marke: @Html.DisplayFor(Model => item.Marke)</p>
                                 <p>Typ: @Html.DisplayFor(Model => item.Typ)</p>
+                                <p>Kategorie: @Html.DisplayFor(Model => item.Kategorie)</p>
                             </td>
                             <td class="myTd">
                                 <p>Baujahr: @Html.DisplayFor(Model => item.Baujahr)</p>
-                                <p>PS: @Html.DisplayFor(Model => item.PS)</p>
+                                <p>Kilometerstand: @Html.DisplayFor(Model => item.Kilometerstand)</p>
                             </td>
                             <td class="myTd">
                                 <p>Mietpreis: @Html.DisplayFor(Model => item.MietPreis)€</p>
                                 <p>Verkaufspreis: @Html.DisplayFor(Model => item.VerkaufPreis)€</p>
                             </td>
                             <td style="padding-left:15px;">
-                                <div class="btn-default myButton">@Html.ActionLink("Bearbeiten", "AutoBearbeiten", new { id = item.IDAuto })</div>
+                                <div>@Html.ActionLink("Bearbeiten", "AutoBearbeiten", new { id = item.IDAuto }, new { @class = "myButton", @style = "color: white; text-decoration: none;" })</div>
                             </td>
                         </tr>
                     }
+                    @*Ende Auflistung der Fahrzeuge*@
                 </table>
             </div>
         </div>
     </div>
+}
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/FilterScript.js")    
 }

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace kundt_back_end.Models
 {
     public class AutoModel
     {
+
+        Regex r = new Regex("^[a-zA-Z0-9]*$");
         public List<tblAuto> autoListe { get; set; }
         public List<tblAusstattung> ausstattungListe { get; set; }
         public List<tblAusstattung> plainAusstattungListe { get; set; }
@@ -19,7 +22,7 @@ namespace kundt_back_end.Models
         public string myMarke { get; set; }
         public string myTyp { get; set; }
         public string myKategorie { get; set; }
-        public string myPS { get; set; }
+        public string myPS { get;set; }
         public int myBauJahr { get; set; }
         public int myBauJahrVon { get; set; }
         public int myBauJahrBis { get; set; }

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link rel="SHORTCUT ICON" href="~/favicon.ico" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
@@ -57,10 +58,19 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    @if (User.IsInRole("A"))
+                    @if (User.IsInRole("M"))
                     {
-                        <li>@Html.ActionLink("Einstellungen", "Einstellung", "Eyecatchers")</li>
-                    }
+                        <li>
+                            <a href="@Url.Action("MitarbeiterDaten","Mitarbeiter")" style="font-size:1.5em;">
+                                @{
+                                    HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                                    @ticket.Name;
+                                }
+                            </a>
+                        </li>
+                                    }
                     @if (User.IsInRole("M") || User.IsInRole("A"))
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
@@ -119,9 +129,9 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="@Url.Action("Index","Mitarbeiter")">Liste</a></li>
                                         <li><a href="@Url.Action("Create","Mitarbeiter")">Hinzufügen</a></li>
-                                        <li><a href="@Url.Action("MitarbeiterDaten","Mitarbeiter")">Meine Daten</a></li>
                                     </ul>
                                 </li>
+                                <li>@Html.ActionLink("Einstellungen", "Einstellung", "Eyecatchers")</li>
                             }
                         </ul>
                     </div>
@@ -143,7 +153,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/scripts.js")
-    @Scripts.Render("~/Scripts/LoginScript.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

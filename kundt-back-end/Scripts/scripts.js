@@ -9,22 +9,22 @@ function Active() {
     } else {
         $("#uebersicht").removeClass("active");
     }
-    if (document.title == "Übersicht Autos" || document.title == "Auto Hinzufügen") {
+    if (document.title == "Übersicht Autos" || document.title == "Auto Hinzufügen" || document.title == "Auto Bearbeiten") {
         $("#fahrzeug").addClass("active");
     } else {
         $("#fahrzeug").removeClass("active");
     }
-    if (document.title == "Übersicht Kunden" || document.title == "Kunde Hinzufügen") {
+    if (document.title == "Übersicht Kunden" || document.title == "Kunde Hinzufügen" || document.title == "Kunde Bearbeiten") {
         $("#kunden").addClass("active");
     } else {
         $("#kunden").removeClass("active");
     }
-    if (document.title == "Übersicht Buchungen") {
+    if (document.title == "Übersicht Buchungen" || document.title == "Buchung Bearbeiten") {
         $("#buchung").addClass("active");
     } else {
         $("#buchung").removeClass("active");
     }
-    if (document.title == "Übersicht Mitarbeiter" || document.title == "Mitarbeiter Hinzufügen") {
+    if (document.title == "Übersicht Mitarbeiter" || document.title == "Mitarbeiter Hinzufügen" || document.title == "Mitarbeiter Bearbeiten") {
         $("#mitarbeiter").addClass("active");
     } else {
         $("#mitarbeiter").removeClass("active");
@@ -52,24 +52,3 @@ function CheckTime(i) {
     };
     return i;
 }
-
-
-$(document).ready(function () {
-    if (document.title = "Auto Übersicht") {
-        $(window).scroll(function () {
-
-            console.log($(window).scrollTop());
-
-            if ($(window).scrollTop() < 250) {
-                $('#filter').removeClass('navbar-fixed-top');
-                $('#filter').removeClass('filterPos');
-
-            }
-
-            if ($(window).scrollTop() > 250) {
-                $('#filter').addClass('navbar-fixed-top');
-                $('#filter').addClass('filterPos');
-            }
-        });
-    }
-});

@@ -27,6 +27,12 @@ namespace kundt_back_end.Controllers
             am.treibstoffListe = db.tblTreibstoff.ToList();
             var res = db.tblAuto.Select(x => x.Getriebe);
             am.getriebeListe = res.ToList();
+            DateTime dtime = new DateTime();
+            dtime = DateTime.Now;
+            am.myBauJahr = dtime.Year;
+            am.myTueren = "5";
+            am.myPS = "100";
+            am.mySitze = 5;
             return View(am);
         }
 
@@ -35,8 +41,6 @@ namespace kundt_back_end.Controllers
         public ActionResult AutoHinzu(AutoModel am, int[] ausstattungListe, HttpPostedFileBase upload)
         //public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
         {
-
-
             if (upload != null && upload.ContentLength > 0)
             {
                 using (var reader = new System.IO.BinaryReader(upload.InputStream))
@@ -51,16 +55,17 @@ namespace kundt_back_end.Controllers
                 am.myAutobild, am.myAnzeigen, am.myTreibstoff, am.myTyp,
                 am.myKategorie);
 
-            foreach (int? item in ausstattungListe)
+            if (ausstattungListe != null)
             {
-                if (item != null)
+                foreach (int? item in ausstattungListe)
                 {
-                    db.pAusstattungZuAuto2(item);
+                    if (item != null)
+                    {
+                        db.pAusstattungZuAuto2(item);
+                    }
                 }
             }
-
             return RedirectToAction("AutoUebersicht", "tblAuto");
-
         }
 
         [Authorize(Roles = "M,A")]
@@ -73,7 +78,7 @@ namespace kundt_back_end.Controllers
             am.typListe = db.tblTyp.ToList();
             am.markeListe = db.tblMarke.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
-            
+
             if (am.myIDAuto != 0)
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
@@ -189,6 +194,9 @@ namespace kundt_back_end.Controllers
             am.kategorieListe = db.tblKategorie.ToList();
             am.plainAusstattungListe = db.tblAusstattung.SqlQuery("SELECT* FROM tblAusstattung").ToList();
             am.myAnzeigen = db.tblAuto.Find((int)id).Anzeigen;
+            DateTime dtime = new DateTime();
+            dtime = DateTime.Now;
+            am.myBauJahr = dtime.Year;
             if (am.ausstattungListe != null)
             {
 
@@ -222,9 +230,9 @@ namespace kundt_back_end.Controllers
             //Autoupdate proc:
             if (am.myIDAuto != 0)
             {
-                db.pAutoBearbeiten(am.myIDAuto, umwandlerINT16(am.autoBearbeiten[0].Baujahr),
-                    am.autoBearbeiten[0].PS, am.myGetriebe, am.autoBearbeiten[0].Tueren,
-                    am.autoBearbeiten[0].Sitze, am.autoBearbeiten[0].MietPreis,
+                db.pAutoBearbeiten(am.myIDAuto, umwandlerINT16(am.myBauJahr),
+                    am.autoBearbeiten[0].PS, am.myGetriebe, am.myTueren,
+                    (byte)am.mySitze, am.autoBearbeiten[0].MietPreis,
                     am.autoBearbeiten[0].VerkaufPreis, am.autoBearbeiten[0].Kilometerstand,
                     am.myAutobild, am.myAnzeigen, am.myTreibstoff,
                     am.myTyp, am.myKategorie);

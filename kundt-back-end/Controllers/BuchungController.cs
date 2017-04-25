@@ -28,13 +28,9 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "M,A")]
         public ActionResult Index()
         {
-            /// Hier die Prozedur der Buchungsauflistung der nächsten 14 Tage einfügen
-            /// Evtl. neues Model dafür erstellen und die Buchungsauflistung als Liste übergeben
-            //var buchungUebersicht = db.tblBuchung.Include(b => b.tblAuto).Include(b => b.tblKunde);
             List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
 
             var test = db.OffeneBuchungenTodayPlus13();
-            //var BuchungListe = new List<BuchungViewModel>();
 
             foreach (var b in test)
             {
@@ -47,11 +43,8 @@ namespace kundt_back_end.Controllers
                 res.Ort = b.Ort;
                 res.PLZ = b.PLZ;
 
-
-
                 buchungList.Add(res);
             }
-            //return View(buchungUebersicht.ToList());
             return View(buchungList);
         }
 
@@ -112,7 +105,6 @@ namespace kundt_back_end.Controllers
                 idkunde = 0;
             }
 
-
             List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
 
             DbConnection con = db.Database.Connection;
@@ -121,7 +113,6 @@ namespace kundt_back_end.Controllers
             {
                 con.Open();
             }
-
 
             /// Erzeugt ein SQLCommand Objekt mit Parametern das an die Db geschickt wird
             SqlCommand cmd = new SqlCommand(GefilterteBuchungen.SQL, (SqlConnection)con);
@@ -145,8 +136,6 @@ namespace kundt_back_end.Controllers
             return View(buchungList);
         }
 
-
-
         // GET: Buchung/Edit/5
         [Authorize(Roles = "M,A")]
         public ActionResult Edit(int? id)
@@ -159,7 +148,6 @@ namespace kundt_back_end.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
 
             /// Besser wäre es das eigene Modell zu verwenden anstelle der tblBuchung
             /// allerdings hat unser eigenes modell nicht alle Felder aus tblbuchung
@@ -183,7 +171,6 @@ namespace kundt_back_end.Controllers
             BEM.Vorname = tblBuchung.tblKunde.Vorname;
             BEM.Nachname = tblBuchung.tblKunde.Nachname;
 
-
             return View(BEM);
         }
 
@@ -200,7 +187,6 @@ namespace kundt_back_end.Controllers
             {
                 /// Alte Variante
                 //var Buchung = (from b in db.tblBuchung where b.IDBuchung == BEM.IDBuchung select b).FirstOrDefault<tblBuchung>();
-
 
                 /// Wenn im Edit-View das Feld BuchungBis kleiner als BuchungVon ist wird ein TempData erzeugt
                 /// das im Edit View eine Fehlermeldung einblendet und den User darauf hinweist
@@ -221,8 +207,6 @@ namespace kundt_back_end.Controllers
                     string email = ticket.Name;
 
                     db.ptblHistorieInsert(BEM.IDBuchung, email);
-
-
                 }
                 /// bool Wert der ermittelt wird um den BuchungStatus auf 'zurueck' zu setzen
                 if (BEM.zurueck)
@@ -235,8 +219,6 @@ namespace kundt_back_end.Controllers
                     string email = ticket.Name;
 
                     db.ptblHistorieInsert(BEM.IDBuchung, email);
-
-
                 }
                 /// Abklären was passiert wenn storniert wurde.
                 /// Eintrag in tblHistorie machen oder nicht?
@@ -251,7 +233,6 @@ namespace kundt_back_end.Controllers
                 {
                     BEM.BuchungStatus = db.tblBuchung.Find(BEM.IDBuchung).BuchungStatus;
                 }
-
 
                 /// Hol dir die IDBuchung aus BuchungEditModel und suchen den gleichen
                 /// Datensatz mit der selben ID aus der Datenbank von der tblBuchung
@@ -270,7 +251,6 @@ namespace kundt_back_end.Controllers
                 var urlStr = (string)TempData["AusgangsURL"];
                 return Redirect(urlStr);
             }
-
             return View(BEM);
         }
 

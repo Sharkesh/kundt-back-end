@@ -3,14 +3,14 @@
     ViewBag.Title = "Auto Hinzufügen";
 }
 <style>
-    .table1 {
-        font-family: arial, sans-serif;
+    .tableLength {
+        min-width:375px;
+        max-width:375px;
     }
 
-    /*.hinzuAuto {
-        min-width: 200px;
-        max-width: 200px;
-    }*/
+    .hinzuAuto {
+        min-width: 250px;        
+    }
 
     .autoHinzu_tr {
         background-color: white;
@@ -80,12 +80,12 @@
 
             </div>
         </div>
-        <div class="col-xs-6 col-xs-offset-1 table-responsive text-right" style="max-width:400px">
+        <div class="col-xs-6 col-xs-offset-1 table-responsive text-right tableLength" style="max-width:400px">
             <table class="table table-hover">
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>Marke:</td>
-                    <td>
-                        <select name="myMarke" id="myMarke" class="hinzuAuto form-control">
+                    <td class="autoHinzu">
+                        <select name="myMarke" id="myMarke" class="form-control">
                             <optgroup label="Kategorie wählen">
                                 @foreach (var item in Model.markeListe)
                                 {
@@ -95,10 +95,10 @@
                         </select>
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>Typ:</td>
-                    <td>
-                        <select name="myTyp" id="myTyp" class="autoHinzu form-control">
+                    <td class="autoHinzu">
+                        <select name="myTyp" id="myTyp" class="form-control">
                             <optgroup label="Typ wählen">
                                 @foreach (var item in Model.typListe)
                                 {
@@ -108,11 +108,11 @@
                         </select>
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>Kategorie:</td>
-                    <td>
+                    <td class="autoHinzu">
 
-                        <select name="myKategorie" id="myKategorie" class="hinzuAuto form-control">
+                        <select name="myKategorie" id="myKategorie" class="form-control">
                             <optgroup label="Kategorie wählen">
                                 @foreach (var item in Model.kategorieListe)
                                 {
@@ -122,17 +122,18 @@
                         </select>
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>PS:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myPS, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.myPS, "", new { @class = "text-danger" })
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.myPS, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myPS, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myPs" value="@Model.myPS" class="form-control" min="0" max="2000" required/>
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>Getriebe:</td>
-                    <td>
-                        <select name="myGetriebe" id="myGetriebe" class="hinzuAuto form-control">
+                    <td class="autoHinzu">
+                        <select name="myGetriebe" id="myGetriebe" class="form-control">
                             <optgroup label="Getriebe wählen">
                                 <option name="myGetriebe" value="Manuell">Manuell</option>
                                 <option name="myGetriebe" value="Automatik">Automatik</option>
@@ -140,38 +141,42 @@
                         </select>
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>Baujahr:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myBauJahr, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.myBauJahr, "", new { @class = "text-danger" })
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.myBauJahr, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myBauJahr, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myBaujahr" value="@Model.myBauJahr" class="form-control" min="1900" max="@Model.myBauJahr" required/>
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>Türen:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myTueren, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.myTueren, "", new { @class = "text-danger" })
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.myTueren, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myTueren, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myTueren" value="@Model.myTueren" class="form-control" min="2" max="5" required/>
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>Sitze:</td>
-                    <td>
-                        @Html.EditorFor(model => model.mySitze, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.mySitze, "", new { @class = "text-danger" })
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.mySitze, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.mySitze, "", new { @class = "text-danger" })*@    
+                        <input type="number" name="mySitze" value="@Model.mySitze" class="form-control" min="2" max="999" required />                    
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>KM-Stand:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myKilometerStand, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.myKilometerStand, "", new { @class = "text-danger" })
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.myKilometerStand, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
+                        @Html.ValidationMessageFor(model => model.myKilometerStand, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myKilometerStand" value="@Model.myKilometerStand" class="form-control" min="0" max="9999999" required />
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr">
+                <tr>
                     <td>Treibstoff:</td>
-                    <td>
-                        <select name="myTreibstoff" id="myTreibstoff" class="hinzuAuto form-control">
+                    <td class="autoHinzu">
+                        <select name="myTreibstoff" id="myTreibstoff" class="form-control">
                             <optgroup label="Treibstoff wählen">
                                 @foreach (var item in Model.treibstoffListe)
                                 {
@@ -181,17 +186,24 @@
                         </select>
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr hinzuAuto">
+                <tr>
                     <td>Mietpreis:</td>
-                    <td>
-                        @Html.EditorFor(model => model.myMietPreis, new { htmlAttributes = new { @class = "form-control" } })
+                    <td class="autoHinzu">
+                        @Html.EditorFor(model => model.myMietPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
                         @Html.ValidationMessageFor(model => model.myMietPreis, "", new { @class = "text-danger" })
                     </td>
                 </tr>
-                <tr class="autoHinzu_tr hinzuAuto">
-                    <td>Anzeigen:</td>
-                    <td>
-                        <select name="myAnzeigen" id="myAnzeigen" class="hinzuAuto form-control">
+                <tr class="hinzuAuto">
+                    <td>Verkaufspreis:</td>
+                    <td class="autoHinzu">
+                        @Html.EditorFor(model => model.myVerkaufsPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
+                        @Html.ValidationMessageFor(model => model.myVerkaufsPreis, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sichtbarkeit:</td>
+                    <td class="autoHinzu">
+                        <select name="myAnzeigen" id="myAnzeigen" class="form-control">
                             <optgroup label="Auto anzeigen">
                                 <option value="true">Sichtbar</option>
                                 <option value="false">Versteckt</option>

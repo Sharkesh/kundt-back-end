@@ -358,6 +358,7 @@
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\FilterScript.js" />
     <Content Include="Scripts\i18n\bootstrap-select\defaults-bg_BG.js" />
     <Content Include="Scripts\i18n\bootstrap-select\defaults-bg_BG.min.js" />
     <Content Include="Scripts\i18n\bootstrap-select\defaults-cs_CZ.js" />
@@ -511,6 +512,7 @@
     <Content Include="Views\Eyecatchers\Index.cshtml" />
     <Content Include="Views\Mitarbeiter\PasswortZuruecksetzen.cshtml" />
     <Content Include="Views\Mitarbeiter\MitarbeiterDaten.cshtml" />
+    <Content Include="Views\Mitarbeiter\ÄnderungenErfolgreich.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
