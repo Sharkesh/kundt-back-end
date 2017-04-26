@@ -1,4 +1,4 @@
-﻿@model kundt_back_end.Models.tblEyecatcher
+﻿@model IEnumerable<kundt_back_end.Models.tblEyecatcher>
 @{
     ViewBag.Title = "Einstellung";
 }
@@ -39,6 +39,8 @@
     </div>
     }*@
 
+            
+   
 
 <div class="headingFormat">
     <h2 style="padding:5px;">Eyecatcher Einstellungen</h2>
@@ -47,22 +49,29 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal col-md-10">
         <h4>Bild: 1</h4>
         <hr />
 
         <input type="hidden" value="1" name="IDEyecatcher" />
         <div class="form-group">
-            @Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+
+            @{
+                var image = Convert.ToBase64String(Model.ToList()[0].Eyecatcher);
+            }
+            @Html.Raw("<img src=\"data:" + Model.ToList()[0].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\"  />")
+
             <div class="col-md-10">
                 <input type="file" id="upload" name="upload" />
-                @Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })
+                @*@Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Bild Aktualisieren" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -71,22 +80,28 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal col-md-10">
         <h4>Bild: 2</h4>
         <hr />
 
         <input type="hidden" value="2" name="IDEyecatcher" />
         <div class="form-group">
-            @Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @{
+                var image = Convert.ToBase64String(Model.ToList()[1].Eyecatcher);
+            }
+            @Html.Raw("<img src=\"data:" + Model.ToList()[1].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" />")
             <div class="col-md-10">
                 <input type="file" id="upload" name="upload" />
-                @Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })
+                
+                @*@Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })*@
             </div>
+            
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Bild Aktualisieren" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -95,22 +110,28 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal col-md-10">
         <h4>Bild: 3</h4>
         <hr />
 
         <input type="hidden" value="3" name="IDEyecatcher" />
         <div class="form-group">
-            @Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @{
+                var image = Convert.ToBase64String(Model.ToList()[2].Eyecatcher);
+            }
+            @Html.Raw("<img src=\"data:" + Model.ToList()[2].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" />")
+            
+                           
             <div class="col-md-10">
                 <input type="file" id="upload" name="upload" />
-                @Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })
+                @*@Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Bild Aktualisieren" class="btn btn-default" />
             </div>
         </div>
     </div>
