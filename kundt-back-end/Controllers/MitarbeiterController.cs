@@ -119,7 +119,7 @@ namespace kundt_back_end.Controllers
         }
         //Get: Adming/MitarbeiterBearbeiten/PasswortZurücksetzenAdmin
         [Authorize(Roles = "A")]
-        public ActionResult PasswortZuruecksetzenAdmin(int id)
+        public ActionResult PasswortZuruecksetzenA(int id)
         {
 
             string erzeugtesPW = "error";

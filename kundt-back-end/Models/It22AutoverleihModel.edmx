@@ -339,6 +339,7 @@
           <Parameter Name="checkOffen" Type="bit" Mode="In" />
           <Parameter Name="checkAbgeschlossen" Type="bit" Mode="In" />
           <Parameter Name="checkProblem" Type="bit" Mode="In" />
+          <Parameter Name="checkAll" Type="bit" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
@@ -505,7 +506,8 @@
           <Parameter Name="gebdat" Type="date" Mode="In" />
         </Function>
         <Function Name="pKundenAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="searchName" Type="varchar" Mode="In" />
+          <Parameter Name="searchVorname" Type="varchar" Mode="In" />
+          <Parameter Name="searchNachname" Type="varchar" Mode="In" />
           <Parameter Name="searchKundenNr" Type="int" Mode="In" />
           <Parameter Name="searchOrt" Type="varchar" Mode="In" />
           <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
@@ -1023,7 +1025,8 @@
             <Parameter Name="gebdat" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="pKundenAnzeigen" ReturnType="Collection(it22AutoverleihModel.pKundenAnzeigen_Result)">
-            <Parameter Name="searchName" Mode="In" Type="String" />
+            <Parameter Name="searchVorname" Mode="In" Type="String" />
+            <Parameter Name="searchNachname" Mode="In" Type="String" />
             <Parameter Name="searchKundenNr" Mode="In" Type="Int32" />
             <Parameter Name="searchOrt" Mode="In" Type="String" />
             <Parameter Name="searchPLZ" Mode="In" Type="String" />
@@ -1039,6 +1042,7 @@
             <Parameter Name="checkOffen" Mode="In" Type="Boolean" />
             <Parameter Name="checkAbgeschlossen" Mode="In" Type="Boolean" />
             <Parameter Name="checkProblem" Mode="In" Type="Boolean" />
+            <Parameter Name="checkAll" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="pAutoHinzufuegen">
             <Parameter Name="Baujahr" Mode="In" Type="Int16" />

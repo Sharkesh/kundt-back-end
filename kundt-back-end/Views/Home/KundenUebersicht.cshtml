@@ -222,6 +222,17 @@
         }*/
 </style>
 
+<script>
+    function FilterReset() {
+        document.getElementById("KundenNr").value = '';
+        document.getElementById("Nachname").value = '';
+        document.getElementById("Vorname").value = '';
+        document.getElementById("PLZ").value = '';
+        document.getElementById("Ort").value = '';
+        document.getElementById("suchMaske").submit;
+    }
+</script>
+
 <div class="headingFormat">
     <h2 style="padding:5px;">Kunden Übersicht</h2>
 </div>
@@ -231,13 +242,14 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="row" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
-                <form method="post" action="@Url.Action("KundenUebersichtFilter","Home")">
+                <form id="suchMaske" method="post" action="@Url.Action("KundenUebersichtFilter","Home")">
                     <center><h3>Suchen nach</h3></center>
-                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenName }" placeholder="Nachname" id="KundenName" name="KundenName" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenNr }" placeholder="Kunden Nr" id="KundenNr" name="KundenNr" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Ort }" placeholder="Ort" id="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Nachname }" placeholder="Nachname" id="Nachname" name="Nachname" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Vorname }" placeholder="Vorname" id="Vorname" name="Vorname" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Plz }" placeholder="PLZ" id="PLZ" name="PLZ" class="col-lg-12 SuchFilter_abstand" />
-
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Ort }" placeholder="Ort" id="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand" />
+                    <button value="Suche Reset" onclick="FilterReset()" name="reset" class="col-lg-12 SuchFilter_abstand"><span>Filter Reset</span></button>
                     <div class="col-lg-12">
                         <button class="col-lg-6 SuchFilter_abstand buttonOrangeSuchen" type="submit" id="suchen" name="suchen" value="Suchen"><span>Suchen</span></button>
                     </div>

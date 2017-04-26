@@ -8,7 +8,8 @@ namespace kundt_back_end.Models
 {
     public class KundenUebersichtFilterModel 
     {
-        public string KundenName { get; set; }
+        public string Vorname { get; set; }
+        public string Nachname { get; set; }
         public int? KundenNr { get; set; }
         public string Plz { get; set; }
         public string Ort { get; set; }
