@@ -117,9 +117,9 @@ namespace kundt_back_end.Controllers
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
         }
-        //Get: Adming/MitarbeiterBearbeiten/Passwort Zurücksetzen
-        [Authorize(Roles = "A,M")]
-        public ActionResult PasswortZuruecksetzenA(int id)
+        //Get: Adming/MitarbeiterBearbeiten/PasswortZurücksetzenA
+        [Authorize(Roles = "A")]
+        public ActionResult PasswortZuruecksetzenAdmin(int id)
         {
 
             string erzeugtesPW = "error";
@@ -144,7 +144,7 @@ namespace kundt_back_end.Controllers
 
             return View(MM);
         }
-        //Get: Mitarbeiter/PasswortZuruecksetzenM
+        //Get: Mitarbeiter/PasswortZuruecksetzenMitarbeiter
         [Authorize(Roles = "M")]
         public ActionResult PasswortZuruecksetzenM(int? id)
         {
