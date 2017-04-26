@@ -22,7 +22,7 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "A")]
         public ActionResult Index()
         {
-            var tblMitarbeiter = db.tblMitarbeiter.Include(t => t.tblLogin);
+            var tblMitarbeiter = db.tblMitarbeiter.Include(t => t.tblLogin).Where(t => t.tblLogin.Rolle == "M");
             return View(tblMitarbeiter.ToList());
         }
 
@@ -109,7 +109,7 @@ namespace kundt_back_end.Controllers
                 db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort,MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
                 //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich
-                return RedirectToAction("ÄnderungenErfolgreich");
+                return RedirectToAction("Index");
             }
             else
             {
