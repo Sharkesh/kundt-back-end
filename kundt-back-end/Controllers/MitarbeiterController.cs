@@ -65,7 +65,7 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: Mitarbeiter/Edit/5
-        [Authorize(Roles = "A")]
+        [Authorize(Roles = "A,M")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,7 +100,7 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "A")]
+        [Authorize(Roles = "A,M")]
         public ActionResult Edit(MitarbeiterModel MM)
         {
             if (ModelState.IsValid)
@@ -118,7 +118,7 @@ namespace kundt_back_end.Controllers
             }
         }
         //Adming/MitarbeiterBearbeiten/Passwort Zurücksetzen
-        [Authorize(Roles = "A")]
+        [Authorize(Roles = "A,M")]
         public ActionResult PasswortZuruecksetzenA(int id)
         {
 
@@ -146,23 +146,45 @@ namespace kundt_back_end.Controllers
         }
 
         [Authorize(Roles = "M")]
-        public ActionResult PasswortZuruecksetzenM(MitarbeiterModel MM)
+        public ActionResult PasswortZuruecksetzenM(int? id)
         {
 
-            if (ModelState.IsValid)
+            if (id != null && id > 0)
             {
-                // AT WORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
-                var res = db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+                MitarbeiterModel MM = new MitarbeiterModel();
+                MM.IDMitarbeiter = id ?? -1;
 
-                //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich
-                return RedirectToAction("ÄnderungenErfolgreich", "Mitarbeiter");
+                var dbMA = db.tblMitarbeiter.Find(id);
+                var dbLogin = db.tblLogin.Find(id);
+
+                MM.Email = dbLogin.Email;
+                MM.MAVorname = dbMA.MAVorname;
+                MM.MANachname = dbMA.MANachname;
+                MM.Rolle = 'M';
+                MM.Deaktiviert = false;
+                MM.MAAnrede = dbMA.MAAnrede;
+
+                return View(MM);
             }
             else
             {
-                //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
-                return RedirectToAction("Edit", MM.IDMitarbeiter);
+                throw new Exception("MAResetPW");
             }
+            
+        }
+
+        [Authorize(Roles = "M")]
+        [HttpPost]
+        public ActionResult PasswortZuruecksetzenM(MitarbeiterModel MM)
+        {
+
+            var dbLogin = db.tblLogin.Find(MM.IDMitarbeiter);
+            dbLogin.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
+            db.Entry(dbLogin).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
+
         }
 
         protected override void Dispose(bool disposing)
@@ -218,7 +240,9 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-                // AT WORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+             
+                
+                   
                 var res = db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
                 //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich

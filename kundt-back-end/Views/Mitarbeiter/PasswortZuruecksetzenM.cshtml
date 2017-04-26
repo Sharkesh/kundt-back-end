@@ -4,7 +4,8 @@
 }
 
 <h2>Passwort Zurückgesetzt!</h2>
-
+@using (Html.BeginForm())
+{
 <div class="form-group">
     @Html.LabelFor(model => model.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
@@ -19,7 +20,9 @@
     @Html.HiddenFor(model => model.Email)
     </div>
         <div class="col-lg-6">
-            <button type="submit" value="Save" class="buttonOrangeNextStep"><span>Passwort Speichern</span></button>
+            @*<button type="submit" value="Save" class="buttonOrangeNextStep"><span>Passwort Speichern</span></button>*@
+            <input type="submit" value="Speichern" class="btn buttonOrangeNextStep" />
         </div>
 
+}
 
