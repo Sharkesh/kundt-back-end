@@ -117,7 +117,7 @@ namespace kundt_back_end.Controllers
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
         }
-        //Adming/MitarbeiterBearbeiten/Passwort Zurücksetzen
+        //Get: Adming/MitarbeiterBearbeiten/Passwort Zurücksetzen
         [Authorize(Roles = "A,M")]
         public ActionResult PasswortZuruecksetzenA(int id)
         {
@@ -144,7 +144,7 @@ namespace kundt_back_end.Controllers
 
             return View(MM);
         }
-
+        //Get: Mitarbeiter/PasswortZuruecksetzenM
         [Authorize(Roles = "M")]
         public ActionResult PasswortZuruecksetzenM(int? id)
         {
@@ -172,7 +172,7 @@ namespace kundt_back_end.Controllers
             }
             
         }
-
+        //Post: Mitarbeiter/PasswortZuruecksetzenM
         [Authorize(Roles = "M")]
         [HttpPost]
         public ActionResult PasswortZuruecksetzenM(MitarbeiterModel MM)
@@ -183,7 +183,7 @@ namespace kundt_back_end.Controllers
             db.Entry(dbLogin).State = EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ÄnderungenErfolgreich", "Mitarbeiter");
 
         }
 
