@@ -72,14 +72,12 @@
         box-shadow: lightgray 1px 1px 0px;
         text-align: center;
     }
-
 </style>
 
 
 <div class="headingFormat">
-    <h2>Tagesübersicht & Problemfälle</h2>
+    <h2 style="padding:5px;">Tagesübersicht & Problemfälle</h2>
 </div>
-<hr />
 <div class="row">
     <div class="col-lg-4">
         <center><h3>Abholung</h3></center>
@@ -96,8 +94,8 @@
                     </thead>
                     <tbody>
                         @foreach (var item in Model.buchungAbholung)
-                        {                            
-                            <tr>                                
+                        {
+                            <tr>
                                 <td style="width:20%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
                                 <td style="width:40%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Vorname) @Html.DisplayFor(x => item.Nachname)</a></td>
                                 <td style="width:40%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Auto)</a></td>
@@ -139,7 +137,7 @@
             }
             else
             {
-                <center><h3>Heute keine Rückgabe</h3></center>                
+                <center><h3>Heute keine Rückgabe</h3></center>
             }
         </div>
     </div>

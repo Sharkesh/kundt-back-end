@@ -226,6 +226,7 @@
     <Compile Include="Models\tblBuchung.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblBuchungEditMeta.cs" />
     <Compile Include="Models\tblEyecatcher.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -251,6 +252,7 @@
     <Compile Include="Models\tblMitarbeiter.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblMitarbeiterMeta.cs" />
     <Compile Include="Models\tblPLZOrt.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -503,7 +505,6 @@
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
     <Content Include="Views\Buchung\Edit.cshtml" />
     <Content Include="Views\Buchung\Index.cshtml" />
-    <Content Include="Views\Buchung\_BuchungTable.cshtml" />
     <Content Include="Views\Mitarbeiter\Create.cshtml" />
     <Content Include="Views\Mitarbeiter\Edit.cshtml" />
     <Content Include="Views\Mitarbeiter\Index.cshtml" />

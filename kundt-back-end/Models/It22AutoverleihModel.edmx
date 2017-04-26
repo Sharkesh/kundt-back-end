@@ -1192,11 +1192,10 @@
         </ComplexType>
         <ComplexType Name="pKundenAnzeigen_Result">
           <Property Type="Int32" Name="IDKunde" Nullable="false" />
-          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="BuchungFilter_Result">
           <Property Type="Int32" Name="BuchungNr" Nullable="true" />
@@ -1560,11 +1559,10 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="it22AutoverleihModel.pKundenAnzeigen_Result">
                 <ScalarProperty Name="IDKunde" ColumnName="IDKunde" />
-                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
                 <ScalarProperty Name="Nachname" ColumnName="Nachname" />
                 <ScalarProperty Name="PLZ" ColumnName="PLZ" />
                 <ScalarProperty Name="Ort" ColumnName="Ort" />
-                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

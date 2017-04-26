@@ -40,7 +40,7 @@
 </style>
 
 <div class="headingFormat">
-    <h2>Buchung bearbeiten</h2>
+    <h2 style="padding:5px;">Buchung bearbeiten</h2>
 </div>
 
 
@@ -49,23 +49,22 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IDBuchung)
         <div class="form-group">
             @Html.LabelFor(model => model.IDBuchung, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <p name="IDBuchung" id="IDBuchung" class="form-control input EditDisplayWidth disabledField">
+                <div name="IDBuchung" id="IDBuchung" class="form-control input EditDisplayWidth disabledField">
                     @Model.IDBuchung
-                </p>
+                </div>
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.BuchungAm, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <p name="BuchungAm" id="BuchungAm" class="form-control input EditDisplayWidth disabledField">
+                <div name="BuchungAm" id="BuchungAm" class="form-control input EditDisplayWidth disabledField">
                     @Model.BuchungAm
-                </p>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -92,39 +91,39 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FKKunde, "KundenNr.", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <p name="KundeId" id="KundeId" class="form-control input EditDisplayWidth disabledField">
+                <div name="KundeId" id="KundeId" class="form-control input EditDisplayWidth disabledField">
                     @Model.FKKunde
-                </p>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-md-2">Kunde Name</label>
             <div class="col-md-10">                
-                <p name="name" id="name" class="form-control input EditDisplayWidth disabledField">
+                <div name="name" id="name" class="form-control input EditDisplayWidth disabledField">
                     @Model.Vorname @Model.Nachname
-                </p>
+                </div>
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.MietPreis, "MietPreis", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <p name="MietPreis" id="MietPreis" class="form-control input EditDisplayWidth disabledField">
+                <div name="MietPreis" id="MietPreis" class="form-control input EditDisplayWidth disabledField">
                     @Model.MietPreis
-                </p>
+                </div>
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Tage, "Mietdauer", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <p name="MietDauer" id="MietDauer" class="form-control input EditDisplayWidth disabledField">
+                <div name="MietDauer" id="MietDauer" class="form-control input EditDisplayWidth disabledField">
                     @Model.Tage Tage
-                </p>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-md-2">BuchungStatus</label>
             <div class="col-md-10">
-                <p class="form-control input EditDisplayWidth disabledField">@Model.BuchungStatus</p>
+                <div class="form-control input EditDisplayWidth disabledField">@Model.BuchungStatus</div>
                 @*@Html.LabelFor(model => model.BuchungStatus, htmlAttributes: new { @class = "control-label col-md-2" })
                     @Html.DropDownList("BuchungStatus", Model.options, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.BuchungStatus, "", new { @class = "text-danger" })*@
