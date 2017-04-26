@@ -8,7 +8,6 @@ namespace kundt_back_end.Models
 {
     public class AutoModel
     {
-
         Regex r = new Regex("^[a-zA-Z0-9]*$");
         public List<tblAuto> autoListe { get; set; }
         public List<tblAusstattung> ausstattungListe { get; set; }
