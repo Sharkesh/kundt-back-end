@@ -226,6 +226,7 @@
     <Compile Include="Models\tblBuchung.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblBuchungEditMeta.cs" />
     <Compile Include="Models\tblEyecatcher.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
