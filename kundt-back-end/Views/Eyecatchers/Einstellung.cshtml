@@ -19,6 +19,58 @@
         height: 40px;
         font-size: 32px;
     }
+
+    .buttonOrangeSave {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+        .buttonOrangeSave span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .buttonOrangeSave span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -30px;
+                transition: 0.5s;
+                font-size: 15px;
+            }
+
+        .buttonOrangeSave:hover span {
+            padding-right: 15px;
+        }
+
+            .buttonOrangeSave:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+        .buttonOrangeSave:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+        }
 </style>
 @*@using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
@@ -39,103 +91,103 @@
     </div>
     }*@
 
-            
-   
-
 <div class="headingFormat">
     <h2 style="padding:5px;">Eyecatcher Einstellungen</h2>
 </div>
-@using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal col-md-10">
-        <h4>Bild: 1</h4>
-        <hr />
-
-        <input type="hidden" value="1" name="IDEyecatcher" />
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })*@
-
-
-            @{
-                var image = Convert.ToBase64String(Model.ToList()[0].Eyecatcher);
-            }
-            @Html.Raw("<img src=\"data:" + Model.ToList()[0].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\"  />")
-
-            <div class="col-md-10">
-                <input type="file" id="upload" name="upload" />
-                @*@Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })*@
+<div class=" container" style="padding-top:15px;">
+    <div class="row col-md-12">
+        @using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal col-md-12">
+                <div class="col-md-2">
+                    <h3>Bild 1</h3>
+                </div>
+                <input type="hidden" value="1" name="IDEyecatcher" />
+                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                    <center>
+                        <div>
+                            @{
+                                var image = Convert.ToBase64String(Model.ToList()[0].Eyecatcher);
+                            }
+                            @Html.Raw("<img src=\"data:" + Model.ToList()[0].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\"  />")
+                        </div>
+                    </center>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <div style="padding-bottom:15px;padding-top:30px;">
+                        <input type="file" id="upload" name="upload" />
+                    </div>
+                    <div>
+                        <button type="submit" value="Bild Aktualisieren" class="buttonOrangeSave"><span>Bild Aktualisieren</span></button>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Bild Aktualisieren" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
-@using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal col-md-10">
-        <h4>Bild: 2</h4>
-        <hr />
-
-        <input type="hidden" value="2" name="IDEyecatcher" />
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            @{
-                var image = Convert.ToBase64String(Model.ToList()[1].Eyecatcher);
-            }
-            @Html.Raw("<img src=\"data:" + Model.ToList()[1].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" />")
-            <div class="col-md-10">
-                <input type="file" id="upload" name="upload" />
-                
-                @*@Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })*@
+    <div class="row col-md-12">
+        @using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            <div class="form-horizontal col-md-12">
+                <div class="col-md-2">
+                    <h3>Bild 2</h3>
+                </div>
+                <input type="hidden" value="2" name="IDEyecatcher" />
+                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                    <center>
+                        <div>
+                            @{
+                                var image = Convert.ToBase64String(Model.ToList()[1].Eyecatcher);
+                            }
+                            @Html.Raw("<img src=\"data:" + Model.ToList()[1].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" />")
+                        </div>
+                    </center>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <div style="padding-bottom:15px;padding-top:30px;">
+                        <input type="file" id="upload" name="upload" />
+                    </div>
+                    <div>
+                        <button type="submit" value="Bild Aktualisieren" class="buttonOrangeSave"><span>Bild Aktualisieren</span></button>
+                    </div>
+                </div>
             </div>
-            
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Bild Aktualisieren" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
-@using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal col-md-10">
-        <h4>Bild: 3</h4>
-        <hr />
-
-        <input type="hidden" value="3" name="IDEyecatcher" />
-        <div class="form-group">
-            @*@Html.LabelFor(model => model.Eyecatcher, htmlAttributes: new { @class = "control-label col-md-2" })*@
-            @{
-                var image = Convert.ToBase64String(Model.ToList()[2].Eyecatcher);
-            }
-            @Html.Raw("<img src=\"data:" + Model.ToList()[2].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" />")
-            
-                           
-            <div class="col-md-10">
-                <input type="file" id="upload" name="upload" />
-                @*@Html.ValidationMessageFor(model => model.Eyecatcher, "", new { @class = "text-danger" })*@
+    <div class="row col-md-12">
+        @using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            <div class="form-horizontal col-md-12">
+                <div class="col-md-2">
+                    <h3>Bild 3</h3>
+                </div>
+                <input type="hidden" value="3" name="IDEyecatcher" />
+                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                    <center>
+                        <div>
+                            @{
+                                var image = Convert.ToBase64String(Model.ToList()[2].Eyecatcher);
+                            }
+                            @Html.Raw("<img src=\"data:" + Model.ToList()[2].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" />")
+                        </div>
+                    </center>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <div style="padding-bottom:15px;padding-top:30px;">
+                        <input type="file" id="upload" name="upload" />
+                    </div>
+                    <div>
+                        <button type="submit" value="Bild Aktualisieren" class="buttonOrangeSave"><span>Bild Aktualisieren</span></button>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Bild Aktualisieren" class="btn btn-default" />
-            </div>
-        </div>
+        }
     </div>
-}
+</div>
+
 <script type="text/javascript" src="/path/to/si.files.js"></script>
-
-
