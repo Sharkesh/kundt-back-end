@@ -240,13 +240,17 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-             
-                
-                   
+                try { 
+ 
                 var res = db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
                 //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich
                 return RedirectToAction("ÄnderungenErfolgreich" , "Mitarbeiter");
+                }
+                catch
+                {
+                    return HttpNotFound();
+                }
             }
             else
             {

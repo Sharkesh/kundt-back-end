@@ -147,52 +147,55 @@
                     @Html.ValidationMessageFor(model => model.MAAnrede, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.MAVorname, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.MAVorname, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MAVorname, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.MANachname, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.MANachname, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MANachname, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            @*Passwort ändern*@
-            <div class="form-group" style="padding-left:210px;">
-                @Html.ActionLink("Passwort zurücksetzen", "PasswortZuruecksetzenM", new { id = Model.IDMitarbeiter })
-            </div>
-            </div>
-            <div style="padding-top:15px;padding-left:40px;">
-            <p>Für Schwirigkeiten beim Ein Logen, wenden sie sich Bitte an ihren Administrator</p>
-        </div>
-        <div style="margin-top:50px;">
-            <div class="row">
-                <center>
-                    <div class="col-lg-6">
-                        <a href="@Url.Action("Index", "Mitarbeiter")">
-                            <input type="button" class="buttonOrangeReturn" value="Zurück zu Mitarbeiter" />
-                        </a>
-                    </div>
-                    <div>
-                        <div class="col-lg-6">
-                            <input type="submit" value="Aktualisieren" class="btn buttonOrangeNextStep" />
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MAVorname, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MAVorname, new { htmlAttributes = new { @class = "form-control validationMSG" } })
+                            @Html.ValidationMessageFor(model => model.MAVorname, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </center>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MANachname, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MANachname, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MANachname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @*Passwort ändern*@
+                    <div class="form-group" style="padding-left:210px;">
+                        @Html.ActionLink("Passwort zurücksetzen", "PasswortZuruecksetzenM", new { id = Model.IDMitarbeiter })
+                    </div>
+                </div>
+                <div style="padding-top:15px;padding-left:40px;">
+                    <p>Für Schwirigkeiten beim Ein Logen, wenden sie sich Bitte an ihren Administrator</p>
+                </div>
+                <div style="margin-top:50px;">
+                    <div class="row">
+                        <center>
+                            <div class="col-lg-6">
+                                <a href="@Url.Action("Index", "Mitarbeiter")">
+                                    <input type="button" class="buttonOrangeReturn" value="Zurück zu Mitarbeiter" />
+                                </a>
+                            </div>
+                            <div>
+                                <div class="col-lg-6">
+                                    <input type="submit" value="Aktualisieren" class="btn buttonOrangeNextStep" />
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+                }
             </div>
-        </div>
-    }
-</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
