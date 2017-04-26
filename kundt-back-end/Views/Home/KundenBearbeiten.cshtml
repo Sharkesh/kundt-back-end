@@ -3,35 +3,37 @@
     ViewBag.Title = "Kunde Bearbeiten";
 }
 <style>
-    .CenteredButton {
-        display: block;
-        margin: auto;
+    .EditDisplayWidth {
+        max-width: 280px;
     }
 
-    .TabellenGitter {
-        border: 1px solid black;
-        height: 2em;
-    }
-
-    #Kopfzeile {
-        height: 4em;
-    }
-
-    #Tabelle {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 1em;
+    .buttonOrangeNextStep {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
     }
 
     .headingFormat {
         margin: auto auto 20px auto;
         color: white;
         background-color: #f99b1c;
+        vertical-align: middle;
+        padding: 0px;
         border-radius: 4px;
         box-shadow: lightgray 1px 1px 0px;
         text-align: center;
-        height: 40px;
-        font-size: 32px;
+    }
+
+    .disabledField {
+        background-color: #eee;
     }
 </style>
 
@@ -46,103 +48,105 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.idkunde)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.idkunde, "Kunden-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="idkunde" name="idkunde" value="@if (@Model != null)
-            { @Model.idkunde }" readonly="readonly" />
-                @Html.ValidationMessageFor(model => model.idkunde, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Vorname" name="Vorname" value="@if (@Model != null)
-            { @Model.Vorname }" />
-                @Html.ValidationMessageFor(model => model.Vorname, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nachname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Nachname" name="Nachname" value="@if (@Model != null)
-            { @Model.Nachname }" />
-                @Html.ValidationMessageFor(model => model.Nachname, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Straße, "Straße", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Straße" name="Straße" value="@if (@Model != null)
-            { @Model.Straße }" required="required" />
-                @Html.ValidationMessageFor(model => model.Straße, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Plz, "PLZ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Plz" name="Plz" value="@if (@Model != null)
-            { @Model.Plz }" /><p>Bitte nur PLZ angeben - Ort wird automatisch editiert.</p>
-
-                @Html.ValidationMessageFor(model => model.Plz, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ort, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Ort" name="Ort" value="@if (@Model != null)
-            { @Model.Ort }" readonly="readonly" />
-                @Html.ValidationMessageFor(model => model.Ort, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="Email" name="Email" readonly="readonly" value="@if (@Model != null)
-            { @Model.Email }" />
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    <input type="text" id="Telefon" name="Telefon" value="@if (@Model != null)
-                { @Model.Telefon }" />
-                    @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Vorname, htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <input type="text" id="Vorname" name="Vorname" value="@Model.Vorname" class="form-control input EditDisplayWidth" />
+                        @Html.ValidationMessageFor(model => model.Vorname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nachname, htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <input type="text" id="Nachname" name="Nachname" value="@Model.Nachname" class="form-control input EditDisplayWidth" />
+                        @Html.ValidationMessageFor(model => model.Nachname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Straße, "Straße", htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <input type="text" id="Straße" name="Straße" value="@Model.Straße" class="form-control input EditDisplayWidth" />
+                        @Html.ValidationMessageFor(model => model.Straße, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Plz, "PLZ", htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <input type="text" id="Plz" name="Plz" value="@Model.Plz" class="form-control input EditDisplayWidth" />
+                        @Html.ValidationMessageFor(model => model.Plz, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Telefon, htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <input type="text" id="Telefon" name="Telefon" value="@Model.Telefon" class="form-control input EditDisplayWidth" />
+                        @Html.ValidationMessageFor(model => model.Telefon, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PassNr, "Pass-Nr.", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="PassNr" name="PassNr" value="@if (@Model != null)
-            { @Model.PassNr }" />
-                @Html.ValidationMessageFor(model => model.PassNr, "", new { @class = "text-danger" })
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.idkunde, "Kundennummer", htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <div name="idkunde" id="idkunde" class="form-control input EditDisplayWidth disabledField">
+                            @Model.idkunde
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PassNr, "Passnummer", htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <div id="PassNr" name="PassNr" class="form-control input EditDisplayWidth disabledField">@Model.PassNr</div>
+                        @Html.ValidationMessageFor(model => model.PassNr, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.PassNr)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GebDat, "Geburtsdatum", htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <div id="GebDat" name="GebDat" class="form-control input EditDisplayWidth disabledField">@Model.GebDat.ToString("dd.MM.yyyy")</div>
+                        @Html.ValidationMessageFor(model => model.GebDat, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.GebDat)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Ort, htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <div id="Ort" name="Ort" class="form-control input EditDisplayWidth disabledField">@Model.Ort</div>
+                        @Html.ValidationMessageFor(model => model.Ort, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-lg-4" })
+                    <div class="col-lg-8">
+                        <div id="Email" name="Email" class="form-control input EditDisplayWidth disabledField">@Model.Email</div>
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Email)
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GebDat, "Geburtsdatum", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="text" id="GebDat" name="GebDat" value="@if (@Model != null)
-            { @Model.GebDat.ToString("yyyy-MM-dd") }" />
-                @Html.ValidationMessageFor(model => model.GebDat, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        </div>        
+        <div class="container" style="margin-top:50px;">
+            <div class="row">
+                <center>
+                    <div class="col-lg-4">
+                        <a href="@Url.Action("KundenUebersicht", "Home")">
+                            <input type="button" class="buttonOrangeNextStep" value="Zurück zu Kunden" />
+                        </a>
+                    </div>
+                    <div>
+                        <div class="col-lg-4">
+                            <input type="submit" value="Save" class="btn buttonOrangeNextStep" />
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="@Url.Action("Index", "BuchungUebersicht")">
+                            <input type="button" class="buttonOrangeNextStep" value="Zurück zur Übersicht" />
+                        </a>
+                    </div>
+                </center>
             </div>
         </div>
     </div>
