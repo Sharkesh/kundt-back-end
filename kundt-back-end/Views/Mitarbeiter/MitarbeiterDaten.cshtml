@@ -134,12 +134,10 @@
         <div class="form-horizontal">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            @Html.HiddenFor(model => model.IDMitarbeiter)
             @Html.HiddenFor(model => model.Passwort)
 
-
-
+            @Html.HiddenFor(model => model.IDMitarbeiter)
+            @Html.HiddenFor(model => model.Rolle)
 
             <div class="form-group" style="padding-top:20px;">
                 @Html.LabelFor(model => model.MAAnrede, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -165,8 +163,6 @@
                     @Html.ValidationMessageFor(model => model.MANachname, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -174,9 +170,13 @@
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-        <div style="padding-top:15px;padding-left:40px;">
-            <p>Für Änderungen an ihrem Passwort, wenden sie sich bitte an einen Admin.</p>
+            @*Passwort ändern*@
+            <div class="form-group" style="padding-left:210px;">
+                @Html.ActionLink("Passwort zurücksetzen", "PasswortZuruecksetzenM", new { id = Model.IDMitarbeiter })
+            </div>
+            </div>
+            <div style="padding-top:15px;padding-left:40px;">
+            <p>Für Schwirigkeiten beim Ein Logen, wenden sie sich Bitte an ihren Administrator</p>
         </div>
         <div style="margin-top:50px;">
             <div class="row">

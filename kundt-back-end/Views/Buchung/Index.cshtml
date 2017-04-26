@@ -122,36 +122,6 @@
             text-align: center;
         }
 
-    /*.buttonOrangeSuchen {
-        background-color: #f99b1c;
-        border: none;
-        color: #ffffff;
-        font-size: 15px;
-        height: 50px;
-        width: 221.5px;
-        font-weight: 700;
-        letter-spacing: .5px;
-        text-align: center;
-        display: inline-block;
-        border-radius: 4px;
-        margin-top: 50px;
-    }
-
-        .buttonOrangeSuchen:hover {
-            background-color: #f99b1c;
-            border: none;
-            color: black;
-            font-size: 15px;
-            height: 50px;
-            width: 221.5px;
-            font-weight: 700;
-            letter-spacing: .5px;
-            text-align: center;
-            display: inline-block;
-            border-radius: 4px;
-            margin-top: 50px;
-        }*/
-
     .buttonOrangeEdit {
         background-color: #f99b1c;
         border: none;
@@ -162,22 +132,19 @@
         font-weight: 700;
         letter-spacing: .5px;
         text-align: center;
-        display: inline-block;
-        border-radius: 4px;
     }
 
         .buttonOrangeEdit:hover {
             background-color: #f99b1c;
             border: none;
-            color: black;
+            color: #ffffff;
             font-size: 15px;
             height: 40px;
             width: 100px;
             font-weight: 700;
             letter-spacing: .5px;
             text-align: center;
-            display: inline-block;
-            border-radius: 4px;
+            opacity:0.7;
         }
 
     .headingFormat {
@@ -324,7 +291,7 @@
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x=>item.BuchungVon)</a></td>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungBis)</a></td>
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungStatus)</a></td>
-                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })"><input type="button" class="btn buttonOrangeEdit" value="Bearbeiten" /></a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })"><button type="button" class="btn buttonOrangeEdit" value="Bearbeiten"><span>Bearbeiten</span></button></a></td>
                                 </tr>
                             }
                         </tbody>
