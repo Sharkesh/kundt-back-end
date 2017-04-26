@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "Auto Hinzufügen";
 }
+<script>
+    function changePic() {
+        var temp = document.getElementById("upload").value; 
+        document.getElementById("pic").src = "~/Content/img/" + temp;
+    }
+</script>
 <style>
     .tableLength {
         min-width:375px;
@@ -61,8 +67,8 @@
     <div class="container">
 
         <div class="col-xs-6" style="margin:auto; display:inline-block; padding:0px">
-            <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" alt="Alternate Text" style="max-height:200px" class="picBorder" />
-            <p><input type="file" id="upload" name="upload" accept="image/*" /></p>
+            <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" id="pic" alt="Alternate Text" style="max-height:200px" class="picBorder" />
+            <p><input type="file" id="upload" name="upload" accept="image/*" onchange="changePic()"/></p>            
             <div class="col-xs-12" style="margin:20px 0px 0px -12px">
 
                 <p>Ausstattungsoptionen:</p>
@@ -72,7 +78,7 @@
                         if (item != null)
                         {
                             <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
-                                <label class="labelCheckbox"><input type="checkbox" name="ausstattungListe" value="@item.IDAusstattung">@Html.DisplayFor(m => item.Ausstattung)</label>
+                                <label class="labelCheckbox"><input type="checkbox" name="ausstattungListe" value="@item.IDAusstattung" min="0">@Html.DisplayFor(m => item.Ausstattung)</label>
                             </div>
                         }
                     }
@@ -85,7 +91,7 @@
                 <tr>
                     <td>Marke:</td>
                     <td class="autoHinzu">
-                        <select name="myMarke" id="myMarke" class="form-control">
+                        <select name="myMarke" id="FilterMarke" class="form-control">
                             <optgroup label="Kategorie wählen">
                                 @foreach (var item in Model.markeListe)
                                 {
@@ -98,7 +104,7 @@
                 <tr>
                     <td>Typ:</td>
                     <td class="autoHinzu">
-                        <select name="myTyp" id="myTyp" class="form-control">
+                        <select name="myTyp" id="FilterTyp" class="form-control">
                             <optgroup label="Typ wählen">
                                 @foreach (var item in Model.typListe)
                                 {
@@ -146,7 +152,7 @@
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myBauJahr, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.myBauJahr, "", new { @class = "text-danger" })*@
-                        <input type="number" name="myBaujahr" value="@Model.myBauJahr" class="form-control" min="1900" max="@Model.myBauJahr" required/>
+                        <input type="number" name="myBaujahr" value="@Model.myBauJahr" class="form-control" min="1970" max="@Model.myBauJahr" required/>
                     </td>
                 </tr>
                 <tr>
@@ -222,3 +228,7 @@
         </div>
     </div>
 </form>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/filter.js")
+}
