@@ -22,8 +22,21 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "A")]
         public ActionResult Index()
         {
-            var tblMitarbeiter = db.tblMitarbeiter.Include(t => t.tblLogin).Where(t => t.tblLogin.Rolle == "M");
-            return View(tblMitarbeiter.ToList());
+            MitarbeiterContainerModel McM = new MitarbeiterContainerModel();
+            McM.mafilter = (MitarbeiterFilterModel)Session["Filterparameter"];
+
+
+
+            if (McM.mafilter == null)
+            {
+                McM.malist = db.pMAAnzeigen(null, null, null, null);
+            }
+            else
+            {
+                McM.malist = db.pMAAnzeigen(McM.mafilter.Vorname, McM.mafilter.Nachname, McM.mafilter.MaId, McM.mafilter.Anrede);
+            }
+
+            return View(McM);
         }
 
         // GET: Mitarbeiter/Create

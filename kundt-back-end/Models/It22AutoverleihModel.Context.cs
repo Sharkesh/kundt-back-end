@@ -639,5 +639,48 @@ namespace kundt_back_end.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p8Passwort", nPasswort);
         }
+    
+        [DbFunction("it22AutoverleihEntities", "getMA")]
+        public virtual IQueryable<getMA_Result> getMA(string searchVorname, string searchNachname, Nullable<int> searchMaID, string searchGeschlecht)
+        {
+            var searchVornameParameter = searchVorname != null ?
+                new ObjectParameter("searchVorname", searchVorname) :
+                new ObjectParameter("searchVorname", typeof(string));
+    
+            var searchNachnameParameter = searchNachname != null ?
+                new ObjectParameter("searchNachname", searchNachname) :
+                new ObjectParameter("searchNachname", typeof(string));
+    
+            var searchMaIDParameter = searchMaID.HasValue ?
+                new ObjectParameter("searchMaID", searchMaID) :
+                new ObjectParameter("searchMaID", typeof(int));
+    
+            var searchGeschlechtParameter = searchGeschlecht != null ?
+                new ObjectParameter("searchGeschlecht", searchGeschlecht) :
+                new ObjectParameter("searchGeschlecht", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<getMA_Result>("[it22AutoverleihEntities].[getMA](@searchVorname, @searchNachname, @searchMaID, @searchGeschlecht)", searchVornameParameter, searchNachnameParameter, searchMaIDParameter, searchGeschlechtParameter);
+        }
+    
+        public virtual ObjectResult<pMAAnzeigen_Result> pMAAnzeigen(string searchVorname, string searchNachname, Nullable<int> searchMaID, string searchGeschlecht)
+        {
+            var searchVornameParameter = searchVorname != null ?
+                new ObjectParameter("searchVorname", searchVorname) :
+                new ObjectParameter("searchVorname", typeof(string));
+    
+            var searchNachnameParameter = searchNachname != null ?
+                new ObjectParameter("searchNachname", searchNachname) :
+                new ObjectParameter("searchNachname", typeof(string));
+    
+            var searchMaIDParameter = searchMaID.HasValue ?
+                new ObjectParameter("searchMaID", searchMaID) :
+                new ObjectParameter("searchMaID", typeof(int));
+    
+            var searchGeschlechtParameter = searchGeschlecht != null ?
+                new ObjectParameter("searchGeschlecht", searchGeschlecht) :
+                new ObjectParameter("searchGeschlecht", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pMAAnzeigen_Result>("pMAAnzeigen", searchVornameParameter, searchNachnameParameter, searchMaIDParameter, searchGeschlechtParameter);
+        }
     }
 }

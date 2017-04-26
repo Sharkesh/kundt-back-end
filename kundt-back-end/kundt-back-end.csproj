@@ -160,6 +160,9 @@
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GefilterteBuchungen.cs" />
+    <Compile Include="Models\getMA_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\It22AutoverleihModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,6 +186,8 @@
     <Compile Include="Models\KundeEditModel.cs" />
     <Compile Include="Models\KundenUebersichtContainerModel.cs" />
     <Compile Include="Models\KundenUebersichtFilterModel.cs" />
+    <Compile Include="Models\MitarbeiterContainerModel.cs" />
+    <Compile Include="Models\MitarbeiterFilterModel.cs" />
     <Compile Include="Models\MitarbeiterModel.cs" />
     <Compile Include="Models\OffeneBuchungenTodayPlus13_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
@@ -212,6 +217,9 @@
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pKundenAnzeigen_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pMAAnzeigen_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
