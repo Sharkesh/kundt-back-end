@@ -122,14 +122,6 @@
         }
 </style>
 
-<script>
-    function PasswortReset() {
-
-        document.getElementByName("Passwort").value = "PasswortResetten";
-        @*document.getElementByName("Passwort2").innerHTML = '<hidden>@Html.Hidden("Model.Passwort", "PasswortResetten")</hidden>';*@
-    }
-</script>
-
 <div class="headingFormat">
     <h2 style="padding:5px;">Meine Daten</h2>
 </div>
@@ -187,7 +179,7 @@
                         @Html.EditorFor(model => model.Passwort, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Passwort, "", new { @class = "text-danger" })
                     </div>*@
-                @Html.ActionLink("Passwort zurücksetzen", "PasswortZuruecksetzen", new { id = Model.IDMitarbeiter })
+                @Html.ActionLink("Passwort zurücksetzen", "PasswortZuruecksetzenA", new { id = Model.IDMitarbeiter })
             </div>
 
 

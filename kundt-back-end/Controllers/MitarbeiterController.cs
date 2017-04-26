@@ -119,7 +119,7 @@ namespace kundt_back_end.Controllers
         }
         //Adming/MitarbeiterBearbeiten/Passwort Zurücksetzen
         [Authorize(Roles = "A")]
-        public ActionResult PasswortZuruecksetzen(int id)
+        public ActionResult PasswortZuruecksetzenA(int id)
         {
 
             string erzeugtesPW = "error";
@@ -143,6 +143,26 @@ namespace kundt_back_end.Controllers
             MM.Passwort = erzeugtesPW;
 
             return View(MM);
+        }
+
+        [Authorize(Roles = "M")]
+        public ActionResult PasswortZuruecksetzenM(MitarbeiterModel MM)
+        {
+
+            if (ModelState.IsValid)
+            {
+                // AT WORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
+                var res = db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
+
+                //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich
+                return RedirectToAction("ÄnderungenErfolgreich", "Mitarbeiter");
+            }
+            else
+            {
+                //Gehe zurück zum Bearbeiten wen das verändern nicht funktioniert hat! 
+                return RedirectToAction("Edit", MM.IDMitarbeiter);
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -198,6 +218,7 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
+                // AT WORK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 var res = db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
                 //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich
