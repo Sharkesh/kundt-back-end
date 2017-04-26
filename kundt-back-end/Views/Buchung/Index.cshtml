@@ -184,27 +184,49 @@
                 <!-- Abklären ob man das so lassen kann in Verbindung mit der Prozedur zum Filtern wenn implementiert!!! -->
                 <form method="post" action="@Url.Action("Index","Buchung")">
                     <center><h3>Suchen nach</h3></center>
-                    <input type="text" id="idbuchung" name="idbuchung" placeholder="IDBuchung" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" id="idbuchung" name="idbuchung" placeholder="Buchungs Nr" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" id="idkunde" name="idkunde" placeholder="Kunden Nr" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="nachname" name="nachname" placeholder="Nachname" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" id="idkunde" name="idkunde" placeholder="IDKunde" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" id="ort" name="ort" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" id="plz" name="plz" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="hidden" id="ort" name="ort" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="hidden" id="plz" name="plz" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
+                    <p>
+                        Von:
+
+                        <input type="date" id="buchungVon" name="buchungVon" class="col-lg-12 SuchFilter_abstand" />
+                    </p>
+                    <p >
+                        Bis:
+
+                        <input type="date" id="buchungBis" name="buchungBis" class="col-lg-12 SuchFilter_abstand" />
+                    </p>
+
                     <center><h3>Buchungs Status</h3></center>
                     @if (TempData["problems"] != null)
                     {
+                        <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e" />
                         <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" checked="checked" />
 
+
                     }
                     else if (TempData["finished"] != null)
                     {
+                        <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e" />
                         <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" checked="checked" />
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
-                    }                    
+                    }
+                    else if (TempData["all"] != null)
+                    {
+                        <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e" checked="checked" />
+                        <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" />
+                        <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
+                        <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
+                    }
                     else
                     {
+                        <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e"  />
                         <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" checked="checked" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p"  />
@@ -221,12 +243,14 @@
                     <table class="table">
                         <thead>
                             <tr style="margin-right:16px;">
-                                <th style="width:10%;">IDBuchung</th>
-                                <th style="width:10%;">IDKunden</th>
-                                <th style="width:15%;">Vorname</th>
-                                <th style="width:15%;">Nachname</th>
-                                <th style="width:15%;">Ort</th>
-                                <th style="width:10%;">PLZ</th>
+                                <th style="width:15%;">Buchungs Nr</th>
+                                <th style="width:15%;">Kunden Nr</th>
+                                <th style="width:10%;">Vorname</th>
+                                <th style="width:10%;">Nachname</th>
+                                @*<th style="width:15%;">Ort</th>
+                                <th style="width:10%;">PLZ</th>*@
+                                <th style="width:10%;">Von</th>
+                                <th style="width:15%;">Bis</th>
                                 <th style="width:10%;">Status</th>
                                 <th style="width:15%;">Bearbeiten</th>
                             </tr>
@@ -235,12 +259,14 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
-                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDKunde)</a></td>
-                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Vorname)</a></td>
-                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Nachname)</a></td>
-                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Ort)</a></td>
-                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.PLZ)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDKunde)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Vorname)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Nachname)</a></td>
+                                    @*<td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Ort)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.PLZ)</a></td>*@
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x=>item.BuchungVon)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungBis)</a></td>
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungStatus)</a></td>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })"><input type="button" class="btn buttonOrangeEdit" value="Bearbeiten" /></a></td>
                                 </tr>

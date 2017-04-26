@@ -334,6 +334,8 @@
           <Parameter Name="searchKundeNr" Type="int" Mode="In" />
           <Parameter Name="searchOrt" Type="varchar" Mode="In" />
           <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
+          <Parameter Name="searchVonDatum" Type="date" Mode="In" />
+          <Parameter Name="searchBisDatum" Type="date" Mode="In" />
           <Parameter Name="checkOffen" Type="bit" Mode="In" />
           <Parameter Name="checkAbgeschlossen" Type="bit" Mode="In" />
           <Parameter Name="checkProblem" Type="bit" Mode="In" />
@@ -346,6 +348,8 @@
                 <Property Name="KundenNr" Type="int" />
                 <Property Name="Ort" Type="varchar" MaxLength="50" />
                 <Property Name="Plz" Type="varchar" MaxLength="50" />
+                <Property Name="BuchungVon" Type="date" />
+                <Property Name="BuchungBis" Type="date" />
                 <Property Name="BuchungStatus" Type="varchar" MaxLength="10" />
                 <Property Name="Problem" Type="varchar" MaxLength="50" />
               </RowType>
@@ -505,12 +509,11 @@
           <Parameter Name="searchKundenNr" Type="int" Mode="In" />
           <Parameter Name="searchOrt" Type="varchar" Mode="In" />
           <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
-          <Parameter Name="searchBuchung" Type="varchar" Mode="In" />
         </Function>
         <Function Name="pMitarbeiterEditieren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IDLogin" Type="int" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
-          <Parameter Name="Passwort" Type="varchar" Mode="In" />
+          <Parameter Name="Passwort" Type="varchar(max)" Mode="In" />
           <Parameter Name="Rolle" Type="char" Mode="In" />
           <Parameter Name="Deaktiviert" Type="bit" Mode="In" />
           <Parameter Name="MAVorname" Type="varchar" Mode="In" />
@@ -1024,7 +1027,6 @@
             <Parameter Name="searchKundenNr" Mode="In" Type="Int32" />
             <Parameter Name="searchOrt" Mode="In" Type="String" />
             <Parameter Name="searchPLZ" Mode="In" Type="String" />
-            <Parameter Name="searchBuchung" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BuchungFilter" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.BuchungFilter_Result)">
             <Parameter Name="searchBuchungNr" Mode="In" Type="Int32" />
@@ -1032,6 +1034,8 @@
             <Parameter Name="searchKundeNr" Mode="In" Type="Int32" />
             <Parameter Name="searchOrt" Mode="In" Type="String" />
             <Parameter Name="searchPLZ" Mode="In" Type="String" />
+            <Parameter Name="searchVonDatum" Mode="In" Type="DateTime" />
+            <Parameter Name="searchBisDatum" Mode="In" Type="DateTime" />
             <Parameter Name="checkOffen" Mode="In" Type="Boolean" />
             <Parameter Name="checkAbgeschlossen" Mode="In" Type="Boolean" />
             <Parameter Name="checkProblem" Mode="In" Type="Boolean" />
@@ -1153,7 +1157,7 @@
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="p8Passwort">
-            <Parameter Name="NPasswort" Mode="InOut" Type="String" />
+          <Parameter Name="NPasswort" Mode="InOut" Type="String" />
           </FunctionImport>
 
         </EntityContainer>
@@ -1182,7 +1186,9 @@
           <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
           <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="BuchungStatus" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="BuchungVon" Nullable="false" />
+          <Property Type="DateTime" Name="BuchungBis" Nullable="false" />
         </ComplexType>
         <ComplexType Name="pKundenAnzeigen_Result">
           <Property Type="Int32" Name="IDKunde" Nullable="false" />
@@ -1544,6 +1550,8 @@
                 <ScalarProperty Name="PLZ" ColumnName="PLZ" />
                 <ScalarProperty Name="Ort" ColumnName="Ort" />
                 <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="BuchungVon" ColumnName="BuchungVon" />
+                <ScalarProperty Name="BuchungBis" ColumnName="BuchungBis" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

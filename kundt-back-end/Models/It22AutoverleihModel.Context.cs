@@ -137,7 +137,7 @@ namespace kundt_back_end.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pKundeEdit", idkundeParameter, vornameParameter, nachnameParameter, strasseParameter, plzParameter, ortParameter, emailParameter, telefonParameter, passnrParameter, gebdatParameter);
         }
     
-        public virtual ObjectResult<pKundenAnzeigen_Result> pKundenAnzeigen(string searchName, Nullable<int> searchKundenNr, string searchOrt, string searchPLZ, string searchBuchung)
+        public virtual ObjectResult<pKundenAnzeigen_Result> pKundenAnzeigen(string searchName, Nullable<int> searchKundenNr, string searchOrt, string searchPLZ)
         {
             var searchNameParameter = searchName != null ?
                 new ObjectParameter("searchName", searchName) :
@@ -155,15 +155,11 @@ namespace kundt_back_end.Models
                 new ObjectParameter("searchPLZ", searchPLZ) :
                 new ObjectParameter("searchPLZ", typeof(string));
     
-            var searchBuchungParameter = searchBuchung != null ?
-                new ObjectParameter("searchBuchung", searchBuchung) :
-                new ObjectParameter("searchBuchung", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter, searchBuchungParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pKundenAnzeigen_Result>("pKundenAnzeigen", searchNameParameter, searchKundenNrParameter, searchOrtParameter, searchPLZParameter);
         }
     
         [DbFunction("it22AutoverleihEntities", "BuchungFilter")]
-        public virtual IQueryable<BuchungFilter_Result> BuchungFilter(Nullable<int> searchBuchungNr, string searchName, Nullable<int> searchKundeNr, string searchOrt, string searchPLZ, Nullable<bool> checkOffen, Nullable<bool> checkAbgeschlossen, Nullable<bool> checkProblem)
+        public virtual IQueryable<BuchungFilter_Result> BuchungFilter(Nullable<int> searchBuchungNr, string searchName, Nullable<int> searchKundeNr, string searchOrt, string searchPLZ, Nullable<System.DateTime> searchVonDatum, Nullable<System.DateTime> searchBisDatum, Nullable<bool> checkOffen, Nullable<bool> checkAbgeschlossen, Nullable<bool> checkProblem)
         {
             var searchBuchungNrParameter = searchBuchungNr.HasValue ?
                 new ObjectParameter("searchBuchungNr", searchBuchungNr) :
@@ -185,6 +181,14 @@ namespace kundt_back_end.Models
                 new ObjectParameter("searchPLZ", searchPLZ) :
                 new ObjectParameter("searchPLZ", typeof(string));
     
+            var searchVonDatumParameter = searchVonDatum.HasValue ?
+                new ObjectParameter("searchVonDatum", searchVonDatum) :
+                new ObjectParameter("searchVonDatum", typeof(System.DateTime));
+    
+            var searchBisDatumParameter = searchBisDatum.HasValue ?
+                new ObjectParameter("searchBisDatum", searchBisDatum) :
+                new ObjectParameter("searchBisDatum", typeof(System.DateTime));
+    
             var checkOffenParameter = checkOffen.HasValue ?
                 new ObjectParameter("checkOffen", checkOffen) :
                 new ObjectParameter("checkOffen", typeof(bool));
@@ -197,7 +201,7 @@ namespace kundt_back_end.Models
                 new ObjectParameter("checkProblem", checkProblem) :
                 new ObjectParameter("checkProblem", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<BuchungFilter_Result>("[it22AutoverleihEntities].[BuchungFilter](@searchBuchungNr, @searchName, @searchKundeNr, @searchOrt, @searchPLZ, @checkOffen, @checkAbgeschlossen, @checkProblem)", searchBuchungNrParameter, searchNameParameter, searchKundeNrParameter, searchOrtParameter, searchPLZParameter, checkOffenParameter, checkAbgeschlossenParameter, checkProblemParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<BuchungFilter_Result>("[it22AutoverleihEntities].[BuchungFilter](@searchBuchungNr, @searchName, @searchKundeNr, @searchOrt, @searchPLZ, @searchVonDatum, @searchBisDatum, @checkOffen, @checkAbgeschlossen, @checkProblem)", searchBuchungNrParameter, searchNameParameter, searchKundeNrParameter, searchOrtParameter, searchPLZParameter, searchVonDatumParameter, searchBisDatumParameter, checkOffenParameter, checkAbgeschlossenParameter, checkProblemParameter);
         }
     
         public virtual int pAutoHinzufuegen(Nullable<short> baujahr, string pS, string getriebe, string tueren, Nullable<byte> sitze, Nullable<decimal> mietpreis, Nullable<decimal> verkaufPreis, Nullable<decimal> kilometerstand, byte[] autobild, Nullable<bool> anzeigen, string treibstoff, string typ, string kategorie)

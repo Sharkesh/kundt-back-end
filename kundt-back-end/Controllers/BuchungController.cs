@@ -42,6 +42,8 @@ namespace kundt_back_end.Controllers
                 res.Vorname = b.Vorname;
                 res.Ort = b.Ort;
                 res.PLZ = b.PLZ;
+                res.BuchungVon = b.BuchungVon;
+                res.BuchungBis = b.BuchungBis;
 
                 buchungList.Add(res);
             }
@@ -61,8 +63,10 @@ namespace kundt_back_end.Controllers
         /// <returns>Gefilterte Liste von Buchungen</returns>
         [HttpPost]
         [Authorize(Roles = "M,A")]
-        public ActionResult Index(int? idbuchung, string nachname, int? idkunde, string ort, string plz, string checkStatus)
+        public ActionResult Index(int? idbuchung, string nachname, int? idkunde, string ort, string plz, DateTime? buchungVon,
+        DateTime? buchungBis, string checkStatus)
         {
+            bool all = false;
             bool open = false;
             bool problems = false;
             bool finished = false;
@@ -94,6 +98,11 @@ namespace kundt_back_end.Controllers
                 problems = true;
                 TempData["problems"] = "problem";
             }
+            else if (checkStatus == "e")
+            {
+                all = true;
+                TempData["all"] = "all";
+            }
             /// Wenn kein Wert (null) im Suchfeld für IDBuchung angegeben wird setze IDBuchung auf 0
             if (idbuchung == null)
             {
@@ -103,6 +112,14 @@ namespace kundt_back_end.Controllers
             if (idkunde == null)
             {
                 idkunde = 0;
+            }
+            if (buchungVon == null)
+            {
+                buchungVon = DateTime.Parse("01.01.1900");
+            }
+            if (buchungBis == null)
+            {
+                buchungBis = DateTime.Parse("01.01.2200");
             }
 
             List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
@@ -121,9 +138,12 @@ namespace kundt_back_end.Controllers
             cmd.Parameters.AddWithValue("@idkunde", idkunde);
             cmd.Parameters.AddWithValue("@ort", ort);
             cmd.Parameters.AddWithValue("@plz", plz);
+            cmd.Parameters.AddWithValue("@buchungVon", buchungVon);
+            cmd.Parameters.AddWithValue("@buchungBis", buchungBis);
             cmd.Parameters.AddWithValue("@offen", open);
             cmd.Parameters.AddWithValue("@abgeschlossen", finished);
             cmd.Parameters.AddWithValue("@problem", problems);
+            cmd.Parameters.AddWithValue("@all", all);
 
             /// Hier wird ein SqlDataReader Objekt angelegt das die Ergebnise des abgesetzten SQLCommands
             /// ausliest und in eine Liste speichert
@@ -133,7 +153,7 @@ namespace kundt_back_end.Controllers
                 buchungList.Add(new GefilterteBuchungen(reader));
             }
 
-            return View(buchungList);
+            return View(buchungList.OrderBy(s => s.BuchungVon).ToList());
         }
 
         // GET: Buchung/Edit/5

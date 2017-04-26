@@ -20,5 +20,7 @@ namespace kundt_back_end.Models
         public string PLZ { get; set; }
         public string Ort { get; set; }
         public string BuchungStatus { get; set; }
+        public System.DateTime BuchungVon { get; set; }
+        public System.DateTime BuchungBis { get; set; }
     }
 }
