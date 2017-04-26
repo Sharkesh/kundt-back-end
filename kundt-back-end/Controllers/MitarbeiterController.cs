@@ -117,7 +117,7 @@ namespace kundt_back_end.Controllers
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
         }
-        //Get: Adming/MitarbeiterBearbeiten/PasswortZurücksetzenA
+        //Get: Adming/MitarbeiterBearbeiten/PasswortZurücksetzenAdmin
         [Authorize(Roles = "A")]
         public ActionResult PasswortZuruecksetzenAdmin(int id)
         {
@@ -146,7 +146,7 @@ namespace kundt_back_end.Controllers
         }
         //Get: Mitarbeiter/PasswortZuruecksetzenMitarbeiter
         [Authorize(Roles = "M")]
-        public ActionResult PasswortZuruecksetzenM(int? id)
+        public ActionResult PasswortZuruecksetzenMitarbeiter(int? id)
         {
 
             if (id != null && id > 0)
@@ -175,7 +175,7 @@ namespace kundt_back_end.Controllers
         //Post: Mitarbeiter/PasswortZuruecksetzenM
         [Authorize(Roles = "M")]
         [HttpPost]
-        public ActionResult PasswortZuruecksetzenM(MitarbeiterModel MM)
+        public ActionResult PasswortZuruecksetzenMitarbeiter(MitarbeiterModel MM)
         {
 
             var dbLogin = db.tblLogin.Find(MM.IDMitarbeiter);

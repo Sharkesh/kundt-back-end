@@ -511,10 +511,10 @@
     <Content Include="Views\tblAuto\AutoBearbeiten.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Eyecatchers\Index.cshtml" />
-    <Content Include="Views\Mitarbeiter\PasswortZuruecksetzenA.cshtml" />
+    <Content Include="Views\Mitarbeiter\PasswortZuruecksetzenAdmin.cshtml" />
     <Content Include="Views\Mitarbeiter\MitarbeiterDaten.cshtml" />
     <Content Include="Views\Mitarbeiter\ÄnderungenErfolgreich.cshtml" />
-    <Content Include="Views\Mitarbeiter\PasswortZuruecksetzenM.cshtml" />
+    <Content Include="Views\Mitarbeiter\PasswortZuruecksetzenMitarbeiter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
