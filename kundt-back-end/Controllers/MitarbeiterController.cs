@@ -23,7 +23,7 @@ namespace kundt_back_end.Controllers
         public ActionResult Index()
         {
             MitarbeiterContainerModel McM = new MitarbeiterContainerModel();
-            McM.mafilter = (MitarbeiterFilterModel)Session["Filterparameter"];
+            McM.mafilter = (MitarbeiterFilterModel)Session["MAFilterparameter"];
 
 
 
@@ -33,10 +33,33 @@ namespace kundt_back_end.Controllers
             }
             else
             {
-                McM.malist = db.pMAAnzeigen(McM.mafilter.Vorname, McM.mafilter.Nachname, McM.mafilter.MaId, McM.mafilter.Anrede);
+                string tempAnrede = null;
+                if (McM.mafilter.Anrede != null)
+                {
+                    if (McM.mafilter.Anrede.ToUpper() == "W")
+                    {
+
+                        tempAnrede = "Frau";
+                    }
+                    else if (McM.mafilter.Anrede.ToUpper() == "M")
+                    {
+                        tempAnrede = "Herr";
+                    }
+                }
+                
+                McM.malist = db.pMAAnzeigen(McM.mafilter.Vorname, McM.mafilter.Nachname, McM.mafilter.MaId, tempAnrede);
             }
 
             return View(McM);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "A")]
+        public ActionResult Index (MitarbeiterFilterModel MaF) //(endl)
+        {
+
+            Session["MAFilterparameter"] = MaF;
+            return RedirectToAction("Index", "Mitarbeiter");
         }
 
         // GET: Mitarbeiter/Create

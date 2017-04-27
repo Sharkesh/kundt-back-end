@@ -1,4 +1,5 @@
-﻿@model IEnumerable<kundt_back_end.Models.tblMitarbeiter>
+﻿@using kundt_back_end.Models;
+@model MitarbeiterContainerModel
 
 @{
     ViewBag.Title = "Übersicht Mitarbeiter";
@@ -222,6 +223,15 @@
             }
         }*/
 </style>
+<script>
+    function FilterReset() {
+        document.getElementById("MaId").value = '';
+        document.getElementById("Nachname").value = '';
+        document.getElementById("Vorname").value = '';
+        document.getElementById("Anrede").value = '';
+        document.getElementById("suchMaskeMA").submit;
+    }
+</script>
 
 <div class="headingFormat">
     <h2 style="padding:5px;">Mitarbeiter Übersicht</h2>
@@ -231,14 +241,17 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="row" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
-                <center><h3>Suchen nach</h3></center>
-                <input type="text" placeholder="MA Id" class="col-lg-12 SuchFilter_abstand" />
-                <input type="text" placeholder="Geschlecht" class="col-lg-12 SuchFilter_abstand" />
-                <input type="text" placeholder="Vorname" class="col-lg-12 SuchFilter_abstand" />
-                <input type="text" placeholder="Nachname" class="col-lg-12 SuchFilter_abstand" />
-                <div class="col-lg-12">
-                    <button class="SuchFilter_abstand buttonOrangeSuchen" type="submit" value="Suchen"><span>Suchen</span></button>
-                </div>                
+                <form id="suchMaskeMA" method="post" action="@Url.Action("Index","Mitarbeiter")">
+                    <center><h3>Suchen nach</h3></center>
+                    <input type="text" value="@if (@Model.mafilter != null){ @Model.mafilter.MaId }" placeholder="MA Id" id="MaId" name="MaId" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.mafilter != null){ @Model.mafilter.Anrede }" placeholder="Geschlecht" id="Anrede" name="Anrede" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.mafilter != null){ @Model.mafilter.Vorname }" placeholder="Vorname" id="Vorname" name="Vorname" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.mafilter != null) { @Model.mafilter.Nachname}" placeholder="Nachname" id="Nachname" name="Nachname" class="col-lg-12 SuchFilter_abstand" />
+                    <button value="Suche Reset" onclick="FilterReset()" name="reset" class="col-lg-12 SuchFilter_abstand"><span>Filter Reset</span></button>
+                    <div class="col-lg-12">
+                        <button class="SuchFilter_abstand buttonOrangeSuchen" type="submit" value="Suchen"><span>Suchen</span></button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-lg-9">
@@ -255,19 +268,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.malist)
                         {
                             <tr>
-                                <td style="width:10%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.IDMitarbeiter)</a></td>
-                                <td style="width:15%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MAVorname)</a></td>
-                                <td style="width:15%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MANachname)</a></td>
-                                <td style="width:15%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@if (item.MAAnrede == "Herr"){<span>M</span>}else{<span>W</span>}</a></td>
-                                <td style="width:30%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.tblLogin.Email)</a></td>
-                                <td style="width:15%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })"><input type="button" class="btn buttonOrangeEdit" value="Bearbeiten" /></a></td>
+                                <td style="width:10%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.IDMitarbeiter)</a></td>
+                                <td style="width:15%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MAVorname)</a></td>
+                                <td style="width:15%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MANachname)</a></td>
+                                <td style="width:15%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@if (item.MAAnrede == "Herr")
+                                {<span>M</span>}
+                                else
+                                {<span>W</span>}</a></td>
+                                <td style="width:30%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.Email)</a></td>
+                                <td style="width:15%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })"><input type="button" class="btn buttonOrangeEdit" value="Bearbeiten" /></a></td>
                             </tr>
                         }
                     </tbody>
-                </table>
+                </table>                
             </div>
         </div>
     </div>
