@@ -8,7 +8,7 @@ namespace kundt_back_end.Models
 {
     public class KundenUebersichtContainerModel
     {
-        public ObjectResult<pKundenAnzeigen_Result> kundenlist { get; set; }
+        public List<pKundenAnzeigen_Result> kundenlist { get; set; }
         public KundenUebersichtFilterModel filtermodel { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace kundt_back_end.Controllers
 
             if (McM.mafilter == null)
             {
-                McM.malist = db.pMAAnzeigen(null, null, null, null);
+                McM.malist = db.pMAAnzeigen(null, null, null, null).ToList();
             }
             else
             {
@@ -47,7 +47,7 @@ namespace kundt_back_end.Controllers
                     }
                 }
                 
-                McM.malist = db.pMAAnzeigen(McM.mafilter.Vorname, McM.mafilter.Nachname, McM.mafilter.MaId, tempAnrede);
+                McM.malist = db.pMAAnzeigen(McM.mafilter.Vorname, McM.mafilter.Nachname, McM.mafilter.MaId, tempAnrede).ToList();
             }
 
             return View(McM);

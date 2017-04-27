@@ -8,7 +8,7 @@ namespace kundt_back_end.Models
 {
     public class MitarbeiterContainerModel
     {
-        public ObjectResult<pMAAnzeigen_Result> malist { get; set; }
+        public List<pMAAnzeigen_Result> malist { get; set; }
         public MitarbeiterFilterModel mafilter { get; set; }
     }
 }

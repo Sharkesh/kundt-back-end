@@ -254,34 +254,45 @@
         </div>
         <div class="col-lg-9">
             <div class="row table-responsive" style="margin:10px;padding:10px;height:400px;">
-                <table class="table">
-                    <thead>
-                        <tr style="margin-right:16px;">
-                            <th style="width:12%;">MitarbeiterNr.</th>
-                            <th style="width:13%;">Vorname</th>
-                            <th style="width:15%;">Nachname</th>
-                            <th style="width:15%;">Geschlecht</th>
-                            <th style="width:30%;">E-Mail</th>
-                            <th style="width:15%;">Bearbeiten</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.malist)
-                        {
-                            <tr>
-                                <td style="width:12%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.IDMitarbeiter)</a></td>
-                                <td style="width:13%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MAVorname)</a></td>
-                                <td style="width:15%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MANachname)</a></td>
-                                <td style="width:15%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@if (item.MAAnrede == "Herr")
-                                {<span>M</span>}
-                                else
-                                {<span>W</span>}</a></td>
+                @if (Model.malist.Count() > 0)
+                {
+                    <table class="table">
+                        <thead>
+                            <tr style="margin-right:16px;">
+                                <th style="width:12%;">MitarbeiterNr.</th>
+                                <th style="width:13%;">Vorname</th>
+                                <th style="width:15%;">Nachname</th>
+                                <th style="width:15%;">Geschlecht</th>
+                                <th style="width:30%;">E-Mail</th>
+                                <th style="width:15%;">Bearbeiten</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.malist)
+                            {
+                                <tr>
+                                    <td style="width:12%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.IDMitarbeiter)</a></td>
+                                    <td style="width:13%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MAVorname)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MANachname)</a></td>
+                                    <td style="width:15%;">
+                                        <a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">
+                                            @if (item.MAAnrede == "Herr")
+                                        {<span>M</span>}
+                                        else
+                                        {<span>W</span>}
+                                    </a>
+                                </td>
                                 <td style="width:30%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.Email)</a></td>
                                 <td style="width:15%;"><a href="@Url.Action("Edit", "Mitarbeiter", new { ID = item.IDMitarbeiter })"><input type="button" class="buttonOrangeEdit" value="Bearbeiten" /></a></td>
                             </tr>
-                        }
-                    </tbody>
-                </table>                
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <center><h3>Es konnte kein Mitarbeitereintrag gefunden werden!</h3></center>
+                }
             </div>
         </div>
     </div>
