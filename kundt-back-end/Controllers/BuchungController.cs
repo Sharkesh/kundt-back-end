@@ -190,7 +190,12 @@ namespace kundt_back_end.Controllers
             BEM.MietPreis = tblBuchung.tblAuto.MietPreis;
             BEM.Vorname = tblBuchung.tblKunde.Vorname;
             BEM.Nachname = tblBuchung.tblKunde.Nachname;
-
+            BEM.Gesamtpreis = BEM.MietPreis * (int)BEM.Tage;
+            BEM.BMarke = tblBuchung.tblAuto.tblTyp.tblMarke.Marke;
+            BEM.BTyp = tblBuchung.tblAuto.tblTyp.Typ;
+            BEM.BKategorie = tblBuchung.tblAuto.tblKategorie.Kategorie;
+            BEM.BAutoBild = tblBuchung.tblAuto.AutoBild;
+            BEM.BIDAuto = tblBuchung.tblAuto.IDAuto;
             return View(BEM);
         }
 

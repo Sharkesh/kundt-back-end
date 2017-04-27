@@ -39,5 +39,12 @@ namespace kundt_back_end.Models
         public bool zurueck { get; set; }
         public string Vorname { get; set; }
         public string Nachname { get; set; }
+        public decimal Gesamtpreis { get; set; }
+        
+        public int BIDAuto { get; set; }
+        public string BMarke { get; set; }
+        public string BTyp { get; set; }
+        public string BKategorie{ get; set; }
+        public byte[] BAutoBild { get; set; }
     }
 }

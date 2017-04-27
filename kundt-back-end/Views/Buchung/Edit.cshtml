@@ -214,18 +214,18 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.MietPreis, "Mietpreis:", htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-8">
-                                <div name="MietPreis" id="MietPreis" class="form-control input EditDisplayWidth disabledField">
-                                    @Model.MietPreis
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             @Html.LabelFor(model => model.Tage, "Mietdauer:", htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-8">
                                 <div name="MietDauer" id="MietDauer" class="form-control input EditDisplayWidth disabledField">
-                                    @Model.Tage Tage
+                                    @if (Model.Tage == 1)
+                                    {
+                                        ViewBag.tage = "Tag";
+                                    }
+                                    else
+                                    {
+                                        ViewBag.tage = "Tage";
+                                    }
+                                    @Model.Tage @ViewBag.tage
                                 </div>
                             </div>
                         </div>
@@ -312,7 +312,54 @@
                         }
                     </div>
                     <div class="col-md-6">
-                        
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BMarke, "Marke:", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                <div name="BMarke" id="BMarke" class="form-control input EditDisplayWidth disabledField">
+                                    @Model.BMarke
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BTyp, "Typ:", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                <div name="BTyp" id="BTyp" class="form-control input EditDisplayWidth disabledField">
+                                    @Model.BTyp
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BKategorie, "Kategorie:", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                <div name="BKategorie" id="BKategorie" class="form-control input EditDisplayWidth disabledField">
+                                    @Model.BKategorie
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MietPreis, "Mietpreis:", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                <div name="MietPreis" id="MietPreis" class="form-control input EditDisplayWidth disabledField">
+                                    @Model.MietPreis €
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Gesamtpreis, "Gesamtpreis:", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                <div name="Gesamtpreis" id="Gesamtpreis" class="form-control input EditDisplayWidth disabledField">
+                                    @Model.Gesamtpreis €
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <div style="padding-left:150px;">
+                                @{
+                                    var image = Convert.ToBase64String(Model.BAutoBild);
+                                }
+                                @Html.Raw("<img src=\"data:" + Model.BAutoBild + ";base64," + image + "\" class=\"img-responsive\" />")
+                            </div>
+                        </div>
                     </div>
                     <div class="container" style="margin-top:20px;">
                         <div class="row col-md-12">
@@ -328,8 +375,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <a href="@Url.Action("Index", "BuchungUebersicht")">
-                                        <button type="button" class="buttonOrangeForward" value="Zurück zur Übersicht"><span>Zur Übersicht</span></button>
+                                    <a href="@Url.Action("AutoBearbeiten", "tblAuto", new { id = Model.BIDAuto })">
+                                        <button type="button" class="buttonOrangeForward" value="Zurück zur Übersicht"><span>Zum Auto</span></button>
                                     </a>
                                 </div>
                             </center>
@@ -337,9 +384,6 @@
                     </div>
                 </div>
             }
-        </div>
-        <div>
-
         </div>
     </div>
 </div>
