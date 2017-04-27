@@ -25,8 +25,6 @@ namespace kundt_back_end.Controllers
             MitarbeiterContainerModel McM = new MitarbeiterContainerModel();
             McM.mafilter = (MitarbeiterFilterModel)Session["MAFilterparameter"];
 
-
-
             if (McM.mafilter == null)
             {
                 McM.malist = db.pMAAnzeigen(null, null, null, null).ToList();
@@ -53,11 +51,11 @@ namespace kundt_back_end.Controllers
             return View(McM);
         }
 
+        // POST: Mitarbeiter
         [HttpPost]
         [Authorize(Roles = "A")]
-        public ActionResult Index (MitarbeiterFilterModel MaF) //(endl)
+        public ActionResult Index (MitarbeiterFilterModel MaF)
         {
-
             Session["MAFilterparameter"] = MaF;
             return RedirectToAction("Index", "Mitarbeiter");
         }
@@ -125,7 +123,6 @@ namespace kundt_back_end.Controllers
             b.MANachname = ma.MANachname;
             b.MAVorname = ma.MAVorname;
 
-
             ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", ma.IDMitarbeiter);
             return View(b);
         }
@@ -153,7 +150,7 @@ namespace kundt_back_end.Controllers
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
         }
-        //Get: Adming/MitarbeiterBearbeiten/PasswortZurücksetzenAdmin
+        //Get: Admin/MitarbeiterBearbeiten/PasswortZurücksetzenAdmin
         [Authorize(Roles = "A")]
         public ActionResult PasswortZuruecksetzenAdmin(int id)
         {
@@ -184,7 +181,6 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "M")]
         public ActionResult PasswortZuruecksetzenMitarbeiter(int? id)
         {
-
             if (id != null && id > 0)
             {
                 MitarbeiterModel MM = new MitarbeiterModel();
@@ -199,8 +195,6 @@ namespace kundt_back_end.Controllers
                 MM.Rolle = 'M';
                 MM.Deaktiviert = false;
                 MM.MAAnrede = dbMA.MAAnrede;
-
-
 
                 return View(MM);
             }
@@ -303,8 +297,7 @@ namespace kundt_back_end.Controllers
         public ActionResult ÄnderungenErfolgreich()
         {
             return View();
-        }
-       
+        }      
 
     }
 }

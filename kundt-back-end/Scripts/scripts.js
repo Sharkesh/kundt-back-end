@@ -1,13 +1,18 @@
 ﻿function OnLoad() {
     Active();
     StartTime();
-}
+} 
 
 function Active() {
     if (document.title == "Übersicht") {
         $("#uebersicht").addClass("active");
     } else {
         $("#uebersicht").removeClass("active");
+    }
+    if (document.title == "Einstellungen") {
+        $("#einstellungen").addClass("active");
+    } else {
+        $("#einstellungen").removeClass("active");
     }
     if (document.title == "Übersicht Autos" || document.title == "Auto Hinzufügen" || document.title == "Auto Bearbeiten") {
         $("#fahrzeug").addClass("active");
