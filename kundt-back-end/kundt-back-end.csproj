@@ -484,7 +484,6 @@
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
     <Content Include="Views\tblAuto\AutoBearbeiten.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Eyecatchers\Index.cshtml" />
     <Content Include="Views\Mitarbeiter\PasswortZuruecksetzenAdmin.cshtml" />
     <Content Include="Views\Mitarbeiter\MitarbeiterDaten.cshtml" />
     <Content Include="Views\Mitarbeiter\ÄnderungenErfolgreich.cshtml" />
