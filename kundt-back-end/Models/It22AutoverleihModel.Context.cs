@@ -700,5 +700,18 @@ namespace kundt_back_end.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pMAAnzeigen_Result>("pMAAnzeigen", searchVornameParameter, searchNachnameParameter, searchMaIDParameter, searchGeschlechtParameter);
         }
+    
+        public virtual int pMitarbeiterEigenesPasswortZuruecksetzen(Nullable<int> iDLogin, string passwort)
+        {
+            var iDLoginParameter = iDLogin.HasValue ?
+                new ObjectParameter("IDLogin", iDLogin) :
+                new ObjectParameter("IDLogin", typeof(int));
+    
+            var passwortParameter = passwort != null ?
+                new ObjectParameter("Passwort", passwort) :
+                new ObjectParameter("Passwort", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pMitarbeiterEigenesPasswortZuruecksetzen", iDLoginParameter, passwortParameter);
+        }
     }
 }

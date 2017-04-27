@@ -14,11 +14,11 @@ namespace kundt_back_end.Models
 
     public class tblMitarbeiterMeta
     {
-        [Display(Name = "Vorname")]
+        [Display(Name = "Vorname:")]
         public string MAVorname { get; set; }
-        [Display(Name = "Nachname")]
+        [Display(Name = "Nachname:")]
         public string MANachname { get; set; }
-        [Display(Name = "Anrede")]
+        [Display(Name = "Anrede:")]
         public string MAAnrede { get; set; }
     }
 }
