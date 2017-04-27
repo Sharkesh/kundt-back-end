@@ -10,6 +10,5 @@ namespace kundt_back_end.Models
     {
         public ObjectResult<pKundenAnzeigen_Result> kundenlist { get; set; }
         public KundenUebersichtFilterModel filtermodel { get; set; }
-
     }
 }

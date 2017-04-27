@@ -14,13 +14,17 @@ namespace kundt_back_end.Models
             //options = new SelectList(new[] { "erstellt", "abgeholt", "zurueck" });
         }
         /// Abklären ob die Anotationen nötig sind oder ob man sie weglassen kann??
+        [Display(Name ="Buchungsnummer:")]
         public int IDBuchung { get; set; }
+        [Display(Name ="Gebucht am:")]
         public System.DateTime BuchungAm { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
+        [Display(Name = "Gebucht von:")]
         public System.DateTime BuchungVon { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
+        [Display(Name = "Gebucht bis:")]
         public System.DateTime BuchungBis { get; set; }
         public Nullable<int> Tage { get; set; }
         public bool Versicherung { get; set; }
@@ -29,6 +33,7 @@ namespace kundt_back_end.Models
         public string BuchungStatus { get; set; }
         public bool Storno { get; set; }
         //public SelectList options { get; set; }
+        [Display(Name ="Mietpreis:")]
         public decimal MietPreis { get; set; }
         public bool abgeholt { get; set; }
         public bool zurueck { get; set; }

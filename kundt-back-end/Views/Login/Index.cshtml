@@ -2,7 +2,7 @@
     ViewBag.Title = "Mitarbeiter Login";
 }
 <style>
-    .buttonOrangeForwardStep3 {
+    .buttonOrangeSuchen {
         background-color: #f99b1c;
         border: none;
         color: #ffffff;
@@ -15,7 +15,7 @@
         border-radius: 4px;
     }
 
-    .buttonOrangeForwardStep3OhneAnimation {
+    .buttonOrangeSuchenOhneAnimation {
         background-color: #f99b1c;
         border: none;
         color: #ffffff;
@@ -29,14 +29,28 @@
         border-radius: 4px;
     }
 
-    .buttonOrangeForwardStep3 span {
+        .buttonOrangeSuchenOhneAnimation:disabled {
+            background-color: #CCC;
+            border: none;
+            color: #ffffff;
+            font-size: 1em;
+            height: 37.5px;
+            width: 150px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+    .buttonOrangeSuchen span {
         cursor: pointer;
         display: inline-block;
         position: relative;
         transition: 0.5s;
     }
 
-        .buttonOrangeForwardStep3 span:after {
+        .buttonOrangeSuchen span:after {
             content: '\00bb';
             position: absolute;
             opacity: 0;
@@ -46,16 +60,16 @@
             font-size: 15px;
         }
 
-    .buttonOrangeForwardStep3:hover span {
+    .buttonOrangeSuchen:hover span {
         padding-right: 15px;
     }
 
-        .buttonOrangeForwardStep3:hover span:after {
+        .buttonOrangeSuchen:hover span:after {
             opacity: 1;
             right: 0;
         }
 
-    .buttonOrangeForwardStep3:hover {
+    .buttonOrangeSuchen:hover {
         background-color: #f99b1c;
         border: none;
         color: #ffffff;
@@ -96,18 +110,26 @@
                                 </div>
                             </div>
                         }
+                        else if (ViewBag.loginResult == -3)
+                        {
+                            <div class="form-group">
+                                <div class="col-md-offset-3 col-md-8">
+                                    <p class="text-danger">Ihr Account ist Deaktiviert. Bitte melden Sie sich beim Administrator!</p>
+                                </div>
+                            </div>
+                        }
                     }
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <div class="row">
                                 <div class="hidden-sm hidden-xs col-md-12">
                                     @*Button Login*@
-                                    <button type="submit" id="submitLogin" class="buttonOrangeForwardStep3OhneAnimation" style="float:left; margin-left:10px" value="Login" disabled><span>Login</span></button>
+                                    <button type="submit" id="submitLogin" class="buttonOrangeSuchenOhneAnimation" style="float:left; margin-left:10px" value="Login" disabled><span>Login</span></button>
                                 </div>
                                 <div class="hidden-lg hidden-md">
                                     @*Button Login*@
                                     <div class="col-sm-12 col-xs-12">
-                                        <button type="submit" id="submitLoginMobile" class="buttonOrangeForwardStep3OhneAnimation" style="width: 280px;" disabled><span>Login</span></button>
+                                        <button type="submit" id="submitLoginMobile" class="buttonOrangeSuchenOhneAnimation" style="width: 280px;" disabled><span>Login</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -121,5 +143,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/Scripts/LoginScript.js")    
+    @Scripts.Render("~/Scripts/LoginScript.js")
 }

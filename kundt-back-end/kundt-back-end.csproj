@@ -164,6 +164,9 @@
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GefilterteBuchungen.cs" />
+    <Compile Include="Models\getMA_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\It22AutoverleihModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -187,6 +190,8 @@
     <Compile Include="Models\KundeEditModel.cs" />
     <Compile Include="Models\KundenUebersichtContainerModel.cs" />
     <Compile Include="Models\KundenUebersichtFilterModel.cs" />
+    <Compile Include="Models\MitarbeiterContainerModel.cs" />
+    <Compile Include="Models\MitarbeiterFilterModel.cs" />
     <Compile Include="Models\MitarbeiterModel.cs" />
     <Compile Include="Models\OffeneBuchungenTodayPlus13_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
@@ -221,6 +226,9 @@
     <Compile Include="Models\pKundenAnzeigen_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pMAAnzeigen_Result.cs">
+      <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -233,6 +241,7 @@
     <Compile Include="Models\tblBuchung.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblBuchungEditMeta.cs" />
     <Compile Include="Models\tblEyecatcher.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -258,6 +267,7 @@
     <Compile Include="Models\tblMitarbeiter.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblMitarbeiterMeta.cs" />
     <Compile Include="Models\tblPLZOrt.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
@@ -511,16 +521,16 @@
     <Content Include="Views\BuchungUebersicht\Index.cshtml" />
     <Content Include="Views\Buchung\Edit.cshtml" />
     <Content Include="Views\Buchung\Index.cshtml" />
-    <Content Include="Views\Buchung\_BuchungTable.cshtml" />
     <Content Include="Views\Mitarbeiter\Create.cshtml" />
     <Content Include="Views\Mitarbeiter\Edit.cshtml" />
     <Content Include="Views\Mitarbeiter\Index.cshtml" />
     <Content Include="Views\tblAuto\AutoBearbeiten.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Eyecatchers\Index.cshtml" />
-    <Content Include="Views\Mitarbeiter\PasswortZuruecksetzen.cshtml" />
+    <Content Include="Views\Mitarbeiter\PasswortZuruecksetzenAdmin.cshtml" />
     <Content Include="Views\Mitarbeiter\MitarbeiterDaten.cshtml" />
     <Content Include="Views\Mitarbeiter\ÄnderungenErfolgreich.cshtml" />
+    <Content Include="Views\Mitarbeiter\PasswortZuruecksetzenMitarbeiter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

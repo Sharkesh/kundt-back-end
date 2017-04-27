@@ -58,11 +58,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    @if (User.IsInRole("A") || User.IsInRole("M"))
+                    @if (User.IsInRole("M"))
                     {
                         <li>
                             <a href="@Url.Action("MitarbeiterDaten","Mitarbeiter")" style="font-size:1.5em;">
-                                @{ 
+                                @{
                                     HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
                                     FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
 
@@ -70,18 +70,14 @@
                                 }
                             </a>
                         </li>
-                            if (User.IsInRole("A"))
-                            {
-                                <li>@Html.ActionLink("Einstellungen", "Einstellung", "Eyecatchers")</li>
-                            }
-                            if (User.IsInRole("M") || User.IsInRole("A"))
-                            {
-                                <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
-                            }
-                            else
-                            {
-                                <li>@Html.ActionLink("Login", "Index", "Login")</li>
-                            }
+                                    }
+                    @if (User.IsInRole("M") || User.IsInRole("A"))
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
                     }
                 </ul>
             </div>
@@ -135,6 +131,7 @@
                                         <li><a href="@Url.Action("Create","Mitarbeiter")">Hinzufügen</a></li>
                                     </ul>
                                 </li>
+                                <li>@Html.ActionLink("Einstellungen", "Einstellung", "Eyecatchers")</li>
                             }
                         </ul>
                     </div>

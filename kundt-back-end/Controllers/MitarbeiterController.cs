@@ -22,8 +22,21 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "A")]
         public ActionResult Index()
         {
-            var tblMitarbeiter = db.tblMitarbeiter.Include(t => t.tblLogin);
-            return View(tblMitarbeiter.ToList());
+            MitarbeiterContainerModel McM = new MitarbeiterContainerModel();
+            McM.mafilter = (MitarbeiterFilterModel)Session["Filterparameter"];
+
+
+
+            if (McM.mafilter == null)
+            {
+                McM.malist = db.pMAAnzeigen(null, null, null, null);
+            }
+            else
+            {
+                McM.malist = db.pMAAnzeigen(McM.mafilter.Vorname, McM.mafilter.Nachname, McM.mafilter.MaId, McM.mafilter.Anrede);
+            }
+
+            return View(McM);
         }
 
         // GET: Mitarbeiter/Create
@@ -65,7 +78,7 @@ namespace kundt_back_end.Controllers
         }
 
         // GET: Mitarbeiter/Edit/5
-        [Authorize(Roles = "A")]
+        [Authorize(Roles = "A,M")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -100,7 +113,7 @@ namespace kundt_back_end.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "A")]
+        [Authorize(Roles = "A,M")]
         public ActionResult Edit(MitarbeiterModel MM)
         {
             if (ModelState.IsValid)
@@ -109,7 +122,7 @@ namespace kundt_back_end.Controllers
                 db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort,MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
                 //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich
-                return RedirectToAction("ÄnderungenErfolgreich");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -117,9 +130,9 @@ namespace kundt_back_end.Controllers
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
         }
-        //Adming/MitarbeiterBearbeiten/Passwort Zurücksetzen
+        //Get: Adming/MitarbeiterBearbeiten/PasswortZurücksetzenAdmin
         [Authorize(Roles = "A")]
-        public ActionResult PasswortZuruecksetzen(int id)
+        public ActionResult PasswortZuruecksetzenAdmin(int id)
         {
 
             string erzeugtesPW = "error";
@@ -144,6 +157,48 @@ namespace kundt_back_end.Controllers
 
             return View(MM);
         }
+        //Get: Mitarbeiter/PasswortZuruecksetzenMitarbeiter
+        [Authorize(Roles = "M")]
+        public ActionResult PasswortZuruecksetzenMitarbeiter(int? id)
+        {
+
+            if (id != null && id > 0)
+            {
+                MitarbeiterModel MM = new MitarbeiterModel();
+                MM.IDMitarbeiter = id ?? -1;
+
+                var dbMA = db.tblMitarbeiter.Find(id);
+                var dbLogin = db.tblLogin.Find(id);
+
+                MM.Email = dbLogin.Email;
+                MM.MAVorname = dbMA.MAVorname;
+                MM.MANachname = dbMA.MANachname;
+                MM.Rolle = 'M';
+                MM.Deaktiviert = false;
+                MM.MAAnrede = dbMA.MAAnrede;
+
+                return View(MM);
+            }
+            else
+            {
+                throw new Exception("MAResetPW");
+            }
+            
+        }
+        //Post: Mitarbeiter/PasswortZuruecksetzenM
+        [Authorize(Roles = "M")]
+        [HttpPost]
+        public ActionResult PasswortZuruecksetzenMitarbeiter(MitarbeiterModel MM)
+        {
+
+            var dbLogin = db.tblLogin.Find(MM.IDMitarbeiter);
+            dbLogin.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
+            db.Entry(dbLogin).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("ÄnderungenErfolgreich", "Mitarbeiter");
+
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -154,7 +209,7 @@ namespace kundt_back_end.Controllers
             base.Dispose(disposing);
         }
         // GET: Mitarbeiter/MitarbeiterDaten
-        [Authorize(Roles = "M,A")]
+        [Authorize(Roles = "M")]
         public ActionResult MitarbeiterDaten(/*int? id*/)
         {            
             HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
@@ -193,15 +248,22 @@ namespace kundt_back_end.Controllers
         //POST: MitarbeiterDaten
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "M,A")]
+        [Authorize(Roles = "M")]
         public ActionResult MitarbeiterDaten(MitarbeiterModel MM)
         {
             if (ModelState.IsValid)
             {
+                try { 
+ 
                 var res = db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
                 //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich
                 return RedirectToAction("ÄnderungenErfolgreich" , "Mitarbeiter");
+                }
+                catch
+                {
+                    return HttpNotFound();
+                }
             }
             else
             {
@@ -210,7 +272,7 @@ namespace kundt_back_end.Controllers
             }
         }
         // GET: ÄnderungenErfolgreich
-        [Authorize(Roles = "M, A")]
+        [Authorize(Roles = "M")]
         public ActionResult ÄnderungenErfolgreich()
         {
             return View();

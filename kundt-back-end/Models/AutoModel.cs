@@ -8,7 +8,6 @@ namespace kundt_back_end.Models
 {
     public class AutoModel
     {
-                
         public List<tblAuto> autoListe { get; set; }
         public List<tblAusstattung> ausstattungListe { get; set; }
         public List<tblAusstattung> plainAusstattungListe { get; set; }

@@ -11,16 +11,12 @@ namespace kundt_back_end.Models
 {
     using System;
     
-    public partial class OffeneBuchungenTodayPlus13_Result
+    public partial class pMAAnzeigen_Result
     {
-        public int IDBuchung { get; set; }
-        public int IDKunde { get; set; }
-        public string Vorname { get; set; }
-        public string Nachname { get; set; }
-        public string PLZ { get; set; }
-        public string Ort { get; set; }
-        public string BuchungStatus { get; set; }
-        public System.DateTime BuchungVon { get; set; }
-        public System.DateTime BuchungBis { get; set; }
+        public int IDMitarbeiter { get; set; }
+        public string MAVorname { get; set; }
+        public string MANachname { get; set; }
+        public string MAAnrede { get; set; }
+        public string Email { get; set; }
     }
 }

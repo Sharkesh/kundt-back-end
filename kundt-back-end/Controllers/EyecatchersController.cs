@@ -25,7 +25,7 @@ namespace kundt_back_end.Controllers
         [HttpGet]
         public ActionResult Einstellung()
         {
-            return View();
+            return View(db.tblEyecatcher.ToList());
         }
 
         //Falls alle bilder aus der Datenbank gelöscht werden, benutze diese Methode zum einfügen der ersten Bilder

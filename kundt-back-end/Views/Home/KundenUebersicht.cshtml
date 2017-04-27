@@ -1,24 +1,27 @@
-﻿@using System.Web.UI.WebControls
-@using kundt_back_end.Models;
-@using Microsoft.Ajax.Utilities
-
-
+﻿@using kundt_back_end.Models;
 @model KundenUebersichtContainerModel
-
-
 
 @{
     ViewBag.Title = "Übersicht Kunden";
 }
 <style>
-    .CenteredButton {
+    table tr td a {
         display: block;
-        margin: auto;
+        height: 100%;
+        width: 100%;
+        text-decoration: none;
     }
 
-    .SuchFilter_abstand {
-        margin-top: 10px;
-        margin-bottom: 10px;
+        table tr td a:hover {
+            display: block;
+            height: 100%;
+            width: 100%;
+            text-decoration: none;
+        }
+
+    .row > .col-lg-4 {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     table {
@@ -34,7 +37,7 @@
         border-bottom: 0px;
     }
 
-    tbody, tr /*, td,th, thead*/ {
+    /*thead,*/ tbody, tr /*, td, th*/ {
         display: block;
     }
 
@@ -50,7 +53,7 @@
     }
 
     tbody {
-        height: 300px;
+        height: 330px;
         overflow-y: auto;
     }
 
@@ -59,77 +62,224 @@
             float: left;
         }
 
-    .costomListOnKlick {
-        border: none;
-        margin: -10px;
-        margin-bottom: 0px;
-        padding-top: 0px;
-        padding: 0px;
-        border-bottom: 1px solid gray;
+    .SuchFilter_abstand {
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
+
+
+    .buttonOrangeSuchen {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+        .buttonOrangeSuchen span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .buttonOrangeSuchen span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -30px;
+                transition: 0.5s;
+                font-size: 15px;
+            }
+
+        .buttonOrangeSuchen:hover span {
+            padding-right: 15px;
+        }
+
+            .buttonOrangeSuchen:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+        .buttonOrangeSuchen:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+        }
+
+    /*.buttonOrangeSuchen {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 221.5px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+        margin-top: 50px;
+    }
+
+        .buttonOrangeSuchen:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: black;
+            font-size: 15px;
+            height: 50px;
+            width: 221.5px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 4px;
+            margin-top: 50px;
+        }*/
+
+    .buttonOrangeEdit {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 40px;
+        width: 100px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+        .buttonOrangeEdit:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: black;
+            font-size: 15px;
+            height: 40px;
+            width: 100px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        vertical-align: middle;
+        padding: 0px;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+    }
+
+    /*.drehMich{
+            animation-name:itsOver;
+            animation-iteration-count:infinite;
+            animation-duration:1s;
+        }
+        .drehMich2{
+            animation-name:itsOver;
+            animation-iteration-count:infinite;
+            animation-duration:15s;
+            animation-direction:reverse;
+        }
+        @@keyframes itsOver{
+            0%{
+                background-color:lawngreen;
+                transform:rotate(0deg);
+                min-height:0px;
+                max-height:0px;
+
+            }
+            50%{
+                min-height:700px;
+                max-height:700px;
+                border-radius:700px;
+            }
+            100%{
+                transform:rotate(3600deg);
+                background-color:red;
+                 min-height:0px;
+                max-height:0px;
+            }
+        }*/
 </style>
 
+<script>
+    function FilterReset() {
+        document.getElementById("KundenNr").value = '';
+        document.getElementById("Nachname").value = '';
+        document.getElementById("Vorname").value = '';
+        document.getElementById("PLZ").value = '';
+        document.getElementById("Ort").value = '';
+        document.getElementById("suchMaske").submit;
+    }
+</script>
 
-<div class="container" style="border:2px solid black;">
+<div class="headingFormat">
+    <h2 style="padding:5px;">Kunden Übersicht</h2>
+</div>
+
+
+<div class="container">
     <div class="row">
         <div class="col-lg-3">
-            <div class="row" style="margin: 10px; padding: 10px; height: 400px;">
-                @*<form method="@Url.Action("KundenUebersicht", "Home")" action="KundenUebersicht.cshtml"></form>*@
-                <form method="post" action="/Home/KundenUebersichtFilter">
-                    <center><h3>Suchen</h3></center>
-                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenName }" placeholder="Nachname" id="KundenName" name="KundenName" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenNr }" placeholder="Kunden-Nr." id="KundenNr" name="KundenNr" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Ort }" placeholder="Ort" id="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand" />
+            <div class="row" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
+                <form id="suchMaske" method="post" action="@Url.Action("KundenUebersichtFilter","Home")">
+                    <center><h3>Suchen nach</h3></center>
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.KundenNr }" placeholder="Kunden Nr" id="KundenNr" name="KundenNr" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Nachname }" placeholder="Nachname" id="Nachname" name="Nachname" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Vorname }" placeholder="Vorname" id="Vorname" name="Vorname" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Plz }" placeholder="PLZ" id="PLZ" name="PLZ" class="col-lg-12 SuchFilter_abstand" />
-                    <label class="SuchFilter_abstand">Buchungsstatus</label>
-
-
-                    @if (Model.filtermodel == null)
-                    {
-                        <select name="Buchungsstatus">
-                            <option value="Alle">Alle</option>
-                            <option value="erstellt">Erstellt</option>
-                            <option value="abgeholt">Abgeholt</option>
-                            <option value="zurueck">Zurück</option>
-                        </select>
-                    }
-                    else
-                    {
-                        <select name="Buchungsstatus">
-                            @foreach (var item in Model.filtermodel.BuStat)
-                            {
-                                <option value="@Html.DisplayFor(model => item)">@Html.DisplayFor(model => item)</option>
-                            }
-                        </select>
-                    }
-                    <input class="col-lg-6 col-lg-offset-3 SuchFilter_abstand" type="submit" value="Suchen" />
+                    <input type="text" value="@if (@Model.filtermodel != null){ @Model.filtermodel.Ort }" placeholder="Ort" id="Ort" name="Ort" class="col-lg-12 SuchFilter_abstand" />
+                    <button value="Suche Reset" onclick="FilterReset()" name="reset" class="col-lg-12 SuchFilter_abstand"><span>Filter Reset</span></button>
+                    <div class="col-lg-12">
+                        <button class="col-lg-6 SuchFilter_abstand buttonOrangeSuchen" type="submit" id="suchen" name="suchen" value="Suchen"><span>Suchen</span></button>
+                    </div>
                 </form>
             </div>
         </div>
 
         <div class="col-lg-9">
-            <div class="row table-responsive" style="height: 500px;">
+            <div class="row table-responsive" style="margin:10px;padding:10px;height:450px;">
                 <table class="table">
                     <thead>
-                        <tr style="margin-right: 16px; margin-bottom: 10px; border-bottom: 1px solid black">
-                            <th style="width: 8%;">Ku-Nr.</th>
+                        <tr style="margin-right:16px;">
+                            <th style="width: 15%;">Kunden Nr</th>
                             <th style="width: 20%;">Vorname</th>
                             <th style="width: 20%;">Nachname</th>
                             <th style="width: 15%;">PLZ</th>
-                            <th style="width: 17%;">Ort</th>
-                            <th style="width: 18%;">Status</th>
+                            <th style="width: 15%;">Ort</th>
+                            <th style="width: 15%;">Bearbeiten</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in @Model.kundenlist)
                         {
                             <tr>
-                                <td style="width: 8%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.IDKunde)</a></td>
-                                <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Vorname)</a></td>
-                                <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Nachname)</a></td>
-                                <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.PLZ)</a></td>
-                                <td style="width: 17%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.Ort)</a></td>
-                                <td style="width: 18%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})" class="costomListOnKlick list-group-item">@Html.DisplayFor(x => item.BuchungStatus)</a></td>
+                                <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.IDKunde)</a></td>
+                                <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.Vorname)</a></td>
+                                <td style="width: 20%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.Nachname)</a></td>
+                                <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.PLZ)</a></td>
+                                <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})">@Html.DisplayFor(x => item.Ort)</a></td>
+                                <td style="width: 15%;"><a href="@Url.Action("KundenBearbeiten", "Home", new {ID = item.IDKunde})"><input type="button" class="btn buttonOrangeEdit" value="Bearbeiten" /></a></td>
                             </tr>
                         }
                     </tbody>
