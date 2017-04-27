@@ -14,14 +14,23 @@ namespace kundt_back_end.Controllers
     {
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
+        /// <summary>
+        /// POST: tblAuto/FilterValidation
+        /// </summary>
         [HttpPost]
+        [Authorize(Roles = "M,A")]
         public JsonResult FilterValidation(string Marke)
         {
             var data = db.tblTyp.Include(x => x.tblMarke).Where(x => x.tblMarke.Marke == Marke).Select(x => x.Typ);
 
             return Json(data);
         }
+
+        /// <summary>
+        /// GET: tblAuto/GetMarke
+        /// </summary>
         [HttpGet]
+        [Authorize(Roles = "M,A")]
         public JsonResult GetMarke(int IDAuto)
         {
             var data = db.tblAuto.Include(x => x.tblTyp).Include(x => x.tblTyp.tblMarke).Where(x => x.IDAuto == IDAuto).Select(x => x.tblTyp.tblMarke.Marke);
@@ -29,6 +38,9 @@ namespace kundt_back_end.Controllers
             return Json(data);
         }
 
+        /// <summary>
+        /// GET: tblAuto/AutoHinzu
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzu()
@@ -51,6 +63,9 @@ namespace kundt_back_end.Controllers
             return View(am);
         }
 
+        /// <summary>
+        /// POST: tblAuto/AutoHinzu
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzu(AutoModel am, int[] ausstattungListe, HttpPostedFileBase upload)
@@ -99,6 +114,9 @@ namespace kundt_back_end.Controllers
         //    return View(am);
         //}
 
+        /// <summary>
+        /// GET: tblAuto/AutoUebersicht
+        /// </summary>
         [Authorize(Roles = "M,A")]
         public ActionResult AutoUebersicht(AutoModel am, int? id)
         {
@@ -268,8 +286,10 @@ namespace kundt_back_end.Controllers
         //    ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ", tblAuto.FKTyp);
         //    return View(tblAuto);
         //}
-
-        // GET: tblAuto/Edit/5
+        
+        /// <summary>
+        /// GET: tblAuto/Edit/5
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoBearbeiten(int? id)
@@ -309,6 +329,10 @@ namespace kundt_back_end.Controllers
             }
             return View(am);
         }
+
+        /// <summary>
+        /// POST: tblAuto/AutoBearbeiten
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoBearbeiten(AutoModel am, int[] ausstattungListe, int[] plainAusstattungListe, HttpPostedFileBase upload)

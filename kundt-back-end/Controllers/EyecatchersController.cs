@@ -14,14 +14,10 @@ namespace kundt_back_end.Controllers
     {
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
-
-
-        public ActionResult Index()
-        {
-            return View(db.tblEyecatcher.ToList());
-        }
-
-        // GET: Eyecatchers
+        /// <summary>
+        /// GET: Eyechatchers/Einstellung
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Einstellung()
         {
@@ -53,10 +49,9 @@ namespace kundt_back_end.Controllers
         //    return View(tblEyecatcher);
         //}
 
-
-        // POST: Eyecatchers/Edit/5
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Eyecatchers/Edit/5
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Einstellung([Bind(Include = "IDEyecatcher,GUIDBild,Eyecatcher,Typ")] tblEyecatcher tblEyecatcher, HttpPostedFileBase upload)
