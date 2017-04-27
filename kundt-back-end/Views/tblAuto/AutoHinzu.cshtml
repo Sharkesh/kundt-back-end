@@ -1,0 +1,268 @@
+﻿@model kundt_back_end.Models.AutoModel
+@{
+    ViewBag.Title = "Auto Hinzufügen";
+}
+<script>
+    //function changePic() {
+    //    var temp = document.getElementById("upload").value; 
+    //    document.getElementById("pic").src = "~/Content/img/" + temp;
+    //}
+    function ShowTypFilter() {
+        if (document.getElementById("FilterMarke").value == "Alle Marken/Typen" || document.getElementById("FilterMarke").value == "") {
+            document.getElementById("FilterTyp").style.visibility = "hidden";
+        }
+        else {
+            document.getElementById("FilterTyp").style.visibility = "visible";
+        }
+    }
+    function Validation() {        
+        if (document.getElementById("ValidateData").value == "Marke wählen" || document.getElementById("ValidateData").value == "") {
+            document.getElementByID("ValidateData").style.color = "red";
+            return false;
+        }
+    }
+</script>
+<style>
+    .tableLength {
+        min-width:375px;
+        max-width:375px;
+    }
+
+    .hinzuAuto {
+        min-width: 250px;        
+    }
+
+    .autoHinzu_tr {
+        background-color: white;
+        min-width: 200px;
+        max-width: 200px;
+        padding-bottom: 10px;
+    }
+
+    .picBorder {
+        border: solid 1px;
+        border-color: lightgray;
+    }
+
+    .labelCheckbox {
+        margin-left: 20px;
+        font-style: unset;
+    }
+
+    .buttonOrangeHinzu {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+        .buttonOrangeHinzu:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            opacity: 0.7;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+        height: 40px;
+        font-size: 32px;
+    }
+</style>
+
+<div class="headingFormat">
+    <h2 style="padding:5px">Fahrzeug hinzufügen</h2>
+</div>
+
+<form action="@Url.Action("AutoHinzu", "tblAuto", null)" method="post" enctype="multipart/form-data">
+    <div class="container">
+
+        <div class="col-xs-6" style="margin:auto; display:inline-block; padding:0px">
+            <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" id="pic" alt="Alternate Text" style="max-height:200px" class="picBorder" />
+            <p><input type="file" id="upload" name="upload" accept="image/*" onchange="changePic()"/></p>            
+            <div class="col-xs-12" style="margin:20px 0px 0px -12px">
+
+                <p>Ausstattungsoptionen:</p>
+                @foreach (var item in Model.ausstattungListe)
+                {
+                    {
+                        if (item != null)
+                        {
+                            <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
+                                <label class="labelCheckbox"><input type="checkbox" name="ausstattungListe" value="@item.IDAusstattung" min="0">@Html.DisplayFor(m => item.Ausstattung)</label>
+                            </div>
+                        }
+                    }
+                }
+
+            </div>
+        </div>
+        <div class="col-xs-6 col-xs-offset-1 table-responsive text-right tableLength" style="max-width:400px">
+            <table class="table table-hover">
+                <tr>
+                    <td>Marke:</td>
+                    <td class="autoHinzu">
+                        <select name="myMarke" id="FilterMarke" class="form-control" onchange="ShowTypFilter()">
+                            <optgroup label="Kategorie wählen">
+                                <option name="myMarke" value="">Marke wählen</option>
+                                @foreach (var item in Model.markeListe)
+                                {
+                                    <option name="myMarke" value="@item.Marke">@Html.DisplayFor(m => item.Marke)</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Typ:</td>
+                    <td class="autoHinzu">
+                        <select name="myTyp" id="FilterTyp" class="form-control" style="visibility:hidden">
+                            <optgroup label="Typ wählen">
+                                @foreach (var item in Model.typListe)
+                                {
+                                    <option name="myTyp" value="@item.Typ">@Html.DisplayFor(m => item.Typ)</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kategorie:</td>
+                    <td class="autoHinzu">
+
+                        <select name="myKategorie" id="myKategorie" class="form-control">
+                            <optgroup label="Kategorie wählen">
+                                @foreach (var item in Model.kategorieListe)
+                                {
+                                    <option name="myKategorie" value="@item.Kategorie">@Html.DisplayFor(m => item.Kategorie)</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>PS:</td>
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.myPS, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myPS, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myPs" value="@Model.myPS" class="form-control" min="0" max="2000" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Getriebe:</td>
+                    <td class="autoHinzu">
+                        <select name="myGetriebe" id="myGetriebe" class="form-control">
+                            <optgroup label="Getriebe wählen">
+                                <option name="myGetriebe" value="Manuell">Manuell</option>
+                                <option name="myGetriebe" value="Automatik">Automatik</option>
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Baujahr:</td>
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.myBauJahr, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myBauJahr, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myBaujahr" value="@Model.myBauJahr" class="form-control" min="1970" max="@Model.myBauJahr" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Türen:</td>
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.myTueren, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.myTueren, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myTueren" value="@Model.myTueren" class="form-control" min="2" max="5" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sitze:</td>
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.mySitze, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.mySitze, "", new { @class = "text-danger" })*@    
+                        <input type="number" name="mySitze" value="@Model.mySitze" class="form-control" min="2" max="999" required />                    
+                    </td>
+                </tr>
+                <tr>
+                    <td>KM-Stand:</td>
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.myKilometerStand, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
+                        @Html.ValidationMessageFor(model => model.myKilometerStand, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myKilometerStand" value="@Model.myKilometerStand" class="form-control" min="0" max="9999999" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Treibstoff:</td>
+                    <td class="autoHinzu">
+                        <select name="myTreibstoff" id="myTreibstoff" class="form-control">
+                            <optgroup label="Treibstoff wählen">
+                                @foreach (var item in Model.treibstoffListe)
+                                {
+                                    <option value="@item.Treibstoff">@Html.DisplayFor(m => item.Treibstoff)</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mietpreis:</td>
+                    <td class="autoHinzu">
+                        @Html.EditorFor(model => model.myMietPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
+                        @Html.ValidationMessageFor(model => model.myMietPreis, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr class="hinzuAuto">
+                    <td>Verkaufspreis:</td>
+                    <td class="autoHinzu">
+                        @Html.EditorFor(model => model.myVerkaufsPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
+                        @Html.ValidationMessageFor(model => model.myVerkaufsPreis, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sichtbarkeit:</td>
+                    <td class="autoHinzu">
+                        <select name="myAnzeigen" id="myAnzeigen" class="form-control">
+                            <optgroup label="Auto anzeigen">
+                                <option value="true">Sichtbar</option>
+                                <option value="false">Versteckt</option>
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-xs-12 text-center">
+            @*<form action="@Url.Action("AutoHinzu","tblAuto",Model)" method="post">
+                    <button class="buttonOrangeNextStep">Aktualisieren</button>
+                </form>*@
+
+            <input type="submit" value="Hinzufügen" class="buttonOrangeHinzu" />
+
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/filter.js")
+}

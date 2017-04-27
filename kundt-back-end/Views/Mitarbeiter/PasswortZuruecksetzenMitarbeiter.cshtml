@@ -1,0 +1,28 @@
+﻿@model kundt_back_end.Models.MitarbeiterModel
+@{
+    ViewBag.Title = "PasswortZuruecksetzen";
+}
+
+<h2>Passwort Zurückgesetzt!</h2>
+@using (Html.BeginForm())
+{
+<div class="form-group">
+    @Html.LabelFor(model => model.Passwort, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        <input type="password" id="Passwort" name="Passwort" class="form-control input EditDisplayWidth" />
+        @Html.ValidationMessageFor(model => model.Passwort, "", new { @class = "text-danger" })
+    </div>
+    @Html.HiddenFor(model => model.IDMitarbeiter)
+    @Html.HiddenFor(model => model.Rolle)
+    @Html.HiddenFor(model => model.MAAnrede)
+    @Html.HiddenFor(model => model.MAVorname)
+    @Html.HiddenFor(model => model.MANachname)
+    @Html.HiddenFor(model => model.Email)
+    </div>
+        <div class="col-lg-6">
+            @*<button type="submit" value="Save" class="buttonOrangeNextStep"><span>Passwort Speichern</span></button>*@
+            <input type="submit" value="Speichern" class="btn buttonOrangeNextStep" />
+        </div>
+
+}
+

@@ -1,0 +1,1859 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="it22AutoverleihModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblAusstattung">
+          <Key>
+            <PropertyRef Name="IDAusstattung" />
+          </Key>
+          <Property Name="IDAusstattung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ausstattung" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblAuto">
+          <Key>
+            <PropertyRef Name="IDAuto" />
+          </Key>
+          <Property Name="IDAuto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Baujahr" Type="smallint" Nullable="false" />
+          <Property Name="PS" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Getriebe" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Tueren" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sitze" Type="tinyint" Nullable="false" />
+          <Property Name="MietPreis" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="VerkaufPreis" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Kilometerstand" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="AutoBild" Type="varbinary(max)" />
+          <Property Name="Anzeigen" Type="bit" Nullable="false" />
+          <Property Name="FKTreibstoff" Type="int" Nullable="false" />
+          <Property Name="FKTyp" Type="int" Nullable="false" />
+          <Property Name="FKKategorie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblAutodetail">
+          <Key>
+            <PropertyRef Name="FKAuto" />
+            <PropertyRef Name="FKAusstattung" />
+          </Key>
+          <Property Name="FKAuto" Type="int" Nullable="false" />
+          <Property Name="FKAusstattung" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblBuchung">
+          <Key>
+            <PropertyRef Name="IDBuchung" />
+          </Key>
+          <Property Name="IDBuchung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuchungAm" Type="smalldatetime" Nullable="false" />
+          <Property Name="BuchungVon" Type="date" Nullable="false" />
+          <Property Name="BuchungBis" Type="date" Nullable="false" />
+          <Property Name="Versicherung" Type="bit" Nullable="false" />
+          <Property Name="FKKunde" Type="int" Nullable="false" />
+          <Property Name="FKAuto" Type="int" Nullable="false" />
+          <Property Name="Tage" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="BuchungStatus" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Storno" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEyecatcher">
+          <Key>
+            <PropertyRef Name="IDEyecatcher" />
+          </Key>
+          <Property Name="IDEyecatcher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GUIDBild" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Eyecatcher" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblHistorie">
+          <Key>
+            <PropertyRef Name="IDHistorie" />
+          </Key>
+          <Property Name="IDHistorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FKMitarbeiter" Type="int" Nullable="false" />
+          <Property Name="FKBuchung" Type="int" Nullable="false" />
+          <Property Name="AenderungsDatum" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblKategorie">
+          <Key>
+            <PropertyRef Name="IDKategorie" />
+          </Key>
+          <Property Name="IDKategorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kategorie" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblKunde">
+          <Key>
+            <PropertyRef Name="IDKunde" />
+          </Key>
+          <Property Name="IDKunde" Type="int" Nullable="false" />
+          <Property Name="Vorname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nachname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Strasse" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Anrede" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="GebDatum" Type="date" Nullable="false" />
+          <Property Name="ReisepassNr" Type="varchar" MaxLength="50" />
+          <Property Name="FKPLZOrt" Type="int" />
+        </EntityType>
+        <EntityType Name="tblLand">
+          <Key>
+            <PropertyRef Name="IDLand" />
+          </Key>
+          <Property Name="IDLand" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="Land" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblLogin">
+          <Key>
+            <PropertyRef Name="IDLogin" />
+          </Key>
+          <Property Name="IDLogin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Passwort" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rolle" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Deaktiviert" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMarke">
+          <Key>
+            <PropertyRef Name="IDMarke" />
+          </Key>
+          <Property Name="IDMarke" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Marke" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMitarbeiter">
+          <Key>
+            <PropertyRef Name="IDMitarbeiter" />
+          </Key>
+          <Property Name="IDMitarbeiter" Type="int" Nullable="false" />
+          <Property Name="MAVorname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MANachname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MAAnrede" Type="char" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblPLZOrt">
+          <Key>
+            <PropertyRef Name="IDPLZOrt" />
+          </Key>
+          <Property Name="IDPLZOrt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLZ" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Ort" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FKLand" Type="char" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="tblTreibstoff">
+          <Key>
+            <PropertyRef Name="IDTreibstoff" />
+          </Key>
+          <Property Name="IDTreibstoff" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Treibstoff" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTyp">
+          <Key>
+            <PropertyRef Name="IDTyp" />
+          </Key>
+          <Property Name="IDTyp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Typ" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FKMarke" Type="int" />
+        </EntityType>
+        <Association Name="FK__tblAuto__FKKateg__3FD07829">
+          <End Role="tblKategorie" Type="Self.tblKategorie" Multiplicity="1" />
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKategorie">
+              <PropertyRef Name="IDKategorie" />
+            </Principal>
+            <Dependent Role="tblAuto">
+              <PropertyRef Name="FKKategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAuto__FKTreib__3DE82FB7">
+          <End Role="tblTreibstoff" Type="Self.tblTreibstoff" Multiplicity="1" />
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTreibstoff">
+              <PropertyRef Name="IDTreibstoff" />
+            </Principal>
+            <Dependent Role="tblAuto">
+              <PropertyRef Name="FKTreibstoff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAuto__FKTyp__3EDC53F0">
+          <End Role="tblTyp" Type="Self.tblTyp" Multiplicity="1" />
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTyp">
+              <PropertyRef Name="IDTyp" />
+            </Principal>
+            <Dependent Role="tblAuto">
+              <PropertyRef Name="FKTyp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAutode__FKAus__43A1090D">
+          <End Role="tblAusstattung" Type="Self.tblAusstattung" Multiplicity="1" />
+          <End Role="tblAutodetail" Type="Self.tblAutodetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAusstattung">
+              <PropertyRef Name="IDAusstattung" />
+            </Principal>
+            <Dependent Role="tblAutodetail">
+              <PropertyRef Name="FKAusstattung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAutode__FKAut__42ACE4D4">
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="1" />
+          <End Role="tblAutodetail" Type="Self.tblAutodetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAuto">
+              <PropertyRef Name="IDAuto" />
+            </Principal>
+            <Dependent Role="tblAutodetail">
+              <PropertyRef Name="FKAuto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBuchun__FKAut__4A4E069C">
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="1" />
+          <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAuto">
+              <PropertyRef Name="IDAuto" />
+            </Principal>
+            <Dependent Role="tblBuchung">
+              <PropertyRef Name="FKAuto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBuchun__FKKun__4959E263">
+          <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="1" />
+          <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKunde">
+              <PropertyRef Name="IDKunde" />
+            </Principal>
+            <Dependent Role="tblBuchung">
+              <PropertyRef Name="FKKunde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblHistor__FKBuc__5006DFF2">
+          <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="1" />
+          <End Role="tblHistorie" Type="Self.tblHistorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBuchung">
+              <PropertyRef Name="IDBuchung" />
+            </Principal>
+            <Dependent Role="tblHistorie">
+              <PropertyRef Name="FKBuchung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblHistor__FKMit__4F12BBB9">
+          <End Role="tblMitarbeiter" Type="Self.tblMitarbeiter" Multiplicity="1" />
+          <End Role="tblHistorie" Type="Self.tblHistorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMitarbeiter">
+              <PropertyRef Name="IDMitarbeiter" />
+            </Principal>
+            <Dependent Role="tblHistorie">
+              <PropertyRef Name="FKMitarbeiter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblKunde__FKPLZO__308E3499">
+          <End Role="tblPLZOrt" Type="Self.tblPLZOrt" Multiplicity="0..1" />
+          <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPLZOrt">
+              <PropertyRef Name="IDPLZOrt" />
+            </Principal>
+            <Dependent Role="tblKunde">
+              <PropertyRef Name="FKPLZOrt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblKunde__IDKund__2DB1C7EE">
+          <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="1" />
+          <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblLogin">
+              <PropertyRef Name="IDLogin" />
+            </Principal>
+            <Dependent Role="tblKunde">
+              <PropertyRef Name="IDKunde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMitarb__IDMit__29E1370A">
+          <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="1" />
+          <End Role="tblMitarbeiter" Type="Self.tblMitarbeiter" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblLogin">
+              <PropertyRef Name="IDLogin" />
+            </Principal>
+            <Dependent Role="tblMitarbeiter">
+              <PropertyRef Name="IDMitarbeiter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPLZOrt__FKLan__4222D4EF">
+          <End Role="tblLand" Type="Self.tblLand" Multiplicity="0..1" />
+          <End Role="tblPLZOrt" Type="Self.tblPLZOrt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLand">
+              <PropertyRef Name="IDLand" />
+            </Principal>
+            <Dependent Role="tblPLZOrt">
+              <PropertyRef Name="FKLand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTyp__FKMarke__345EC57D">
+          <End Role="tblMarke" Type="Self.tblMarke" Multiplicity="0..1" />
+          <End Role="tblTyp" Type="Self.tblTyp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMarke">
+              <PropertyRef Name="IDMarke" />
+            </Principal>
+            <Dependent Role="tblTyp">
+              <PropertyRef Name="FKMarke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="BuchungAbholung" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="BuchungFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchBuchungNr" Type="int" Mode="In" />
+          <Parameter Name="searchName" Type="varchar" Mode="In" />
+          <Parameter Name="searchKundeNr" Type="int" Mode="In" />
+          <Parameter Name="searchOrt" Type="varchar" Mode="In" />
+          <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
+          <Parameter Name="searchVonDatum" Type="date" Mode="In" />
+          <Parameter Name="searchBisDatum" Type="date" Mode="In" />
+          <Parameter Name="checkOffen" Type="bit" Mode="In" />
+          <Parameter Name="checkAbgeschlossen" Type="bit" Mode="In" />
+          <Parameter Name="checkProblem" Type="bit" Mode="In" />
+          <Parameter Name="checkAll" Type="bit" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="BuchungNr" Type="int" />
+                <Property Name="Vorname" Type="varchar" MaxLength="50" />
+                <Property Name="Nachname" Type="varchar" MaxLength="50" />
+                <Property Name="KundenNr" Type="int" />
+                <Property Name="Ort" Type="varchar" MaxLength="50" />
+                <Property Name="Plz" Type="varchar" MaxLength="50" />
+                <Property Name="BuchungVon" Type="date" />
+                <Property Name="BuchungBis" Type="date" />
+                <Property Name="BuchungStatus" Type="varchar" MaxLength="10" />
+                <Property Name="Problem" Type="varchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="BuchungProblem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="BuchungRueckgabe" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="BuchungUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="buchungvon" Type="date" Mode="In" />
+          <Parameter Name="buchungbis" Type="date" Mode="In" />
+          <Parameter Name="buchungstatus" Type="varchar" Mode="In" />
+          <Parameter Name="storno" Type="bit" Mode="In" />
+          <Parameter Name="versicherung" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="fAutoBearbeitenInklFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchStatus" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="IDAuto" Type="int" Nullable="false" />
+                <Property Name="Baujahr" Type="smallint" Nullable="false" />
+                <Property Name="PS" Type="varchar" MaxLength="5" Nullable="false" />
+                <Property Name="MietPreis" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+                <Property Name="VerkaufPreis" Type="decimal" Precision="9" Scale="2" Nullable="false" />
+                <Property Name="AutoBild" Type="varbinary(max)" />
+                <Property Name="Anzeigen" Type="bit" Nullable="false" />
+                <Property Name="Marke" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="Typ" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="Kategorie" Type="varchar" MaxLength="50" Nullable="false" />
+                <Property Name="BuchungStatus" Type="varchar" MaxLength="10" />
+                <Property Name="Problem" Type="varchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fBuchungProblem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="idBuchung" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fBuchungStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="idBuchung" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getMA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchVorname" Type="varchar" Mode="In" />
+          <Parameter Name="searchNachname" Type="varchar" Mode="In" />
+          <Parameter Name="searchMaID" Type="int" Mode="In" />
+          <Parameter Name="searchGeschlecht" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="IDMitarbeiter" Type="int" Nullable="false" />
+                <Property Name="MAVorname" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="MANachname" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="MAAnrede" Type="char" MaxLength="4" Nullable="false" />
+                <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="OffeneBuchungenTodayPlus13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p8Passwort" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NPasswort" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="pAusstattung" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pAusstattungZuAuto2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="daten" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeiten" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDAuto" Type="int" Mode="In" />
+          <Parameter Name="Baujahr" Type="smallint" Mode="In" />
+          <Parameter Name="PS" Type="varchar" Mode="In" />
+          <Parameter Name="Getriebe" Type="varchar" Mode="In" />
+          <Parameter Name="Tueren" Type="varchar" Mode="In" />
+          <Parameter Name="Sitze" Type="tinyint" Mode="In" />
+          <Parameter Name="MietPreis" Type="decimal" Mode="In" />
+          <Parameter Name="VerkaufPreis" Type="decimal" Mode="In" />
+          <Parameter Name="Kilometerstand" Type="decimal" Mode="In" />
+          <Parameter Name="Autobild" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Anzeigen" Type="bit" Mode="In" />
+          <Parameter Name="Treibstoff" Type="varchar" Mode="In" />
+          <Parameter Name="Typ" Type="varchar" Mode="In" />
+          <Parameter Name="Kategorie" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenAnzeigen2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenCreate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="daten" Type="int" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilter2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilter3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilterFinal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchBaujahr" Type="smallint" Mode="In" />
+          <Parameter Name="searchKilometerstand" Type="decimal" Mode="In" />
+          <Parameter Name="searchAnzeigen" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="pAutoBearbeitenInklFilterFinal2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchIDAuto" Type="int" Mode="In" />
+          <Parameter Name="searchMarke" Type="varchar" Mode="In" />
+          <Parameter Name="searchTyp" Type="varchar" Mode="In" />
+          <Parameter Name="searchKategorie" Type="varchar" Mode="In" />
+          <Parameter Name="searchBaujahrVon" Type="smallint" Mode="In" />
+          <Parameter Name="searchBaujahrBis" Type="smallint" Mode="In" />
+          <Parameter Name="searchKilometerstandVon" Type="decimal" Mode="In" />
+          <Parameter Name="searchKilometerstandBis" Type="decimal" Mode="In" />
+          <Parameter Name="searchAnzeigen" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="pAutoHinzufuegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Baujahr" Type="smallint" Mode="In" />
+          <Parameter Name="PS" Type="varchar" Mode="In" />
+          <Parameter Name="Getriebe" Type="varchar" Mode="In" />
+          <Parameter Name="Tueren" Type="varchar" Mode="In" />
+          <Parameter Name="Sitze" Type="tinyint" Mode="In" />
+          <Parameter Name="Mietpreis" Type="decimal" Mode="In" />
+          <Parameter Name="VerkaufPreis" Type="decimal" Mode="In" />
+          <Parameter Name="Kilometerstand" Type="decimal" Mode="In" />
+          <Parameter Name="Autobild" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Anzeigen" Type="bit" Mode="In" />
+          <Parameter Name="Treibstoff" Type="varchar" Mode="In" />
+          <Parameter Name="Typ" Type="varchar" Mode="In" />
+          <Parameter Name="Kategorie" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pFilterMarke" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="marke" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pFilterTyp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="typ" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pKundeEdit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idkunde" Type="int" Mode="In" />
+          <Parameter Name="vorname" Type="varchar" Mode="In" />
+          <Parameter Name="nachname" Type="varchar" Mode="In" />
+          <Parameter Name="strasse" Type="varchar" Mode="In" />
+          <Parameter Name="plz" Type="varchar" Mode="In" />
+          <Parameter Name="ort" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="telefon" Type="varchar" Mode="In" />
+          <Parameter Name="passnr" Type="varchar" Mode="In" />
+          <Parameter Name="gebdat" Type="date" Mode="In" />
+        </Function>
+        <Function Name="pKundenAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchVorname" Type="varchar" Mode="In" />
+          <Parameter Name="searchNachname" Type="varchar" Mode="In" />
+          <Parameter Name="searchKundenNr" Type="int" Mode="In" />
+          <Parameter Name="searchOrt" Type="varchar" Mode="In" />
+          <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
+
+        </Function>
+        <Function Name="pMAAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchVorname" Type="varchar" Mode="In" />
+          <Parameter Name="searchNachname" Type="varchar" Mode="In" />
+          <Parameter Name="searchMaID" Type="int" Mode="In" />
+          <Parameter Name="searchGeschlecht" Type="varchar" Mode="In" />
+        </Function>
+
+        <Function Name="pMitarbeiterEditieren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDLogin" Type="int" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Passwort" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Rolle" Type="char" Mode="In" />
+          <Parameter Name="Deaktiviert" Type="bit" Mode="In" />
+          <Parameter Name="MAVorname" Type="varchar" Mode="In" />
+          <Parameter Name="MANachname" Type="varchar" Mode="In" />
+          <Parameter Name="MAAnrede" Type="char" Mode="In" />
+        </Function>
+        <Function Name="pMitarbeiterEigenesPasswortZuruecksetzen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDLogin" Type="int" Mode="In" />
+          <Parameter Name="Passwort" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="pNeuenMitarbeiterAnlegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Passwort" Type="varchar" Mode="In" />
+          <Parameter Name="Deaktiviert" Type="bit" Mode="In" />
+          <Parameter Name="MAVorname" Type="varchar" Mode="In" />
+          <Parameter Name="MANachname" Type="varchar" Mode="In" />
+          <Parameter Name="MAAnrede" Type="char" Mode="In" />
+        </Function>
+        <Function Name="ptblHistorieInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDBuchung" Type="int" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="it22AutoverleihModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAusstattung" EntityType="Self.tblAusstattung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAuto" EntityType="Self.tblAuto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblAutodetail" EntityType="Self.tblAutodetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblBuchung" EntityType="Self.tblBuchung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEyecatcher" EntityType="Self.tblEyecatcher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHistorie" EntityType="Self.tblHistorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKategorie" EntityType="Self.tblKategorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKunde" EntityType="Self.tblKunde" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLand" EntityType="Self.tblLand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMarke" EntityType="Self.tblMarke" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMitarbeiter" EntityType="Self.tblMitarbeiter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPLZOrt" EntityType="Self.tblPLZOrt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTreibstoff" EntityType="Self.tblTreibstoff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTyp" EntityType="Self.tblTyp" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblAuto__FKKateg__3FD07829" Association="Self.FK__tblAuto__FKKateg__3FD07829">
+            <End Role="tblKategorie" EntitySet="tblKategorie" />
+            <End Role="tblAuto" EntitySet="tblAuto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAuto__FKTreib__3DE82FB7" Association="Self.FK__tblAuto__FKTreib__3DE82FB7">
+            <End Role="tblTreibstoff" EntitySet="tblTreibstoff" />
+            <End Role="tblAuto" EntitySet="tblAuto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAuto__FKTyp__3EDC53F0" Association="Self.FK__tblAuto__FKTyp__3EDC53F0">
+            <End Role="tblTyp" EntitySet="tblTyp" />
+            <End Role="tblAuto" EntitySet="tblAuto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAutode__FKAus__43A1090D" Association="Self.FK__tblAutode__FKAus__43A1090D">
+            <End Role="tblAusstattung" EntitySet="tblAusstattung" />
+            <End Role="tblAutodetail" EntitySet="tblAutodetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAutode__FKAut__42ACE4D4" Association="Self.FK__tblAutode__FKAut__42ACE4D4">
+            <End Role="tblAuto" EntitySet="tblAuto" />
+            <End Role="tblAutodetail" EntitySet="tblAutodetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBuchun__FKAut__4A4E069C" Association="Self.FK__tblBuchun__FKAut__4A4E069C">
+            <End Role="tblAuto" EntitySet="tblAuto" />
+            <End Role="tblBuchung" EntitySet="tblBuchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBuchun__FKKun__4959E263" Association="Self.FK__tblBuchun__FKKun__4959E263">
+            <End Role="tblKunde" EntitySet="tblKunde" />
+            <End Role="tblBuchung" EntitySet="tblBuchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblHistor__FKBuc__5006DFF2" Association="Self.FK__tblHistor__FKBuc__5006DFF2">
+            <End Role="tblBuchung" EntitySet="tblBuchung" />
+            <End Role="tblHistorie" EntitySet="tblHistorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblHistor__FKMit__4F12BBB9" Association="Self.FK__tblHistor__FKMit__4F12BBB9">
+            <End Role="tblMitarbeiter" EntitySet="tblMitarbeiter" />
+            <End Role="tblHistorie" EntitySet="tblHistorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblKunde__FKPLZO__308E3499" Association="Self.FK__tblKunde__FKPLZO__308E3499">
+            <End Role="tblPLZOrt" EntitySet="tblPLZOrt" />
+            <End Role="tblKunde" EntitySet="tblKunde" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblKunde__IDKund__2DB1C7EE" Association="Self.FK__tblKunde__IDKund__2DB1C7EE">
+            <End Role="tblLogin" EntitySet="tblLogin" />
+            <End Role="tblKunde" EntitySet="tblKunde" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMitarb__IDMit__29E1370A" Association="Self.FK__tblMitarb__IDMit__29E1370A">
+            <End Role="tblLogin" EntitySet="tblLogin" />
+            <End Role="tblMitarbeiter" EntitySet="tblMitarbeiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPLZOrt__FKLan__4222D4EF" Association="Self.FK__tblPLZOrt__FKLan__4222D4EF">
+            <End Role="tblLand" EntitySet="tblLand" />
+            <End Role="tblPLZOrt" EntitySet="tblPLZOrt" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTyp__FKMarke__345EC57D" Association="Self.FK__tblTyp__FKMarke__345EC57D">
+            <End Role="tblMarke" EntitySet="tblMarke" />
+            <End Role="tblTyp" EntitySet="tblTyp" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="it22AutoverleihModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblAusstattung">
+          <Key>
+            <PropertyRef Name="IDAusstattung" />
+          </Key>
+          <Property Name="IDAusstattung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ausstattung" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAuto" Relationship="Self.tblAutodetail" FromRole="tblAusstattung" ToRole="tblAuto" />
+        </EntityType>
+        <EntityType Name="tblAuto">
+          <Key>
+            <PropertyRef Name="IDAuto" />
+          </Key>
+          <Property Name="IDAuto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Baujahr" Type="Int16" Nullable="false" />
+          <Property Name="PS" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Getriebe" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tueren" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sitze" Type="Byte" Nullable="false" />
+          <Property Name="MietPreis" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="VerkaufPreis" Type="Decimal" Precision="9" Scale="2" Nullable="false" />
+          <Property Name="Kilometerstand" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="AutoBild" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Anzeigen" Type="Boolean" Nullable="false" />
+          <Property Name="FKTreibstoff" Type="Int32" Nullable="false" />
+          <Property Name="FKTyp" Type="Int32" Nullable="false" />
+          <Property Name="FKKategorie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblKategorie" Relationship="Self.FK__tblAuto__FKKateg__628FA481" FromRole="tblAuto" ToRole="tblKategorie" />
+          <NavigationProperty Name="tblTreibstoff" Relationship="Self.FK__tblAuto__FKTreib__60A75C0F" FromRole="tblAuto" ToRole="tblTreibstoff" />
+          <NavigationProperty Name="tblTyp" Relationship="Self.FK__tblAuto__FKTyp__619B8048" FromRole="tblAuto" ToRole="tblTyp" />
+          <NavigationProperty Name="tblBuchung" Relationship="Self.FK__tblBuchun__FKAut__6D0D32F4" FromRole="tblAuto" ToRole="tblBuchung" />
+          <NavigationProperty Name="tblAusstattung" Relationship="Self.tblAutodetail" FromRole="tblAuto" ToRole="tblAusstattung" />
+        </EntityType>
+        <EntityType Name="tblBuchung">
+          <Key>
+            <PropertyRef Name="IDBuchung" />
+          </Key>
+          <Property Name="IDBuchung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuchungAm" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BuchungVon" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BuchungBis" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Versicherung" Type="Boolean" Nullable="false" />
+          <Property Name="FKKunde" Type="Int32" Nullable="false" />
+          <Property Name="FKAuto" Type="Int32" Nullable="false" />
+          <Property Name="Tage" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="BuchungStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Storno" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblAuto" Relationship="Self.FK__tblBuchun__FKAut__6D0D32F4" FromRole="tblBuchung" ToRole="tblAuto" />
+          <NavigationProperty Name="tblKunde" Relationship="Self.FK__tblBuchun__FKKun__6C190EBB" FromRole="tblBuchung" ToRole="tblKunde" />
+          <NavigationProperty Name="tblHistorie" Relationship="Self.FK__tblHistor__FKBuc__72C60C4A" FromRole="tblBuchung" ToRole="tblHistorie" />
+        </EntityType>
+        <EntityType Name="tblEyecatcher">
+          <Key>
+            <PropertyRef Name="IDEyecatcher" />
+          </Key>
+          <Property Name="IDEyecatcher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUIDBild" Type="Guid" Nullable="false" />
+          <Property Name="Eyecatcher" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblHistorie">
+          <Key>
+            <PropertyRef Name="IDHistorie" />
+          </Key>
+          <Property Name="IDHistorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FKMitarbeiter" Type="Int32" Nullable="false" />
+          <Property Name="FKBuchung" Type="Int32" Nullable="false" />
+          <Property Name="AenderungsDatum" Type="DateTime" Precision="0" Nullable="false" />
+          <NavigationProperty Name="tblBuchung" Relationship="Self.FK__tblHistor__FKBuc__72C60C4A" FromRole="tblHistorie" ToRole="tblBuchung" />
+          <NavigationProperty Name="tblMitarbeiter" Relationship="Self.FK__tblHistor__FKMit__71D1E811" FromRole="tblHistorie" ToRole="tblMitarbeiter" />
+        </EntityType>
+        <EntityType Name="tblKategorie">
+          <Key>
+            <PropertyRef Name="IDKategorie" />
+          </Key>
+          <Property Name="IDKategorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kategorie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAuto" Relationship="Self.FK__tblAuto__FKKateg__628FA481" FromRole="tblKategorie" ToRole="tblAuto" />
+        </EntityType>
+        <EntityType Name="tblKunde">
+          <Key>
+            <PropertyRef Name="IDKunde" />
+          </Key>
+          <Property Name="IDKunde" Type="Int32" Nullable="false" />
+          <Property Name="Vorname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nachname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Strasse" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Anrede" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="GebDatum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReisepassNr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FKPLZOrt" Type="Int32" />
+          <NavigationProperty Name="tblBuchung" Relationship="Self.FK__tblBuchun__FKKun__6C190EBB" FromRole="tblKunde" ToRole="tblBuchung" />
+          <NavigationProperty Name="tblPLZOrt" Relationship="Self.FK__tblKunde__FKPLZO__47DBAE45" FromRole="tblKunde" ToRole="tblPLZOrt" />
+          <NavigationProperty Name="tblLogin" Relationship="Self.FK__tblKunde__IDKund__44FF419A" FromRole="tblKunde" ToRole="tblLogin" />
+        </EntityType>
+        <EntityType Name="tblLand">
+          <Key>
+            <PropertyRef Name="IDLand" />
+          </Key>
+          <Property Name="IDLand" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Land" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblPLZOrt" Relationship="Self.FK__tblPLZOrt__FKLan__4222D4EF" FromRole="tblLand" ToRole="tblPLZOrt" />
+        </EntityType>
+        <EntityType Name="tblLogin">
+          <Key>
+            <PropertyRef Name="IDLogin" />
+          </Key>
+          <Property Name="IDLogin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passwort" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rolle" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Deaktiviert" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblKunde" Relationship="Self.FK__tblKunde__IDKund__44FF419A" FromRole="tblLogin" ToRole="tblKunde" />
+          <NavigationProperty Name="tblMitarbeiter" Relationship="Self.FK__tblMitarb__IDMit__3B75D760" FromRole="tblLogin" ToRole="tblMitarbeiter" />
+        </EntityType>
+        <EntityType Name="tblMarke">
+          <Key>
+            <PropertyRef Name="IDMarke" />
+          </Key>
+          <Property Name="IDMarke" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Marke" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblTyp" Relationship="Self.FK__tblTyp__FKMarke__4E88ABD4" FromRole="tblMarke" ToRole="tblTyp" />
+        </EntityType>
+        <EntityType Name="tblMitarbeiter">
+          <Key>
+            <PropertyRef Name="IDMitarbeiter" />
+          </Key>
+          <Property Name="IDMitarbeiter" Type="Int32" Nullable="false" />
+          <Property Name="MAVorname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MANachname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAAnrede" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblHistorie" Relationship="Self.FK__tblHistor__FKMit__71D1E811" FromRole="tblMitarbeiter" ToRole="tblHistorie" />
+          <NavigationProperty Name="tblLogin" Relationship="Self.FK__tblMitarb__IDMit__3B75D760" FromRole="tblMitarbeiter" ToRole="tblLogin" />
+        </EntityType>
+        <EntityType Name="tblPLZOrt">
+          <Key>
+            <PropertyRef Name="IDPLZOrt" />
+          </Key>
+          <Property Name="IDPLZOrt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLZ" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ort" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FKLand" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tblKunde" Relationship="Self.FK__tblKunde__FKPLZO__47DBAE45" FromRole="tblPLZOrt" ToRole="tblKunde" />
+          <NavigationProperty Name="tblLand" Relationship="Self.FK__tblPLZOrt__FKLan__4222D4EF" FromRole="tblPLZOrt" ToRole="tblLand" />
+        </EntityType>
+        <EntityType Name="tblTreibstoff">
+          <Key>
+            <PropertyRef Name="IDTreibstoff" />
+          </Key>
+          <Property Name="IDTreibstoff" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Treibstoff" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblAuto" Relationship="Self.FK__tblAuto__FKTreib__60A75C0F" FromRole="tblTreibstoff" ToRole="tblAuto" />
+        </EntityType>
+        <EntityType Name="tblTyp">
+          <Key>
+            <PropertyRef Name="IDTyp" />
+          </Key>
+          <Property Name="IDTyp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Typ" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FKMarke" Type="Int32" />
+          <NavigationProperty Name="tblAuto" Relationship="Self.FK__tblAuto__FKTyp__619B8048" FromRole="tblTyp" ToRole="tblAuto" />
+          <NavigationProperty Name="tblMarke" Relationship="Self.FK__tblTyp__FKMarke__4E88ABD4" FromRole="tblTyp" ToRole="tblMarke" />
+        </EntityType>
+        <Association Name="FK__tblAuto__FKKateg__628FA481">
+          <End Role="tblKategorie" Type="Self.tblKategorie" Multiplicity="1" />
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKategorie">
+              <PropertyRef Name="IDKategorie" />
+            </Principal>
+            <Dependent Role="tblAuto">
+              <PropertyRef Name="FKKategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAuto__FKTreib__60A75C0F">
+          <End Role="tblTreibstoff" Type="Self.tblTreibstoff" Multiplicity="1" />
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTreibstoff">
+              <PropertyRef Name="IDTreibstoff" />
+            </Principal>
+            <Dependent Role="tblAuto">
+              <PropertyRef Name="FKTreibstoff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblAuto__FKTyp__619B8048">
+          <End Role="tblTyp" Type="Self.tblTyp" Multiplicity="1" />
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTyp">
+              <PropertyRef Name="IDTyp" />
+            </Principal>
+            <Dependent Role="tblAuto">
+              <PropertyRef Name="FKTyp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBuchun__FKAut__6D0D32F4">
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="1" />
+          <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblAuto">
+              <PropertyRef Name="IDAuto" />
+            </Principal>
+            <Dependent Role="tblBuchung">
+              <PropertyRef Name="FKAuto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblBuchun__FKKun__6C190EBB">
+          <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="1" />
+          <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKunde">
+              <PropertyRef Name="IDKunde" />
+            </Principal>
+            <Dependent Role="tblBuchung">
+              <PropertyRef Name="FKKunde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblHistor__FKBuc__72C60C4A">
+          <End Role="tblBuchung" Type="Self.tblBuchung" Multiplicity="1" />
+          <End Role="tblHistorie" Type="Self.tblHistorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblBuchung">
+              <PropertyRef Name="IDBuchung" />
+            </Principal>
+            <Dependent Role="tblHistorie">
+              <PropertyRef Name="FKBuchung" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblHistor__FKMit__71D1E811">
+          <End Role="tblMitarbeiter" Type="Self.tblMitarbeiter" Multiplicity="1" />
+          <End Role="tblHistorie" Type="Self.tblHistorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMitarbeiter">
+              <PropertyRef Name="IDMitarbeiter" />
+            </Principal>
+            <Dependent Role="tblHistorie">
+              <PropertyRef Name="FKMitarbeiter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblKunde__FKPLZO__47DBAE45">
+          <End Role="tblPLZOrt" Type="Self.tblPLZOrt" Multiplicity="0..1" />
+          <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPLZOrt">
+              <PropertyRef Name="IDPLZOrt" />
+            </Principal>
+            <Dependent Role="tblKunde">
+              <PropertyRef Name="FKPLZOrt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblKunde__IDKund__44FF419A">
+          <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="1" />
+          <End Role="tblKunde" Type="Self.tblKunde" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblLogin">
+              <PropertyRef Name="IDLogin" />
+            </Principal>
+            <Dependent Role="tblKunde">
+              <PropertyRef Name="IDKunde" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblPLZOrt__FKLan__4222D4EF">
+          <End Role="tblLand" Type="Self.tblLand" Multiplicity="0..1" />
+          <End Role="tblPLZOrt" Type="Self.tblPLZOrt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLand">
+              <PropertyRef Name="IDLand" />
+            </Principal>
+            <Dependent Role="tblPLZOrt">
+              <PropertyRef Name="FKLand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblMitarb__IDMit__3B75D760">
+          <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="1" />
+          <End Role="tblMitarbeiter" Type="Self.tblMitarbeiter" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tblLogin">
+              <PropertyRef Name="IDLogin" />
+            </Principal>
+            <Dependent Role="tblMitarbeiter">
+              <PropertyRef Name="IDMitarbeiter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblTyp__FKMarke__4E88ABD4">
+          <End Role="tblMarke" Type="Self.tblMarke" Multiplicity="0..1" />
+          <End Role="tblTyp" Type="Self.tblTyp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMarke">
+              <PropertyRef Name="IDMarke" />
+            </Principal>
+            <Dependent Role="tblTyp">
+              <PropertyRef Name="FKMarke" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tblAutodetail">
+          <End Role="tblAusstattung" Type="Self.tblAusstattung" Multiplicity="*" />
+          <End Role="tblAuto" Type="Self.tblAuto" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="it22AutoverleihEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tblAusstattung" EntityType="Self.tblAusstattung" />
+          <EntitySet Name="tblAuto" EntityType="Self.tblAuto" />
+          <EntitySet Name="tblBuchung" EntityType="Self.tblBuchung" />
+          <EntitySet Name="tblEyecatcher" EntityType="Self.tblEyecatcher" />
+          <EntitySet Name="tblHistorie" EntityType="Self.tblHistorie" />
+          <EntitySet Name="tblKategorie" EntityType="Self.tblKategorie" />
+          <EntitySet Name="tblKunde" EntityType="Self.tblKunde" />
+          <EntitySet Name="tblLand" EntityType="Self.tblLand" />
+          <EntitySet Name="tblLogin" EntityType="Self.tblLogin" />
+          <EntitySet Name="tblMarke" EntityType="Self.tblMarke" />
+          <EntitySet Name="tblMitarbeiter" EntityType="Self.tblMitarbeiter" />
+          <EntitySet Name="tblPLZOrt" EntityType="Self.tblPLZOrt" />
+          <EntitySet Name="tblTreibstoff" EntityType="Self.tblTreibstoff" />
+          <EntitySet Name="tblTyp" EntityType="Self.tblTyp" />
+          <AssociationSet Name="FK__tblAuto__FKKateg__628FA481" Association="Self.FK__tblAuto__FKKateg__628FA481">
+            <End Role="tblKategorie" EntitySet="tblKategorie" />
+            <End Role="tblAuto" EntitySet="tblAuto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAuto__FKTreib__60A75C0F" Association="Self.FK__tblAuto__FKTreib__60A75C0F">
+            <End Role="tblTreibstoff" EntitySet="tblTreibstoff" />
+            <End Role="tblAuto" EntitySet="tblAuto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblAuto__FKTyp__619B8048" Association="Self.FK__tblAuto__FKTyp__619B8048">
+            <End Role="tblTyp" EntitySet="tblTyp" />
+            <End Role="tblAuto" EntitySet="tblAuto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBuchun__FKAut__6D0D32F4" Association="Self.FK__tblBuchun__FKAut__6D0D32F4">
+            <End Role="tblAuto" EntitySet="tblAuto" />
+            <End Role="tblBuchung" EntitySet="tblBuchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblBuchun__FKKun__6C190EBB" Association="Self.FK__tblBuchun__FKKun__6C190EBB">
+            <End Role="tblKunde" EntitySet="tblKunde" />
+            <End Role="tblBuchung" EntitySet="tblBuchung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblHistor__FKBuc__72C60C4A" Association="Self.FK__tblHistor__FKBuc__72C60C4A">
+            <End Role="tblBuchung" EntitySet="tblBuchung" />
+            <End Role="tblHistorie" EntitySet="tblHistorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblHistor__FKMit__71D1E811" Association="Self.FK__tblHistor__FKMit__71D1E811">
+            <End Role="tblMitarbeiter" EntitySet="tblMitarbeiter" />
+            <End Role="tblHistorie" EntitySet="tblHistorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblKunde__FKPLZO__47DBAE45" Association="Self.FK__tblKunde__FKPLZO__47DBAE45">
+            <End Role="tblPLZOrt" EntitySet="tblPLZOrt" />
+            <End Role="tblKunde" EntitySet="tblKunde" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblKunde__IDKund__44FF419A" Association="Self.FK__tblKunde__IDKund__44FF419A">
+            <End Role="tblLogin" EntitySet="tblLogin" />
+            <End Role="tblKunde" EntitySet="tblKunde" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblPLZOrt__FKLan__4222D4EF" Association="Self.FK__tblPLZOrt__FKLan__4222D4EF">
+            <End Role="tblLand" EntitySet="tblLand" />
+            <End Role="tblPLZOrt" EntitySet="tblPLZOrt" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblMitarb__IDMit__3B75D760" Association="Self.FK__tblMitarb__IDMit__3B75D760">
+            <End Role="tblLogin" EntitySet="tblLogin" />
+            <End Role="tblMitarbeiter" EntitySet="tblMitarbeiter" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblTyp__FKMarke__4E88ABD4" Association="Self.FK__tblTyp__FKMarke__4E88ABD4">
+            <End Role="tblMarke" EntitySet="tblMarke" />
+            <End Role="tblTyp" EntitySet="tblTyp" />
+          </AssociationSet>
+          <AssociationSet Name="tblAutodetail" Association="Self.tblAutodetail">
+            <End Role="tblAusstattung" EntitySet="tblAusstattung" />
+            <End Role="tblAuto" EntitySet="tblAuto" />
+          </AssociationSet>
+          <FunctionImport Name="BuchungAbholung" ReturnType="Collection(it22AutoverleihModel.BuchungAbholung_Result)" />
+          <FunctionImport Name="BuchungProblem" ReturnType="Collection(it22AutoverleihModel.BuchungProblem_Result)" />
+          <FunctionImport Name="BuchungRueckgabe" ReturnType="Collection(it22AutoverleihModel.BuchungRueckgabe_Result)" />
+          <FunctionImport Name="BuchungUpdate">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="buchungvon" Mode="In" Type="DateTime" />
+            <Parameter Name="buchungbis" Mode="In" Type="DateTime" />
+            <Parameter Name="buchungstatus" Mode="In" Type="String" />
+            <Parameter Name="storno" Mode="In" Type="Boolean" />
+            <Parameter Name="versicherung" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="OffeneBuchungenTodayPlus13" ReturnType="Collection(it22AutoverleihModel.OffeneBuchungenTodayPlus13_Result)" />
+          <FunctionImport Name="pKundeEdit">
+            <Parameter Name="idkunde" Mode="In" Type="Int32" />
+            <Parameter Name="vorname" Mode="In" Type="String" />
+            <Parameter Name="nachname" Mode="In" Type="String" />
+            <Parameter Name="strasse" Mode="In" Type="String" />
+            <Parameter Name="plz" Mode="In" Type="String" />
+            <Parameter Name="ort" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="telefon" Mode="In" Type="String" />
+            <Parameter Name="passnr" Mode="In" Type="String" />
+            <Parameter Name="gebdat" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="pKundenAnzeigen" ReturnType="Collection(it22AutoverleihModel.pKundenAnzeigen_Result)">
+            <Parameter Name="searchVorname" Mode="In" Type="String" />
+            <Parameter Name="searchNachname" Mode="In" Type="String" />
+            <Parameter Name="searchKundenNr" Mode="In" Type="Int32" />
+            <Parameter Name="searchOrt" Mode="In" Type="String" />
+            <Parameter Name="searchPLZ" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BuchungFilter" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.BuchungFilter_Result)">
+            <Parameter Name="searchBuchungNr" Mode="In" Type="Int32" />
+            <Parameter Name="searchName" Mode="In" Type="String" />
+            <Parameter Name="searchKundeNr" Mode="In" Type="Int32" />
+            <Parameter Name="searchOrt" Mode="In" Type="String" />
+            <Parameter Name="searchPLZ" Mode="In" Type="String" />
+            <Parameter Name="searchVonDatum" Mode="In" Type="DateTime" />
+            <Parameter Name="searchBisDatum" Mode="In" Type="DateTime" />
+            <Parameter Name="checkOffen" Mode="In" Type="Boolean" />
+            <Parameter Name="checkAbgeschlossen" Mode="In" Type="Boolean" />
+            <Parameter Name="checkProblem" Mode="In" Type="Boolean" />
+            <Parameter Name="checkAll" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoHinzufuegen">
+            <Parameter Name="Baujahr" Mode="In" Type="Int16" />
+            <Parameter Name="PS" Mode="In" Type="String" />
+            <Parameter Name="Getriebe" Mode="In" Type="String" />
+            <Parameter Name="Tueren" Mode="In" Type="String" />
+            <Parameter Name="Sitze" Mode="In" Type="Byte" />
+            <Parameter Name="Mietpreis" Mode="In" Type="Decimal" />
+            <Parameter Name="VerkaufPreis" Mode="In" Type="Decimal" />
+            <Parameter Name="Kilometerstand" Mode="In" Type="Decimal" />
+            <Parameter Name="Autobild" Mode="In" Type="Binary" />
+            <Parameter Name="Anzeigen" Mode="In" Type="Boolean" />
+            <Parameter Name="Treibstoff" Mode="In" Type="String" />
+            <Parameter Name="Typ" Mode="In" Type="String" />
+            <Parameter Name="Kategorie" Mode="In" Type="String" />
+          </FunctionImport>
+
+          <FunctionImport Name="pAusstattungZuAuto2">
+          <Parameter Name="daten" Mode="In" Type="Int32" />
+          </FunctionImport>
+
+          <FunctionImport Name="pMitarbeiterEditieren">
+            <Parameter Name="IDLogin" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Passwort" Mode="In" Type="String" />
+            <Parameter Name="Rolle" Mode="In" Type="String" />
+            <Parameter Name="Deaktiviert" Mode="In" Type="Boolean" />
+            <Parameter Name="MAVorname" Mode="In" Type="String" />
+            <Parameter Name="MANachname" Mode="In" Type="String" />
+            <Parameter Name="MAAnrede" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pNeuenMitarbeiterAnlegen" ReturnType="Collection(Int32)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Passwort" Mode="In" Type="String" />
+            <Parameter Name="Deaktiviert" Mode="In" Type="Boolean" />
+            <Parameter Name="MAVorname" Mode="In" Type="String" />
+            <Parameter Name="MANachname" Mode="In" Type="String" />
+            <Parameter Name="MAAnrede" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ptblHistorieInsert">
+            <Parameter Name="IDBuchung" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAusstattung" EntitySet="tblAusstattung" ReturnType="Collection(it22AutoverleihModel.tblAusstattung)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenAnzeigen" EntitySet="tblAuto" ReturnType="Collection(it22AutoverleihModel.tblAuto)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenAnzeigen2" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenAnzeigen2_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fAutoBearbeitenInklFilter" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.fAutoBearbeitenInklFilter_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenInklFilter" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenInklFilter_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenInklFilter3" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenInklFilter3_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenInklFilterFinal" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenInklFilterFinal_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchBaujahr" Mode="In" Type="Int16" />
+            <Parameter Name="searchKilometerstand" Mode="In" Type="Decimal" />
+            <Parameter Name="searchAnzeigen" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenInklFilterFinal2" ReturnType="Collection(it22AutoverleihModel.pAutoBearbeitenInklFilterFinal2_Result)">
+            <Parameter Name="searchIDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="searchMarke" Mode="In" Type="String" />
+            <Parameter Name="searchTyp" Mode="In" Type="String" />
+            <Parameter Name="searchKategorie" Mode="In" Type="String" />
+            <Parameter Name="searchBaujahrVon" Mode="In" Type="Int16" />
+            <Parameter Name="searchBaujahrBis" Mode="In" Type="Int16" />
+            <Parameter Name="searchKilometerstandVon" Mode="In" Type="Decimal" />
+            <Parameter Name="searchKilometerstandBis" Mode="In" Type="Decimal" />
+            <Parameter Name="searchAnzeigen" Mode="In" Type="Boolean" />
+          </FunctionImport>
+
+          <FunctionImport Name="pAutoBearbeiten">
+            <Parameter Name="IDAuto" Mode="In" Type="Int32" />
+            <Parameter Name="Baujahr" Mode="In" Type="Int16" />
+            <Parameter Name="PS" Mode="In" Type="String" />
+            <Parameter Name="Getriebe" Mode="In" Type="String" />
+            <Parameter Name="Tueren" Mode="In" Type="String" />
+            <Parameter Name="Sitze" Mode="In" Type="Byte" />
+            <Parameter Name="MietPreis" Mode="In" Type="Decimal" />
+            <Parameter Name="VerkaufPreis" Mode="In" Type="Decimal" />
+            <Parameter Name="Kilometerstand" Mode="In" Type="Decimal" />
+            <Parameter Name="Autobild" Mode="In" Type="Binary" />
+            <Parameter Name="Anzeigen" Mode="In" Type="Boolean" />
+            <Parameter Name="Treibstoff" Mode="In" Type="String" />
+            <Parameter Name="Typ" Mode="In" Type="String" />
+            <Parameter Name="Kategorie" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenCreate">
+            <Parameter Name="daten" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pAutoBearbeitenDelete">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p8Passwort">
+          <Parameter Name="NPasswort" Mode="InOut" Type="String" />
+          </FunctionImport>
+
+          <FunctionImport Name="pFilterMarke" ReturnType="Collection(it22AutoverleihModel.pFilterMarke_Result)">
+            <Parameter Name="marke" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pFilterTyp" ReturnType="Collection(String)">
+            <Parameter Name="typ" Mode="In" Type="String" />
+	  </FunctionImport>
+
+          <FunctionImport Name="getMA" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.getMA_Result)">
+            <Parameter Name="searchVorname" Mode="In" Type="String" />
+            <Parameter Name="searchNachname" Mode="In" Type="String" />
+            <Parameter Name="searchMaID" Mode="In" Type="Int32" />
+            <Parameter Name="searchGeschlecht" Mode="In" Type="String" />
+          </FunctionImport>
+
+          <FunctionImport Name="pMAAnzeigen" ReturnType="Collection(it22AutoverleihModel.pMAAnzeigen_Result)">
+            <Parameter Name="searchVorname" Mode="In" Type="String" />
+            <Parameter Name="searchNachname" Mode="In" Type="String" />
+            <Parameter Name="searchMaID" Mode="In" Type="Int32" />
+            <Parameter Name="searchGeschlecht" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pMitarbeiterEigenesPasswortZuruecksetzen">
+            <Parameter Name="IDLogin" Mode="In" Type="Int32" />
+            <Parameter Name="Passwort" Mode="In" Type="String" />
+          </FunctionImport>
+
+        </EntityContainer>
+        <ComplexType Name="BuchungAbholung_Result">
+          <Property Type="Int32" Name="IDBuchung" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Auto" Nullable="false" MaxLength="201" />
+        </ComplexType>
+        <ComplexType Name="BuchungProblem_Result">
+          <Property Type="Int32" Name="IDBuchung" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Auto" Nullable="false" MaxLength="201" />
+        </ComplexType>
+        <ComplexType Name="BuchungRueckgabe_Result">
+          <Property Type="Int32" Name="IDBuchung" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Auto" Nullable="false" MaxLength="201" />
+        </ComplexType>
+        <ComplexType Name="OffeneBuchungenTodayPlus13_Result">
+          <Property Type="Int32" Name="IDBuchung" Nullable="false" />
+          <Property Type="Int32" Name="IDKunde" Nullable="false" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="BuchungStatus" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="BuchungVon" Nullable="false" />
+          <Property Type="DateTime" Name="BuchungBis" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pKundenAnzeigen_Result">
+          <Property Type="Int32" Name="IDKunde" Nullable="false" />
+          <Property Type="String" Name="Nachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PLZ" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Ort" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Vorname" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="BuchungFilter_Result">
+          <Property Type="Int32" Name="BuchungNr" Nullable="true" />
+          <Property Type="String" Name="Vorname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Nachname" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="KundenNr" Nullable="true" />
+          <Property Type="String" Name="Ort" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Plz" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Problem" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pAusstattung_Result">
+          <Property Type="Int32" Name="IDAusstattung" Nullable="false" />
+          <Property Type="String" Name="ausstattung" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenAnzeigen_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="Decimal" Name="Kilometerstand" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="String" Name="Getriebe" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Tueren" Nullable="false" MaxLength="20" />
+          <Property Type="Byte" Name="Sitze" Nullable="false" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="Int32" Name="FKKategorie" Nullable="false" />
+          <Property Type="Int32" Name="FKTreibstoff" Nullable="false" />
+          <Property Type="Int32" Name="FKTyp" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenAnzeigen2_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="Decimal" Name="Kilometerstand" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="String" Name="Getriebe" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Tueren" Nullable="false" MaxLength="20" />
+          <Property Type="Byte" Name="Sitze" Nullable="false" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Treibstoff" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="fAutoBearbeitenInklFilter_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Problem" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilter_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Problem" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilter2_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Problem" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilter3_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BuchungStatus" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilterFinal_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="Decimal" Name="Kilometerstand" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Byte" Name="Sitze" Nullable="false" />
+          <Property Type="String" Name="Tueren" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Getriebe" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Treibstoff" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="pAutoBearbeitenInklFilterFinal2_Result">
+          <Property Type="Int32" Name="IDAuto" Nullable="false" />
+          <Property Type="Int16" Name="Baujahr" Nullable="false" />
+          <Property Type="String" Name="PS" Nullable="false" MaxLength="5" />
+          <Property Type="Decimal" Name="MietPreis" Nullable="false" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="VerkaufPreis" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Binary" Name="AutoBild" Nullable="true" />
+          <Property Type="Boolean" Name="Anzeigen" Nullable="false" />
+          <Property Type="Decimal" Name="Kilometerstand" Nullable="false" Precision="10" Scale="0" />
+          <Property Type="Byte" Name="Sitze" Nullable="false" />
+          <Property Type="String" Name="Tueren" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Getriebe" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Marke" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Treibstoff" Nullable="false" MaxLength="100" />
+        </ComplexType>
+
+        <ComplexType Name="pFilterMarke_Result">
+          <Property Type="String" Name="typ" Nullable="false" MaxLength="100" />
+	</ComplexType>
+
+        <ComplexType Name="getMA_Result">
+          <Property Type="Int32" Name="IDMitarbeiter" Nullable="false" />
+          <Property Type="String" Name="MAVorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MANachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MAAnrede" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+        </ComplexType>
+
+        <ComplexType Name="pMAAnzeigen_Result">
+          <Property Type="Int32" Name="IDMitarbeiter" Nullable="false" />
+          <Property Type="String" Name="MAVorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MANachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MAAnrede" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="it22AutoverleihModelStoreContainer" CdmEntityContainer="it22AutoverleihEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAusstattung">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblAusstattung">
+              <MappingFragment StoreEntitySet="tblAusstattung">
+                <ScalarProperty Name="IDAusstattung" ColumnName="IDAusstattung" />
+                <ScalarProperty Name="Ausstattung" ColumnName="Ausstattung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAuto">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblAuto">
+              <MappingFragment StoreEntitySet="tblAuto">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="Getriebe" ColumnName="Getriebe" />
+                <ScalarProperty Name="Tueren" ColumnName="Tueren" />
+                <ScalarProperty Name="Sitze" ColumnName="Sitze" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="Kilometerstand" ColumnName="Kilometerstand" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="FKTreibstoff" ColumnName="FKTreibstoff" />
+                <ScalarProperty Name="FKTyp" ColumnName="FKTyp" />
+                <ScalarProperty Name="FKKategorie" ColumnName="FKKategorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblBuchung">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblBuchung">
+              <MappingFragment StoreEntitySet="tblBuchung">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="BuchungAm" ColumnName="BuchungAm" />
+                <ScalarProperty Name="BuchungVon" ColumnName="BuchungVon" />
+                <ScalarProperty Name="BuchungBis" ColumnName="BuchungBis" />
+                <ScalarProperty Name="Versicherung" ColumnName="Versicherung" />
+                <ScalarProperty Name="FKKunde" ColumnName="FKKunde" />
+                <ScalarProperty Name="FKAuto" ColumnName="FKAuto" />
+                <ScalarProperty Name="Tage" ColumnName="Tage" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Storno" ColumnName="Storno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEyecatcher">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblEyecatcher">
+              <MappingFragment StoreEntitySet="tblEyecatcher">
+                <ScalarProperty Name="IDEyecatcher" ColumnName="IDEyecatcher" />
+                <ScalarProperty Name="GUIDBild" ColumnName="GUIDBild" />
+                <ScalarProperty Name="Eyecatcher" ColumnName="Eyecatcher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHistorie">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblHistorie">
+              <MappingFragment StoreEntitySet="tblHistorie">
+                <ScalarProperty Name="IDHistorie" ColumnName="IDHistorie" />
+                <ScalarProperty Name="FKMitarbeiter" ColumnName="FKMitarbeiter" />
+                <ScalarProperty Name="FKBuchung" ColumnName="FKBuchung" />
+                <ScalarProperty Name="AenderungsDatum" ColumnName="AenderungsDatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKategorie">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblKategorie">
+              <MappingFragment StoreEntitySet="tblKategorie">
+                <ScalarProperty Name="IDKategorie" ColumnName="IDKategorie" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKunde">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblKunde">
+              <MappingFragment StoreEntitySet="tblKunde">
+                <ScalarProperty Name="IDKunde" ColumnName="IDKunde" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Strasse" ColumnName="Strasse" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Anrede" ColumnName="Anrede" />
+                <ScalarProperty Name="GebDatum" ColumnName="GebDatum" />
+                <ScalarProperty Name="ReisepassNr" ColumnName="ReisepassNr" />
+                <ScalarProperty Name="FKPLZOrt" ColumnName="FKPLZOrt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLand">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblLand">
+              <MappingFragment StoreEntitySet="tblLand">
+                <ScalarProperty Name="IDLand" ColumnName="IDLand" />
+                <ScalarProperty Name="Land" ColumnName="Land" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLogin">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblLogin">
+              <MappingFragment StoreEntitySet="tblLogin">
+                <ScalarProperty Name="IDLogin" ColumnName="IDLogin" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Passwort" ColumnName="Passwort" />
+                <ScalarProperty Name="Rolle" ColumnName="Rolle" />
+                <ScalarProperty Name="Deaktiviert" ColumnName="Deaktiviert" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMarke">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblMarke">
+              <MappingFragment StoreEntitySet="tblMarke">
+                <ScalarProperty Name="IDMarke" ColumnName="IDMarke" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMitarbeiter">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblMitarbeiter">
+              <MappingFragment StoreEntitySet="tblMitarbeiter">
+                <ScalarProperty Name="MANachname" ColumnName="MANachname" />
+                <ScalarProperty Name="IDMitarbeiter" ColumnName="IDMitarbeiter" />
+                <ScalarProperty Name="MAVorname" ColumnName="MAVorname" />
+                <ScalarProperty Name="MAAnrede" ColumnName="MAAnrede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPLZOrt">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblPLZOrt">
+              <MappingFragment StoreEntitySet="tblPLZOrt">
+                <ScalarProperty Name="IDPLZOrt" ColumnName="IDPLZOrt" />
+                <ScalarProperty Name="PLZ" ColumnName="PLZ" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="FKLand" ColumnName="FKLand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTreibstoff">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblTreibstoff">
+              <MappingFragment StoreEntitySet="tblTreibstoff">
+                <ScalarProperty Name="IDTreibstoff" ColumnName="IDTreibstoff" />
+                <ScalarProperty Name="Treibstoff" ColumnName="Treibstoff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTyp">
+            <EntityTypeMapping TypeName="it22AutoverleihModel.tblTyp">
+              <MappingFragment StoreEntitySet="tblTyp">
+                <ScalarProperty Name="IDTyp" ColumnName="IDTyp" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="FKMarke" ColumnName="FKMarke" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tblAutodetail" TypeName="it22AutoverleihModel.tblAutodetail" StoreEntitySet="tblAutodetail">
+            <EndProperty Name="tblAusstattung">
+              <ScalarProperty Name="IDAusstattung" ColumnName="FKAusstattung" />
+            </EndProperty>
+            <EndProperty Name="tblAuto">
+              <ScalarProperty Name="IDAuto" ColumnName="FKAuto" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="BuchungAbholung" FunctionName="it22AutoverleihModel.Store.BuchungAbholung">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.BuchungAbholung_Result">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Auto" ColumnName="Auto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuchungProblem" FunctionName="it22AutoverleihModel.Store.BuchungProblem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.BuchungProblem_Result">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Auto" ColumnName="Auto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuchungRueckgabe" FunctionName="it22AutoverleihModel.Store.BuchungRueckgabe">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.BuchungRueckgabe_Result">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Auto" ColumnName="Auto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuchungUpdate" FunctionName="it22AutoverleihModel.Store.BuchungUpdate" />
+          <FunctionImportMapping FunctionImportName="OffeneBuchungenTodayPlus13" FunctionName="it22AutoverleihModel.Store.OffeneBuchungenTodayPlus13">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.OffeneBuchungenTodayPlus13_Result">
+                <ScalarProperty Name="IDBuchung" ColumnName="IDBuchung" />
+                <ScalarProperty Name="IDKunde" ColumnName="IDKunde" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="PLZ" ColumnName="PLZ" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="BuchungVon" ColumnName="BuchungVon" />
+                <ScalarProperty Name="BuchungBis" ColumnName="BuchungBis" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pKundeEdit" FunctionName="it22AutoverleihModel.Store.pKundeEdit" />
+          <FunctionImportMapping FunctionImportName="pKundenAnzeigen" FunctionName="it22AutoverleihModel.Store.pKundenAnzeigen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pKundenAnzeigen_Result">
+                <ScalarProperty Name="IDKunde" ColumnName="IDKunde" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="PLZ" ColumnName="PLZ" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuchungFilter" FunctionName="it22AutoverleihModel.Store.BuchungFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.BuchungFilter_Result">
+                <ScalarProperty Name="BuchungNr" ColumnName="BuchungNr" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="KundenNr" ColumnName="KundenNr" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="Plz" ColumnName="Plz" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoHinzufuegen" FunctionName="it22AutoverleihModel.Store.pAutoHinzufuegen" />
+
+          <FunctionImportMapping FunctionImportName="pAusstattungZuAuto2" FunctionName="it22AutoverleihModel.Store.pAusstattungZuAuto2" />
+
+          <FunctionImportMapping FunctionImportName="pMitarbeiterEditieren" FunctionName="it22AutoverleihModel.Store.pMitarbeiterEditieren" />
+          <FunctionImportMapping FunctionImportName="pNeuenMitarbeiterAnlegen" FunctionName="it22AutoverleihModel.Store.pNeuenMitarbeiterAnlegen" />
+          <FunctionImportMapping FunctionImportName="ptblHistorieInsert" FunctionName="it22AutoverleihModel.Store.ptblHistorieInsert" />
+          <FunctionImportMapping FunctionImportName="pAusstattung" FunctionName="it22AutoverleihModel.Store.pAusstattung">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenAnzeigen" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenAnzeigen">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenAnzeigen2" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenAnzeigen2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenAnzeigen2_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="Kilometerstand" ColumnName="Kilometerstand" />
+                <ScalarProperty Name="Getriebe" ColumnName="Getriebe" />
+                <ScalarProperty Name="Tueren" ColumnName="Tueren" />
+                <ScalarProperty Name="Sitze" ColumnName="Sitze" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Treibstoff" ColumnName="Treibstoff" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="fAutoBearbeitenInklFilter" FunctionName="it22AutoverleihModel.Store.fAutoBearbeitenInklFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.fAutoBearbeitenInklFilter_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenInklFilter" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenInklFilter">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenInklFilter_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenInklFilter3" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenInklFilter3">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenInklFilter3_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="BuchungStatus" ColumnName="BuchungStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenInklFilterFinal" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenInklFilterFinal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenInklFilterFinal_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="Kilometerstand" ColumnName="Kilometerstand" />
+                <ScalarProperty Name="Sitze" ColumnName="Sitze" />
+                <ScalarProperty Name="Tueren" ColumnName="Tueren" />
+                <ScalarProperty Name="Getriebe" ColumnName="Getriebe" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Treibstoff" ColumnName="Treibstoff" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenInklFilterFinal2" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenInklFilterFinal2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pAutoBearbeitenInklFilterFinal2_Result">
+                <ScalarProperty Name="IDAuto" ColumnName="IDAuto" />
+                <ScalarProperty Name="Baujahr" ColumnName="Baujahr" />
+                <ScalarProperty Name="PS" ColumnName="PS" />
+                <ScalarProperty Name="MietPreis" ColumnName="MietPreis" />
+                <ScalarProperty Name="VerkaufPreis" ColumnName="VerkaufPreis" />
+                <ScalarProperty Name="AutoBild" ColumnName="AutoBild" />
+                <ScalarProperty Name="Anzeigen" ColumnName="Anzeigen" />
+                <ScalarProperty Name="Kilometerstand" ColumnName="Kilometerstand" />
+                <ScalarProperty Name="Sitze" ColumnName="Sitze" />
+                <ScalarProperty Name="Tueren" ColumnName="Tueren" />
+                <ScalarProperty Name="Getriebe" ColumnName="Getriebe" />
+                <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="Treibstoff" ColumnName="Treibstoff" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+
+          <FunctionImportMapping FunctionImportName="pAutoBearbeiten" FunctionName="it22AutoverleihModel.Store.pAutoBearbeiten" />
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenCreate" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenCreate" />
+          <FunctionImportMapping FunctionImportName="pAutoBearbeitenDelete" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenDelete" />
+          <FunctionImportMapping FunctionImportName="p8Passwort" FunctionName="it22AutoverleihModel.Store.p8Passwort" />
+
+          <FunctionImportMapping FunctionImportName="pFilterMarke" FunctionName="it22AutoverleihModel.Store.pFilterMarke" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pFilterMarke_Result">
+                <ScalarProperty Name="typ" ColumnName="typ" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pFilterTyp" FunctionName="it22AutoverleihModel.Store.pFilterTyp" />
+
+          <FunctionImportMapping FunctionImportName="getMA" FunctionName="it22AutoverleihModel.Store.getMA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.getMA_Result">
+                <ScalarProperty Name="IDMitarbeiter" ColumnName="IDMitarbeiter" />
+                <ScalarProperty Name="MAVorname" ColumnName="MAVorname" />
+                <ScalarProperty Name="MANachname" ColumnName="MANachname" />
+                <ScalarProperty Name="MAAnrede" ColumnName="MAAnrede" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pMAAnzeigen" FunctionName="it22AutoverleihModel.Store.pMAAnzeigen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pMAAnzeigen_Result">
+                <ScalarProperty Name="IDMitarbeiter" ColumnName="IDMitarbeiter" />
+                <ScalarProperty Name="MAVorname" ColumnName="MAVorname" />
+                <ScalarProperty Name="MANachname" ColumnName="MANachname" />
+                <ScalarProperty Name="MAAnrede" ColumnName="MAAnrede" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pMitarbeiterEigenesPasswortZuruecksetzen" FunctionName="it22AutoverleihModel.Store.pMitarbeiterEigenesPasswortZuruecksetzen" />
+
+
+
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

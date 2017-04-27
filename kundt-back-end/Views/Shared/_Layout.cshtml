@@ -1,14 +1,16 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="de-at">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link rel="SHORTCUT ICON" href="~/favicon.ico" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
         .navbar-brand {
             padding: 5px;
+            height: 90px;
         }
 
         .navbar {
@@ -16,48 +18,141 @@
         }
 
         .navbar-nav > li > a {
-            padding-top: 35px;
-            padding-bottom: 20px;
             font-size: 2em;
             font-weight: bold;
         }
 
-        .navbar-toggle {
-            margin-top: 30px;
+        .navbar-right {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .navbar .navbar-nav {
+            display: inline-block;
+            float: none;
+        }
+
+        .navbar .navbar-collapse {
+            text-align: center;
         }
 
         .body-content {
             padding-left: 0px;
             padding-right: 0px;
         }
+
+        #time {
+            font-weight: bold;
+            font-size: large;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
-<body>
+<body onload="OnLoad()">
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                <a class="navbar-brand" href="@if (User.IsInRole("M") || User.IsInRole("A")) {@Url.Action("Index", "Home")}else{@Url.Action("Index", "Login")}">
                     <img alt="Brand" src="~/Content/img/kundt_logo_with_slogan_right.png" />
                 </a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Login", "Index", "Home")</li>
+                    @if (User.IsInRole("M"))
+                    {
+                        <li>
+                            <a href="@Url.Action("MitarbeiterDaten","Mitarbeiter")" style="font-size:1.5em;">
+                                @{
+                                    HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                                    @ticket.Name;
+                                }
+                            </a>
+                        </li>
+                                    }
+                    @if (User.IsInRole("M") || User.IsInRole("A"))
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Login")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                    }
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="container" style="margin-top:20px;margin-bottom:20px;">
+        @if (User.IsInRole("A") || User.IsInRole("M"))
+        {
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div id="navbar" class="navbar-collapse collapse" style="max-height:50px;">
+                        <ul class="nav navbar-nav">
+                            <li id="uebersicht">@Html.ActionLink("Übersicht", "Index", "BuchungUebersicht")</li>
+                            <li id="fahrzeug" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Fahrzeug<span class="caret"></span></a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("AutoUebersicht","tblAuto")">Liste</a></li>
+                                    <li><a href="@Url.Action("AutoHinzu","tblAuto")">Hinzufügen</a></li>
+                                </ul>
+                            </li>
+                            <li id="kunden">
+                                @Html.ActionLink("Kunden", "KundenUebersicht", "Home")
+                            </li>
+                            @*<li id="kunden" class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kunden<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="@Url.Action("KundenUebersicht","Home")">Liste</a></li>
+                                            </ul>
+                                        </li>
+                                    <li id="buchung">
+                                        @Html.ActionLink("Buchungen", "Index", "Buchung")
+                                        @Html.ActionLink("Buchungen", "View", "Controller")
+                                </li>*@
+                            @*<li id="buchung" class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Buchung<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Liste</a></li>
+                                    </ul>
+                                </li>*@
+                            <li id="buchung">
+                                <a href="@Url.Action("Index","Buchung")">Buchungen</a>
+
+                            </li>
+                            @if (User.IsInRole("A"))
+                            {
+                                <li id="mitarbeiter" class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mitarbeiter<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("Index","Mitarbeiter")">Liste</a></li>
+                                        <li><a href="@Url.Action("Create","Mitarbeiter")">Hinzufügen</a></li>
+                                    </ul>
+                                </li>
+                                <li id="einstellungen">@Html.ActionLink("Einstellungen", "Einstellung", "Eyecatchers")</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        }
+    </div>
     <div class="container body-content">
+        <div id="Datumsfeld">
+            <center>
+                <div id="time">
+
+                </div>
+            </center>
+        </div>
         @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/scripts.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,227 @@
+﻿@model IEnumerable<kundt_back_end.Models.tblEyecatcher>
+@{
+    ViewBag.Title = "Einstellungen";
+}
+
+<style>
+    .einstellungLayout {
+        margin-bottom: 2%;
+        margin-top: 2%;
+    }
+
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+        height: 40px;
+        font-size: 32px;
+    }
+    .buttonOrangeForwardStep3OhneAnimation {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+        .buttonOrangeForwardStep3OhneAnimation:disabled {
+            background-color: #CCC;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 4px;
+        }
+    .buttonOrangeSave {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+        .buttonOrangeSave span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .buttonOrangeSave span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -30px;
+                transition: 0.5s;
+                font-size: 15px;
+            }
+
+        .buttonOrangeSave:hover span {
+            padding-right: 15px;
+        }
+
+            .buttonOrangeSave:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+        .buttonOrangeSave:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+        }
+</style>
+@*@using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="row">
+
+        <div class="col-lg-1 einstellungLayout">Bild 1</div>
+        <div class="col-lg-3 einstellungLayout">
+            <input type="hidden" value="1" name="Id" />
+
+            <input type="file" id="upload" name="upload" />
+
+        </div>
+        <div class="col-lg-1 einstellungLayout">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+    }*@
+
+<div class="headingFormat">
+    <h2 style="padding:5px;">Eyecatcher Einstellungen</h2>
+</div>
+
+<div class=" container" style="padding-top:15px;">
+    <div class="row col-md-12">
+        @using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal col-md-12">
+                <div class="col-md-2">
+                    <h3>Bild 1</h3>
+                </div>
+                <input type="hidden" value="1" name="IDEyecatcher" />
+                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                    <center>
+                        <div>
+                            @{
+                                var image = Convert.ToBase64String(Model.ToList()[0].Eyecatcher);
+                            }
+                            @Html.Raw("<img src=\"data:" + Model.ToList()[0].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\"  />")
+                        </div>
+                    </center>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <div style="padding-bottom:15px;padding-top:30px;">
+                        <input type="file" id="upload" name="upload" onchange="Fileupload('1')" />
+                    </div>
+                    <div>
+                        <button type="submit" id="submit1" value="submitfile" class="buttonOrangeForwardStep3OhneAnimation" disabled><span>Bild Aktualisieren</span></button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row col-md-12">
+        @using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            <div class="form-horizontal col-md-12">
+                <div class="col-md-2">
+                    <h3>Bild 2</h3>
+                </div>
+                <input type="hidden" value="2" name="IDEyecatcher" />
+                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                    <center>
+                        <div>
+                            @{
+                                var image = Convert.ToBase64String(Model.ToList()[1].Eyecatcher);
+                            }
+                            @Html.Raw("<img src=\"data:" + Model.ToList()[1].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" />")
+                        </div>
+                    </center>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <div style="padding-bottom:15px;padding-top:30px;">
+                        <input type="file" id="upload" name="upload" onchange="Fileupload('2')" />
+                    </div>
+                    <div>
+                        <button type="submit" id="submit2" value="submitfile" class="buttonOrangeForwardStep3OhneAnimation" disabled><span>Bild Aktualisieren</span></button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row col-md-12">
+        @using (Html.BeginForm("Einstellung", "Eyecatchers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <hr />
+            <div class="form-horizontal col-md-12">
+                <div class="col-md-2">
+                    <h3>Bild 3</h3>
+                </div>
+                <input type="hidden" value="3" name="IDEyecatcher" />
+                <div class="form-group col-md-6" style="margin-bottom:0px;">
+                    <center>
+                        <div>
+                            @{
+                                var image = Convert.ToBase64String(Model.ToList()[2].Eyecatcher);
+                            }
+                            @Html.Raw("<img src=\"data:" + Model.ToList()[2].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" />")
+                        </div>
+                    </center>
+                </div>
+                <div class="col-md-offset-1 col-md-3">
+                    <div style="padding-bottom:15px;padding-top:30px;">
+                        <input type="file" id="upload" name="upload" onchange="Fileupload('3')"/>
+                    </div>
+                    <div>
+                        <button type="submit" id="submit3" value="submitfile" class="buttonOrangeForwardStep3OhneAnimation" disabled><span>Bild Aktualisieren</span></button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    function Fileupload(method) {
+        
+
+            $('#submit' + method).removeClass('buttonOrangeForwardStep3OhneAnimation');
+            $('#submit' + method).addClass('buttonOrangeSave');
+            $('#submit' + method).prop('disabled', false);
+        
+    }
+</script>

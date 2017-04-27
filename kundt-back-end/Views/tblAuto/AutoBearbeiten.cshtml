@@ -1,0 +1,284 @@
+﻿@model kundt_back_end.Models.AutoModel
+@{
+    ViewBag.Title = "Auto Bearbeiten";
+}
+<script>
+    //function ShowTypFilter() {
+    //    if (document.getElementById("FilterMarke2").value == "Alle Marken/Typen" || document.getElementById("FilterMarke2").value == "") {
+    //        document.getElementById("FilterTyp2").style.visibility = "hidden";
+    //    }
+    //    else {
+    //        document.getElementById("FilterTyp2").style.visibility = "visible";
+    //    }
+    //}
+</script>
+<style>
+    .myImg {
+        max-height: 200px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .tableLength {
+        min-width: 375px;
+        max-width: 375px;
+    }
+
+    .hinzuAuto {
+        min-width: 250px;
+    }
+
+    .autoHinzu_tr {
+        /*background-color: white;
+        min-width: 200px;
+        max-width: 200px;
+        padding-bottom: 10px;*/
+    }
+
+    .picBorder {
+        border: solid 1px;
+        border-color: lightgray;
+    }
+
+    .labelCheckbox {
+        margin-left: 20px;
+        font-style: unset;
+    }
+
+    .buttonOrangeHinzu {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
+
+        .buttonOrangeHinzu:hover {
+            background-color: #f99b1c;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            opacity: 0.7;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+    .headingFormat {
+        margin: auto auto 20px auto;
+        color: white;
+        background-color: #f99b1c;
+        border-radius: 4px;
+        box-shadow: lightgray 1px 1px 0px;
+        text-align: center;
+        height: 40px;
+        font-size: 32px;
+    }
+</style>
+
+<div class="headingFormat">
+    <h2 style="padding:5px;">Fahrzeug bearbeiten</h2>
+</div>
+
+<form action="@Url.Action("AutoBearbeiten","tblAuto", null)" method="post" enctype="multipart/form-data">
+    <div class="container">
+
+        <div class="col-xs-6" style="margin:auto; display:inline-block; padding:0px">
+            @if (Model.autoBearbeiten[0].AutoBild != null)
+            {
+                var image = Convert.ToBase64String(Model.autoBearbeiten[0].AutoBild);
+                @Html.Raw("<img src=\"data:image/png;base64," + image + "\" class=\"img-responsive myImg\" />");
+            }
+            else
+            {
+                <p>Kein Bild vorhanden</p>
+            }
+            <p><input type="file" id="upload" name="upload" accept="image/*" /></p>
+            <div class="col-xs-12" style="margin:20px 0px 0px -12px">
+                <p>Ausstattungsoptionen:</p>
+                @foreach (var item in Model.ausstattungListe)
+                {
+                    <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
+                        <label class="labelCheckbox"><input type="checkbox" checked name="ausstattungListe" value="@item.IDAusstattung">@Html.DisplayFor(model => item.Ausstattung)</label>
+                    </div>
+                }
+                @foreach (var item in Model.plainAusstattungListe)
+                {
+                    <div class="checkbox col-xs-5" style="margin: 10px 5px 0px 5px;">
+                        <label class="labelCheckbox"><input type="checkbox" name="plainAusstattungListe" value="@item.IDAusstattung">@Html.DisplayFor(model => item.Ausstattung)</label>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-xs-6 col-xs-offset-1 table-responsive text-right tableLength" style="max-width:400px">
+            <table class="table table-hover">
+                <tr>
+                    <td>Marke:</td>
+                    <td class="autoHinzu">
+                        <select name="myMarke" id="FilterMarke2" class="form-control" onchange="ShowTypFilter()">
+                            <optgroup label="Marke wählen">                                
+                                <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => m.autoBearbeiten[0].Marke)</option>
+                                <option value="">Alle Marken</option>
+                                 @foreach (var item in Model.markeListe)
+                                {
+                                    if (item.Marke != Model.autoBearbeiten[0].Marke)
+                                    {
+                                        <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => item.Marke)</option>
+                                    }
+                                }
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>Typ:</td>
+                    <td class="autoHinzu">
+                        <select name="myTyp" id="FilterTyp2" class="autoHinzu form-control" style="visibility:visible">
+                            <optgroup label="Typ wählen">
+                                <option name="myTyp" value="@Model.autoBearbeiten[0].Typ">@Html.DisplayFor(m => m.autoBearbeiten[0].Typ)</option>
+                                @foreach (var item in Model.typListe)
+                                {
+                                    if (item.Typ != Model.autoBearbeiten[0].Typ)
+                                    {
+                                        <option name="myTyp" value="@item.Typ">@Html.DisplayFor(m => item.Typ)</option>
+                                    }
+                                }
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>Kategorie:</td>
+                    <td class="autoHinzu">
+
+                        <select name="myKategorie" id="Kategorie" class="hinzuAuto form-control">
+                            <optgroup label="Kategorie wählen">
+                                <option name="myKategorie" value="@Model.autoBearbeiten[0].Kategorie">@Html.DisplayFor(m => Model.autoBearbeiten[0].Kategorie)</option>
+                                @foreach (var item in Model.kategorieListe)
+                                {
+                                    if (item.Kategorie != Model.autoBearbeiten[0].Kategorie)
+                                    {
+                                        <option name="myKategorie" value="@Model.autoBearbeiten[0].Kategorie">@Html.DisplayFor(m => item)</option>
+                                    }
+                                }
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>PS:</td>
+                    <td>
+                        @Html.EditorFor(model => model.autoBearbeiten[0].PS, new { htmlAttributes = new { @class = "form-control" } })
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>Getriebe:</td>
+                    <td class="autoHinzu">
+                        <select name="myGetriebe" id="myGetriebe" class="hinzuAuto form-control">
+                            <optgroup label="Getriebe wählen">
+                                <option name="myGetriebe" value="Manuell">Manuell</option>
+                                <option name="myGetriebe" value="Automatik">Automatik</option>
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>Baujahr:</td>
+                    <td>
+                        @*@Html.EditorFor(model => model.autoBearbeiten[0].Baujahr, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="number" name="myBauJahr" value="@Model.autoBearbeiten[0].Baujahr" min="1970" max="@Model.myTime" class="form-control" required />
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>Türen:</td>
+                    <td class="autoHinzu">
+                        @*@Html.EditorFor(model => model.autoBearbeiten[0].Tueren, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="number" name="myTueren" value="@Model.autoBearbeiten[0].Tueren" min="2" max="5" class="form-control" required />
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td class="autoHinzu">Sitze:</td>
+                    <td>
+                        @*@Html.EditorFor(model => model.autoBearbeiten[0].Sitze, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="number" name="mySitze" value="@Model.autoBearbeiten[0].Sitze" min="2" max="999" class="form-control" required />
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>KM-Stand:</td>
+                    <td class="autoHinzu">
+                        @Html.EditorFor(model => model.autoBearbeiten[0].Kilometerstand, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
+                        @Html.ValidationMessageFor(model => model.autoBearbeiten[0].Kilometerstand, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>Treibstoff:</td>
+                    <td class="autoHinzu">
+                        <select name="myTreibstoff" id="Treibstoff" class="hinzuAuto form-control">
+                            <optgroup label="Treibstoff wählen">
+                                <option name="myTreibstoff" value="@Model.autoBearbeiten[0].Treibstoff">@Html.DisplayFor(m => m.autoBearbeiten[0].Treibstoff)</option>
+                                @foreach (var item in Model.treibstoffListe)
+                                {
+                                    if (item.Treibstoff != Model.autoBearbeiten[0].Treibstoff)
+                                    {
+                                        <option name="myTreibstoff" value="@Model.autoBearbeiten[0].Treibstoff">@Html.DisplayFor(m => item.Treibstoff)</option>
+                                    }
+                                }
+                            </optgroup>
+                        </select>
+
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr hinzuAuto">
+                    <td>Mietpreis:</td>
+                    <td class="autoHinzu">
+                        @Html.EditorFor(model => model.autoBearbeiten[0].MietPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
+                        @Html.ValidationMessageFor(model => model.autoBearbeiten[0].MietPreis, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr hinzuAuto">
+                    <td>Verkaufspreis:</td>
+                    <td class="autoHinzu">
+                        @Html.EditorFor(model => model.autoBearbeiten[0].VerkaufPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
+                        @Html.ValidationMessageFor(model => model.autoBearbeiten[0].VerkaufPreis, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr class="autoHinzu_tr">
+                    <td>Sichtbarkeit:</td>
+                    <td class="autoHinzu">
+                        <select name="myAnzeigen" id="myAnzeigen" class="hinzuAuto form-control">
+                            <optgroup label="Auto anzeigen">
+                                @if (Model.autoBearbeiten[0].Anzeigen == true)
+                                {
+                                    <option value="true">Sichtbar</option>
+                                    <option value="false">Versteckt</option>
+                                }
+                                @if (Model.autoBearbeiten[0].Anzeigen == false)
+                                {
+                                    <option value="false">Versteckt</option>
+                                    <option value="true">Sichtbar</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-xs-12 text-center">
+            <input type="hidden" name="myIDAuto" value="@Model.autoBearbeiten[0].IDAuto" />
+            <button type="submit" class="buttonOrangeHinzu">Aktualisieren</button>
+        </div>
+    </div>
+</form>
+@section Scripts{    
+    @Scripts.Render("~/Scripts/filter.js")
+}
