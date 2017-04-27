@@ -13,5 +13,14 @@
             $('#filter').addClass('navbar-fixed-top');
             $('#filter').addClass('filterPos');
         }
+        if ($(window).scrollTop() < 250) {
+            $('#filterBar').removeClass('nav navbar-fixed-top');            
+            $('#filterBar').removeClass('FilterOnMove');
+        }
+
+        if ($(window).scrollTop() > 250) {
+            $('#filterBar').addClass('nav navbar-fixed-top');
+            $('#filterBar').addClass('FilterOnMove');
+        }
     });
 });

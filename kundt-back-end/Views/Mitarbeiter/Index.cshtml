@@ -151,6 +151,7 @@
             margin-top: 50px;
         }*/
 
+
     .buttonOrangeEdit {
         background-color: #f99b1c;
         border: none;
@@ -161,22 +162,19 @@
         font-weight: 700;
         letter-spacing: .5px;
         text-align: center;
-        display: inline-block;
-        border-radius: 4px;
     }
 
         .buttonOrangeEdit:hover {
             background-color: #f99b1c;
             border: none;
-            color: black;
+            color: #ffffff;
             font-size: 15px;
             height: 40px;
             width: 100px;
             font-weight: 700;
             letter-spacing: .5px;
             text-align: center;
-            display: inline-block;
-            border-radius: 4px;
+            opacity: 0.7;
         }
 
     .headingFormat {
@@ -232,7 +230,7 @@
         <div class="col-lg-3">
             <div class="row" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
                 <center><h3>Suchen nach</h3></center>
-                <input type="text" placeholder="MA Id" class="col-lg-12 SuchFilter_abstand" />
+                <input type="text" placeholder="MitarbeiterNr." class="col-lg-12 SuchFilter_abstand" />
                 <input type="text" placeholder="Geschlecht" class="col-lg-12 SuchFilter_abstand" />
                 <input type="text" placeholder="Vorname" class="col-lg-12 SuchFilter_abstand" />
                 <input type="text" placeholder="Nachname" class="col-lg-12 SuchFilter_abstand" />
@@ -246,8 +244,8 @@
                 <table class="table">
                     <thead>
                         <tr style="margin-right:16px;">
-                            <th style="width:10%;">MA Id</th>
-                            <th style="width:15%;">Vorname</th>
+                            <th style="width:12%;">MitarbeiterNr.</th>
+                            <th style="width:13%;">Vorname</th>
                             <th style="width:15%;">Nachname</th>
                             <th style="width:15%;">Geschlecht</th>
                             <th style="width:30%;">E-Mail</th>
@@ -258,8 +256,8 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td style="width:10%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.IDMitarbeiter)</a></td>
-                                <td style="width:15%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MAVorname)</a></td>
+                                <td style="width:12%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.IDMitarbeiter)</a></td>
+                                <td style="width:13%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MAVorname)</a></td>
                                 <td style="width:15%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.MANachname)</a></td>
                                 <td style="width:15%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@if (item.MAAnrede == "Herr"){<span>M</span>}else{<span>W</span>}</a></td>
                                 <td style="width:30%;"><a href="@Url.Action("Edit","Mitarbeiter",new { ID = item.IDMitarbeiter })">@Html.DisplayFor(modelItem => item.tblLogin.Email)</a></td>
