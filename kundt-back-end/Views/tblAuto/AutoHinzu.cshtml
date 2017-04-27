@@ -3,10 +3,11 @@
     ViewBag.Title = "Auto Hinzufügen";
 }
 <script>
-    //function changePic() {
-    //    var temp = document.getElementById("upload").value; 
-    //    document.getElementById("pic").src = "~/Content/img/" + temp;
-    //}
+    function changePic() {
+        var temp = document.getElementById("upload").src;
+        console.log(temp);
+        document.getElementById("pic").src = "~/Content/img/" + temp;
+    }
     function ShowTypFilter() {
         if (document.getElementById("FilterMarke").value == "Alle Marken/Typen" || document.getElementById("FilterMarke").value == "") {
             document.getElementById("FilterTyp").style.visibility = "hidden";
@@ -15,21 +16,31 @@
             document.getElementById("FilterTyp").style.visibility = "visible";
         }
     }
-    function Validation() {        
+    function Validation() {
         if (document.getElementById("ValidateData").value == "Marke wählen" || document.getElementById("ValidateData").value == "") {
             document.getElementByID("ValidateData").style.color = "red";
             return false;
         }
     }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#pic')
+                  .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 <style>
     .tableLength {
-        min-width:375px;
-        max-width:375px;
+        min-width: 375px;
+        max-width: 375px;
     }
 
     .hinzuAuto {
-        min-width: 250px;        
+        min-width: 250px;
     }
 
     .autoHinzu_tr {
@@ -98,8 +109,8 @@
     <div class="container">
 
         <div class="col-xs-6" style="margin:auto; display:inline-block; padding:0px">
-            <img src="~/Content/img/alfa-romeo-giulia-silber-2016.png" id="pic" alt="Alternate Text" style="max-height:200px" class="picBorder" />
-            <p><input type="file" id="upload" name="upload" accept="image/*" onchange="changePic()"/></p>            
+            <img src="~/Content/img/kundt_logo.png" id="pic" alt="Alternate Text" style="max-height:200px" class="picBorder" />
+            <p><input type="file" id="upload" name="upload" accept="image/*" onchange="readURL(this)" /></p>
             <div class="col-xs-12" style="margin:20px 0px 0px -12px">
 
                 <p>Ausstattungsoptionen:</p>
@@ -164,8 +175,8 @@
                     <td>PS:</td>
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myPS, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.myPS, "", new { @class = "text-danger" })*@
-                        <input type="number" name="myPs" value="@Model.myPS" class="form-control" min="0" max="2000" required/>
+                            @Html.ValidationMessageFor(model => model.myPS, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myPs" value="@Model.myPS" class="form-control" min="0" max="2000" required />
                     </td>
                 </tr>
                 <tr>
@@ -183,31 +194,31 @@
                     <td>Baujahr:</td>
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myBauJahr, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.myBauJahr, "", new { @class = "text-danger" })*@
-                        <input type="number" name="myBaujahr" value="@Model.myBauJahr" class="form-control" min="1970" max="@Model.myBauJahr" required/>
+                            @Html.ValidationMessageFor(model => model.myBauJahr, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myBaujahr" value="@Model.myBauJahr" class="form-control" min="1970" max="@Model.myBauJahr" required />
                     </td>
                 </tr>
                 <tr>
                     <td>Türen:</td>
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myTueren, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.myTueren, "", new { @class = "text-danger" })*@
-                        <input type="number" name="myTueren" value="@Model.myTueren" class="form-control" min="2" max="5" required/>
+                            @Html.ValidationMessageFor(model => model.myTueren, "", new { @class = "text-danger" })*@
+                        <input type="number" name="myTueren" value="@Model.myTueren" class="form-control" min="2" max="5" required />
                     </td>
                 </tr>
                 <tr>
                     <td>Sitze:</td>
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.mySitze, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.mySitze, "", new { @class = "text-danger" })*@    
-                        <input type="number" name="mySitze" value="@Model.mySitze" class="form-control" min="2" max="999" required />                    
+                            @Html.ValidationMessageFor(model => model.mySitze, "", new { @class = "text-danger" })*@
+                        <input type="number" name="mySitze" value="@Model.mySitze" class="form-control" min="2" max="999" required />
                     </td>
                 </tr>
                 <tr>
                     <td>KM-Stand:</td>
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myKilometerStand, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
-                        @Html.ValidationMessageFor(model => model.myKilometerStand, "", new { @class = "text-danger" })*@
+                            @Html.ValidationMessageFor(model => model.myKilometerStand, "", new { @class = "text-danger" })*@
                         <input type="number" name="myKilometerStand" value="@Model.myKilometerStand" class="form-control" min="0" max="9999999" required />
                     </td>
                 </tr>

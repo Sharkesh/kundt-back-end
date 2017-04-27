@@ -3,14 +3,16 @@
     ViewBag.Title = "Auto Bearbeiten";
 }
 <script>
-    //function ShowTypFilter() {
-    //    if (document.getElementById("FilterMarke2").value == "Alle Marken/Typen" || document.getElementById("FilterMarke2").value == "") {
-    //        document.getElementById("FilterTyp2").style.visibility = "hidden";
-    //    }
-    //    else {
-    //        document.getElementById("FilterTyp2").style.visibility = "visible";
-    //    }
-    //}
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#pic')
+                  .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 <style>
     .myImg {
@@ -97,13 +99,14 @@
             @if (Model.autoBearbeiten[0].AutoBild != null)
             {
                 var image = Convert.ToBase64String(Model.autoBearbeiten[0].AutoBild);
-                @Html.Raw("<img src=\"data:image/png;base64," + image + "\" class=\"img-responsive myImg\" />");
+                @Html.Raw("<img src=\"data:image/png;base64," + image + "\" class=\"img-responsive myImg\" id=\"pic\" />");
             }
             else
             {
+                <img src="" id="pic" />
                 <p>Kein Bild vorhanden</p>
             }
-            <p><input type="file" id="upload" name="upload" accept="image/*" /></p>
+            <p><input type="file" id="upload" name="upload" accept="image/*" onchange="readURL(this)" /></p>
             <div class="col-xs-12" style="margin:20px 0px 0px -12px">
                 <p>Ausstattungsoptionen:</p>
                 @foreach (var item in Model.ausstattungListe)

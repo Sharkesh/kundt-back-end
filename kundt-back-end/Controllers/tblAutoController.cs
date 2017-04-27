@@ -20,14 +20,7 @@ namespace kundt_back_end.Controllers
             var data = db.tblTyp.Include(x => x.tblMarke).Where(x => x.tblMarke.Marke == Marke).Select(x => x.Typ);
 
             return Json(data);
-        }
-        [HttpGet]
-        public JsonResult GetMarke(int IDAuto)
-        {
-            var data = db.tblAuto.Include(x => x.tblTyp).Include(x => x.tblTyp.tblMarke).Where(x => x.IDAuto == IDAuto).Select(x => x.tblTyp.tblMarke.Marke);
-
-            return Json(data);
-        }
+        }        
 
         [HttpGet]
         [Authorize(Roles = "M,A")]
