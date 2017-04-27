@@ -14,6 +14,14 @@ namespace kundt_back_end.Controllers
     {
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
+        [HttpPost]
+        public JsonResult FilterValidation(string Marke)
+        {
+            var data = db.tblTyp.Include(x => x.tblMarke).Where(x => x.tblMarke.Marke == Marke).Select(x => x.Typ);
+
+            return Json(data);
+        }
+
         [HttpGet]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzu()
@@ -68,16 +76,64 @@ namespace kundt_back_end.Controllers
             return RedirectToAction("AutoUebersicht", "tblAuto");
         }
 
+        //[HttpPost]
+        //[Authorize(Roles = "M,A")]
+        //public ActionResult AutoHinzuMitBild(AutoModel am, int[] ausstattungListe, HttpPostedFileBase upload)
+        ////public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
+        //{            
+        //    if (upload != null && upload.ContentLength > 0)
+        //    {
+        //        using (var reader = new System.IO.BinaryReader(upload.InputStream))
+        //        {
+        //            am.myAutobild = reader.ReadBytes(upload.ContentLength);
+        //        }
+        //    }
+
+        //    return View(am);
+        //}
+
         [Authorize(Roles = "M,A")]
-        public ActionResult AutoUebersicht(AutoModel am)
+        public ActionResult AutoUebersicht(AutoModel am, int? id)
         {
-
             //AutoModel am = new AutoModel();
-
+            //Befüllen der Listen und Werte
+            DateTime dt = new DateTime();
+            dt = DateTime.Now;
+            am.myTime = dt.Year;
             am.autoListe = db.tblAuto.ToList();
             am.typListe = db.tblTyp.ToList();
             am.markeListe = db.tblMarke.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
+
+            // Kontrolle, ob eine ID übergeben wurde
+            if (am.myIDAuto != 0)
+            {
+                bool trigger = false;
+                for (int i = 0; i < am.autoListe.Count; i++)
+                {
+                    if (am.myIDAuto == am.autoListe[i].IDAuto)
+                    {
+                        trigger = true;
+                    }
+                }
+                if (trigger == false)
+                {
+                    am.myIDAuto = 0;
+                }
+            }
+
+            //Filterliste befüllen
+            am.filterList = new List<string>();
+
+            am.filterList.Add(converterStr(am.myIDAuto));
+            am.filterList.Add(converterStr(am.myMarke));
+            am.filterList.Add(converterStr(am.myTyp));
+            am.filterList.Add(converterStr(am.myKategorie));
+            am.filterList.Add(converterStr(am.myBauJahrVon));
+            am.filterList.Add(converterStr(am.myBauJahrBis));
+            am.filterList.Add(converterStr(am.myKilometerStandVon));
+            am.filterList.Add(converterStr(am.myKilometerStandBis));
+            am.filterList.Add(converterStr(am.myAnzeigen));
 
             if (am.myIDAuto != 0)
             {
@@ -101,7 +157,7 @@ namespace kundt_back_end.Controllers
                                             umwandlerDEC(am.myKilometerStandBis),
                                             am.myAnzeigen).ToList();
             }
-
+            ViewBag.temp = am.autoBearbeitenFilter;
             return View(am);
         }
         private short? umwandlerINT16(int? x)
@@ -126,7 +182,39 @@ namespace kundt_back_end.Controllers
                 return x;
             }
         }
-
+        private string converterStr(object temp)
+        {
+            if (temp != null)
+            {
+                if (temp.GetType() == typeof(int))
+                {
+                    return Convert.ToString(temp);
+                }
+                else if (temp == null)
+                {
+                    return "";
+                }
+                else if (temp.GetType() == typeof(bool))
+                {
+                    if ((bool)temp == true)
+                    {
+                        return "Sichtbar";
+                    }
+                    else
+                    {
+                        return "Versteckt";
+                    }
+                }
+                else
+                {
+                    return temp.ToString();
+                }
+            }
+            else
+            {
+                return "";
+            }
+        }
         // GET: tblAuto/Details/5
         //[Authorize(Roles = "M,A")]
         //public ActionResult Details(int? id)
@@ -196,7 +284,7 @@ namespace kundt_back_end.Controllers
             am.myAnzeigen = db.tblAuto.Find((int)id).Anzeigen;
             DateTime dtime = new DateTime();
             dtime = DateTime.Now;
-            am.myBauJahr = dtime.Year;
+            am.myTime = dtime.Year;
             if (am.ausstattungListe != null)
             {
 

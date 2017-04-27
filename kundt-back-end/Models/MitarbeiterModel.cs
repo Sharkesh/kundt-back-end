@@ -16,21 +16,22 @@ namespace kundt_back_end.Models
         // Hier gibt es haufenweise Clienseitige Validierungen die durch [] angekündigt werden
         public int IDMitarbeiter { get; set; }
 
-        [Display(Name ="Vorname")]
+        [Display(Name ="Vorname:")]
         [Required(ErrorMessage = "Bitte Vorname Eingebe")]
         [StringLength(100, MinimumLength = 2)]
         public string MAVorname { get; set; }
 
-        [Display(Name ="Nachname")]
+        [Display(Name ="Nachname:")]
         [Required(ErrorMessage = "Bitte Nachname Eingeben")]
         [StringLength(100, MinimumLength = 2)]
         public string MANachname { get; set; }
 
-        [Display(Name = "Anrede")]
+        [Display(Name = "Anrede:")]
         public string MAAnrede { get; set; }
 
         [Required(ErrorMessage = "Bitte Email Eingeben")]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Muss einer Email ähneln! bsp: test@user.com")]
+        [Display(Name ="E-Mail:")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Bitte Passwort Eingeben")]

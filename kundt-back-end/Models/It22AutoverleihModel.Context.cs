@@ -640,6 +640,24 @@ namespace kundt_back_end.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("p8Passwort", nPasswort);
         }
     
+        public virtual ObjectResult<pFilterMarke_Result> pFilterMarke(string marke)
+        {
+            var markeParameter = marke != null ?
+                new ObjectParameter("marke", marke) :
+                new ObjectParameter("marke", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pFilterMarke_Result>("pFilterMarke", markeParameter);
+        }
+    
+        public virtual ObjectResult<string> pFilterTyp(string typ)
+        {
+            var typParameter = typ != null ?
+                new ObjectParameter("typ", typ) :
+                new ObjectParameter("typ", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("pFilterTyp", typParameter);
+	}
+
         [DbFunction("it22AutoverleihEntities", "getMA")]
         public virtual IQueryable<getMA_Result> getMA(string searchVorname, string searchNachname, Nullable<int> searchMaID, string searchGeschlecht)
         {
@@ -681,6 +699,19 @@ namespace kundt_back_end.Models
                 new ObjectParameter("searchGeschlecht", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pMAAnzeigen_Result>("pMAAnzeigen", searchVornameParameter, searchNachnameParameter, searchMaIDParameter, searchGeschlechtParameter);
+        }
+    
+        public virtual int pMitarbeiterEigenesPasswortZuruecksetzen(Nullable<int> iDLogin, string passwort)
+        {
+            var iDLoginParameter = iDLogin.HasValue ?
+                new ObjectParameter("IDLogin", iDLogin) :
+                new ObjectParameter("IDLogin", typeof(int));
+    
+            var passwortParameter = passwort != null ?
+                new ObjectParameter("Passwort", passwort) :
+                new ObjectParameter("Passwort", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pMitarbeiterEigenesPasswortZuruecksetzen", iDLoginParameter, passwortParameter);
         }
     }
 }

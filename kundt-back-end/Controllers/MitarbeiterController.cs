@@ -200,6 +200,8 @@ namespace kundt_back_end.Controllers
                 MM.Deaktiviert = false;
                 MM.MAAnrede = dbMA.MAAnrede;
 
+
+
                 return View(MM);
             }
             else
@@ -214,10 +216,12 @@ namespace kundt_back_end.Controllers
         public ActionResult PasswortZuruecksetzenMitarbeiter(MitarbeiterModel MM)
         {
 
-            var dbLogin = db.tblLogin.Find(MM.IDMitarbeiter);
-            dbLogin.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
-            db.Entry(dbLogin).State = EntityState.Modified;
-            db.SaveChanges();
+            //var dbLogin = db.tblLogin.Find(MM.IDMitarbeiter);
+            //dbLogin.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
+            //db.Entry(dbLogin).State = EntityState.Modified;
+            //db.SaveChanges();
+            MM.Passwort = Logic.Helper.PasswordConverter(MM.Passwort);
+            db.pMitarbeiterEigenesPasswortZuruecksetzen(MM.IDMitarbeiter, MM.Passwort);
 
             return RedirectToAction("ÄnderungenErfolgreich", "Mitarbeiter");
 

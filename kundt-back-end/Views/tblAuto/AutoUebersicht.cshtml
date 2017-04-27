@@ -3,9 +3,34 @@
     ViewBag.Title = "Übersicht Autos";
 }
 
+<script>
+    
+    function ResetFilter() {
+        document.getElementById("myIDAuto").value = "";
+        document.getElementById("FilterMarke").value = null;
+        document.getElementById("FilterTyp").value = null;
+        document.getElementById("FilterKategorie").value = null;
+        document.getElementById("myBauJahrVon").value = "";
+        document.getElementById("myBauJahrBis").value = "";
+        document.getElementById("myKilometerStandVon").value = "";
+        document.getElementById("myKilometerStandBis").value = "";
+        document.getElementById("myAnzeigen").value = "";
+    }
+    function ShowTypFilter() {
+        document.getElementById("FilterRow").style.visibility = "visible"
+    }
+</script>
 <style>
     .DefaultFilter {
         font-weight: 700;
+    }
+
+    .AuswahlFilter {
+        color: darkgray;
+    }
+
+    .FilterAnzeige {
+        font-size: 15px;
     }
 
     .filterPos {
@@ -13,6 +38,23 @@
         padding-top: 50px;
     }
 
+    .FilterAnzeigeRow {
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-color: darkgray;
+        color: darkgray;
+        margin: 7px auto 14px auto;
+        height: 20px;
+    }
+
+    .FilterBG{
+        background-color:white;
+        max-height:27px;
+    }
+    .FilterOnMove{
+        padding-left:10px;
+        padding-right:10px;
+    }
     .myImg {
         max-height: 100px;
     }
@@ -73,99 +115,108 @@
         text-align: center;
         vertical-align: middle;
         text-decoration-color: none;
-        border-radius: 5px;
         font-size: 15px;
-        text-align: match-parent;
-        background-color: darkorange;
-        box-shadow: dimgrey 1px 1px 0px;
-        padding:10px 10px 10px 10px;
-        color:white;
-        margin-right:5px;
-        outline:none;
+        box-shadow: white 1px 1px 0px;
+        padding: 10px 10px 10px 10px;
+        margin-right: 5px;
+        outline: none;
+        background-color: #f99b1c;
+        border: none;
+        color: white;
+        letter-spacing: .5px;
+        border-radius: 4px;
     }
 
-    .myButton:hover, myButton:visited {
-        min-width: 120px;
-        max-height: 35px;
-        text-align: center;
-        vertical-align: middle;
-        text-decoration-color: none;
-        border-radius: 5px;
-        font-size: 15px;
-        text-align: match-parent;
-        background-color: darkorange;
-        box-shadow: black 2px 2px 1px;
-        padding:10px 10px 10px 10px;
-        color:white;
-        margin-right:5px;
-        opacity:0.8;
-        outline:none;
-    }
-
-    .myButton:active {
-        min-width: 120px;
-        max-height: 35px;
-        text-align: center;
-        vertical-align: middle;
-        text-decoration-color: none;
-        border-radius: 5px;
-        font-size: 15px;
-        text-align: match-parent;
-        background-color: orange;
-        box-shadow: dimgrey 2px 2px 1px;
-        padding:10px 10px 10px 10px;
-        color:white;
-        margin-right:5px;
-        outline:none;
-    }
-
-        .myButtonFilter {
-        min-width: 120px;
-        max-height: 35px;
-        text-align: center;
-        vertical-align: middle;
-        text-decoration-color: none;
-        border-radius: 5px;
-        font-size: 19px;
-        text-align: match-parent;
-        background-color: darkorange;
-        box-shadow: dimgrey 1px 1px 0px;
-        padding:3px 10px 10px 10px;
-        color:white;
-        outline:none;
-    }
-
-        .myButtonFilter:hover, myButtonFilter:visited {
-        min-width: 120px;
-        max-height: 35px;
-        text-align: center;
-        vertical-align: middle;
-        text-decoration-color: none;
-        border-radius: 5px;
-        font-size: 19px;
-        text-align: match-parent;
-        background-color: darkorange;
-        box-shadow: black 2px 2px 1px;
-        padding:3px 10px 10px 10px;
-        color:white;
-        opacity:0.8;
-        outline:none;
+        .myButton:hover {
+            min-width: 120px;
+            max-height: 35px;
+            text-align: center;
+            vertical-align: middle;
+            text-decoration-color: none;
+            font-size: 15px;
+            box-shadow: dimgrey 1px 1px 0px;
+            padding: 10px 10px 10px 10px;
+            margin-right: 5px;
+            outline: none;
+            background-color: #f99b1c;
+            border: none;
+            color: white;
+            letter-spacing: .5px;
+            border-radius: 4px;
         }
 
-        .myButtonFilter:active {
+        .myButton:visited, .myButton:active {
+            min-width: 120px;
+            max-height: 35px;
+            text-align: center;
+            vertical-align: middle;
+            text-decoration-color: none;
+            font-size: 15px;
+            box-shadow: dimgrey 1px 1px 0px;
+            padding: 10px 10px 10px 10px;
+            margin-right: 5px;
+            outline: none;
+            background-color: #f99b1c;
+            border: none;
+            color: white;
+            letter-spacing: .5px;
+            border-radius: 4px;
+            opacity: 0.8;
+        }
+
+    .myButtonFilter {
         min-width: 120px;
         max-height: 35px;
         text-align: center;
         vertical-align: middle;
         text-decoration-color: none;
-        outline:none;
-        border-radius: 5px;
-        font-size: 19px;
-        text-align: match-parent;
-        background-color: darkorange;
-        box-shadow: dimgrey 2px 2px 1px;
-        padding:3px 10px 10px 10px;
-        color:white;
+        font-size: 15px;
+        box-shadow: white 1px 1px 0px;
+        padding: 5px 10px 10px 10px;
+        margin-right: 5px;
+        outline: none;
+        background-color: #f99b1c;
+        border: none;
+        color: white;
+        letter-spacing: .5px;
+        border-radius: 4px;
+    }
+
+        .myButtonFilter:hover {
+            min-width: 120px;
+            max-height: 35px;
+            text-align: center;
+            vertical-align: middle;
+            text-decoration-color: none;
+            font-size: 15px;
+            box-shadow: dimgrey 1px 1px 0px;
+            padding: 5px 10px 10px 10px;
+            margin-right: 5px;
+            outline: none;
+            background-color: #f99b1c;
+            border: none;
+            color: white;
+            letter-spacing: .5px;
+            border-radius: 4px;
+        }
+
+        .myButtonFilter:visited, .myButtonFilter:active {
+            min-width: 120px;
+            max-height: 35px;
+            text-align: center;
+            vertical-align: middle;
+            text-decoration-color: none;
+            font-size: 15px;
+            box-shadow: dimgrey 1px 1px 0px;
+            padding: 5px 10px 10px 10px;
+            margin-right: 5px;
+            outline: none;
+            background-color: #f99b1c;
+            border: none;
+            color: white;
+            letter-spacing: .5px;
+            border-radius: 4px;
+            opacity: 0.8;
         }
 
     .MyHead {
@@ -194,6 +245,25 @@
     <h2 style="padding:5px;">Auto Übersicht</h2>
 </div>
 
+<nav id="filterBar" class="FilterBG">
+    <div class="FilterAnzeigeRow">
+
+        <div class="FilterAnzeige" style="float:left">
+            Ihre Filterkriterien:
+        </div>
+        <div class="col-xs-1" style="max-width:10px"></div>
+        @foreach (var item in Model.filterList)
+        {
+            if (!string.IsNullOrEmpty(item) && item != "0")
+            {
+                <div class="FilterAnzeige" style="float:left; text-align:right">
+                    | @item.ToString() |
+                </div>
+            }
+        }
+    </div>
+</nav>
+
 @using (Html.BeginForm())
 {
     <div class="row">
@@ -205,35 +275,61 @@
                         <tr>
                             <td class="myTd">
                                 <header>ID-Suche:</header>
-                                <select id="FilterID" name="myIDAuto" class="myInput">
-                                    <option class="myInput DefaultFilter filterPos" value="">Alle IDs</option>
-                                    @foreach (var item in Model.autoListe)
-                                    {
-                                        <option class="myInput" value="@item.IDAuto">@Html.DisplayFor(Model => item.IDAuto)</option>
-                                    }
-                                </select>
+                                @if (Model.myIDAuto != 0)
+                                {
+                                    <input class="myInput" id="myIDAuto" type="text" name="myIDAuto" value="@Model.myIDAuto" placeholder="ID" min="0" />
+                                }
+                                else
+                                {
+                                    <input class="myInput" id="myIDAuto" type="text" name="myIDAuto" value="" placeholder="ID" min="0" />
+                                }
                             </td>
                         </tr>
                         <tr>
                             <td class="myTd">
                                 <header>Marke wählen:</header>
-                                <select id="FilterMarke" name="myMarke" class="myInput">
-                                    <option class="myInput DefaultFilter" value="">Alle Marken</option>
-                                    @foreach (var item in Model.markeListe)
+                                <select id="FilterMarke" name="myMarke" class="myInput" onchange="ShowTypFilter()">
+                                    @if (Model.myMarke != null)
                                     {
-                                        <option class="myInput" value="@item.Marke">@Html.DisplayFor(Model => item.Marke)</option>
+                                        <option class="myInput AuswahlFilter" value="@Model.myMarke">@Model.myMarke</option>
+                                        <option class="myInput DefaultFilter" value="">Alle Marken</option>
+
+                                        foreach (var item in Model.markeListe)
+                                        {
+                                            <option class="myInput" value="@item.Marke">@item.Marke</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option class="myInput DefaultFilter" value="">Alle Marken</option>
+                                        foreach (var item in Model.markeListe)
+                                        {
+                                            <option class="myInput" value="@item.Marke">@item.Marke</option>
+                                        }
                                     }
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="myTd">
+                        <tr id="FilterRow" style="visibility:hidden">
+                            <td class="myTd"  >
                                 <header>Typ wählen:</header>
                                 <select id="FilterTyp" name="myTyp" class="myInput">
-                                    <option class="myInput DefaultFilter" value="">Alle Typen</option>
-                                    @foreach (var item in Model.typListe)
+                                    @if (Model.myTyp != null)
                                     {
-                                        <option class="myInput" value="@item.Typ">@Html.DisplayFor(Model => item.Typ)</option>
+                                        <option class="myInput AuswahlFilter" value="@Model.myTyp">@Model.myTyp</option>
+                                        <option class="myInput DefaultFilter" value="">Alle Typen</option>
+                                        foreach (var item in Model.typListe)
+                                        {
+                                            <option class="myInput" value="@item.Typ">@item.Typ</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option class="myInput DefaultFilter" value="">Alle Typen</option>
+                                        foreach (var item in Model.typListe)
+                                        {
+                                            <option class="myInput" value="@item.Typ">@item.Typ</option>
+                                        }
                                     }
                                 </select>
                             </td>
@@ -242,10 +338,22 @@
                             <td class="myTd">
                                 <header>Kategorie wählen:</header>
                                 <select id="FilterKategorie" name="myKategorie" class="myInput">
-                                    <option class="myInput DefaultFilter" value="">Alle Kategorien</option>
-                                    @foreach (var item in Model.kategorieListe)
+                                    @if (Model.myKategorie != null)
                                     {
-                                        <option class="myInput" value="@item.Kategorie">@item.Kategorie</option>
+                                        <option class="myInput AuswahlFilter" value="@Model.myKategorie">@Model.myKategorie</option>
+                                        <option class="myInput DefaultFilter" value="">Alle Kategorien</option>
+                                        foreach (var item in Model.kategorieListe)
+                                        {
+                                            <option class="myInput" value="@item.Kategorie">@item.Kategorie</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option class="myInput DefaultFilter" value="">Alle Kategorien</option>
+                                        foreach (var item in Model.kategorieListe)
+                                        {
+                                            <option class="myInput" value="@item.Kategorie">@item.Kategorie</option>
+                                        }
                                     }
                                 </select>
                             </td>
@@ -253,21 +361,63 @@
                         <tr>
                             <td class="myTd">
                                 <header>Baujahr wählen:</header>
-                                Von: <input class="myInput2" type="number" name="myBauJahrVon" value="" />
-                                Bis: <input class="myInput2" type="number" name="myBauJahrBis" value="" />
+                                Von:
+                                @if (Model.myBauJahrVon != 0)
+                                {
+                                    <input class="myInput2" id="myBauJahrVon" type="number" name="" value="@Model.myBauJahrVon" min="1970" max="@Model.myTime" />
+                                }
+                                else
+                                {
+                                    <input class="myInput2" id="myBauJahrVon" type="number" name="myBauJahrVon" min="1970" max="@Model.myTime" />
+                                }
+                                Bis:
+                                @if (Model.myBauJahrBis != 0)
+                                {
+                                    <input class="myInput2" id="myBauJahrBis" type="number" name="myBauJahrBis" value="@Model.myBauJahrBis" min="1970" max="@Model.myTime" />
+                                }
+                                else
+                                {
+                                    <input class="myInput2" id="myBauJahrBis" type="number" name="myBauJahrBis" value="" min="1970" max="@Model.myTime" />
+                                }
                             </td>
                         </tr>
                         <tr>
                             <td class="myTd">
                                 <header>Kilometerstand wählen:</header>
-                                <input class="myInput" type="number" name="myKilometerStandVon" value="" placeholder="Von" />
-                                <input class="myInput" type="number" name="myKilometerStandBis" value="" placeholder=" Bis" />
+                                @if (Model.myKilometerStandVon != 0)
+                                {
+                                    <input class="myInput" id="myKilometerStandVon" type="number" name="myKilometerStandVon" value="@Model.myKilometerStandVon" min="0" max="9999999" />
+                                }
+                                else
+                                {
+                                    <input class="myInput" id="myKilometerStandVon" type="number" name="myKilometerStandVon" value="" placeholder="Von" min="0" max="9999999" />
+                                }
+                                @if (Model.myKilometerStandBis != 0)
+                                {
+                                    <input class="myInput" id="myKilometerStandBis" type="number" name="myKilometerStandBis" value="@Model.myKilometerStandBis" min="0" max="9999999" />
+                                }
+                                else
+                                {
+                                    <input class="myInput" id="myKilometerStandBis" type="number" name="myKilometerStandBis" value="" placeholder="Bis" min="0" max="9999999" />
+                                }
                             </td>
                         </tr>
                         <tr>
                             <td class="myTd">
                                 <header>Sichtbarkeit wählen:</header>
-                                <select id="FilterKategorie" name="myAnzeigen" class="myInput">
+                                <select id="myAnzeigen" name="myAnzeigen" class="myInput">
+                                    @if (Model.myAnzeigen != null)
+                                    {
+                                        if (Model.myAnzeigen == true)
+                                        {
+                                            <option class="myInput AuswahlFilter" value="true">Sichtbare Autos</option>
+                                        }
+                                        else
+                                        {
+                                            <option class="myInput AuswahlFilter" value="false">Versteckte Autos</option>
+                                        }
+
+                                    }
                                     <option class="myInput DefaultFilter" value="">Alle Autos</option>
                                     <option class="myInput" value="true">Sichtbare Autos</option>
                                     <option class="myInput" value="false">Versteckte Autos</option>
@@ -279,6 +429,14 @@
                                 <td>
                                     <center>
                                         <input type="submit" class="myButtonFilter" value="Suchen" style="border:solid 1px; border-color:darkgrey; border-radius:5px; width:150px; margin-left:-5px" />
+                                    </center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <center>
+                                        <input type="submit" class="myButtonFilter" value="Zurücksetzen" style="border:solid 1px; border-color:darkgrey; border-radius:5px; width:150px; margin-left:-5px" onclick="ResetFilter()" />
+                                        @*<input type="hidden" name="id" value="0" id="FilterId" />*@
                                     </center>
                                 </td>
                             </tr>
@@ -294,7 +452,7 @@
                 <table class="table-hover">
                     @*Start Auflistung der Fahrzeuge*@
                     @foreach (var item in Model.autoBearbeitenFilter)
-                    {
+                {
                         <tr class="myTableBorder" style="margin-bottom:15px;">
                             <td class="myTd">
                                 @if (item.AutoBild != null)
@@ -306,12 +464,16 @@
                                 {
                                     <p>Kein Bild vorhanden</p>
                                 }
+                                <center>
+                                    <p><h4>ID: @Html.DisplayFor(Model => item.IDAuto)</h4></p>
+                                </center>
                             </td>
+                            @*
+                                <td class="myTd">
+                                    <p><h4>ID</h4></p><p><h4>@Html.DisplayFor(Model => item.IDAuto)</h4></p>
+
+                                </td>*@
                             <td class="myTd">
-                                <p><h4>ID</h4></p><p><h4>@Html.DisplayFor(Model => item.IDAuto)</h4></p>
-                                
-                            </td>
-                            <td class="myTd">                                
                                 <p>Marke: @Html.DisplayFor(Model => item.Marke)</p>
                                 <p>Typ: @Html.DisplayFor(Model => item.Typ)</p>
                                 <p>Kategorie: @Html.DisplayFor(Model => item.Kategorie)</p>
@@ -337,5 +499,6 @@
 }
 
 @section Scripts{
-    @Scripts.Render("~/Scripts/FilterScript.js")    
+    @Scripts.Render("~/Scripts/FilterScript.js")
+    @Scripts.Render("~/Scripts/filter.js")
 }
