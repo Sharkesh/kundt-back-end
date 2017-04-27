@@ -177,9 +177,19 @@
                 @Html.ActionLink("Passwort zurücksetzen", "PasswortZuruecksetzen", new { id = Model.IDMitarbeiter })
             </div>
         </div>
-        <div class="container" style="margin-top:50px;">
-            <div class="row">
-                <center>
+        <div class="form-group" style="padding-left:210px;">
+            @Html.ActionLink("Passwort zurücksetzen", "PasswortZuruecksetzenAdmin", new { id = Model.IDMitarbeiter })
+        </div>
+    </div>
+    <div class="container" style="margin-top:50px;">
+        <div class="row">
+            <center>
+                <div class="col-lg-6">
+                    <a href="@Url.Action("Index","Mitarbeiter")" class="buttonOrangeReturn">
+                        <span style="margin-top:15px;">Zurück zu Mitarbeiter</span>
+                    </a>
+                </div>
+                <div>
                     <div class="col-lg-6">
                         <a href="@Url.Action("Index","Mitarbeiter")" class="buttonOrangeReturn">
                             <span style="margin-top:15px;">Zurück zu Mitarbeiter</span>

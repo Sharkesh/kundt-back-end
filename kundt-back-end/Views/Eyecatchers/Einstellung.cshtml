@@ -19,7 +19,33 @@
         height: 40px;
         font-size: 32px;
     }
+    .buttonOrangeForwardStep3OhneAnimation {
+        background-color: #f99b1c;
+        border: none;
+        color: #ffffff;
+        font-size: 15px;
+        height: 50px;
+        width: 200px;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-align: center;
+        display: inline-block;
+        border-radius: 4px;
+    }
 
+        .buttonOrangeForwardStep3OhneAnimation:disabled {
+            background-color: #CCC;
+            border: none;
+            color: #ffffff;
+            font-size: 15px;
+            height: 50px;
+            width: 200px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            text-align: center;
+            display: inline-block;
+            border-radius: 4px;
+        }
     .buttonOrangeSave {
         background-color: #f99b1c;
         border: none;
@@ -117,10 +143,10 @@
                 </div>
                 <div class="col-md-offset-1 col-md-3">
                     <div style="padding-bottom:15px;padding-top:30px;">
-                        <input type="file" id="upload" name="upload" />
+                        <input type="file" id="upload" name="upload" onchange="Fileupload('1')" />
                     </div>
                     <div>
-                        <button type="submit" value="Bild Aktualisieren" class="buttonOrangeSave"><span>Bild Aktualisieren</span></button>
+                        <button type="submit" id="submit1" value="submitfile" class="buttonOrangeForwardStep3OhneAnimation" disabled><span>Bild Aktualisieren</span></button>
                     </div>
                 </div>
             </div>
@@ -148,10 +174,10 @@
                 </div>
                 <div class="col-md-offset-1 col-md-3">
                     <div style="padding-bottom:15px;padding-top:30px;">
-                        <input type="file" id="upload" name="upload" />
+                        <input type="file" id="upload" name="upload" onchange="Fileupload('2')" />
                     </div>
                     <div>
-                        <button type="submit" value="Bild Aktualisieren" class="buttonOrangeSave"><span>Bild Aktualisieren</span></button>
+                        <button type="submit" id="submit2" value="submitfile" class="buttonOrangeForwardStep3OhneAnimation" disabled><span>Bild Aktualisieren</span></button>
                     </div>
                 </div>
             </div>
@@ -179,15 +205,23 @@
                 </div>
                 <div class="col-md-offset-1 col-md-3">
                     <div style="padding-bottom:15px;padding-top:30px;">
-                        <input type="file" id="upload" name="upload" />
+                        <input type="file" id="upload" name="upload" onchange="Fileupload('3')"/>
                     </div>
                     <div>
-                        <button type="submit" value="Bild Aktualisieren" class="buttonOrangeSave"><span>Bild Aktualisieren</span></button>
+                        <button type="submit" id="submit3" value="submitfile" class="buttonOrangeForwardStep3OhneAnimation" disabled><span>Bild Aktualisieren</span></button>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+<script>
+    function Fileupload(method) {
+        
 
-<script type="text/javascript" src="/path/to/si.files.js"></script>
+            $('#submit' + method).removeClass('buttonOrangeForwardStep3OhneAnimation');
+            $('#submit' + method).addClass('buttonOrangeSave');
+            $('#submit' + method).prop('disabled', false);
+        
+    }
+</script>

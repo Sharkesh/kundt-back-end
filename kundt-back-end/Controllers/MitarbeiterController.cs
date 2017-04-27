@@ -22,8 +22,21 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "A")]
         public ActionResult Index()
         {
-            var tblMitarbeiter = db.tblMitarbeiter.Include(t => t.tblLogin).Where(t => t.tblLogin.Rolle == "M");
-            return View(tblMitarbeiter.ToList());
+            MitarbeiterContainerModel McM = new MitarbeiterContainerModel();
+            McM.mafilter = (MitarbeiterFilterModel)Session["Filterparameter"];
+
+
+
+            if (McM.mafilter == null)
+            {
+                McM.malist = db.pMAAnzeigen(null, null, null, null);
+            }
+            else
+            {
+                McM.malist = db.pMAAnzeigen(McM.mafilter.Vorname, McM.mafilter.Nachname, McM.mafilter.MaId, McM.mafilter.Anrede);
+            }
+
+            return View(McM);
         }
 
         // GET: Mitarbeiter/Create
@@ -117,9 +130,9 @@ namespace kundt_back_end.Controllers
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
         }
-        //Get: Adming/MitarbeiterBearbeiten/Passwort Zurücksetzen
-        [Authorize(Roles = "A,M")]
-        public ActionResult PasswortZuruecksetzenA(int id)
+        //Get: Adming/MitarbeiterBearbeiten/PasswortZurücksetzenAdmin
+        [Authorize(Roles = "A")]
+        public ActionResult PasswortZuruecksetzenAdmin(int id)
         {
 
             string erzeugtesPW = "error";
@@ -144,9 +157,9 @@ namespace kundt_back_end.Controllers
 
             return View(MM);
         }
-        //Get: Mitarbeiter/PasswortZuruecksetzenM
+        //Get: Mitarbeiter/PasswortZuruecksetzenMitarbeiter
         [Authorize(Roles = "M")]
-        public ActionResult PasswortZuruecksetzenM(int? id)
+        public ActionResult PasswortZuruecksetzenMitarbeiter(int? id)
         {
 
             if (id != null && id > 0)
@@ -175,7 +188,7 @@ namespace kundt_back_end.Controllers
         //Post: Mitarbeiter/PasswortZuruecksetzenM
         [Authorize(Roles = "M")]
         [HttpPost]
-        public ActionResult PasswortZuruecksetzenM(MitarbeiterModel MM)
+        public ActionResult PasswortZuruecksetzenMitarbeiter(MitarbeiterModel MM)
         {
 
             var dbLogin = db.tblLogin.Find(MM.IDMitarbeiter);
@@ -240,13 +253,17 @@ namespace kundt_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-             
-                
-                   
+                try { 
+ 
                 var res = db.pMitarbeiterEditieren(MM.IDMitarbeiter, MM.Email, MM.Passwort, MM.Rolle.ToString(), MM.Deaktiviert, MM.MAVorname, MM.MANachname, MM.MAAnrede);
 
                 //Nach Erfolgreichem Ändern schick den Benutzer zur View ÄnderungenErfolgreich
                 return RedirectToAction("ÄnderungenErfolgreich" , "Mitarbeiter");
+                }
+                catch
+                {
+                    return HttpNotFound();
+                }
             }
             else
             {

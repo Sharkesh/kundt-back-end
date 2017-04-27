@@ -339,6 +339,7 @@
           <Parameter Name="checkOffen" Type="bit" Mode="In" />
           <Parameter Name="checkAbgeschlossen" Type="bit" Mode="In" />
           <Parameter Name="checkProblem" Type="bit" Mode="In" />
+          <Parameter Name="checkAll" Type="bit" Mode="In" />
           <ReturnType>
             <CollectionType>
               <RowType>
@@ -396,6 +397,23 @@
         </Function>
         <Function Name="fBuchungStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="idBuchung" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getMA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchVorname" Type="varchar" Mode="In" />
+          <Parameter Name="searchNachname" Type="varchar" Mode="In" />
+          <Parameter Name="searchMaID" Type="int" Mode="In" />
+          <Parameter Name="searchGeschlecht" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="IDMitarbeiter" Type="int" Nullable="false" />
+                <Property Name="MAVorname" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="MANachname" Type="varchar" MaxLength="100" Nullable="false" />
+                <Property Name="MAAnrede" Type="char" MaxLength="4" Nullable="false" />
+                <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
         </Function>
         <Function Name="OffeneBuchungenTodayPlus13" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="p8Passwort" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -492,6 +510,12 @@
           <Parameter Name="Typ" Type="varchar" Mode="In" />
           <Parameter Name="Kategorie" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="pFilterMarke" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="marke" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pFilterTyp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="typ" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="pKundeEdit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idkunde" Type="int" Mode="In" />
           <Parameter Name="vorname" Type="varchar" Mode="In" />
@@ -505,11 +529,20 @@
           <Parameter Name="gebdat" Type="date" Mode="In" />
         </Function>
         <Function Name="pKundenAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="searchName" Type="varchar" Mode="In" />
+          <Parameter Name="searchVorname" Type="varchar" Mode="In" />
+          <Parameter Name="searchNachname" Type="varchar" Mode="In" />
           <Parameter Name="searchKundenNr" Type="int" Mode="In" />
           <Parameter Name="searchOrt" Type="varchar" Mode="In" />
           <Parameter Name="searchPLZ" Type="varchar" Mode="In" />
+
         </Function>
+        <Function Name="pMAAnzeigen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchVorname" Type="varchar" Mode="In" />
+          <Parameter Name="searchNachname" Type="varchar" Mode="In" />
+          <Parameter Name="searchMaID" Type="int" Mode="In" />
+          <Parameter Name="searchGeschlecht" Type="varchar" Mode="In" />
+        </Function>
+
         <Function Name="pMitarbeiterEditieren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IDLogin" Type="int" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
@@ -1023,7 +1056,8 @@
             <Parameter Name="gebdat" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="pKundenAnzeigen" ReturnType="Collection(it22AutoverleihModel.pKundenAnzeigen_Result)">
-            <Parameter Name="searchName" Mode="In" Type="String" />
+            <Parameter Name="searchVorname" Mode="In" Type="String" />
+            <Parameter Name="searchNachname" Mode="In" Type="String" />
             <Parameter Name="searchKundenNr" Mode="In" Type="Int32" />
             <Parameter Name="searchOrt" Mode="In" Type="String" />
             <Parameter Name="searchPLZ" Mode="In" Type="String" />
@@ -1039,6 +1073,7 @@
             <Parameter Name="checkOffen" Mode="In" Type="Boolean" />
             <Parameter Name="checkAbgeschlossen" Mode="In" Type="Boolean" />
             <Parameter Name="checkProblem" Mode="In" Type="Boolean" />
+            <Parameter Name="checkAll" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="pAutoHinzufuegen">
             <Parameter Name="Baujahr" Mode="In" Type="Int16" />
@@ -1158,6 +1193,27 @@
           </FunctionImport>
           <FunctionImport Name="p8Passwort">
           <Parameter Name="NPasswort" Mode="InOut" Type="String" />
+          </FunctionImport>
+
+          <FunctionImport Name="pFilterMarke" ReturnType="Collection(it22AutoverleihModel.pFilterMarke_Result)">
+            <Parameter Name="marke" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pFilterTyp" ReturnType="Collection(String)">
+            <Parameter Name="typ" Mode="In" Type="String" />
+	  </FunctionImport>
+
+          <FunctionImport Name="getMA" IsComposable="true" ReturnType="Collection(it22AutoverleihModel.getMA_Result)">
+            <Parameter Name="searchVorname" Mode="In" Type="String" />
+            <Parameter Name="searchNachname" Mode="In" Type="String" />
+            <Parameter Name="searchMaID" Mode="In" Type="Int32" />
+            <Parameter Name="searchGeschlecht" Mode="In" Type="String" />
+          </FunctionImport>
+
+          <FunctionImport Name="pMAAnzeigen" ReturnType="Collection(it22AutoverleihModel.pMAAnzeigen_Result)">
+            <Parameter Name="searchVorname" Mode="In" Type="String" />
+            <Parameter Name="searchNachname" Mode="In" Type="String" />
+            <Parameter Name="searchMaID" Mode="In" Type="Int32" />
+            <Parameter Name="searchGeschlecht" Mode="In" Type="String" />
           </FunctionImport>
 
         </EntityContainer>
@@ -1332,6 +1388,27 @@
           <Property Type="String" Name="Typ" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Kategorie" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Treibstoff" Nullable="false" MaxLength="100" />
+        </ComplexType>
+
+        <ComplexType Name="pFilterMarke_Result">
+          <Property Type="String" Name="typ" Nullable="false" MaxLength="100" />
+	</ComplexType>
+
+        <ComplexType Name="getMA_Result">
+          <Property Type="Int32" Name="IDMitarbeiter" Nullable="false" />
+          <Property Type="String" Name="MAVorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MANachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MAAnrede" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+        </ComplexType>
+
+        <ComplexType Name="pMAAnzeigen_Result">
+          <Property Type="Int32" Name="IDMitarbeiter" Nullable="false" />
+          <Property Type="String" Name="MAVorname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MANachname" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MAAnrede" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1712,6 +1789,39 @@
           <FunctionImportMapping FunctionImportName="pAutoBearbeitenCreate" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenCreate" />
           <FunctionImportMapping FunctionImportName="pAutoBearbeitenDelete" FunctionName="it22AutoverleihModel.Store.pAutoBearbeitenDelete" />
           <FunctionImportMapping FunctionImportName="p8Passwort" FunctionName="it22AutoverleihModel.Store.p8Passwort" />
+
+          <FunctionImportMapping FunctionImportName="pFilterMarke" FunctionName="it22AutoverleihModel.Store.pFilterMarke" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pFilterMarke_Result">
+                <ScalarProperty Name="typ" ColumnName="typ" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pFilterTyp" FunctionName="it22AutoverleihModel.Store.pFilterTyp" />
+
+          <FunctionImportMapping FunctionImportName="getMA" FunctionName="it22AutoverleihModel.Store.getMA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.getMA_Result">
+                <ScalarProperty Name="IDMitarbeiter" ColumnName="IDMitarbeiter" />
+                <ScalarProperty Name="MAVorname" ColumnName="MAVorname" />
+                <ScalarProperty Name="MANachname" ColumnName="MANachname" />
+                <ScalarProperty Name="MAAnrede" ColumnName="MAAnrede" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pMAAnzeigen" FunctionName="it22AutoverleihModel.Store.pMAAnzeigen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="it22AutoverleihModel.pMAAnzeigen_Result">
+                <ScalarProperty Name="IDMitarbeiter" ColumnName="IDMitarbeiter" />
+                <ScalarProperty Name="MAVorname" ColumnName="MAVorname" />
+                <ScalarProperty Name="MANachname" ColumnName="MANachname" />
+                <ScalarProperty Name="MAAnrede" ColumnName="MAAnrede" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+
 
 
         </EntityContainerMapping>
