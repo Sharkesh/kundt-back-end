@@ -3,9 +3,23 @@
     ViewBag.Title = "Auto Hinzufügen";
 }
 <script>
-    function changePic() {
-        var temp = document.getElementById("upload").value; 
-        document.getElementById("pic").src = "~/Content/img/" + temp;
+    //function changePic() {
+    //    var temp = document.getElementById("upload").value; 
+    //    document.getElementById("pic").src = "~/Content/img/" + temp;
+    //}
+    function ShowTypFilter() {
+        if (document.getElementById("FilterMarke").value == "Alle Marken/Typen" || document.getElementById("FilterMarke").value == "") {
+            document.getElementById("FilterTyp").style.visibility = "hidden";
+        }
+        else {
+            document.getElementById("FilterTyp").style.visibility = "visible";
+        }
+    }
+    function Validation() {        
+        if (document.getElementById("ValidateData").value == "Marke wählen" || document.getElementById("ValidateData").value == "") {
+            document.getElementByID("ValidateData").style.color = "red";
+            return false;
+        }
     }
 </script>
 <style>
@@ -91,8 +105,9 @@
                 <tr>
                     <td>Marke:</td>
                     <td class="autoHinzu">
-                        <select name="myMarke" id="FilterMarke" class="form-control">
+                        <select name="myMarke" id="FilterMarke" class="form-control" onchange="ShowTypFilter()">
                             <optgroup label="Kategorie wählen">
+                                <option name="myMarke" value="">Marke wählen</option>
                                 @foreach (var item in Model.markeListe)
                                 {
                                     <option name="myMarke" value="@item.Marke">@Html.DisplayFor(m => item.Marke)</option>
@@ -104,7 +119,7 @@
                 <tr>
                     <td>Typ:</td>
                     <td class="autoHinzu">
-                        <select name="myTyp" id="FilterTyp" class="form-control">
+                        <select name="myTyp" id="FilterTyp" class="form-control" style="visibility:hidden">
                             <optgroup label="Typ wählen">
                                 @foreach (var item in Model.typListe)
                                 {
@@ -224,7 +239,7 @@
             @*<form action="@Url.Action("AutoHinzu","tblAuto",Model)" method="post">
                     <button class="buttonOrangeNextStep">Aktualisieren</button>
                 </form>*@
-            <input type="submit" value="Hinzufügen" class="btn buttonOrangeNextStep" />
+            <input id="ValidateData" type="submit" value="Hinzufügen" class="btn buttonOrangeNextStep" onsubmit="Validation()"/>
         </div>
     </div>
 </form>

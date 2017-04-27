@@ -21,6 +21,13 @@ namespace kundt_back_end.Controllers
 
             return Json(data);
         }
+        [HttpGet]
+        public JsonResult GetMarke(int IDAuto)
+        {
+            var data = db.tblAuto.Include(x => x.tblTyp).Include(x => x.tblTyp.tblMarke).Where(x => x.IDAuto == IDAuto).Select(x => x.tblTyp.tblMarke.Marke);
+
+            return Json(data);
+        }
 
         [HttpGet]
         [Authorize(Roles = "M,A")]
@@ -277,6 +284,7 @@ namespace kundt_back_end.Controllers
             am.ausstattungListe = db.pAusstattung(id).ToList();
             am.autoBearbeiten = db.pAutoBearbeitenAnzeigen2(id).ToList();
             am.markeListe = db.tblMarke.ToList();
+            //am.mySelectedCar = db.tblAuto.Include(x => x.tblTyp).Include(x => x.tblTyp.tblMarke).Where(x => x.IDAuto == id).Select(x => x.tblTyp.tblMarke.Marke);
             am.typListe = db.tblTyp.ToList();
             am.treibstoffListe = db.tblTreibstoff.ToList();
             am.kategorieListe = db.tblKategorie.ToList();

@@ -41,5 +41,6 @@ namespace kundt_back_end.Models
         public List<string> filterList { get; set; }
         public int myTime { get; set; }
         public List<pFilterMarke_Result> filterMarkeListe { get; set; }
+        //public IQueryable<string> mySelectedCar { get; set; }
     }
 }

@@ -2,7 +2,16 @@
 @{
     ViewBag.Title = "Auto Bearbeiten";
 }
-
+<script>
+    //function ShowTypFilter() {
+    //    if (document.getElementById("FilterMarke2").value == "Alle Marken/Typen" || document.getElementById("FilterMarke2").value == "") {
+    //        document.getElementById("FilterTyp2").style.visibility = "hidden";
+    //    }
+    //    else {
+    //        document.getElementById("FilterTyp2").style.visibility = "visible";
+    //    }
+    //}
+</script>
 <style>
     .myImg {
         max-height: 200px;
@@ -100,15 +109,15 @@
                 <tr>
                     <td>Marke:</td>
                     <td class="autoHinzu">
-                        <select name="myMarke" id="Marke" class="form-control">
-                            <optgroup label="Kategorie wählen">
-
+                        <select name="myMarke" id="FilterMarke2" class="form-control" onchange="ShowTypFilter()">
+                            <optgroup label="Marke wählen">                                
                                 <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => m.autoBearbeiten[0].Marke)</option>
-                                @foreach (var item in Model.markeListe)
+                                <option value="">Alle Marken</option>
+                                 @foreach (var item in Model.markeListe)
                                 {
                                     if (item.Marke != Model.autoBearbeiten[0].Marke)
                                     {
-                                        <option name="myMarke" disabled value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => item.Marke)</option>
+                                        <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => item.Marke)</option>
                                     }
                                 }
                             </optgroup>
@@ -118,14 +127,14 @@
                 <tr class="autoHinzu_tr">
                     <td>Typ:</td>
                     <td class="autoHinzu">
-                        <select name="myTyp" id="Typ" class="autoHinzu form-control">
+                        <select name="myTyp" id="FilterTyp2" class="autoHinzu form-control" style="visibility:visible">
                             <optgroup label="Typ wählen">
                                 <option name="myTyp" value="@Model.autoBearbeiten[0].Typ">@Html.DisplayFor(m => m.autoBearbeiten[0].Typ)</option>
                                 @foreach (var item in Model.typListe)
                                 {
                                     if (item.Typ != Model.autoBearbeiten[0].Typ)
                                     {
-                                        <option name="myTyp" value="@Model.autoBearbeiten[0].Typ">@Html.DisplayFor(m => item.Typ)</option>
+                                        <option name="myTyp" value="@item.Typ">@Html.DisplayFor(m => item.Typ)</option>
                                     }
                                 }
                             </optgroup>
@@ -255,3 +264,7 @@
         </div>
     </div>
 </form>
+
+@section Scripts{    
+    @Scripts.Render("~/Scripts/filter.js")
+}
