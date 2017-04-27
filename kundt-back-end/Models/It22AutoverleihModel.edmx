@@ -545,6 +545,10 @@
           <Parameter Name="MANachname" Type="varchar" Mode="In" />
           <Parameter Name="MAAnrede" Type="char" Mode="In" />
         </Function>
+        <Function Name="pMitarbeiterEigenesPasswortZuruecksetzen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDLogin" Type="int" Mode="In" />
+          <Parameter Name="Passwort" Type="varchar(max)" Mode="In" />
+        </Function>
         <Function Name="pNeuenMitarbeiterAnlegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="Passwort" Type="varchar" Mode="In" />
@@ -1198,6 +1202,10 @@
             <Parameter Name="searchMaID" Mode="In" Type="Int32" />
             <Parameter Name="searchGeschlecht" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="pMitarbeiterEigenesPasswortZuruecksetzen">
+            <Parameter Name="IDLogin" Mode="In" Type="Int32" />
+            <Parameter Name="Passwort" Mode="In" Type="String" />
+          </FunctionImport>
 
         </EntityContainer>
         <ComplexType Name="BuchungAbholung_Result">
@@ -1787,6 +1795,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pMitarbeiterEigenesPasswortZuruecksetzen" FunctionName="it22AutoverleihModel.Store.pMitarbeiterEigenesPasswortZuruecksetzen" />
 
 
         </EntityContainerMapping>
