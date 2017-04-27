@@ -17,30 +17,35 @@ namespace kundt_back_end.Controllers
         [HttpPost]
         public JsonResult FilterValidation(string Marke)
         {
+            //asynchronus server request for typlist deppending on actual choice
             var data = db.tblTyp.Include(x => x.tblMarke).Where(x => x.tblMarke.Marke == Marke).Select(x => x.Typ);
-
             return Json(data);
-        }        
+        }
 
         [HttpGet]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzu()
         {
-            AutoModel am = new AutoModel();
-            am.autoListe = db.tblAuto.ToList();
+            AutoModel am = new AutoModel(); //initialize new object of type AutoModel
+
+            am.autoListe = db.tblAuto.ToList(); //fill the object.lists with necessary elements
             am.ausstattungListe = db.tblAusstattung.ToList();
             am.typListe = db.tblTyp.ToList();
             am.markeListe = db.tblMarke.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
             am.treibstoffListe = db.tblTreibstoff.ToList();
-            var res = db.tblAuto.Select(x => x.Getriebe);
-            am.getriebeListe = res.ToList();
-            DateTime dtime = new DateTime();
+
+            var res = db.tblAuto.Select(x => x.Getriebe); //LinQ used (instead of a proc)
+            am.getriebeListe = res.ToList();              //to increase my experience/practice
+
+            DateTime dtime = new DateTime(); //need of correct year validation (a future-build car can't be added yet)
             dtime = DateTime.Now;
             am.myBauJahr = dtime.Year;
-            am.myTueren = "5";
-            am.myPS = "100";
-            am.mySitze = 5;
+
+            //some elements to give the user a little help/advantage cause:
+            am.myTueren = "5";  //most cars are 5-doored
+            am.myPS = "100";    //average PS in my opinion
+            am.mySitze = 5;     //average count of seats in a car
             return View(am);
         }
 
@@ -57,9 +62,10 @@ namespace kundt_back_end.Controllers
                 }
             }
 
-            db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS,
-                am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze),
-                am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand,
+            //this proc saves a specified car with all its properties to the db!
+            db.pAutoHinzufuegen(Convert.ToInt16(am.myBauJahr), am.myPS,     //some datatypes need a convertion
+                am.myGetriebe, am.myTueren, Convert.ToByte(am.mySitze),     //before used in proc!
+                am.myMietPreis, am.myVerkaufsPreis, am.myKilometerStand,    
                 am.myAutobild, am.myAnzeigen, am.myTreibstoff, am.myTyp,
                 am.myKategorie);
 
@@ -69,34 +75,17 @@ namespace kundt_back_end.Controllers
                 {
                     if (item != null)
                     {
-                        db.pAusstattungZuAuto2(item);
+                        db.pAusstattungZuAuto2(item); //for each item the proc will save it to the db
                     }
                 }
             }
             return RedirectToAction("AutoUebersicht", "tblAuto");
         }
 
-        //[HttpPost]
-        //[Authorize(Roles = "M,A")]
-        //public ActionResult AutoHinzuMitBild(AutoModel am, int[] ausstattungListe, HttpPostedFileBase upload)
-        ////public ActionResult AutoHinzu([Bind(Include = "myBauJahr,myPS,myGetriebe,myTueren,mySitze,myMietPreis,myVerkaufsPreis,myKilometerStand,myAnzeigen, myTreibstoff,myTyp,myKategorie,ausstattungListe")] AutoModel am)
-        //{            
-        //    if (upload != null && upload.ContentLength > 0)
-        //    {
-        //        using (var reader = new System.IO.BinaryReader(upload.InputStream))
-        //        {
-        //            am.myAutobild = reader.ReadBytes(upload.ContentLength);
-        //        }
-        //    }
-
-        //    return View(am);
-        //}
-
         [Authorize(Roles = "M,A")]
         public ActionResult AutoUebersicht(AutoModel am, int? id)
         {
-            //AutoModel am = new AutoModel();
-            //Befüllen der Listen und Werte
+            //get some data from db; is used in the view as nonfiltered lists for multiple selections
             DateTime dt = new DateTime();
             dt = DateTime.Now;
             am.myTime = dt.Year;
@@ -105,7 +94,7 @@ namespace kundt_back_end.Controllers
             am.markeListe = db.tblMarke.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
 
-            // Kontrolle, ob eine ID übergeben wurde
+            // checks if id got a value or is null
             if (am.myIDAuto != 0)
             {
                 bool trigger = false;
@@ -118,14 +107,14 @@ namespace kundt_back_end.Controllers
                 }
                 if (trigger == false)
                 {
-                    am.myIDAuto = 0;
+                    am.myIDAuto = 0; //if its null, it gets manually a 0 instead
                 }
             }
 
-            //Filterliste befüllen
+            //Get elements for this list
             am.filterList = new List<string>();
 
-            am.filterList.Add(converterStr(am.myIDAuto));
+            am.filterList.Add(converterStr(am.myIDAuto)); //adds each required element as a string to the list
             am.filterList.Add(converterStr(am.myMarke));
             am.filterList.Add(converterStr(am.myTyp));
             am.filterList.Add(converterStr(am.myKategorie));
@@ -135,7 +124,7 @@ namespace kundt_back_end.Controllers
             am.filterList.Add(converterStr(am.myKilometerStandBis));
             am.filterList.Add(converterStr(am.myAnzeigen));
 
-            if (am.myIDAuto != 0)
+            if (am.myIDAuto != 0) //pass the data to the proc dependend on int? id value
             {
                 am.autoBearbeitenFilter = db.pAutoBearbeitenInklFilterFinal2(
                                             am.myIDAuto, am.myMarke, am.myTyp,
@@ -171,7 +160,7 @@ namespace kundt_back_end.Controllers
                 return Convert.ToInt16(x);
             }
         }
-        private decimal? umwandlerDEC(decimal? x)
+        private decimal? umwandlerDEC(decimal? x) //transforms nullable decimal in it's true form
         {
             if (x == null || x == 0)
             {
@@ -182,7 +171,7 @@ namespace kundt_back_end.Controllers
                 return x;
             }
         }
-        private string converterStr(object temp)
+        private string converterStr(object temp) //required to get a forced data value
         {
             if (temp != null)
             {
@@ -215,54 +204,8 @@ namespace kundt_back_end.Controllers
                 return "";
             }
         }
-        // GET: tblAuto/Details/5
-        //[Authorize(Roles = "M,A")]
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    tblAuto tblAuto = db.tblAuto.Find(id);
-        //    if (tblAuto == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(tblAuto);
-        //}
 
-        // GET: tblAuto/Create
-        //[Authorize(Roles = "M,A")]
-        //public ActionResult Create()
-        //{
-        //    ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie");
-        //    ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff");
-        //    ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ");
-        //    return View();
-        //}
-
-        // POST: tblAuto/Create
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[Authorize(Roles = "M,A")]
-        //public ActionResult Create([Bind(Include = "IDAuto,Baujahr,PS,Getriebe,Tueren,Sitze,MietPreis,VerkaufPreis,Kilometerstand,AutoBild,Anzeigen,FKTreibstoff,FKTyp,FKKategorie")] tblAuto tblAuto)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.tblAuto.Add(tblAuto);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    ViewBag.FKKategorie = new SelectList(db.tblKategorie, "IDKategorie", "Kategorie", tblAuto.FKKategorie);
-        //    ViewBag.FKTreibstoff = new SelectList(db.tblTreibstoff, "IDTreibstoff", "Treibstoff", tblAuto.FKTreibstoff);
-        //    ViewBag.FKTyp = new SelectList(db.tblTyp, "IDTyp", "Typ", tblAuto.FKTyp);
-        //    return View(tblAuto);
-        //}
-
-        // GET: tblAuto/Edit/5
+        // AutoEdit/Get:
         [HttpGet]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoBearbeiten(int? id)
@@ -277,7 +220,7 @@ namespace kundt_back_end.Controllers
             am.ausstattungListe = db.pAusstattung(id).ToList();
             am.autoBearbeiten = db.pAutoBearbeitenAnzeigen2(id).ToList();
             am.markeListe = db.tblMarke.ToList();
-            //am.mySelectedCar = db.tblAuto.Include(x => x.tblTyp).Include(x => x.tblTyp.tblMarke).Where(x => x.IDAuto == id).Select(x => x.tblTyp.tblMarke.Marke);
+
             am.typListe = db.tblTyp.ToList();
             am.treibstoffListe = db.tblTreibstoff.ToList();
             am.kategorieListe = db.tblKategorie.ToList();
@@ -302,6 +245,8 @@ namespace kundt_back_end.Controllers
             }
             return View(am);
         }
+
+        //AutoEdit/Post:
         [HttpPost]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoBearbeiten(AutoModel am, int[] ausstattungListe, int[] plainAusstattungListe, HttpPostedFileBase upload)
@@ -350,18 +295,6 @@ namespace kundt_back_end.Controllers
             }
             return RedirectToAction("AutoUebersicht", "tblAuto");
         }
-
-        // POST: tblAuto/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //[Authorize(Roles = "M,A")]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    tblAuto tblAuto = db.tblAuto.Find(id);
-        //    db.tblAuto.Remove(tblAuto);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {
