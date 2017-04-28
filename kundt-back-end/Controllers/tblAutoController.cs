@@ -14,7 +14,11 @@ namespace kundt_back_end.Controllers
     {
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
 
+        /// <summary>
+        /// POST: tblAuto/FilterValidation
+        /// </summary>
         [HttpPost]
+        [Authorize(Roles = "M,A")]
         public JsonResult FilterValidation(string Marke)
         {
             //asynchronus server request for typlist deppending on actual choice
@@ -22,6 +26,21 @@ namespace kundt_back_end.Controllers
             return Json(data);
         }
 
+        /// <summary>
+        /// GET: tblAuto/GetMarke
+        /// </summary>
+        [HttpGet]
+        [Authorize(Roles = "M,A")]
+        public JsonResult GetMarke(int IDAuto)
+        {
+            var data = db.tblAuto.Include(x => x.tblTyp).Include(x => x.tblTyp.tblMarke).Where(x => x.IDAuto == IDAuto).Select(x => x.tblTyp.tblMarke.Marke);
+
+            return Json(data);
+        }
+
+        /// <summary>
+        /// GET: tblAuto/AutoHinzu
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzu()
@@ -49,6 +68,9 @@ namespace kundt_back_end.Controllers
             return View(am);
         }
 
+        /// <summary>
+        /// POST: tblAuto/AutoHinzu
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoHinzu(AutoModel am, int[] ausstattungListe, HttpPostedFileBase upload)
@@ -205,7 +227,6 @@ namespace kundt_back_end.Controllers
             }
         }
 
-        // AutoEdit/Get:
         [HttpGet]
         [Authorize(Roles = "M,A")]
         public ActionResult AutoBearbeiten(int? id)
@@ -245,6 +266,7 @@ namespace kundt_back_end.Controllers
             }
             return View(am);
         }
+
 
         //AutoEdit/Post:
         [HttpPost]
