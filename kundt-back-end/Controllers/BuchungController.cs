@@ -54,13 +54,6 @@ namespace kundt_back_end.Controllers
         /// <summary>
         /// POST: Buchung
         /// </summary>
-        /// <param name="idbuchung"></param>
-        /// <param name="nachname"></param>
-        /// <param name="idkunde"></param>
-        /// <param name="ort"></param>
-        /// <param name="plz"></param>
-        /// <param name="checkStatus"></param>
-        /// <returns>Gefilterte Liste von Buchungen</returns>
         [HttpPost]
         [Authorize(Roles = "M,A")]
         public ActionResult Index(int? idbuchung, string nachname, int? idkunde, string ort, string plz, DateTime? buchungVon,
@@ -155,8 +148,10 @@ namespace kundt_back_end.Controllers
 
             return View(buchungList.OrderBy(s => s.BuchungVon).ToList());
         }
-
-        // GET: Buchung/Edit/5
+        
+        /// <summary>
+        /// GET: Buchung/Edit/5
+        /// </summary>
         [Authorize(Roles = "M,A")]
         public ActionResult Edit(int? id)
         {
@@ -198,15 +193,14 @@ namespace kundt_back_end.Controllers
             BEM.BIDAuto = tblBuchung.tblAuto.IDAuto;
             return View(BEM);
         }
-
-        // POST: Buchung/Edit/5
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// POST: Buchung/Edit/
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "M,A")]
         public ActionResult Edit(BuchungEditModel BEM)
-        //public ActionResult Edit(tblBuchung tblBuchung)
         {
             if (ModelState.IsValid)
             {

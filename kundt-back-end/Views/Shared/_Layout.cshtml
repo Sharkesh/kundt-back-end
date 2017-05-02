@@ -70,6 +70,19 @@
                                 }
                             </a>
                         </li>
+                    }
+                    @if (User.IsInRole("A"))
+                    {
+                        <li>
+                            <a style="font-size:1.5em;">
+                                @{
+                                    HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+
+                                    @ticket.Name;
+                                }
+                            </a>
+                        </li>
                                     }
                     @if (User.IsInRole("M") || User.IsInRole("A"))
                     {
@@ -131,7 +144,7 @@
                                         <li><a href="@Url.Action("Create","Mitarbeiter")">Hinzufügen</a></li>
                                     </ul>
                                 </li>
-                                <li>@Html.ActionLink("Einstellungen", "Einstellung", "Eyecatchers")</li>
+                                <li id="einstellungen">@Html.ActionLink("Einstellungen", "Einstellung", "Eyecatchers")</li>
                             }
                         </ul>
                     </div>

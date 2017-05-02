@@ -17,15 +17,15 @@ namespace kundt_back_end.Controllers
     public class MitarbeiterController : Controller
     {
         private it22AutoverleihEntities db = new it22AutoverleihEntities();
-
-        // GET: Mitarbeiter
+        
+        /// <summary>
+        /// GET: Mitarbeiter
+        /// </summary>
         [Authorize(Roles = "A")]
         public ActionResult Index()
         {
             MitarbeiterContainerModel McM = new MitarbeiterContainerModel();
             McM.mafilter = (MitarbeiterFilterModel)Session["MAFilterparameter"];
-
-
 
             if (McM.mafilter == null)
             {
@@ -52,17 +52,21 @@ namespace kundt_back_end.Controllers
 
             return View(McM);
         }
-
+        
+        /// <summary>
+        /// POST: Mitarbeiter
+        /// </summary>
         [HttpPost]
         [Authorize(Roles = "A")]
-        public ActionResult Index (MitarbeiterFilterModel MaF) //(endl)
+        public ActionResult Index (MitarbeiterFilterModel MaF)
         {
-
             Session["MAFilterparameter"] = MaF;
             return RedirectToAction("Index", "Mitarbeiter");
         }
-
-        // GET: Mitarbeiter/Create
+        
+        /// <summary>
+        /// GET: MItarbeiter/Create
+        /// </summary>
         [Authorize(Roles = "A")]
         public ActionResult Create()
         {
@@ -70,15 +74,14 @@ namespace kundt_back_end.Controllers
             ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email");
             return View(test);
         }
-
-        // POST: Mitarbeiter/Create
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// POST: Mitarbeiter/Create
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "A")]
         public ActionResult Create(MitarbeiterModel MM)
-        //public ActionResult Edit(BuchungEditModel BEM)
         {
             try
             {
@@ -99,8 +102,10 @@ namespace kundt_back_end.Controllers
             }
 
         }
-
-        // GET: Mitarbeiter/Edit/5
+        
+        /// <summary>
+        /// GET: Mitarbeiter/Edit/5
+        /// </summary>
         [Authorize(Roles = "A,M")]
         public ActionResult Edit(int? id)
         {
@@ -125,15 +130,13 @@ namespace kundt_back_end.Controllers
             b.MANachname = ma.MANachname;
             b.MAVorname = ma.MAVorname;
 
-
             ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", ma.IDMitarbeiter);
             return View(b);
         }
-
-
-        // POST: Mitarbeiter/Edit
-        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
-        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        /// <summary>
+        /// POST: Mitarbeiter/Edit
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "A,M")]
@@ -153,7 +156,10 @@ namespace kundt_back_end.Controllers
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
         }
-        //Get: Adming/MitarbeiterBearbeiten/PasswortZurücksetzenAdmin
+        
+        /// <summary>
+        /// GET: Mitarbeiter/PasswortZuruecksetzenAdmin
+        /// </summary>
         [Authorize(Roles = "A")]
         public ActionResult PasswortZuruecksetzenAdmin(int id)
         {
@@ -180,11 +186,13 @@ namespace kundt_back_end.Controllers
 
             return View(MM);
         }
-        //Get: Mitarbeiter/PasswortZuruecksetzenMitarbeiter
+        
+        /// <summary>
+        /// GET: Mitarbeiter/PasswortZuruecksetzenMitarbeiter
+        /// </summary>
         [Authorize(Roles = "M")]
         public ActionResult PasswortZuruecksetzenMitarbeiter(int? id)
         {
-
             if (id != null && id > 0)
             {
                 MitarbeiterModel MM = new MitarbeiterModel();
@@ -200,8 +208,6 @@ namespace kundt_back_end.Controllers
                 MM.Deaktiviert = false;
                 MM.MAAnrede = dbMA.MAAnrede;
 
-
-
                 return View(MM);
             }
             else
@@ -210,9 +216,12 @@ namespace kundt_back_end.Controllers
             }
             
         }
-        //Post: Mitarbeiter/PasswortZuruecksetzenM
-        [Authorize(Roles = "M")]
+        
+        /// <summary>
+        /// POST: MItarbeiter/PasswortZuruecksetzenMitarbeiter
+        /// </summary>
         [HttpPost]
+        [Authorize(Roles = "M")]
         public ActionResult PasswortZuruecksetzenMitarbeiter(MitarbeiterModel MM)
         {
 
@@ -235,7 +244,10 @@ namespace kundt_back_end.Controllers
             }
             base.Dispose(disposing);
         }
-        // GET: Mitarbeiter/MitarbeiterDaten
+        
+        /// <summary>
+        /// GET: Mitarbeiter/MitarbeiterDaten
+        /// </summary>
         [Authorize(Roles = "M")]
         public ActionResult MitarbeiterDaten(/*int? id*/)
         {            
@@ -271,8 +283,10 @@ namespace kundt_back_end.Controllers
             ViewBag.IDMitarbeiter = new SelectList(db.tblLogin, "IDLogin", "Email", ma.IDMitarbeiter);
             return View(b);
         }
-
-        //POST: MitarbeiterDaten
+        
+        /// <summary>
+        /// POST: Mitarbeiter/MitarbeiterDaten
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "M")]
@@ -298,13 +312,16 @@ namespace kundt_back_end.Controllers
                 return RedirectToAction("Edit", MM.IDMitarbeiter);
             }
         }
-        // GET: ÄnderungenErfolgreich
+
+        /// <summary>
+        /// GET: Mitarbeiter/ÄnderungenErfolgreich
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "M")]
         public ActionResult ÄnderungenErfolgreich()
         {
             return View();
-        }
-       
+        }      
 
     }
 }
