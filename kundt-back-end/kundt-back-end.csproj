@@ -290,6 +290,7 @@
     <Content Include="Content\img\Bild1.jpg" />
     <Content Include="Content\img\Bild2.jpg" />
     <Content Include="Content\img\Bild3.jpg" />
+    <Content Include="Content\img\dummy-car.png" />
     <Content Include="Content\img\images.png" />
     <Content Include="Content\img\kundt_logo.png" />
     <Content Include="Content\img\kundt_logo_with_slogan_right.png" />
