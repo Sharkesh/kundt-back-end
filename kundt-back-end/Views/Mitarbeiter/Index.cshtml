@@ -158,11 +158,12 @@
         border: none;
         color: #ffffff;
         font-size: 15px;
-        height: 40px;
+        height: 35px;
         width: 100px;
         font-weight: 700;
         letter-spacing: .5px;
         text-align: center;
+        border-radius:4px;
     }
 
         .buttonOrangeEdit:hover {
@@ -170,12 +171,13 @@
             border: none;
             color: #ffffff;
             font-size: 15px;
-            height: 40px;
+            height: 35px;
             width: 100px;
             font-weight: 700;
             letter-spacing: .5px;
             text-align: center;
             opacity: 0.7;
+            border-radius: 4px;
         }
 
     .headingFormat {
@@ -238,16 +240,18 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-3">
-            <div class="row" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
+            <div class="row col-lg-12" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
                 <form id="suchMaskeMA" method="post" action="@Url.Action("Index","Mitarbeiter")">
                     <center><h3>Suchen nach</h3></center>
-                    <input type="text" value="@if (@Model.mafilter != null){ @Model.mafilter.MaId }" placeholder="MitarbeiterNr." id="MaId" name="MaId" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" value="@if (@Model.mafilter != null){ @Model.mafilter.MaId }" placeholder="Mitarbeiternr." id="MaId" name="MaId" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.mafilter != null){ @Model.mafilter.Anrede }" placeholder="Geschlecht" id="Anrede" name="Anrede" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.mafilter != null){ @Model.mafilter.Vorname }" placeholder="Vorname" id="Vorname" name="Vorname" class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" value="@if (@Model.mafilter != null) { @Model.mafilter.Nachname}" placeholder="Nachname" id="Nachname" name="Nachname" class="col-lg-12 SuchFilter_abstand" />
-                    <button value="Suche Reset" onclick="FilterReset()" name="reset" class="col-lg-12 SuchFilter_abstand"><span>Filter Reset</span></button>
                     <div class="col-lg-12">
                         <button class="SuchFilter_abstand buttonOrangeSuchen" type="submit" value="Suchen"><span>Suchen</span></button>
+                    </div>
+                    <div class="col-lg-12">
+                        <button value="Suche Reset" onclick="FilterReset()" name="reset" class="SuchFilter_abstand buttonOrangeSuchen"><span>Zurücksetzen</span></button>
                     </div>
                 </form>
             </div>
@@ -259,7 +263,7 @@
                     <table class="table">
                         <thead>
                             <tr style="margin-right:16px;">
-                                <th style="width:12%;">MitarbeiterNr.</th>
+                                <th style="width:12%;">Mitarbeiternr.</th>
                                 <th style="width:13%;">Vorname</th>
                                 <th style="width:15%;">Nachname</th>
                                 <th style="width:15%;">Geschlecht</th>

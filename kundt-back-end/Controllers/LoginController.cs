@@ -18,10 +18,12 @@ namespace kundt_back_end.Controllers
         /// ConnectionString
         /// </summary>
         public static string connString = System.Configuration.ConfigurationManager.ConnectionStrings["it22AutoverleihEntities"].ConnectionString.Substring(System.Configuration.ConfigurationManager.ConnectionStrings["it22AutoverleihEntities"].ConnectionString.IndexOf("\"") + 1, 156);
+
         /// <summary>
         /// Connection
         /// </summary>
         public static SqlConnection con = new SqlConnection(connString);
+
         /// <summary>
         /// GET: Login
         /// </summary>
@@ -36,6 +38,9 @@ namespace kundt_back_end.Controllers
             return View();
         }
 
+        /// <summary>
+        /// POST: Login
+        /// </summary>
         [HttpPost]
         [AllowAnonymous]
         [RequireHttps]
@@ -93,6 +98,9 @@ namespace kundt_back_end.Controllers
             return View();
         }
 
+        /// <summary>
+        /// GET: Login/Logout
+        /// </summary>
         [HttpGet]
         [Authorize(Roles = "M,A")]
         [RequireHttps]

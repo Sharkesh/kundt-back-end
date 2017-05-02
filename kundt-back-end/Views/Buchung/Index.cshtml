@@ -127,7 +127,7 @@
         border: none;
         color: #ffffff;
         font-size: 15px;
-        height: 40px;
+        height: 35px;
         width: 100px;
         font-weight: 700;
         letter-spacing: .5px;
@@ -139,7 +139,7 @@
             border: none;
             color: #ffffff;
             font-size: 15px;
-            height: 40px;
+            height: 35px;
             width: 100px;
             font-weight: 700;
             letter-spacing: .5px;
@@ -198,13 +198,13 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-3">
-            <div class="row" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
+            <div class="row col-lg-12" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
 
                 <!-- Abklären ob man das so lassen kann in Verbindung mit der Prozedur zum Filtern wenn implementiert!!! -->
                 <form method="post" action="@Url.Action("Index","Buchung")">
                     <center><h3>Suchen nach</h3></center>
-                    <input type="text" id="idbuchung" name="idbuchung" placeholder="Buchungs Nr" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" id="idkunde" name="idkunde" placeholder="Kunden Nr" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" id="idbuchung" name="idbuchung" placeholder="Buchungsnr." class="col-lg-12 SuchFilter_abstand" />
+                    <input type="text" id="idkunde" name="idkunde" placeholder="Kundennr." class="col-lg-12 SuchFilter_abstand" />
                     <input type="text" id="nachname" name="nachname" placeholder="Nachname" class="col-lg-12 SuchFilter_abstand" />
                     <input type="hidden" id="ort" name="ort" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
                     <input type="hidden" id="plz" name="plz" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
@@ -253,23 +253,23 @@
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
                     }
                     <div class="col-lg-12">
-                        <button class="col-lg-6 SuchFilter_abstand buttonOrangeSuchen" type="submit" id="suchen" name="suchen" value="Suchen"><span>Suchen</span></button>
+                        <button class="col-lg-12 SuchFilter_abstand buttonOrangeSuchen" type="submit" id="suchen" name="suchen" value="Suchen"><span>Suchen</span></button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="col-lg-9">
             @*@Html.Partial("_BuchungTable",@Model)*@
-            <div class="row table-responsive" style="margin:10px;padding:10px;height:450px;">
+            <div class="row table-responsive" style="margin:10px;padding:10px;height:550px;">
                 @if (Model.Count() > 0)
                 {
                     <table class="table">
                         <thead>
-                            <tr style="margin-right:16px;">
-                                <th style="width:15%;">Buchungs Nr</th>
-                                <th style="width:15%;">Kunden Nr</th>
+                            <tr style="margin-right:0px;">
+                                <th style="width:15%;">Buchungsnr.</th>
+                                <th style="width:10%;">Kundennr.</th>
                                 <th style="width:10%;">Vorname</th>
-                                <th style="width:10%;">Nachname</th>
+                                <th style="width:15%;">Nachname</th>
                                 @*<th style="width:15%;">Ort</th>
                                 <th style="width:10%;">PLZ</th>*@
                                 <th style="width:10%;">Von</th>
@@ -278,14 +278,14 @@
                                 <th style="width:15%;">Bearbeiten</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="height:480px;">
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
-                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDKunde)</a></td>
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDKunde)</a></td>
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Vorname)</a></td>
-                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Nachname)</a></td>
+                                    <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Nachname)</a></td>
                                     @*<td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Ort)</a></td>
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.PLZ)</a></td>*@
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x=>item.BuchungVon)</a></td>

@@ -3,14 +3,16 @@
     ViewBag.Title = "Auto Bearbeiten";
 }
 <script>
-    //function ShowTypFilter() {
-    //    if (document.getElementById("FilterMarke2").value == "Alle Marken/Typen" || document.getElementById("FilterMarke2").value == "") {
-    //        document.getElementById("FilterTyp2").style.visibility = "hidden";
-    //    }
-    //    else {
-    //        document.getElementById("FilterTyp2").style.visibility = "visible";
-    //    }
-    //}
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#pic')
+                  .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 <style>
     .myImg {
@@ -97,13 +99,14 @@
             @if (Model.autoBearbeiten[0].AutoBild != null)
             {
                 var image = Convert.ToBase64String(Model.autoBearbeiten[0].AutoBild);
-                @Html.Raw("<img src=\"data:image/png;base64," + image + "\" class=\"img-responsive myImg\" />");
+                @Html.Raw("<img src=\"data:image/png;base64," + image + "\" class=\"img-responsive myImg\" id=\"pic\" />");
             }
             else
             {
+                <img src="" id="pic" />
                 <p>Kein Bild vorhanden</p>
             }
-            <p><input type="file" id="upload" name="upload" accept="image/*" /></p>
+            <p><input type="file" id="upload" name="upload" accept="image/*" onchange="readURL(this)" /></p>
             <div class="col-xs-12" style="margin:20px 0px 0px -12px">
                 <p>Ausstattungsoptionen:</p>
                 @foreach (var item in Model.ausstattungListe)
@@ -123,7 +126,7 @@
         <div class="col-xs-6 col-xs-offset-1 table-responsive text-right tableLength" style="max-width:400px">
             <table class="table table-hover">
                 <tr>
-                    <td>Marke:</td>
+                    <td><b>Marke:</b></td>
                     <td class="autoHinzu">
                         <select name="myMarke" id="FilterMarke2" class="form-control" onchange="ShowTypFilter()">
                             <optgroup label="Marke wählen">                                
@@ -141,7 +144,7 @@
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>Typ:</td>
+                    <td><b>Typ:</b></td>
                     <td class="autoHinzu">
                         <select name="myTyp" id="FilterTyp2" class="autoHinzu form-control" style="visibility:visible">
                             <optgroup label="Typ wählen">
@@ -158,7 +161,7 @@
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>Kategorie:</td>
+                    <td><b>Kategorie:</b></td>
                     <td class="autoHinzu">
 
                         <select name="myKategorie" id="Kategorie" class="hinzuAuto form-control">
@@ -176,13 +179,13 @@
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>PS:</td>
+                    <td><b>PS:</b></td>
                     <td>
                         @Html.EditorFor(model => model.autoBearbeiten[0].PS, new { htmlAttributes = new { @class = "form-control" } })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>Getriebe:</td>
+                    <td><b>Getriebe:</b></td>
                     <td class="autoHinzu">
                         <select name="myGetriebe" id="myGetriebe" class="hinzuAuto form-control">
                             <optgroup label="Getriebe wählen">
@@ -193,35 +196,35 @@
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>Baujahr:</td>
+                    <td><b>Baujahr:</b></td>
                     <td>
                         @*@Html.EditorFor(model => model.autoBearbeiten[0].Baujahr, new { htmlAttributes = new { @class = "form-control" } })*@
                         <input type="number" name="myBauJahr" value="@Model.autoBearbeiten[0].Baujahr" min="1970" max="@Model.myTime" class="form-control" required />
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>Türen:</td>
+                    <td><b>Türen:</b></td>
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.autoBearbeiten[0].Tueren, new { htmlAttributes = new { @class = "form-control" } })*@
                         <input type="number" name="myTueren" value="@Model.autoBearbeiten[0].Tueren" min="2" max="5" class="form-control" required />
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td class="autoHinzu">Sitze:</td>
+                    <td class="autoHinzu"><b>Sitze:</b></td>
                     <td>
                         @*@Html.EditorFor(model => model.autoBearbeiten[0].Sitze, new { htmlAttributes = new { @class = "form-control" } })*@
                         <input type="number" name="mySitze" value="@Model.autoBearbeiten[0].Sitze" min="2" max="999" class="form-control" required />
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>KM-Stand:</td>
+                    <td><b>KM-Stand:</b></td>
                     <td class="autoHinzu">
                         @Html.EditorFor(model => model.autoBearbeiten[0].Kilometerstand, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
                         @Html.ValidationMessageFor(model => model.autoBearbeiten[0].Kilometerstand, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>Treibstoff:</td>
+                    <td><b>Treibstoff:</b></td>
                     <td class="autoHinzu">
                         <select name="myTreibstoff" id="Treibstoff" class="hinzuAuto form-control">
                             <optgroup label="Treibstoff wählen">
@@ -239,21 +242,21 @@
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr hinzuAuto">
-                    <td>Mietpreis:</td>
+                    <td><b>Mietpreis:</b></td>
                     <td class="autoHinzu">
                         @Html.EditorFor(model => model.autoBearbeiten[0].MietPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
                         @Html.ValidationMessageFor(model => model.autoBearbeiten[0].MietPreis, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr hinzuAuto">
-                    <td>Verkaufspreis:</td>
+                    <td><b>Verkaufspreis:</b></td>
                     <td class="autoHinzu">
                         @Html.EditorFor(model => model.autoBearbeiten[0].VerkaufPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
                         @Html.ValidationMessageFor(model => model.autoBearbeiten[0].VerkaufPreis, "", new { @class = "text-danger" })
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
-                    <td>Sichtbarkeit:</td>
+                    <td><b>Sichtbarkeit:</b></td>
                     <td class="autoHinzu">
                         <select name="myAnzeigen" id="myAnzeigen" class="hinzuAuto form-control">
                             <optgroup label="Auto anzeigen">

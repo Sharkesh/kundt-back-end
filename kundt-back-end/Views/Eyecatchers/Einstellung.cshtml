@@ -2,7 +2,19 @@
 @{
     ViewBag.Title = "Einstellungen";
 }
-
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#pic')
+                  .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+        Fileupload('1');
+    }
+</script>
 <style>
     .einstellungLayout {
         margin-bottom: 2%;
@@ -137,13 +149,13 @@
                             @{
                                 var image = Convert.ToBase64String(Model.ToList()[0].Eyecatcher);
                             }
-                            @Html.Raw("<img src=\"data:" + Model.ToList()[0].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\"  />")
+                            @Html.Raw("<img src=\"data:" + Model.ToList()[0].Eyecatcher + ";base64," + image + "\"height=\"150\" width=\"400\" id=\"pic\" />")
                         </div>
                     </center>
                 </div>
                 <div class="col-md-offset-1 col-md-3">
                     <div style="padding-bottom:15px;padding-top:30px;">
-                        <input type="file" id="upload" name="upload" onchange="Fileupload('1')" />
+                        <input type="file" id="upload" name="upload" onchange="readURL(this)" />
                     </div>
                     <div>
                         <button type="submit" id="submit1" value="submitfile" class="buttonOrangeForwardStep3OhneAnimation" disabled><span>Bild Aktualisieren</span></button>
