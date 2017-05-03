@@ -202,6 +202,9 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "M,A")]
         public ActionResult Edit(BuchungEditModel BEM)
         {
+            var tempUrl = (string)TempData["AusgangsURL"];
+
+            int tempID = BEM.IDBuchung;
             if (ModelState.IsValid)
             {
                 /// Alte Variante
@@ -215,6 +218,14 @@ namespace kundt_back_end.Controllers
                     TempData["fail"] = "DatumBis muss > sein als DatumVon!";
                     return RedirectToAction("Edit", BEM.IDBuchung);
                 }
+
+                DateTime tempDate = new DateTime(2000, 01, 01);
+                if (BEM.BuchungVon <= tempDate)
+                {
+                    TempData["bVfail"] = string.Format("Das DatumVon muss größer oder gleich {0} sein!",tempDate.ToShortDateString());
+                    return RedirectToAction("Edit", BEM.IDBuchung);
+                }
+
                 /// bool Wert der ermittelt wird um den BuchungStatus auf 'abgeholt' zu setzen
                 if (BEM.abgeholt)
                 {
@@ -267,9 +278,36 @@ namespace kundt_back_end.Controllers
                 //db.SaveChanges();
 
                 /// Nach dem Speichern wird man zum Aufrufpunkt der Edit Seite redirected
-                var urlStr = (string)TempData["AusgangsURL"];
+                var urlStr = tempUrl;
                 return Redirect(urlStr);
             }
+
+            tblBuchung tblBuchung = db.tblBuchung.Find(tempID);
+            if (tblBuchung == null)
+            {
+                return HttpNotFound();
+            }
+
+            BEM.BuchungAm = tblBuchung.BuchungAm;
+            BEM.BuchungVon = tblBuchung.BuchungVon;
+            BEM.BuchungBis = tblBuchung.BuchungBis;
+            BEM.BuchungStatus = tblBuchung.BuchungStatus;
+            BEM.FKAuto = tblBuchung.FKAuto;
+            BEM.FKKunde = tblBuchung.FKKunde;
+            BEM.IDBuchung = tblBuchung.IDBuchung;
+            BEM.Versicherung = tblBuchung.Versicherung;
+            BEM.Tage = tblBuchung.Tage;
+            BEM.MietPreis = tblBuchung.tblAuto.MietPreis;
+            BEM.Vorname = tblBuchung.tblKunde.Vorname;
+            BEM.Nachname = tblBuchung.tblKunde.Nachname;
+            BEM.Gesamtpreis = BEM.MietPreis * (int)BEM.Tage;
+            BEM.BMarke = tblBuchung.tblAuto.tblTyp.tblMarke.Marke;
+            BEM.BTyp = tblBuchung.tblAuto.tblTyp.Typ;
+            BEM.BKategorie = tblBuchung.tblAuto.tblKategorie.Kategorie;
+            BEM.BAutoBild = tblBuchung.tblAuto.AutoBild;
+            BEM.BIDAuto = tblBuchung.tblAuto.IDAuto;
+            TempData["AusgangsURL"] = tempUrl;
+
             return View(BEM);
         }
 

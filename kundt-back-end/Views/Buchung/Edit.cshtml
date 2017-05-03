@@ -182,6 +182,10 @@
                                 @*@Html.EditorFor(model => model.BuchungVon, new { htmlAttributes = new { @class = "form-control"} })*@
                                 <input type="date" id="BuchungVon" name="BuchungVon" value="@Model.BuchungVon.ToString("yyyy-MM-dd")" class="form-control input EditDisplayWidth" />
                                 @Html.ValidationMessageFor(model => model.BuchungVon, "", new { @class = "text-danger" })
+                                @if (TempData["bVfail"] != null)
+                                {
+                                    <span class="text-danger">@TempData["bVfail"].ToString()</span>
+                                }
                             </div>
                         </div>
                         <div class="form-group">
