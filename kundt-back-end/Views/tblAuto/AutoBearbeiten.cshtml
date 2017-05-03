@@ -171,7 +171,7 @@
                                 {
                                     if (item.Kategorie != Model.autoBearbeiten[0].Kategorie)
                                     {
-                                        <option name="myKategorie" value="@Model.autoBearbeiten[0].Kategorie">@Html.DisplayFor(m => item)</option>
+                                        <option name="myKategorie" value="@item.Kategorie">@item.Kategorie</option>
                                     }
                                 }
                             </optgroup>
@@ -219,8 +219,7 @@
                 <tr class="autoHinzu_tr">
                     <td><b>KM-Stand:</b></td>
                     <td class="autoHinzu">
-                        @Html.EditorFor(model => model.autoBearbeiten[0].Kilometerstand, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
-                        @Html.ValidationMessageFor(model => model.autoBearbeiten[0].Kilometerstand, "", new { @class = "text-danger" })
+                        <input name="autoBearbeiten[0].Kilometerstand" value="@Model.autoBearbeiten[0].Kilometerstand" min="0" max="9999999" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />  
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">
@@ -244,15 +243,13 @@
                 <tr class="autoHinzu_tr hinzuAuto">
                     <td><b>Mietpreis:</b></td>
                     <td class="autoHinzu">
-                        @Html.EditorFor(model => model.autoBearbeiten[0].MietPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
-                        @Html.ValidationMessageFor(model => model.autoBearbeiten[0].MietPreis, "", new { @class = "text-danger" })
+                        <input name="autoBearbeiten[0].MietPreis" value="@Model.autoBearbeiten[0].MietPreis" min="0" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />                        
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr hinzuAuto">
                     <td><b>Verkaufspreis:</b></td>
                     <td class="autoHinzu">
-                        @Html.EditorFor(model => model.autoBearbeiten[0].VerkaufPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
-                        @Html.ValidationMessageFor(model => model.autoBearbeiten[0].VerkaufPreis, "", new { @class = "text-danger" })
+                        <input name="autoBearbeiten[0].VerkaufPreis" value="@Model.autoBearbeiten[0].VerkaufPreis" min="0" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />  
                     </td>
                 </tr>
                 <tr class="autoHinzu_tr">

@@ -176,7 +176,7 @@
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myPS, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.myPS, "", new { @class = "text-danger" })*@
-                        <input type="number" name="myPs" value="@Model.myPS" class="form-control" min="0" max="2000" required />
+                        <input name="myPS" value="@Model.myPS" min="0" max="9999" class="form-control" required pattern=[0-9]*$ />  
                     </td>
                 </tr>
                 <tr>
@@ -219,7 +219,7 @@
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myKilometerStand, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
                             @Html.ValidationMessageFor(model => model.myKilometerStand, "", new { @class = "text-danger" })*@
-                        <input type="number" name="myKilometerStand" value="@Model.myKilometerStand" class="form-control" min="0" max="9999999" required />
+                        <input type="number" name="myKilometerStand" value="0,00" class="form-control" min="0" max="9999999" required />
                     </td>
                 </tr>
                 <tr>
@@ -238,15 +238,13 @@
                 <tr>
                     <td><b>Mietpreis:</b></td>
                     <td class="autoHinzu">
-                        @Html.EditorFor(model => model.myMietPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
-                        @Html.ValidationMessageFor(model => model.myMietPreis, "", new { @class = "text-danger" })
+                        <input name="myMietPreis" value="0,00" min="0" max="99999" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />  
                     </td>
                 </tr>
                 <tr class="hinzuAuto">
                     <td><b>Verkaufspreis:</b></td>
                     <td class="autoHinzu">
-                        @Html.EditorFor(model => model.myVerkaufsPreis, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
-                        @Html.ValidationMessageFor(model => model.myVerkaufsPreis, "", new { @class = "text-danger" })
+                        <input name="myVerkaufsPreis" value="0,00" min="0" max="99999999" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />  
                     </td>
                 </tr>
                 <tr>
