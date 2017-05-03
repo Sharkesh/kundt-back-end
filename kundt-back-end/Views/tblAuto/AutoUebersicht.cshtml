@@ -18,10 +18,10 @@
     }
     function ShowTypFilter() {
         if (document.getElementById("FilterMarke").value == "Alle Marken/Typen" || document.getElementById("FilterMarke").value == "") {
-            document.getElementById("FilterTyp").style.visibility = "hidden";
+            document.getElementById("FilterTyp").disabled = true;
         }
         else {
-            document.getElementById("FilterTyp").style.visibility = "visible";
+            document.getElementById("FilterTyp").disabled = false;
         }
     }
 </script>
@@ -58,7 +58,7 @@
     }
 
     .FilterOnMove {
-        padding-left: 10px;
+        padding-left: 20px;
         padding-right: 10px;
     }
 
@@ -321,11 +321,11 @@
                             <tr>
                                 <td class="myTd">
                                     <header>Typ wählen:</header>
-                                    <select id="FilterTyp" style="visibility:hidden" name="myTyp" class="myInput">
+                                    <select id="FilterTyp" disabled name="myTyp" class="myInput">
                                         @if (Model.myTyp != null)
                                         {
                                             <option class="myInput AuswahlFilter" value="@Model.myTyp">@Model.myTyp</option>
-                                            <option class="myInput DefaultFilter" value="">Alle Typen</option>
+                                            <option class="myInput DefaultFilter" value=""></option>
                                             foreach (var item in Model.typListe)
                                             {
                                                 <option class="myInput" value="@item.Typ">@item.Typ</option>
@@ -333,7 +333,7 @@
                                         }
                                         else
                                         {
-                                            <option class="myInput DefaultFilter" value="">Alle Typen</option>
+                                            <option class="myInput DefaultFilter" value=""></option>
                                             foreach (var item in Model.typListe)
                                             {
                                                 <option class="myInput" value="@item.Typ">@item.Typ</option>

@@ -12,7 +12,7 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
-    }
+    }    
 </script>
 <style>
     .myImg {
@@ -128,10 +128,11 @@
                 <tr>
                     <td><b>Marke:</b></td>
                     <td class="autoHinzu">
-                        <select name="myMarke" id="FilterMarke2" class="form-control" onchange="ShowTypFilter()">
-                            <optgroup label="Marke wählen">                                
+                        <select name="myMarke" id="FilterMarke2" class="form-control">
+                            <optgroup label="Marke wählen">  
+                                                            
                                 <option name="myMarke" value="@Model.autoBearbeiten[0].Marke">@Html.DisplayFor(m => m.autoBearbeiten[0].Marke)</option>
-                                <option value="">Alle Marken</option>
+                                 
                                  @foreach (var item in Model.markeListe)
                                 {
                                     if (item.Marke != Model.autoBearbeiten[0].Marke)
@@ -146,16 +147,9 @@
                 <tr class="autoHinzu_tr">
                     <td><b>Typ:</b></td>
                     <td class="autoHinzu">
-                        <select name="myTyp" id="FilterTyp2" class="autoHinzu form-control" style="visibility:visible">
+                        <select name="myTyp" id="FilterTyp2" class="autoHinzu form-control">
                             <optgroup label="Typ wählen">
-                                <option name="myTyp" value="@Model.autoBearbeiten[0].Typ">@Html.DisplayFor(m => m.autoBearbeiten[0].Typ)</option>
-                                @foreach (var item in Model.typListe)
-                                {
-                                    if (item.Typ != Model.autoBearbeiten[0].Typ)
-                                    {
-                                        <option name="myTyp" value="@item.Typ">@Html.DisplayFor(m => item.Typ)</option>
-                                    }
-                                }
+                                <option name="myTyp" value="@Model.autoBearbeiten[0].Typ">@Html.DisplayFor(m => m.autoBearbeiten[0].Typ)</option>                                
                             </optgroup>
                         </select>
                     </td>
@@ -273,7 +267,7 @@
                 </tr>
             </table>
         </div>
-        <div class="col-xs-12 text-center">
+        <div class="col-xs-12 text-center" style="padding-bottom:15px">
             <input type="hidden" name="myIDAuto" value="@Model.autoBearbeiten[0].IDAuto" />
             <button type="submit" class="buttonOrangeHinzu">Aktualisieren</button>
         </div>

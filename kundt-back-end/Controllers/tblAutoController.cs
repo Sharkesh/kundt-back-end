@@ -22,9 +22,10 @@ namespace kundt_back_end.Controllers
         public JsonResult FilterValidation(string Marke)
         {
             //asynchronus server request for typlist deppending on actual choice
-            var data = db.tblTyp.Include(x => x.tblMarke).Where(x => x.tblMarke.Marke == Marke).Select(x => x.Typ);
+            var data = db.tblTyp.Include(x => x.tblMarke).Include(x => x.IDTyp).Where(x => x.tblMarke.Marke == Marke).Select(x => x.Typ);
             return Json(data);
         }
+        //eigens Result für AutoBearbeiten!!!
 
         /// <summary>
         /// GET: tblAuto/GetMarke
@@ -65,6 +66,7 @@ namespace kundt_back_end.Controllers
             am.myTueren = "5";  //most cars are 5-doored
             am.myPS = "100";    //average PS in my opinion
             am.mySitze = 5;     //average count of seats in a car
+            am.myKilometerStand = 0;
             return View(am);
         }
 

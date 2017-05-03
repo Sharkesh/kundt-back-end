@@ -10,18 +10,13 @@
     }
     function ShowTypFilter() {
         if (document.getElementById("FilterMarke").value == "Alle Marken/Typen" || document.getElementById("FilterMarke").value == "") {
-            document.getElementById("FilterTyp").style.visibility = "hidden";
+            document.getElementById("FilterTyp").disabled = true;
         }
         else {
-            document.getElementById("FilterTyp").style.visibility = "visible";
+            document.getElementById("FilterTyp").disabled = false;
         }
     }
-    function Validation() {
-        if (document.getElementById("ValidateData").value == "Marke wählen" || document.getElementById("ValidateData").value == "") {
-            document.getElementByID("ValidateData").style.color = "red";
-            return false;
-        }
-    }
+    
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -31,6 +26,32 @@
             };
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    function Validate() {
+        var temp = document.getElementById("FilterTyp");
+        if (temp.value != null && temp.value != "") {
+            $('#mainForm').submit();
+        }
+        else {
+            temp.style.borderColor = "red";
+        }
+    }
+
+    function ValidateOnChange() {
+        var temp1 = document.getElementById("FilterTyp");
+        var temp2 = document.getElementById("FilterMarke");
+
+        if ($('#FilterMarke :selected').val() != null && $('#FilterMarke :selected').val() != "") {
+            temp1.disabled = false;
+            temp1.style.borderColor = "lightgrey";
+            
+        }
+        else {
+            temp1.style.borderColor = "red";
+            temp1.disabled = true;
+        }
+
     }
 </script>
 <style>
@@ -105,7 +126,7 @@
     <h2 style="padding:5px">Fahrzeug hinzufügen</h2>
 </div>
 
-<form action="@Url.Action("AutoHinzu", "tblAuto", null)" method="post" enctype="multipart/form-data">
+<form action="@Url.Action("AutoHinzu", "tblAuto", null)" method="post" enctype="multipart/form-data" id="mainForm">
     <div class="container">
 
         <div class="col-xs-6" style="margin:auto; display:inline-block; padding:0px">
@@ -133,7 +154,7 @@
                 <tr>
                     <td><b>Marke:</b></td>
                     <td class="autoHinzu">
-                        <select name="myMarke" id="FilterMarke" class="form-control" onchange="ShowTypFilter()">
+                        <select name="myMarke" id="FilterMarke" class="form-control" onchange="ShowTypFilter(), ValidateOnChange()" required>
                             <optgroup label="Kategorie wählen">
                                 <option name="myMarke" value="">Marke wählen</option>
                                 @foreach (var item in Model.markeListe)
@@ -147,8 +168,9 @@
                 <tr>
                     <td><b>Typ:</b></td>
                     <td class="autoHinzu">
-                        <select name="myTyp" id="FilterTyp" class="form-control" style="visibility:hidden">
+                        <select name="myTyp" id="FilterTyp" class="form-control" disabled>
                             <optgroup label="Typ wählen">
+                                <option value=""></option>
                                 @foreach (var item in Model.typListe)
                                 {
                                     <option name="myTyp" value="@item.Typ">@Html.DisplayFor(m => item.Typ)</option>
@@ -176,7 +198,7 @@
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myPS, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.myPS, "", new { @class = "text-danger" })*@
-                        <input name="myPS" value="@Model.myPS" min="0" max="9999" class="form-control" required pattern=[0-9]*$ />  
+                        <input name="myPS" value="@Model.myPS" min="0" max="9999" class="form-control" required pattern=[0-9]*$ />
                     </td>
                 </tr>
                 <tr>
@@ -219,7 +241,7 @@
                     <td class="autoHinzu">
                         @*@Html.EditorFor(model => model.myKilometerStand, new { htmlAttributes = new { @class = "form-control", @html = "required" } })
                             @Html.ValidationMessageFor(model => model.myKilometerStand, "", new { @class = "text-danger" })*@
-                        <input type="number" name="myKilometerStand" value="0,00" class="form-control" min="0" max="9999999" required />
+                        <input type="number" name="myKilometerStand" value="@Model.myKilometerStand" class="form-control" min="0" max="9999999" required />
                     </td>
                 </tr>
                 <tr>
@@ -238,13 +260,13 @@
                 <tr>
                     <td><b>Mietpreis:</b></td>
                     <td class="autoHinzu">
-                        <input name="myMietPreis" value="0,00" min="0" max="99999" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />  
+                        <input name="myMietPreis" value="0,00" min="0" max="99999" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />
                     </td>
                 </tr>
                 <tr class="hinzuAuto">
                     <td><b>Verkaufspreis:</b></td>
                     <td class="autoHinzu">
-                        <input name="myVerkaufsPreis" value="0,00" min="0" max="99999999" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />  
+                        <input name="myVerkaufsPreis" value="0,00" min="0" max="99999999" class="form-control" required pattern=[0-9]+([.,][0-9][0-9]?)? />
                     </td>
                 </tr>
                 <tr>
@@ -266,7 +288,7 @@
                     <button class="buttonOrangeNextStep">Aktualisieren</button>
                 </form>*@
 
-            <input type="submit" value="Hinzufügen" class="buttonOrangeHinzu" />
+            <input type="button" value="Hinzufügen" class="buttonOrangeHinzu" onclick="Validate()" />
 
         </div>
     </div>
