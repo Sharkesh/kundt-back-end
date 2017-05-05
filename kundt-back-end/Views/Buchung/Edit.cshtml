@@ -148,6 +148,22 @@
 <div class="headingFormat">
     <h2 style="padding:5px;">Buchung bearbeiten</h2>
 </div>
+@if (Model.BuchungVon < DateTime.Today && Model.BuchungStatus == "erstellt" && Model.Storno == false)
+{
+    <div>
+        <center><h4 class="text-danger">Das Auto wurde nicht abgeholt!</h4></center>
+    </div>
+}
+else if (Model.BuchungBis < DateTime.Today && Model.BuchungStatus == "abgeholt")
+{
+    <div>
+        <center><h4 class="text-danger">Das Auto wurde nicht zurückgebracht!</h4></center>
+    </div>
+}
+else
+{
+    <div></div>
+}
 
 <div class="container" style="padding-top:20px;padding-bottom:20px;">
     <div class="row col-md-12">

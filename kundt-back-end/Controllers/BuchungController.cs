@@ -28,26 +28,143 @@ namespace kundt_back_end.Controllers
         [Authorize(Roles = "M,A")]
         public ActionResult Index()
         {
-            List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
+            BuchungenCM bcm = new BuchungenCM();
+            bcm.filtermodel = (BuchungenFilter)Session["buchungFilter"];
+            bcm.buchungenlist = new List<GefilterteBuchungen>();
 
-            var test = db.OffeneBuchungenTodayPlus13();
-
-            foreach (var b in test)
+            if (bcm.filtermodel == null)
             {
-                GefilterteBuchungen res = new GefilterteBuchungen();
-                res.IDBuchung = b.IDBuchung;
-                res.IDKunde = b.IDKunde;
-                res.BuchungStatus = b.BuchungStatus;
-                res.Nachname = b.Nachname;
-                res.Vorname = b.Vorname;
-                res.Ort = b.Ort;
-                res.PLZ = b.PLZ;
-                res.BuchungVon = b.BuchungVon;
-                res.BuchungBis = b.BuchungBis;
+                var test = db.OffeneBuchungenTodayPlus13();
+                if (test != null)
+                {
+                    TempData["obt13+"] = "Buchungen von heute und den nächsten 13 Tage.";
+                }
 
-                buchungList.Add(res);
+                foreach (var b in test)
+                {
+                    GefilterteBuchungen res = new GefilterteBuchungen();
+                    res.IDBuchung = b.IDBuchung;
+                    res.IDKunde = b.IDKunde;
+                    res.BuchungStatus = b.BuchungStatus;
+                    res.Nachname = b.Nachname;
+                    res.Vorname = b.Vorname;
+                    res.Ort = b.Ort;
+                    res.PLZ = b.PLZ;
+                    res.BuchungVon = b.BuchungVon;
+                    res.BuchungBis = b.BuchungBis;                    
+
+                    bcm.buchungenlist.Add(res);
+                }
             }
-            return View(buchungList);
+            else
+            {
+                if (bcm.filtermodel.checkStatus == "none")
+                {
+                    Session["buchungFilter"] = null;
+                    return RedirectToAction("Index", "Buchung");
+                }
+
+                bool all = false;
+                bool open = false;
+                bool problems = false;
+                bool finished = false;
+                /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == o ist
+                /// wird der bool Wert auf true gesetzt und ein Tempdata["open"] generiert
+                /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
+                /// Radio Button haben soll (checked/unchecked)
+                if (bcm.filtermodel.checkStatus == "o")
+                {
+                    open = true;
+                    TempData["open"] = "offen";
+
+                }
+                /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == a ist
+                /// wird der bool Wert auf true gesetzt und ein Tempdata["finished"] generiert
+                /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
+                /// Radio Button haben soll (checked/unchecked)
+                else if (bcm.filtermodel.checkStatus == "a")
+                {
+                    finished = true;
+                    TempData["finished"] = "abgeschlossen";
+                }
+                /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == p ist
+                /// wird der bool Wert auf true gesetzt und ein Tempdata["problems"] generiert
+                /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
+                /// Radio Button haben soll (checked/unchecked)
+                else if (bcm.filtermodel.checkStatus == "p")
+                {
+                    problems = true;
+                    TempData["problems"] = "problem";
+                }
+                else if (bcm.filtermodel.checkStatus == "e")
+                {
+                    all = true;
+                    TempData["all"] = "all";
+                }
+                /// Wenn kein Wert (null) im Suchfeld für IDBuchung angegeben wird setze IDBuchung auf 0
+                if (bcm.filtermodel.idbuchung == null)
+                {
+                    bcm.filtermodel.idbuchung = 0;
+                }
+                /// Wenn kein Wert (null) im Suchfeld für IDKunde angegeben wird setze IDBuchung auf 0
+                if (bcm.filtermodel.idkunde == null)
+                {
+                    bcm.filtermodel.idkunde = 0;
+                }
+                DateTime tempDate = new DateTime(0001, 01, 01);
+                if (bcm.filtermodel.buchungVon == tempDate)
+                {
+                    bcm.filtermodel.buchungVon = DateTime.Parse("01.01.1900");
+                }
+                if (bcm.filtermodel.buchungBis == tempDate)
+                {
+                    bcm.filtermodel.buchungBis = DateTime.Parse("01.01.2200");
+                }
+                if (bcm.filtermodel.ort == null)
+                {
+                    bcm.filtermodel.ort = "";
+                }
+                if (bcm.filtermodel.plz == null)
+                {
+                    bcm.filtermodel.plz = "";
+                }
+                if (bcm.filtermodel.nachname == null)
+                {
+                    bcm.filtermodel.nachname = "";
+                }
+
+                DbConnection con = db.Database.Connection;
+                ///Checkt ob die Datenbankverbindung offen ist, falls nicht wird sie geöffnet
+                if (con.State != ConnectionState.Open)
+                {
+                    con.Open();
+                }
+
+                /// Erzeugt ein SQLCommand Objekt mit Parametern das an die Db geschickt wird
+                SqlCommand cmd = new SqlCommand(GefilterteBuchungen.SQL, (SqlConnection)con);
+                cmd.Parameters.AddWithValue("@idBuchung", bcm.filtermodel.idbuchung);
+                cmd.Parameters.AddWithValue("@nachname", bcm.filtermodel.nachname);
+                cmd.Parameters.AddWithValue("@idkunde", bcm.filtermodel.idkunde);
+                cmd.Parameters.AddWithValue("@ort", bcm.filtermodel.ort);
+                cmd.Parameters.AddWithValue("@plz", bcm.filtermodel.plz);
+                cmd.Parameters.AddWithValue("@buchungVon", bcm.filtermodel.buchungVon);
+                cmd.Parameters.AddWithValue("@buchungBis", bcm.filtermodel.buchungBis);
+                cmd.Parameters.AddWithValue("@offen", open);
+                cmd.Parameters.AddWithValue("@abgeschlossen", finished);
+                cmd.Parameters.AddWithValue("@problem", problems);
+                cmd.Parameters.AddWithValue("@all", all);
+
+                /// Hier wird ein SqlDataReader Objekt angelegt das die Ergebnise des abgesetzten SQLCommands
+                /// ausliest und in eine Liste speichert
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    bcm.buchungenlist.Add(new GefilterteBuchungen(reader));
+                }
+                bcm.buchungenlist.OrderBy(s => s.BuchungVon).ToList();
+            }
+
+            return View(bcm);
         }
 
 
@@ -56,97 +173,10 @@ namespace kundt_back_end.Controllers
         /// </summary>
         [HttpPost]
         [Authorize(Roles = "M,A")]
-        public ActionResult Index(int? idbuchung, string nachname, int? idkunde, string ort, string plz, DateTime? buchungVon,
-        DateTime? buchungBis, string checkStatus)
+        public ActionResult Index(BuchungenFilter bf)
         {
-            bool all = false;
-            bool open = false;
-            bool problems = false;
-            bool finished = false;
-            /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == o ist
-            /// wird der bool Wert auf true gesetzt und ein Tempdata["open"] generiert
-            /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
-            /// Radio Button haben soll (checked/unchecked)
-            if (checkStatus == "o")
-            {
-                open = true;
-                TempData["open"] = "offen";
-
-            }
-            /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == a ist
-            /// wird der bool Wert auf true gesetzt und ein Tempdata["finished"] generiert
-            /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
-            /// Radio Button haben soll (checked/unchecked)
-            else if (checkStatus == "a")
-            {
-                finished = true;
-                TempData["finished"] = "abgeschlossen";
-            }
-            /// Wenn der Wert des Radiobuttons mit dem name "checkStatus" == p ist
-            /// wird der bool Wert auf true gesetzt und ein Tempdata["problems"] generiert
-            /// und in der Buchungen View Index zum differenzieren herangezogen welchen Status der
-            /// Radio Button haben soll (checked/unchecked)
-            else if (checkStatus == "p")
-            {
-                problems = true;
-                TempData["problems"] = "problem";
-            }
-            else if (checkStatus == "e")
-            {
-                all = true;
-                TempData["all"] = "all";
-            }
-            /// Wenn kein Wert (null) im Suchfeld für IDBuchung angegeben wird setze IDBuchung auf 0
-            if (idbuchung == null)
-            {
-                idbuchung = 0;
-            }
-            /// Wenn kein Wert (null) im Suchfeld für IDKunde angegeben wird setze IDBuchung auf 0
-            if (idkunde == null)
-            {
-                idkunde = 0;
-            }
-            if (buchungVon == null)
-            {
-                buchungVon = DateTime.Parse("01.01.1900");
-            }
-            if (buchungBis == null)
-            {
-                buchungBis = DateTime.Parse("01.01.2200");
-            }
-
-            List<GefilterteBuchungen> buchungList = new List<GefilterteBuchungen>();
-
-            DbConnection con = db.Database.Connection;
-            ///Checkt ob die Datenbankverbindung offen ist, falls nicht wird sie geöffnet
-            if (con.State != ConnectionState.Open)
-            {
-                con.Open();
-            }
-
-            /// Erzeugt ein SQLCommand Objekt mit Parametern das an die Db geschickt wird
-            SqlCommand cmd = new SqlCommand(GefilterteBuchungen.SQL, (SqlConnection)con);
-            cmd.Parameters.AddWithValue("@idBuchung", idbuchung);
-            cmd.Parameters.AddWithValue("@nachname", nachname);
-            cmd.Parameters.AddWithValue("@idkunde", idkunde);
-            cmd.Parameters.AddWithValue("@ort", ort);
-            cmd.Parameters.AddWithValue("@plz", plz);
-            cmd.Parameters.AddWithValue("@buchungVon", buchungVon);
-            cmd.Parameters.AddWithValue("@buchungBis", buchungBis);
-            cmd.Parameters.AddWithValue("@offen", open);
-            cmd.Parameters.AddWithValue("@abgeschlossen", finished);
-            cmd.Parameters.AddWithValue("@problem", problems);
-            cmd.Parameters.AddWithValue("@all", all);
-
-            /// Hier wird ein SqlDataReader Objekt angelegt das die Ergebnise des abgesetzten SQLCommands
-            /// ausliest und in eine Liste speichert
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                buchungList.Add(new GefilterteBuchungen(reader));
-            }
-
-            return View(buchungList.OrderBy(s => s.BuchungVon).ToList());
+            Session["buchungFilter"] = bf;
+            return RedirectToAction("Index", "Buchung");
         }
         
         /// <summary>

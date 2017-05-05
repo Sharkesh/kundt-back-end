@@ -1,6 +1,5 @@
 ﻿@using kundt_back_end.Models;
-
-@model List<GefilterteBuchungen>
+@model BuchungenCM
 
 @{
     ViewBag.Title = "Übersicht Buchungen";
@@ -144,7 +143,7 @@
             font-weight: 700;
             letter-spacing: .5px;
             text-align: center;
-            opacity:0.7;
+            opacity: 0.7;
         }
 
     .headingFormat {
@@ -191,9 +190,14 @@
         }*/
 </style>
 
+
 <div class="headingFormat">
     <h2 style="padding:5px;">Buchungen Übersicht</h2>
 </div>
+@if (TempData["obt13+"] != null)
+{
+    <div><center><h4 style="color:#008AD0">@TempData["obt13+"].ToString()</h4></center></div>
+}
 
 <div class="container">
     <div class="row">
@@ -201,59 +205,131 @@
             <div class="row col-lg-12" style="margin:0px 10px 10px 10px;padding:10px;height:400px;">
 
                 <!-- Abklären ob man das so lassen kann in Verbindung mit der Prozedur zum Filtern wenn implementiert!!! -->
-                <form method="post" action="@Url.Action("Index","Buchung")">
+                <form id="suchMaske" method="post" action="@Url.Action("Index","Buchung")">
                     <center><h3>Suchen nach</h3></center>
-                    <input type="text" id="idbuchung" name="idbuchung" placeholder="Buchungsnr." class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" id="idkunde" name="idkunde" placeholder="Kundennr." class="col-lg-12 SuchFilter_abstand" />
-                    <input type="text" id="nachname" name="nachname" placeholder="Nachname" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="hidden" id="ort" name="ort" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
-                    <input type="hidden" id="plz" name="plz" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
-                    <p>
-                        Von:
+                    @if (Model.filtermodel != null)
+                    {
+                        if (Model.filtermodel.idbuchung == 0 || Model.filtermodel.idbuchung == null)
+                        {
+                            <input type="text" value="" id="idbuchung" name="idbuchung" placeholder="Buchungsnr." class="col-lg-12 SuchFilter_abstand" />
+                        }
+                        else
+                        {
+                            <input type="text" value="@Model.filtermodel.idbuchung" id="idbuchung" name="idbuchung" placeholder="Buchungsnr." class="col-lg-12 SuchFilter_abstand" />
+                        }
+                        if (Model.filtermodel.idkunde == 0 || Model.filtermodel.idbuchung == null)
+                        {
+                            <input type="text" value="" id="idkunde" name="idkunde" placeholder="Kundennr." class="col-lg-12 SuchFilter_abstand" />
+                        }
+                        else
+                        {
+                            <input type="text" value="@Model.filtermodel.idkunde" id="idkunde" name="idkunde" placeholder="Kundennr." class="col-lg-12 SuchFilter_abstand" />
 
-                        <input type="date" id="buchungVon" name="buchungVon" class="col-lg-12 SuchFilter_abstand" />
-                    </p>
-                    <p >
-                        Bis:
+                        }
+                    }
+                    else
+                    {
+                        <input type="text" value="" id="idbuchung" name="idbuchung" placeholder="Buchungsnr." class="col-lg-12 SuchFilter_abstand" />
+                        <input type="text" value="" id="idkunde" name="idkunde" placeholder="Kundennr." class="col-lg-12 SuchFilter_abstand" />
+                    }
+                    <input type="text" value="@if (Model.filtermodel != null){ @Model.filtermodel.nachname }" id="nachname" name="nachname" placeholder="Nachname" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="hidden" value="@if (Model.filtermodel != null) { @Model.filtermodel.ort }" id="ort" name="ort" placeholder="Ort" class="col-lg-12 SuchFilter_abstand" />
+                    <input type="hidden" value="@if (Model.filtermodel != null){ @Model.filtermodel.plz }" id="plz" name="plz" placeholder="PLZ" class="col-lg-12 SuchFilter_abstand" />
+                    @if (Model.filtermodel != null)
+                    {
+                        if (@Model.filtermodel.buchungVon.ToString("yyyy-MM-dd") == "1900-01-01" || @Model.filtermodel.buchungVon == null)
+                        {
+                            <p>
+                                Von:
 
-                        <input type="date" id="buchungBis" name="buchungBis" class="col-lg-12 SuchFilter_abstand" />
-                    </p>
+                                <input type="date" value="" id="buchungVon" name="buchungVon" class="col-lg-12 SuchFilter_abstand" />
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                Von:
 
+                                <input type="date" value="@Model.filtermodel.buchungVon.ToString("yyyy-MM-dd")" id="buchungVon" name="buchungVon" class="col-lg-12 SuchFilter_abstand" />
+                            </p>
+                        }
+                        if (@Model.filtermodel.buchungBis.ToString("yyyy-MM-dd") == "2200-01-01" || @Model.filtermodel.buchungBis == null)
+                        {
+                            <p>
+                                Bis:
+
+                                <input type="date" value="" id="buchungBis" name="buchungBis" class="col-lg-12 SuchFilter_abstand" />
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                Bis:
+
+                                <input type="date" value="@Model.filtermodel.buchungBis.ToString("yyyy-MM-dd")" id="buchungBis" name="buchungBis" class="col-lg-12 SuchFilter_abstand" />
+                            </p>
+                        }
+                    }
+                    else
+                    {
+                        <p>
+                            Von:
+
+                            <input type="date" value="" id="buchungVon" name="buchungVon" class="col-lg-12 SuchFilter_abstand" />
+                        </p>
+                        <p>
+                            Bis:
+
+                            <input type="date" value="" id="buchungBis" name="buchungBis" class="col-lg-12 SuchFilter_abstand" />
+                        </p>
+                    }
                     <center><h3>Buchungs Status</h3></center>
                     @if (TempData["problems"] != null)
                     {
+                        <label class="col-lg-11">Standart</label><input type="radio" id="none" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="none" />
                         <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e" />
                         <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" checked="checked" />
-
-
                     }
                     else if (TempData["finished"] != null)
-                    {
+                    {                        
+                        <label class="col-lg-11">Standart</label><input type="radio" id="none" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="none" />
                         <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e" />
                         <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" checked="checked" />
-                        <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
+                        <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />                     
                     }
 
                     else if (TempData["all"] != null)
                     {
+                        <label class="col-lg-11">Standart</label><input type="radio" id="none" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="none" />
                         <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e" checked="checked" />
                         <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
                     }
-
+                    else if (TempData["open"] != null)
+                    {
+                        <label class="col-lg-11">Standart</label><input type="radio" id="none" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="none" />
+                        <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e"  />
+                        <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" checked="checked"/>
+                        <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
+                        <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
+                    }
                     else
                     {
-                        <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e"  />
-                        <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" checked="checked" />
+                        <label class="col-lg-11">Standart</label><input type="radio" id="none" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="none" checked="checked" />
+                        <label class="col-lg-11">Alle Anzeigen</label><input type="radio" id="all" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="e" />
+                        <label class="col-lg-11">Offen</label><input type="radio" id="offen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="o" />
                         <label class="col-lg-11">Abgeschlossen</label><input type="radio" id="abgeschlossen" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="a" />
                         <label class="col-lg-11">Problem</label><input type="radio" id="problem" name="checkStatus" class="col-lg-1 SuchFilter_abstand" value="p" />
                     }
                     <div class="col-lg-12">
                         <button class="col-lg-12 SuchFilter_abstand buttonOrangeSuchen" type="submit" id="suchen" name="suchen" value="Suchen"><span>Suchen</span></button>
+                    </div>
+                    <div class="col-lg-12">
+                        <button value="Suche Reset" onclick="FilterReset()" name="reset" class="SuchFilter_abstand buttonOrangeSuchen"><span>Zurücksetzen</span></button>
                     </div>
                 </form>
             </div>
@@ -261,7 +337,7 @@
         <div class="col-lg-9">
             @*@Html.Partial("_BuchungTable",@Model)*@
             <div class="row table-responsive" style="margin:10px;padding:10px;height:551px;">
-                @if (Model.Count() > 0)
+                @if (Model.buchungenlist.Count() > 0)
                 {
                     <table class="table">
                         <thead>
@@ -271,7 +347,7 @@
                                 <th style="width:10%;">Vorname</th>
                                 <th style="width:15%;">Nachname</th>
                                 @*<th style="width:15%;">Ort</th>
-                                <th style="width:10%;">PLZ</th>*@
+                                    <th style="width:10%;">PLZ</th>*@
                                 <th style="width:10%;">Von</th>
                                 <th style="width:15%;">Bis</th>
                                 <th style="width:10%;">Status</th>
@@ -279,7 +355,7 @@
                             </tr>
                         </thead>
                         <tbody style="height:480px;">
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.buchungenlist)
                             {
                                 <tr>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.IDBuchung)</a></td>
@@ -287,8 +363,8 @@
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Vorname)</a></td>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Nachname)</a></td>
                                     @*<td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.Ort)</a></td>
-                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.PLZ)</a></td>*@
-                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x=>item.BuchungVon)</a></td>
+                                        <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.PLZ)</a></td>*@
+                                    <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungVon)</a></td>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungBis)</a></td>
                                     <td style="width:10%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })">@Html.DisplayFor(x => item.BuchungStatus)</a></td>
                                     <td style="width:15%;"><a href="@Url.Action("Edit","Buchung",new { ID = item.IDBuchung })"><button type="button" class="btn buttonOrangeEdit" value="Bearbeiten"><span>Bearbeiten</span></button></a></td>
@@ -305,3 +381,19 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script>
+        function FilterReset() {
+            document.getElementById("idbuchung").value = '';
+            document.getElementById("nachname").value = '';
+            document.getElementById("idkunde").value = '';
+            document.getElementById("plz").value = '';
+            document.getElementById("ort").value = '';
+            document.getElementById("buchungVon").value = '';
+            document.getElementById("buchungBis").value = '';
+            document.getElementById("none").checked = true;
+            document.getElementById("suchMaske").submit;
+        }
+    </script>
+}

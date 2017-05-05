@@ -149,6 +149,8 @@
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BuchungEditModel.cs" />
+    <Compile Include="Models\BuchungenCM.cs" />
+    <Compile Include="Models\BuchungenFilter.cs" />
     <Compile Include="Models\BuchungFilter_Result.cs">
       <DependentUpon>It22AutoverleihModel.tt</DependentUpon>
     </Compile>
